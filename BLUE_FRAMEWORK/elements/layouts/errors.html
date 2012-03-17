@@ -1,0 +1,18 @@
+<!--bledy niekrytyczne i pochodzace z modulow-->
+		<div class="error">
+			<h3>{;lang;core;error_title;}</h3>
+			{;start;errors;}
+				<div class="{;errors;type;}">
+				<b>{;errors;string;}</b>
+				{;op;message;}<br/>{;errors;message;}{;op_end;message;}
+				{;op;line;}<br/><br/>{;errors;line;}{;op_end;line;}
+				{;op;file;}<br/>{;errors;file;}{;op_end;file;}
+				{;op;modul;}<br/>{;errors;modul;}{;op_end;modul;}
+				</div>
+			{;end;errors;}
+			<h3>{;lang;core;error_other;}</h3>
+			{;data;}<br/>
+			{;ip;}<br/>
+			{;browser;}<br/>
+			{;log;}
+		</div>

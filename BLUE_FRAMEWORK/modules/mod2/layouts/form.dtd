@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+    TODO define vocabulary identification
+    PUBLIC ID: -//vendor//vocabulary//EN
+    SYSTEM ID: http://server/path/form_definition.dtd
+
+-->
+
+<!--
+    An example how to use this DTD from your XML document:
+
+    <?xml version="1.0"?>
+
+    <!DOCTYPE form SYSTEM "form_definition.dtd">
+
+    <form>
+    ...
+    </form>
+-->
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT form (fieldset|datalist|div|main_error_info|input|p)*>
+<!ATTLIST form
+    target CDATA #IMPLIED
+    novalidate CDATA #IMPLIED
+    autocomplete CDATA #IMPLIED
+    accept-charset CDATA #IMPLIED
+    action CDATA #IMPLIED
+    id CDATA #IMPLIED
+    class CDATA #IMPLIED
+    style CDATA #IMPLIED
+    enctype CDATA #IMPLIED
+    name CDATA #IMPLIED
+    method CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT p (input3_error|input2_error|input1_error|input|label|input6_error|input5_error|input4_error)*>
+<!ATTLIST p
+    class CDATA #IMPLIED
+    id CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT input4_error (#PCDATA)>
+<!ATTLIST input4_error
+    convert CDATA #IMPLIED
+    class CDATA #IMPLIED
+    id CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT input5_error (#PCDATA)>
+<!ATTLIST input5_error
+    convert CDATA #IMPLIED
+    class CDATA #IMPLIED
+    id CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT input6_error (#PCDATA)>
+<!ATTLIST input6_error
+    convert CDATA #IMPLIED
+    class CDATA #IMPLIED
+    id CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT input EMPTY>
+<!ATTLIST input
+    min CDATA #IMPLIED
+    max CDATA #IMPLIED
+    check_field CDATA #IMPLIED
+    valid_dependency CDATA #IMPLIED
+    pattern CDATA #IMPLIED
+    maxlength CDATA #IMPLIED
+    list CDATA #IMPLIED
+    width CDATA #IMPLIED
+    height CDATA #IMPLIED
+    formnovalidate CDATA #IMPLIED
+    form CDATA #IMPLIED
+    disabled CDATA #IMPLIED
+    autofocus CDATA #IMPLIED
+    autocomplete CDATA #IMPLIED
+    name CDATA #IMPLIED
+    value CDATA #IMPLIED
+    type CDATA #IMPLIED
+    placeholder CDATA #IMPLIED
+    readonly CDATA #IMPLIED
+    required CDATA #IMPLIED
+    size CDATA #IMPLIED
+    step CDATA #IMPLIED
+    minlength CDATA #IMPLIED
+    id CDATA #IMPLIED
+    style CDATA #IMPLIED
+    class CDATA #IMPLIED
+    onclick CDATA #IMPLIED
+    valid_type CDATA #IMPLIED
+    other_val CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT main_error_info (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT label (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT input1_error (#PCDATA|img)*>
+<!ATTLIST input1_error
+    convert CDATA #IMPLIED
+    class CDATA #IMPLIED
+    id CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT img EMPTY>
+<!ATTLIST img
+    alt CDATA #IMPLIED
+    src CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT input2_error EMPTY>
+<!ATTLIST input2_error
+    convert CDATA #IMPLIED
+    class CDATA #IMPLIED
+    id CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT div (label|p)*>
+<!ATTLIST div
+    class CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT input3_error EMPTY>
+<!ATTLIST input3_error
+    convert CDATA #IMPLIED
+    class CDATA #IMPLIED
+    id CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT datalist (option)*>
+<!ATTLIST datalist
+    id CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT option EMPTY>
+<!ATTLIST option
+    value CDATA #IMPLIED
+    label CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT fieldset (input)*>

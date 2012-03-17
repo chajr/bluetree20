@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE root SYSTEM "dtd/config.dtd">
+<root>
+	<option id="domain" value="#(www.)?localhost#"/>		<!--glowna domena, jako wartosc dla regexp-->
+	<option id="debug" value="1"/>							<!--czy wyswietla pelna tresc bledu-->
+	<option id="core_mail" value="chajr@bluetree.pl"/>		<!--glowny mail systemowy -->
+</root>

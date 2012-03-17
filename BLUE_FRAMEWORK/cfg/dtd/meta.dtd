@@ -1,0 +1,13 @@
+<!ELEMENT root (default, page*)>
+	<!ELEMENT default (title, meta*)>					<!--defaultowe wartosci, przypisywane gdy strona nie posiada wlasnych, badz posiada update-->
+		<!ATTLIST default val ID #REQUIRED>				<!--inf do jakiej strony (lista.xml) ma odwolywac sie dany wpis-->
+	<!ELEMENT page (title, meta*)>						<!--pojedyncza strona-->
+		<!ATTLIST page val ID #REQUIRED>				<!--inf do jakiej strony (lista.xml) ma odwolywac sie dany wpis-->
+	<!ELEMENT meta (#PCDATA)>							<!--znacznik meta-->
+		<!ATTLIST meta content CDATA #REQUIRED>			<!--wartosc znacznika-->
+		<!ATTLIST meta update (0|1) #IMPLIED>			<!--jesli ustawiony na 1 dopisuje tresc do wartosci z wezla default-->
+		<!ATTLIST meta name CDATA #IMPLIED>
+		<!ATTLIST meta http-equiv CDATA #IMPLIED>
+	<!ELEMENT title (#PCDATA)>							<!--tytul strony-->
+		<!ATTLIST title update (0|1) #REQUIRED>			<!--jesli ustawiony na 1 dopisuje tresc do wartosci z wezla default-->
+		<!ATTLIST title tytul CDATA #REQUIRED>			<!--tytul strony-->

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE root SYSTEM "dtd/config.dtd">
+<root>
+	<option id="domain" value="#(www.)?localhost#"/>		<!--glowna domena, jako wartosc dla regexp-->
+	<option id="debug" value="1"/>							<!--czy wyswietla pelna tresc bledu-->
+	<option id="core_mail" value="chajr@bluetree.pl"/>		<!--glowny mail systemowy -->
+	<option id="core_procedural_mod_check" value="0"/>		<!--sprawdzanie modulow proceduralnych -->
+	<option id="reg_exp_rewrite" value="#^[\w-\\,\/]*$#"/>	<!--podstawowe wyrarzenie regularne, dla wstepnego sprawdzania -->
+	<option id="reg_exp_classic" value="#^[\w\./?=&amp;-]*$#"/>	<!--podstawowe wyrarzenie regularne, dla wstepnego sprawdzania -->
+	<option id="max_get" value="11"/>						<!--maksymalna liczba parametrow w url, 0 brak limitu -->
+	<option id="max_post" value="45"/>						<!--maksymalna liczba parametrow w post, 0 brak limitu -->
+	<option id="get_len" value="20"/>						<!--maksymalna dlugosc parametru get zmienna+przecinek+wartosc, 0 brak limitu -->
+	<option id="test" value="bluetree20"/>					<!--miejsce w ktorym znajduje sie index.php na serwerze testowym, jesli brak - 0-->
+	<option id="mod_check" value="1"/>						<!--jesli false nie zlicza listy modulow do zaladowanie i nie zgalsza bledu jesli brak modulow -->
+	<option id="param_sep" value="::"/>						<!--separator dla parametrow bibliotek/modulow i css/js -->
+	<option id="rewrite" value="1"/>						<!--jesli 1 kozysta z mode rewrite, jesli 0 z classic URL -->
+	<option id="lang" value="pl-PL"/>						<!--domyslny jezyk, to z niego ma kozystac jesli nie znaleziono pliku jezykowego-->
+	<option id="zmienne_rewrite_sep" value=","/>			<!--separator dla zmiennej-wartosci (/nazwa,zmienna/nazwa,zmienna/)-->
+	<option id="post_secure" value="1"/>					<!--zabezpiecza post ukosnikami i encjami 0-brak, 1-quotes, 2-encje-->
+	<option id="unthrow" value="0"/>						<!--nie zglasza bledow z modulow/bibliotek-->
+	<option id="one_lang" value="0"/>						<!--jesli na true, to kozysta tylko z jednego jezyka-->
+	<option id="lang_support" value="1"/>					<!--jesli na false to nie kozysta z opcji tulmaczenia-->
+	<option id="compress" value="0"/>						<!--poziom kompresji html-a 0-brak, 9-max-->
+	<option id="error404" value="1"/>						<!--jesli nie znaleziono strony i val=1 kieruje na strone error_404-->
+	<option id="log_all_errors" value="1"/>					<!--wysylanie loga przy bledach modulow 0-brak 1-wszystkie 2-tylko wstrzymujace-->
+	<option id="meta" value="1"/>							<!--jesli 1 obsluga metatagow za pomoca bibliotki meta_class-->
+	<option id="file_max_size" value="1000"/>				<!--okresla maksymalny rozmiar pojedynczego pliku w kb-->
+	<option id="files_max_size" value="10000"/>				<!--okresla maksymalny rozmiar uploadowanych plikow w kb-->
+	<option id="files_max" value="10"/>						<!--okresla maksymalna ilosc uploadowanych plikow-->
+	<option id="timezone" value="Europe/Berlin"/>			<!--glowna strefa czasowa-->
+	<option id="detect_lang" value="0"/>					<!--jesli brak podanego jezyka czy ma automatycznie wykryc-->
+	<option id="subdomain" value="1"/>						<!--jesli wlaczone traktuje subdomene jako strone glowna, cyfra okresla zaglebienie-->
+	<option id="techbreak" value="0"/>						<!--jesli 1 zatrzymuje frameworka i wyswietla ekran informujacy o przerwie technicznej-->
+	<option id="cookielifetime" value="3600"/>				<!--czas zycia pliku cookie (3600 -> 1h)-->
+	<option id="errors_log" value="111"/>					<!--ktore bledy ma zapisywac w logach 1-errory, 2-warningi 3-errory zgloszone z pozalisty (pointer)-->
+	<!--lista jezykow ktore sa wlaczone w systemie-->
+	<langs id="lang_on" value="1">
+		<lang id="pl-PL" on="1"/>
+		<lang id="en-GB" on="1"/>
+		<lang id="en-US" on="1"/>
+	</langs>
+</root>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE root SYSTEM "dtd/meta.dtd">
+<root>
+	<default val="index">
+		<title tytul="{;lang;title;}" update="1"/>
+<!--		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>-->
+		<meta name="robots" content="index,follow,all" />
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<meta name="author" content="bluetree.pl powered by blueFramework 2.0" />
+	</default>
+	<page val="inna">
+		<title tytul="" update="1"/>
+<!--		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>-->
+		<meta name="robots" content="index,follow,all"/>
+		<meta name="keywords" content=", aktualności" update="1"/>
+		<meta name="description" content="" update="1"/>
+		<meta name="author" content="bluetree.pl powered by blueFramework 2.0" />
+	</page>
+	<page val="jeszcze_inna">
+		<title tytul="" update="1"/>
+<!--		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>-->
+		<meta name="robots" content="index,follow,all" />
+		<meta name="keywords" content=", aktualności" update="1"/>
+		<meta name="description" content="" update="1" />
+		<meta name="author" content="bluetree.pl powered by blueFramework 2.0" />
+	</page>
+	<page val="zagniezdzenie">
+		<title tytul="" update="1"/>
+<!--		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>-->
+		<meta name="robots" content="index,follow,all" />
+		<meta name="keywords" content=", kontakt, dojazd" update="1"/>
+		<meta name="description" content="a"  update="1"/>
+		<meta name="author" content="bluetree.pl powered by blueFramework 2.0" />
+	</page>
+</root>

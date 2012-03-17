@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+	<head>
+{;core;meta;}
+{;core;css;}
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<header>
+			<fieldset>
+				<legend>
+					zewnetrzny html
+				</legend>
+				{;external;ext;}
+			</fieldset>
+		</header>
+		<h1>
+			instalacja i deinstalacja modulu
+		</h1>
+		<section id="main">
+			<fieldset>
+				<legend>
+					zastępowanie scierzek
+				</legend>
+				<a href="{;core;domain;}{;core;lang;}{;path;/strona2;}">wewnetrzny link</a><br/>
+				<a href="http://www.bluetree.pl">link</a>
+				<a href="mailto:dupa@asd.cv">link</a><br/>
+				<img src="{;core;domain;}elementy/Right.png" alt="obrazek"/>
+			</fieldset>
+			<fieldset>
+				<legend>
+					wazne znaczniki systemowe
+				</legend>
+				{;path;/strona/podstrona/param,val/p2,v/;} - path<br/>
+				{;full;/strona/podstrona/param,val/p2,v/;} - full<br/>
+				{;core;domain;} - domain<br/>
+				{;core;lang;} - lang<br/>
+				{;core;mainpath;} - mainpath
+			</fieldset>
+			<fieldset>
+				<legend>
+					tułmaczenia
+				</legend>
+				tułmaczenie z core - <strong>{;lang;tulmaczenie_przykladowe;}</strong><br/>
+				tułmaczenie z jakiegoś modułu - <strong>{;lang;modul1;tekst_do_tulmaczenia;}</strong><br/>
+				tułmaczenie na podany kod jezykowy z modulu- <strong>{;lang-en-GB;modul1;tekst_do_tulmaczenia;}</strong><br/>
+				tułmaczenie na podany kod jezykowy z core- <strong>{;lang-en-GB;tekst_do_tulmaczenia;}</strong>
+			</fieldset>
+		</section>
+		<section id="content">
+			{;mod;modul1;}
+		</section>
+		<aside>
+			<section>
+				<h3>
+					inne bloki
+				</h3>
+				<fieldset>
+					<legend>blok testowy (moduly wczytywane do bloku)</legend>
+					{;block;blok_testowy;}
+				</fieldset>
+			</section>
+			<section>
+				{;op;core_errors;}
+				<fieldset class="error">
+					<legend>
+						ERROR {;lang;error_title;}
+					</legend>
+					{;core_error;}
+				</fieldset>
+				{;op_end;core_errors;}
+				{;op;core_warnings;}
+				<fieldset class="warning">
+					<legend>
+						WARNING {;lang;warning_title;}
+					</legend>
+					{;core_warning;}
+				</fieldset>
+				{;op_end;core_warnings;}
+				{;op;core_infos;}
+				<fieldset class="info">
+					<legend>
+						INFO {;lang;info_title;}
+					</legend>
+					{;core_info;}
+				</fieldset>
+				{;op_end;core_infos;}
+				{;op;core_oks;}
+				<fieldset class="ok">
+					<legend>
+						OK {;lang;ok_title;}
+					</legend>
+					{;core_ok;}
+				</fieldset>
+				{;op_end;core_oks;}
+			</section>
+		</aside>
+		<div style="clear: both"></div>
+{;core;js;}
+	</body>
+</html>

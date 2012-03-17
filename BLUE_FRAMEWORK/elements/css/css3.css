@@ -1,0 +1,16 @@
+body{
+	color:#fff;
+    font-family: Apolonia, Georgia,'Times New Roman',times,serif;
+	font-size: 14px;
+}
+header, footer, aside, nav, article, section {  
+    display: block;  
+}
+section#content {  
+	width: 50%;
+	float: left;
+}  
+aside {  
+	width: 50%;
+	float: left; 
+}  

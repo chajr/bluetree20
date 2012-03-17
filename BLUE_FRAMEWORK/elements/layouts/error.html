@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>{;lang;error_title;}</title>
+		<style type="text/css">
+			body{
+				background-color: #000000;
+				margin-right: 0px;
+				margin-left: 0px;
+				margin-bottom: 0px;
+				margin-top: 0px;
+				color: #ffffff;
+				font-family: Verdana,Arial,Helvetica,sans-serif;
+			}
+			.error {
+				height: auto;
+				width: 80%;
+				padding-top: 10px;
+				padding-bottom: 10px;
+				margin-top: 10px;
+				margin-right: auto;
+				margin-left: auto;
+				background-color: #FFFFCC;
+				border: medium solid #FF0000;
+				font-size: 16px;
+				color: #FF0000;
+				text-align: center;
+			}
+		</style>
+    </head>
+    <body>
+        <div class="error">
+			<h3>{;lang;error_title;}</h3>
+			{;start;errors;}
+				<b>{;errors;error_code;}</b><br/>
+				{;errors;extend_message;}
+				<br/><br/>
+				{;errors;line;}<br/>
+				{;errors;file;}<br/>
+				{;errors;module;}
+			{;end;errors;}
+			<h3>{;lang;error_other;}</h3>
+			{;data;}<br/>
+			{;ip;}<br/>
+			{;browser;}<br/>
+			{;log;}
+		</div>
+    </body>
+</html>
