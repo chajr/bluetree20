@@ -2,7 +2,7 @@
 /**
  * obiekt do przeksztalcen na pojedynczym obrazie
  * @author chajr <chajr@bluetree.pl>
- * @version 1.5
+ * @version 1.6 beta
  * @access private
  * @copyright chajr/bluetree
  * Display <a href="http://sam.zoy.org/wtfpl/COPYING">Do What The Fuck You Want To Public License</a>
@@ -128,7 +128,11 @@ class image_class{
 			if(($this->height < $this->width) && $width){
 				$nowy = imagecreatetruecolor($x,($x/$this->width) * $this->height);
 			}else{
-				$nowy = imagecreatetruecolor(($y/$this->height) * $this->width, $y);
+				if($width){
+					$nowy = imagecreatetruecolor($x,($x/$this->width) * $this->height);
+				}else{
+					$nowy = imagecreatetruecolor(($y/$this->height) * $this->width, $y);
+				}
 			}
 		}else{
 			$nowy = imagecreatetruecolor($x, $y);
@@ -139,7 +143,7 @@ class image_class{
 		$bool = @imagecopyresampled($nowy, $this->img, 0, 0, 0, 0, 
 				$nowy_x, $nowy_y, $this->width, $this->height);
 		if(!$bool){
-			throw new packageException('resample_error');
+			//throw new packageException('resample_error');
 		}
 		$this->height = $nowy_y;
 		$this->width = $nowy_x;
