@@ -1,11 +1,24 @@
+<!--
+/**
+ * Main framework configuration file DTD
+ *
+ * @category    BlueFramework
+ * @package     BlueFramework Core
+ * @author      Michał Adamiak    <chajr@bluetree.pl>
+ * @copyright   chajr/bluetree
+ * @version     1.0.0
+ */
+-->
 <?xml version="1.0" encoding="UTF-8"?>
 <!ELEMENT root (option*, langs*)>
-	<!ELEMENT option (#PCDATA)>
-		<!ATTLIST option id ID #REQUIRED>
-		<!ATTLIST option value CDATA #REQUIRED>
-	<!ELEMENT langs (lang*)>
-		<!ATTLIST langs id ID #REQUIRED>
-		<!ATTLIST langs value CDATA #REQUIRED>
-	<!ELEMENT lang (#PCDATA)>
-		<!ATTLIST lang id ID #REQUIRED>
-		<!ATTLIST lang on (0|1) #REQUIRED>
+    <!ELEMENT option (#PCDATA)>
+        <!ATTLIST option id ID #REQUIRED>
+        <!ATTLIST option value CDATA #REQUIRED>
+
+    <!ELEMENT langs (lang*)>
+        <!ATTLIST langs id ID #REQUIRED>
+        <!ATTLIST langs value CDATA #REQUIRED>
+
+    <!ELEMENT lang (#PCDATA)>
+        <!ATTLIST lang id ID #REQUIRED>
+        <!ATTLIST lang on (0|1) #REQUIRED>

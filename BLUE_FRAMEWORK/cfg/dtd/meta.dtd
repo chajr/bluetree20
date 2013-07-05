@@ -1,13 +1,37 @@
+<!--
+/**
+ * Meta description configuration file DTD
+ *
+ * @category    BlueFramework
+ * @package     BlueFramework Core
+ * @author      Michał Adamiak    <chajr@bluetree.pl>
+ * @copyright   chajr/bluetree
+ * @version     1.0.0
+ */
+-->
 <!ELEMENT root (default, page*)>
-	<!ELEMENT default (title, meta*)>					<!--defaultowe wartosci, przypisywane gdy strona nie posiada wlasnych, badz posiada update-->
-		<!ATTLIST default val ID #REQUIRED>				<!--inf do jakiej strony (lista.xml) ma odwolywac sie dany wpis-->
-	<!ELEMENT page (title, meta*)>						<!--pojedyncza strona-->
-		<!ATTLIST page val ID #REQUIRED>				<!--inf do jakiej strony (lista.xml) ma odwolywac sie dany wpis-->
-	<!ELEMENT meta (#PCDATA)>							<!--znacznik meta-->
-		<!ATTLIST meta content CDATA #REQUIRED>			<!--wartosc znacznika-->
-		<!ATTLIST meta update (0|1) #IMPLIED>			<!--jesli ustawiony na 1 dopisuje tresc do wartosci z wezla default-->
-		<!ATTLIST meta name CDATA #IMPLIED>
-		<!ATTLIST meta http-equiv CDATA #IMPLIED>
-	<!ELEMENT title (#PCDATA)>							<!--tytul strony-->
-		<!ATTLIST title update (0|1) #REQUIRED>			<!--jesli ustawiony na 1 dopisuje tresc do wartosci z wezla default-->
-		<!ATTLIST title tytul CDATA #REQUIRED>			<!--tytul strony-->
+    <!ELEMENT default (title, meta*)>
+    <!--default values, writen when page don't heve own values or have update value-->
+        <!ATTLIST default val ID #REQUIRED>
+        <!--information to witch page (lista.xml) will appeal current value-->
+
+    <!ELEMENT page (title, meta*)>
+    <!--single page-->
+        <!ATTLIST page val ID #REQUIRED>
+        <!--information to witch page (lista.xml) will appeal current value-->
+
+    <!ELEMENT meta (#PCDATA)>
+    <!--meta tag-->
+        <!ATTLIST meta content CDATA #REQUIRED>
+        <!--tag value-->
+        <!ATTLIST meta update (0|1) #IMPLIED>
+        <!--if set on 1 add content to default node value-->
+        <!ATTLIST meta name CDATA #IMPLIED>
+        <!ATTLIST meta http-equiv CDATA #IMPLIED>
+
+    <!ELEMENT title (#PCDATA)>
+    <!--page title-->
+        <!ATTLIST title update (0|1) #REQUIRED>
+        <!--if set on 1 add content to default node value-->
+        <!ATTLIST title tytul CDATA #REQUIRED>
+        <!--page title-->

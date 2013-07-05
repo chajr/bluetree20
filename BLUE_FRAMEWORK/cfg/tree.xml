@@ -1,68 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+* Framework page structure configuration
+*
+* @category    BlueFramework
+* @package     BlueFramework Core
+* @author      Michał Adamiak    <chajr@bluetree.pl>
+* @copyright   chajr/bluetree
+* @version     1.0.0
+*/
+-->
 <!DOCTYPE root SYSTEM 'dtd/tree.dtd'>
 <root options="1">
-	<lib on="1">valid</lib>
-	<lib on="0">jakas_biblioteka</lib>
-	<mod on="1" param="jakis">modul1</mod>
-	<css>css1</css>
-<!--	<css external="1">http://domenaaaa.pl/css.css</css>
-	<css media="print" external="1">http://domenaaaa.pl/cssasd.css</css>
-	<css external="1">http://domenaaaa.pl/css.css</css>
-	<css external="1">http://domenaaaa.pl/cssa.css</css>
-	<js external="1">http://domenaaaa.pl/js.js</js>-->
-	<js>js1</js>
-	<page id="index" name="Strona Główna" layout="index" options="1111" changefreq="always" priority="0.8">
-		<lib on="1">db/mysql</lib>
-		<lib on="1">time</lib>
-		<lib on="1">image/image</lib>
-		<lib on="1">forms</lib>
-		<mod on="1" block="blok_testowy">mod2</mod>
-		<mod on="1" block="blok_testowy">mod3</mod>
-		<css external="0">css2</css>
-		<css external="0">css3</css>
-		<css external="0" media="print">as</css>
-		<js>js2</js>
-	</page>
-	<page id="strona2" name="Strona 2" layout="strona2" options="1111" changefreq="always" priority="0.8">
-		<sub id="podstrona1" name="Podatrona 1" layout="strona2" options="11111" changefreq="always" priority="0.8">
-			<lib on="1">db/mysql</lib>
-<!--			<lib on="1">files</lib>-->
-<!--			<mod on="1">mod4</mod>-->
-			<css>css4</css>
-			<js>js4</js>
-		</sub>
-		<sub id="podstrona2" name="Podatrona 2" layout="podstrona2" options="11110">
-			<lib on="1">disc</lib>
-			<mod on="1">mod5</mod>
-			<css>css5</css>
-			<js>js5</js>
-		</sub>
-		<mod on="1" block="blok_testowy">mod2</mod>
-		<css external="0">css2</css>
-		<css external="0">css3</css>
-	</page>
-	<page id="strona3" name="Strona 3" layout="strona3" options="1111">
-		<sub id="podstrona3" name="Podatrona 3" layout="podstrona3" options="11110">
-			<sub id="podstrona4" name="Podatrona 4" layout="podstrona4" options="11111">
-				<lib on="1">files</lib>
-				<mod on="1">mod7</mod>
-			</sub>
-			<lib on="1">db/mysql</lib>
-			<lib on="1">files</lib>
-			<mod on="1">mod6</mod>
-		</sub>
-		<lib on="1">db/mysql</lib>
-		<mod on="1">mod3</mod>
-		<mod on="1">modd</mod>
-	</page>
-	<page id="ajax_test" layout="ajax" name="Ajax" options="1000">
-		<mod on="1">mod_ajax</mod>
-	</page>
-	<page id="error404" name="error404" layout="404" options="1001">
-		<css>error_css</css>
-		<js>error_js</js>
-	</page>
-	<page id="sitemap" name="sitemap" layout="empty" options="1001">
-		<mod on="1" param="sitemap">main</mod>
-	</page>
+    <lib on="1">valid</lib>
+    <lib on="0">jakas_biblioteka</lib>
+    <mod on="1" param="jakis">modul1</mod>
+    <css>css1</css>
+    <!--
+    <css external="1">http://domenaaaa.pl/css.css</css>
+    <css media="print" external="1">http://domenaaaa.pl/cssasd.css</css>
+    <css external="1">http://domenaaaa.pl/css.css</css>
+    <css external="1">http://domenaaaa.pl/cssa.css</css>
+    <js external="1">http://domenaaaa.pl/js.js</js>
+    -->
+    <js>js1</js>
+
+    <page id="index" name="Main Page" layout="index" options="1111" changefreq="always" priority="0.8">
+        <lib on="1">db/mysql</lib>
+        <lib on="1">time</lib>
+        <lib on="1">image/image</lib>
+        <lib on="1">forms</lib>
+        <mod on="1" block="blok_testowy">mod2</mod>
+        <mod on="1" block="blok_testowy">mod3</mod>
+        <css external="0">css2</css>
+        <css external="0">css3</css>
+        <css external="0" media="print">as</css>
+        <js>js2</js>
+    </page>
+
+    <page id="strona2" name="Page 2" layout="strona2" options="1111" changefreq="always" priority="0.8">
+        <sub id="podstrona1" name="Subpage 1" layout="strona2" options="11111" changefreq="always" priority="0.8">
+            <lib on="1">db/mysql</lib>
+            <!--<lib on="1">files</lib>-->
+            <!--<mod on="1">mod4</mod>-->
+            <css>css4</css>
+            <js>js4</js>
+        </sub>
+
+        <sub id="podstrona2" name="Subpage 2" layout="podstrona2" options="11110">
+            <lib on="1">disc</lib>
+            <mod on="1">mod5</mod>
+            <css>css5</css>
+            <js>js5</js>
+        </sub>
+
+        <mod on="1" block="blok_testowy">mod2</mod>
+        <css external="0">css2</css>
+        <css external="0">css3</css>
+    </page>
+
+    <page id="strona3" name="Page 3" layout="strona3" options="1111">
+        <sub id="podstrona3" name="Subpage 3" layout="podstrona3" options="11110">
+            <sub id="podstrona4" name="Subpage 4" layout="podstrona4" options="11111">
+                <lib on="1">files</lib>
+                <mod on="1">mod7</mod>
+            </sub>
+            <lib on="1">db/mysql</lib>
+            <lib on="1">files</lib>
+            <mod on="1">mod6</mod>
+        </sub>
+
+        <lib on="1">db/mysql</lib>
+        <mod on="1">mod3</mod>
+        <mod on="1">modd</mod>
+    </page>
+
+    <page id="ajax_test" layout="ajax" name="Ajax" options="1000">
+        <mod on="1">mod_ajax</mod>
+    </page>
+
+    <page id="error404" name="error404" layout="404" options="1001">
+        <css>error_css</css>
+        <js>error_js</js>
+    </page>
+
+    <page id="sitemap" name="sitemap" layout="empty" options="1001">
+        <mod on="1" param="sitemap">main</mod>
+    </page>
+
 </root>
