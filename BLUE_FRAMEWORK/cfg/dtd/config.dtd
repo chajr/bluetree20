@@ -6,10 +6,9 @@
  * @package     BlueFramework Core
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.0.0
+ * @version     1.0.1
  */
 -->
-<?xml version="1.0" encoding="UTF-8"?>
 <!ELEMENT root (option*, langs*)>
     <!ELEMENT option (#PCDATA)>
         <!ATTLIST option id ID #REQUIRED>
