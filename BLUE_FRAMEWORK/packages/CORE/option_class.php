@@ -3,7 +3,7 @@
  * odczyt opcji frameworka
  * @author chajr <chajr@bluetree.pl>
  * @package core
- * @version 1.4.1
+ * @version 1.4.2
  * @copyright chajr/bluetree
  * @final
  */
@@ -32,7 +32,8 @@ final class option_class {
 		}else{
 			$bool = $xml->wczytaj(starter_class::path('cfg').'config.xml', TRUE);
 			if(!$bool){
-				echo 'Main configuration load error<br/>'.starter_class::path('cfg').'config.xml';
+				echo 'Main configuration load error<br/>'.starter_class::path('cfg').'config.xml<br/>';
+                echo $xml->err;
 				exit;
 			}
 		}
