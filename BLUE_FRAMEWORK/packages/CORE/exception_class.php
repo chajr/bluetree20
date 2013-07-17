@@ -1,293 +1,345 @@
-<?PHP
+<?php
 /**
- * @author chajr <chajr@bluetree.pl>
- * @version 1.1
- * @access private
- * @copyright chajr/bluetree
- * @package core
- * @subpackage error
+ * @category    BlueFramework
+ * @package     BlueFramework Core
+ * @subpackage  error
+ * @author      Michał Adamiak    <chajr@bluetree.pl>
+ * @copyright   chajr/bluetree
+ * @version     2.1.0
  */
- /**
- * glowna klasa dla wszystkich exceptionow
- */
-abstract class exception_class extends Exception{
-    /**
-	 * przechowuje kod bledu
-	 * @var string
-	 * @access private
-	 */
-	protected $err_code;
-	/**
-	 * przechowuje dodatkowe informacje o bledzie, zglaszane razem z kodem
-	 * @var string
-	 * @access private
-	 */
-	protected $err_message;
-	/**
-	 * przechowuje scierzke i nazwe pliku w ktorym wystapil wyjatek
-	 * @var string
-	 * @access private
-	 */
-	protected $err_file;
-	/**
-	 * przechowuje numer linni w ktorej zgloszono wyjatek
-	 * @var integer
-	 * @access private
-	 */
-	protected $err_line;
-	/**
-	 * przechowuje kod bledu z klase exception
-	 * @var integer
-	 * @access private
-	 */
-	protected $in_code;
-	/**
-	 * opcjonalnie nazwa modulu zglaszajacego blad
-	 * @var string 
-	 */
-	protected $mod_name = '';
-	/**
-	 * pobiera wiadomosci i wpisuje do odpowiednich zmiennych
-	 * @uses exception_class::$err_code
-	 * @uses exception_class::$err_message
-	 * @uses exception_class::$err_file
-	 * @uses exception_class::$err_line
-	 * @uses exception_class::$in_code
-	 * @uses exception_class::$mod_name
-	 * @uses Exception::getFile()
-	 * @uses Exception::getLine()
-	 * @uses Exception::getCode()
-	 * @param string $code kod bledu
-	 * @param string $message opcjonlanie dodatkowe informacje o bledzie
-	 * @param string $mod opcjonalnie nazwa modulu z ktorego pochodzi blad
-    */
-	public function __construct($code, $message = '', $mod = ''){
-		$this->err_code = $code;
-		$this->err_message = $message;
-		$this->err_file = $this->getFile();
-		$this->err_line = $this->getLine();
-		$this->in_code = $this->getCode();
-		if(!$mod){
-			$mod = 'core';
-		}
-		$this->mod_name = $mod;
-	}
-	/**
-	 * zwraca informacje o bledzie w postaci tekstowej
-	 * @return string pelna informacja na temat bledu 
-	 * @uses exception_class::show()
-	 */
-//	public function __toString() {
-//		return $this->show();
-//	}
-	/**
-	 * dodaje blad do listy bledow
-	 * @param $error object instancja obiektu error_class
-	 * @param $mod_name string opcjonalnie nazwa modulu zglaszajacego blad
-	 * @abstract
-	 */
-	abstract public function show(error_class $error, $mod_name = '');
-	/**
-	 * zwraca tablice informacji o bledzie
-	 * @return array tablica informacji o bledzie 
-	 */
-	public function returns(){
-		return array(
-			$this->err_code,
-			$this->err_message,
-			$this->err_file,
-			$this->err_line,
-			$this->in_code,
-			$this->mod_name,
-		);
-	}
-}
-/**
- * klasa bledow frameworka, zatrzymuje dzialanie calego frameworka i wyswietla blad
- * dzialanie takie jak w przypadku fatal i critic
- */
-class coreException extends exception_class{
-	/**
-	 * dodaje blad do listy bledow, sprawdzajac przy tym powodujacy go modul
-	 * @param $error object instancja obiektu error_class
-	 * @param $mod_name string opcjonalnie nazwa modulu zglaszajacego blad
-	 * @uses exception_class::$mod_name
-	 * @uses exception_class::$in_code
-	 * @uses exception_class::$err_code
-	 * @uses exception_class::$err_line
-	 * @uses exception_class::$err_file
-	 * @uses exception_class::$err_message
-	 * @uses error_class::add_error()
-	 * @uses error_class::log()
-	 * @uses core_class::options()
-	*/
-	public function show(error_class $error, $mod_name = ''){
-		if($mod_name){
-			$this->mod_name = $mod_name;
-		}
-		$er = $error->add_error('critic', $this->in_code,  $this->err_code, $this->err_line, $this->err_file, $this->err_message, $this->mod_name);
-		$bool = core_class::options('errors_log');
-		if((bool)$bool{0}){
-			error_class::log('critic_coreException', $er);
-		}
-	}
-	/**
-	 * uruchamia klase obslugi bledow, dodaje blad krytyczny frameworka i wyswietla go zatrzymujac dzialanie frameworka
-	 * @uses exception_class::$mod_name
-	 * @uses exception_class::$in_code
-	 * @uses exception_class::$err_code
-	 * @uses exception_class::$err_line
-	 * @uses exception_class::$err_file
-	 * @uses exception_class::$err_message
-	 * @uses error_class::add_error()
-	 * @uses error_class::render()
-	 * @uses error_class::__construct()
-	 * @uses error_class::log()
-	 * @uses core_class::options()
-	 */
-	public function show_core(){
-		$error = new error_class();
-		$er = $error->add_error('critic', $this->in_code,  $this->err_code, $this->err_line, $this->err_file, $this->err_message, $this->mod_name);
-		$bool = core_class::options('errors_log');
-		if((bool)$bool{0}){
-			error_class::log('critic_coreException', $er);
-		}
-		echo $error->render();
-		exit;
-	}
-}
-/**
- * klasa obslugujaca bledy modulu, zatrzymuje dany modul, umozliwia dzialanie pozostalych
- */
-class modException extends exception_class{
-	/**
-	 * dodaje blad do listy bledow, sprawdzajac przy tym powodujacy go modul
-	 * @param $error object instancja obiektu error_class
-	 * @param $mod_name string opcjonalnie nazwa modulu zglaszajacego blad
-	 * @uses exception_class::$mod_name
-	 * @uses exception_class::$in_code
-	 * @uses exception_class::$err_code
-	 * @uses exception_class::$err_line
-	 * @uses exception_class::$err_file
-	 * @uses exception_class::$err_message
-	 * @uses error_class::add_error()
-	 * @uses error_class::log()
-	 * @uses core_class::options()
-	 */
-	public function show(error_class $error, $mod_name = ''){
-		if($mod_name){
-			$this->mod_name = $mod_name;
-		}
-		$er = $error->add_error('critic', $this->in_code,  $this->err_code, $this->err_line, $this->err_file, $this->err_message, $this->mod_name);
-		$bool = core_class::options('errors_log');
-		if((bool)$bool{0}){
-			error_class::log('critic_modException', $er);
-		}
-	}
-}
-/**
- * klasa obslugujaca bledy bibliotek, zatrzymuje dana biblioteke, umozliwia dzialanie pozostalych bibliotek i modulow
- */
-class libException extends exception_class{
-	/**
-	 * dodaje blad do listy bledow, sprawdzajac przy tym powodujacy go modul
-	 * @param $error object instancja obiektu error_class
-	 * @param $mod_name string opcjonalnie nazwa modulu zglaszajacego blad
-	 * @uses exception_class::$mod_name
-	 * @uses exception_class::$in_code
-	 * @uses exception_class::$err_code
-	 * @uses exception_class::$err_line
-	 * @uses exception_class::$err_file
-	 * @uses exception_class::$err_message
-	 * @uses error_class::add_error()
-	 * @uses error_class::log()
-	 * @uses core_class::options()
-	 */
-	public function show(error_class $error, $mod_name = ''){
-		if($mod_name){
-			$this->mod_name = $mod_name;
-		}
-		$er = $error->add_error('critic', $this->in_code,  $this->err_code, $this->err_line, $this->err_file, $this->err_message, $this->mod_name);
-		$bool = core_class::options('errors_log');
-		if((bool)$bool{0}){
-			error_class::log('critic_libException', $er);
-		}
-	}
-}
-/**
- * klasa obslugujaca bledy typu warning
- */
-class warningException extends exception_class{
-	/**
-	 * dodaje warninga do listy bledow
-	 * @param $error object instancja obiektu error_class
-	 * @param $mod_name string opcjonalnie nazwa modulu zglaszajacego blad
-	 * @uses exception_class::$in_code
-	 * @uses exception_class::$err_code
-	 * @uses exception_class::$err_line
-	 * @uses exception_class::$err_file
-	 * @uses exception_class::$err_message
-	 * @uses error_class::add_error()
-	 * @uses error_class::log()
-	 * @uses core_class::options()
-	 */
-	public function show(error_class $error, $mod_name = ''){
-		$error->add_error('warning', $this->in_code,  $this->err_code, $this->err_line, $this->err_file, $this->err_message, $mod_name);
-		$bool = core_class::options('errors_log');
-		if((bool)$bool{1}){
-			error_class::log('warning', $er);
-		}
-	}
-}
-/**
- * klasa obslugujaca komunikaty typu info
- */
-class infoException extends exception_class{
-	/**
-	 * dodaje informacje do listy
-	 * @param $error object instancja obiektu error_class
-	 * @param $mod_name string opcjonalnie nazwa modulu zglaszajacego blad
-	 * @uses exception_class::$in_code
-	 * @uses exception_class::$err_code
-	 * @uses exception_class::$err_line
-	 * @uses exception_class::$err_file
-	 * @uses exception_class::$err_message
-	 * @uses error_class::add_error()
-	 */
-	public function show(error_class $error, $mod_name = ''){
-		$error->add_error('info', $this->in_code,  $this->err_code, $this->err_line, $this->err_file, $this->err_message, $mod_name);
-	}
-}
-/**
- * klasa obslugujaca komunikaty typu ok
- */
-class okException extends exception_class{
-	/**
-	 * dodaje informacje do listy
-	 * @param $error object instancja obiektu error_class
-	 * @param $mod_name string opcjonalnie nazwa modulu zglaszajacego blad
-	 * @uses exception_class::$in_code
-	 * @uses exception_class::$err_code
-	 * @uses exception_class::$err_line
-	 * @uses exception_class::$err_file
-	 * @uses exception_class::$err_message
-	 * @uses error_class::add_error()
-	 */
-	public function show(error_class $error, $mod_name = ''){
-		$error->add_error('ok', $this->in_code,  $this->err_code, $this->err_line, $this->err_file, $this->err_message, $mod_name);
-	}
-}
-/**
- * klasa obslugujaca bledy pakietow
- */
-class packageException extends exception_class{
-	/**
-	 * obluga bledu
-	 * @param error_class $error instancja obiektu error_class
-	 * @param type $mod_name nazwa modulu zglaszajacego blad
-	 */
-	public function show(error_class $error, $mod_name = ''){
 
-	}
+ /**
+ * main class for all exceptions
+ */
+abstract class exception_class 
+    extends Exception
+{
+    /**
+     * contains error code
+     * @var string
+     */
+    protected $_errorCode;
+
+    /**
+     * contain some other error information
+     * @var string
+     */
+    protected $_errorMessage;
+
+    /**
+     * contain path and name of file with error
+     * @var string
+     */
+    protected $_errorFile;
+
+    /**
+     * contains line with error
+     * @var integer
+     */
+    protected $_errorLine;
+
+    /**
+     * contain integer error code
+     * @var integer
+     */
+    protected $_integerCode;
+
+    /**
+     * contain optional module name that report error
+     * @var string 
+     */
+    protected $_moduleName = '';
+
+    /**
+     * get messages and write them to variables
+     * 
+     * @param string $code
+     * @param string $message
+     * @param string $mod
+    */
+    public function __construct($code, $message = '', $mod = '')
+    {
+        $this->_errorCode     = $code;
+        $this->_errorMessage  = $message;
+        $this->_errorFile     = $this->getFile();
+        $this->_errorLine     = $this->getLine();
+        $this->_integerCode   = $this->getCode();
+
+        if (!$mod) {
+            $mod = 'core';
+        }
+
+        $this->_moduleName = $mod;
+    }
+
+    /**
+     * add error to error list
+     *
+     * @param $error error_class
+     * @param $moduleName string
+     * @abstract
+     */
+    abstract public function show(error_class $error, $moduleName = '');
+
+    /**
+     * zwraca tablice informacji o bledzie
+     * @return array tablica informacji o bledzie 
+     */
+    public function returns()
+    {
+        return array(
+            $this->_errorCode,
+            $this->_errorMessage,
+            $this->_errorFile,
+            $this->_errorLine,
+            $this->_integerCode,
+            $this->_moduleName,
+        );
+    }
 }
-?>
+
+/**
+ * handle framework exceptions, stops whole framework and display an error
+ */
+class coreException 
+    extends exception_class
+{
+    /**
+     * add error to error list, checking module that call error
+     * 
+     * @param $error error_class
+     * @param $moduleName
+    */
+    public function show(error_class $error, $moduleName = '')
+    {
+        if ($moduleName) {
+            $this->_moduleName = $moduleName;
+        }
+        
+        $formatError = $error->addError(
+            'critic',
+            $this->_integerCode,
+            $this->_errorCode,
+            $this->_errorLine,
+            $this->_errorFile,
+            $this->_errorMessage,
+            $this->_moduleName
+        );
+        $bool = core_class::options('errors_log');
+        
+        if ((bool)$bool{0}) {
+            error_class::log('critic_coreException', $formatError);
+        }
+    }
+
+    /**
+     * show core error, stops framework and display error
+     */
+    public function showCore()
+    {
+        $error          = new error_class();
+        $formatError  = $error->addError(
+            'critic',
+            $this->_integerCode,
+            $this->_errorCode,
+            $this->_errorLine,
+            $this->_errorFile,
+            $this->_errorMessage,
+            $this->_moduleName
+        );
+        $bool = core_class::options('errors_log');
+
+        if ((bool)$bool{0}) {
+            error_class::log('critic_coreException', $formatError);
+        }
+
+        echo $error->render();
+        exit;
+    }
+}
+
+/**
+ * class for handling module exceptions
+ * stops current module, allow working of other modules
+ */
+class modException 
+    extends exception_class
+{
+    /**
+     * add error to errors list, check module that throw error
+     * 
+     * @param $error error_class
+     * @param $moduleName string
+     */
+    public function show(error_class $error, $moduleName = '')
+    {
+        if ($moduleName) {
+            $this->_moduleName = $moduleName;
+        }
+
+        $formatError = $error->addError(
+            'critic',
+            $this->_integerCode,
+            $this->_errorCode,
+            $this->_errorLine,
+            $this->_errorFile,
+            $this->_errorMessage,
+            $this->_moduleName
+        );
+        $bool = core_class::options('errors_log');
+
+        if ((bool)$bool{0}) {
+            error_class::log('critic_modException', $formatError);
+        }
+    }
+}
+
+/**
+ * class for handling libraries exceptions
+ * stops current library, allow working of other libraries and modules
+ */
+class libException 
+    extends exception_class
+{
+    /**
+     * add error to errors list, check module that throw error
+     * 
+     * @param $error error_class
+     * @param $moduleName string
+     */
+    public function show(error_class $error, $moduleName = '')
+    {
+        if ($moduleName) {
+            $this->_moduleName = $moduleName;
+        }
+
+        $formatError = $error->addError(
+            'critic',
+            $this->_integerCode,
+            $this->_errorCode,
+            $this->_errorLine,
+            $this->_errorFile,
+            $this->_errorMessage,
+            $this->_moduleName
+        );
+        $bool = core_class::options('errors_log');
+
+        if ((bool)$bool{0}) {
+            error_class::log('critic_libException', $formatError);
+        }
+    }
+}
+
+/**
+ * class for handling warning exceptions
+ */
+class warningException 
+    extends exception_class
+{
+    /**
+     * add warning to errors list, check module that throw error
+     * @param $error error_class
+     * @param $moduleName string
+     */
+    public function show(error_class $error, $moduleName = '')
+    {
+        $formatError = $error->addError(
+            'warning',
+            $this->_integerCode,
+            $this->_errorCode,
+            $this->_errorLine,
+            $this->_errorFile,
+            $this->_errorMessage,
+            $moduleName
+        );
+        $bool = core_class::options('errors_log');
+
+        if ((bool)$bool{1}) {
+            error_class::log('warning', $formatError);
+        }
+    }
+}
+
+/**
+ * class for handling info exceptions
+ */
+class infoException 
+    extends exception_class
+{
+    /**
+     * add information to list
+     * @param $error error_class
+     * @param $moduleName string
+     */
+    public function show(error_class $error, $moduleName = '')
+    {
+        $error->addError(
+            'info',
+            $this->_integerCode,
+            $this->_errorCode,
+            $this->_errorLine,
+            $this->_errorFile,
+            $this->_errorMessage,
+            $moduleName
+        );
+    }
+}
+
+/**
+ * class for handling ok exceptions
+ */
+class okException 
+    extends exception_class
+{
+    /**
+     * add information to list
+     * @param $error error_class
+     * @param $moduleName string
+     */
+    public function show(error_class $error, $moduleName = '')
+    {
+        $error->addError(
+            'ok',
+            $this->_integerCode,
+            $this->_errorCode,
+            $this->_errorLine,
+            $this->_errorFile,
+            $this->_errorMessage,
+            $moduleName
+        );
+    }
+}
+
+/**
+ * class for handling package exceptions
+ */
+class packageException 
+    extends exception_class
+{
+    /**
+     * obluga bledu
+     * @param $error error_class
+     * @param $moduleName string
+     */
+    public function show(error_class $error, $moduleName = '')
+    {
+        if ($moduleName) {
+            $this->_moduleName = $moduleName;
+        }
+
+        $formatError = $error->addError(
+            'critic',
+            $this->_integerCode,
+            $this->_errorCode,
+            $this->_errorLine,
+            $this->_errorFile,
+            $this->_errorMessage,
+            $this->_moduleName
+        );
+        $bool = core_class::options('errors_log');
+
+        if ((bool)$bool{0}) {
+            error_class::log('critic_packageException', $formatError);
+        }
+    }
+}

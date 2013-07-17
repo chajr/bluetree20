@@ -1,218 +1,348 @@
-<?PHP
+<?php
 /**
- * jadro frameworka
- * uruchamia biblioteki, umozliwia miedzy nimi wymiane danych, zwraca gotowa tresc
- * wszystkie biblioteki frameworka sa czescia tej biblioteki i wniej sa uruchamiane
- * @author chajr <chajr@bluetree.pl>
- * @package core
- * @version 2.2.1
- * @copyright chajr/bluetree
- * @final
+ * framework core
+ * runs libraries and modules, allows to exchange data between them, return ready content to display
+ * all modules and libraries are lunched inside this class
+ *
+ * @category    BlueFramework
+ * @package     BlueFramework Core
+ * @subpackage  core
+ * @author      Michał Adamiak    <chajr@bluetree.pl>
+ * @copyright   chajr/bluetree
+ * @version     2.3.0
  */
-final class core_class{
-	/**
-	 * przechowuje wszystkie opcje frameworka do wykozystania
-	 * @var array
-	 * @access private
-	 * @static
+final class core_class
+{
+    /**
+     * contains all framework options
+     * @var array
     */
-	private static $options = array();
-	/**
-	 * na koncu zapisuje w niej gotowa tresc do zwrotu
-	 * @var string
-	 * @access public
+    private static $_options = array();
+
+    /**
+     * contains ready to display page content
+     * @var string
     */
-	public $render = '';
-	/**
-	 * przechowuje obiekt GET
-	 * @var object
-	 * @access private
+    public $render = '';
+
+    /**
+     * contains get object
+     * @var get
     */
-	private $get;
-	/**
-	 * przechowuje obiekt POST
-	 * @var object
-	 * @access private
+    private $_get;
+
+    /**
+     * contains post object
+     * @var post
     */
-	private $post;
-	/**
-	 * przechowuje obiekt COOKIE
-	 * @var object
-	 * @access private
+    private $_post;
+
+    /**
+     * contains cookie object
+     * @var cookie
     */
-	private $cookie;
-	/**
-	 * przechowuje obiekt SESSION
-	 * @var object
-	 * @access private
+    private $_cookie;
+
+    /**
+     * contains session object
+     * @var session
     */
-	private $session;
-	/**
-	 * przechowuje obiekt FILES
-	 * @var object
-	 * @access private
+    private $_session;
+
+    /**
+     * contains files object
+     * @var files
     */
-	private $files;
-	/**
-	 * obiekt drzewa strony
-	 * @var object
-	 */
-	private $tree;
-	/**
-	 * obiekt display
-	 * @var object
-	 */
-	private $display;
-	/**
-	 * obiekt obslugi metatagow i tytulow strony
-	 * @var object
-	 */
-	private $meta;
-	/**
-	 * obiekt loadera
-	 * @var object
-	 */
-	private $loader;
-	/**
-	 * obiekt obslugi bledow
-	 * @var object
-	 */
-	private $error;
-	/**
-	 * uruchamia biblioteki frameworka
-	 * @uses option_class::load()
-	 * @uses core_class::$options
-	 * @uses core_class::$get
-	 * @uses core_class::$post
-	 * @uses core_class::$cookie
-	 * @uses core_class::$session
-	 * @uses core_class::$files
-	 * @uses core_class::$display
-	 * @uses core_class::$meta
-	 * @uses core_class::$render
-	 * @uses core_class::$lang
-	 * @uses core_class::$error
-	 * @uses core_class::$loader
-	 * @uses globals_class::destroy();
-	 * @uses meta_class::render()
-	 * @uses get::typ()
-	 * @uses get::full_get()
-	 * @uses get::destroy()
-	 * @uses session::run()
-	 * @uses session::set_session()
-	 * @uses tree_class::$layout
-	 * @uses display_class::other()
-	 * @uses display_class::render()
-	 * @uses display_class::generate()
-	 * @uses error_class::render()
-	 * @uses cookie::set_cookie()
+    private $_files;
+
+    /**
+     * contains tree_class object
+     * @var tree_class
+     */
+    private $_tree;
+
+    /**
+     * contains display_class object
+     * @var display_class
+     */
+    private $_display;
+
+    /**
+     * contains meta_class object
+     * @var meta_class
+     */
+    private $_meta;
+
+    /**
+     * contains loader_class object
+     * @var loader_class
+     */
+    private $_loader;
+
+    /**
+     * contains error_class object
+     * @var error_class
+     */
+    private $_error;
+
+    /**
+     * contains lang_class object
+     * @var lang_class
+     */
+    private $_lang;
+
+    /**
+     * start all framework with rendering page
     */
-	public function __construct(){
-		self::$options = option_class::load();
-		benchmark_class::znacznik('zaladowanie opcji');
-		if(self::$options['techbreak']){
-			$break = starter_class::load('elements/layouts/techbreak.html', TRUE);
-			if(!$break){
-				echo 'Technical BREAK';
-			}else{
-				echo $break;
-			}
-			exit;
-		}
-		if(self::$options['timezone']){
-			@date_default_timezone_set(self::$options['timezone']);
-		}
-		$this->get = new get();
-		benchmark_class::znacznik('powolanie obiektu obslugi get');
-		$this->post = new post();
-		benchmark_class::znacznik('powolanie obiektu obslugi post');
-		$this->lang = new lang_class($this->get->get_lang());
-		benchmark_class::znacznik('powolanie obiektu obslugi jezyka');
-		$this->error = new error_class($this->lang);
-		benchmark_class::znacznik('powolanie obiektu obslugi bledow');
-		if($this->get->typ() == 'html'){
-			$this->session = new session();
-			benchmark_class::znacznik('powolanie obiektu obslugi session');
-			$this->cookie = new cookie();
-			benchmark_class::znacznik('powolanie obiektu obslugi cookie');
-			$this->files = new files();
-			benchmark_class::znacznik('powolanie obiektu obslugi uploudu plikow');
-			globals_class::destroy();
-			benchmark_class::znacznik('niszczenie tablic globalnych');
-			$this->tree = new tree_class($this->get->full_get(1), $this->lang->lang);
-			benchmark_class::znacznik('powolanie obiektu obslugi drzewa strony');
-			$this->display = new display_class($this->tree->layout, $this->get, $this->session,
-					$this->lang->lang, $this->tree->css, $this->tree->js);
-			benchmark_class::znacznik('powolanie obiektu display');
-			$this->meta = new meta_class($this->get->full_get(1));
-			benchmark_class::znacznik('powolanie obiektu obslugi znacznikow meta');
-			$this->loader = new loader_class($this->tree, $this->display, $this->lang, $this->meta, 
-					$this->get, $this->post, $this->cookie, $this->session, $this->files, $this->error);
-			$this->display->block = $this->loader->return_block();
-			benchmark_class::znacznik('ladowanie modulow i bibliotek, oraz ich uruchomienie');
-			$this->meta->render($this->display);
-			benchmark_class::znacznik('rendering danych meta');
-			$error_arr = $this->error->render(1);
-			if($error_arr['pointer']){
-				foreach($error_arr['pointer'] as $point_error){
-					$this->display->generate($point_error['point'], $point_error['content'], $point_error['mod']);
-				}
-			}
-			if($error_arr['critic']){
-				$this->display->generate('core_error', $error_arr['critic']);
-			}
-			if($error_arr['warning']){
-				$this->display->generate('core_warning', $error_arr['warning']);
-			}
-			if($error_arr['info']){
-				$this->display->generate('core_info', $error_arr['info']);
-			}
-			if($error_arr['ok']){
-				$this->display->generate('core_ok', $error_arr['ok']);
-			}
-		}else{
-			$this->display = new display_class(NULL, $this->get, NULL, $this->lang->lang, NULL, NULL);
-			benchmark_class::znacznik('powolanie obiektu display');
-			$this->display->other();
-			benchmark_class::znacznik('wygenerowanie css/js');
-			benchmark_class::$session['benchmark']['on'] = FALSE;
-		}
-		$this->lang->set_array();
-		benchmark_class::znacznik('ustawanie tablicy jezyka');
-		$this->lang->translate($this->display);
-		benchmark_class::znacznik('tulmaczenie');
-		$this->render = $this->display->render();
-		benchmark_class::znacznik('rendering');
-		if(empty($this->render) && ($this->get->typ() == 'css' || $this->get->typ() == 'js')){
-			if($this->get->typ() == 'js'){
-				$this->render = '(function(){}())';
-			}elseif($this->get->typ() == 'css'){
-				$this->render = 'html{}';
-			}
-		}
-		if($this->get->typ() == 'html'){
-			globals_class::destroy();
-			benchmark_class::znacznik('niszczenie tablic globalnych');
-			$this->session->set_session();
-			benchmark_class::znacznik('ustawianie danych w sesji');
-			$this->cookie->set_cookies();
-			benchmark_class::znacznik('ustawianie danych cookie');
-		}
-   	}
-	/**
-	 * zwraca opcje frameworka, podana opcje, lub cala liste
-	 * @param string $name nazwa opcji do pobrania, lub brak jesli ma pobrac cala liste
-	 * @return mixed zwraca wartosc opcji (jesli barka zwraca NULL), lub tablice opcji (jesli brak pusta tablice)
-	 * @uses core_class::$options
-	 */
-	public static function options($name = FALSE){
-		if($name){
-			if(!isset(self::$options[$name])){
-				return NULL;
-			}
-			return self::$options[$name];
-		}
-		return self::$options; 
-	}
+    public function __construct()
+    {
+        self::$_options = option_class::load();
+        benchmark_class::znacznik('load options');
+
+        $this->_checkTechBreak();
+        $this->_setTimezone();
+
+        $this->_runBaseObjects();
+
+        if ($this->_get->pageType() === 'html') {
+            $this->_htmlPage();
+        } else {
+            $this->_otherPage();
+        }
+
+        $this->_setLanguage();
+
+        $this->render = $this->_display->render();
+        benchmark_class::znacznik('rendering');
+
+        $this->_setEmptyOtherRender();
+        $this->_transformGlobalArrays();
+    }
+
+    /**
+     * clear global arrays and set to them correct data
+     */
+    protected function _transformGlobalArrays()
+    {
+        if ($this->_get->pageType() === 'html') {
+            globals_class::destroy();
+            benchmark_class::znacznik('destroy global arrays');
+
+            $this->_session->setSession();
+            benchmark_class::znacznik('set data in session');
+
+            $this->_cookie->setCookies();
+            benchmark_class::znacznik('set data in cookie');
+        }
+    }
+
+    /**
+     * if css/js page is empty set default data for them
+     */
+    protected function _setEmptyOtherRender()
+    {
+        if (empty($this->render)
+            && (
+                   $this->_get->pageType() === 'css' 
+                || $this->_get->pageType() === 'js'
+            )
+        ) {
+            if ($this->_get->pageType() === 'js') {
+                $this->render = '(function(){}())';
+            } elseif($this->_get->pageType() == 'css') {
+                $this->render = 'html{}';
+            }
+        }
+    }
+
+    /**
+     * sets translations and translate all markers
+     */
+    protected function _setLanguage()
+    {
+        $this->_lang->setTranslationArray();
+        benchmark_class::znacznik('set translation array');
+
+        $this->_lang->translate($this->_display);
+        benchmark_class::znacznik('start translation');
+    }
+
+    /**
+     * check if framework has technical break
+     */
+    protected function _checkTechBreak()
+    {
+        if (self::$_options['techbreak']) {
+            $break = starter_class::load('elements/layouts/techbreak.html', TRUE);
+
+            if (!$break) {
+                echo 'Technical BREAK';
+            } else {
+                echo $break;
+            }
+            exit;
+        }
+    }
+
+    /**
+     * set default timezone
+     */
+    protected function _setTimezone()
+    {
+        if (self::$_options['timezone']) {
+            @date_default_timezone_set(self::$_options['timezone']);
+        }
+    }
+
+    /**
+     * start common objects for html and css/js page
+     */
+    protected function _runBaseObjects()
+    {
+        $this->_get = new get();
+        benchmark_class::znacznik('runs get object');
+
+        $this->_post = new post();
+        benchmark_class::znacznik('runs post object');
+
+        $this->_lang = new lang_class($this->_get->getLanguage());
+        benchmark_class::znacznik('runs language object');
+
+        $this->_error = new error_class($this->_lang);
+        benchmark_class::znacznik('runs error object');
+    }
+
+    /**
+     * runs correct for html page libraries and starts libraries/modules
+     */
+    protected function _htmlPage()
+    {
+        $this->_session = new session();
+        benchmark_class::znacznik('runs session object');
+
+        $this->_cookie = new cookie();
+        benchmark_class::znacznik('runs cookie object');
+
+        $this->_files = new files();
+        benchmark_class::znacznik('runs files object');
+
+        globals_class::destroy();
+        benchmark_class::znacznik('destroy global arrays');
+
+        $this->_tree = new tree_class(
+            $this->_get->fullGetList(),
+            $this->_lang->lang
+        );
+        benchmark_class::znacznik('runs tree object');
+
+        $this->_display = new display_class(
+            $this->_tree->layout,
+            $this->_get,
+            $this->_session,
+            $this->_lang->lang,
+            $this->_tree->css,
+            $this->_tree->js
+        );
+        benchmark_class::znacznik('runs display object');
+
+        $this->_meta = new meta_class($this->_get->fullGetList());
+        benchmark_class::znacznik('runs meta object');
+
+        $this->_loader = new loader_class(
+            $this->_tree,
+            $this->_display,
+            $this->_lang,
+            $this->_meta,
+            $this->_get,
+            $this->_post,
+            $this->_cookie,
+            $this->_session,
+            $this->_files,
+            $this->_error
+        );
+        benchmark_class::znacznik('loading modules, libraries and start them');
+
+        $this->_display->block = $this->_loader->getBlocks();
+        benchmark_class::znacznik('set blocks');
+
+        $this->_meta->render($this->_display);
+        benchmark_class::znacznik('meta data rendering');
+
+        $this->_checkErrors();
+    }
+
+    /**
+     * check if there was some errors or other communications
+     * if was display them
+     */
+    protected function _checkErrors()
+    {
+        $errorList = $this->_error->render(1);
+
+        if ($errorList['pointer']) {
+            foreach($errorList['pointer'] as $error){
+                $this->_display->generate(
+                    $error['point'],
+                    $error['content'],
+                    $error['mod']
+                );
+            }
+        }
+
+        if ($errorList['critic']) {
+            $this->_display->generate('core_error', $errorList['critic']);
+        }
+
+        if ($errorList['warning']) {
+            $this->_display->generate('core_warning', $errorList['warning']);
+        }
+
+        if ($errorList['info']) {
+            $this->_display->generate('core_info', $errorList['info']);
+        }
+
+        if ($errorList['ok']) {
+            $this->_display->generate('core_ok', $errorList['ok']);
+        }
+    }
+
+    /**
+     * runs correct for css or js page libraries and render content
+     */
+    protected function _otherPage()
+    {
+        $this->_display = new display_class(
+            NULL,
+            $this->_get,
+            NULL,
+            $this->_lang->lang,
+            NULL,
+            NULL
+        );
+        benchmark_class::znacznik('runs display object for css/js');
+
+        $this->_display->other();
+        benchmark_class::znacznik('rendering css/js');
+
+        benchmark_class::$session['benchmark']['on'] = FALSE;
+    }
+
+    /**
+     * return framework options
+     * given option or all options
+     * 
+     * @param string|bool $name
+     * @return mixed
+     */
+    public static function options($name = FALSE) {
+        if ($name) {
+            if (!isset(self::$_options[$name])) {
+                return NULL;
+            }
+
+            return self::$_options[$name];
+        }
+
+        return self::$_options; 
+    }
 }
-?>

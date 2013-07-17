@@ -1,702 +1,876 @@
-<?PHP
+<?php
 /**
- * klasa odpowiedzialana za wyswietlanie
- * przetwarzanie szablonow, zastepowanie znacznikow, petle, renderowanie pelnej strony, ladowanie dodatkowych szablonow
- * oczyszczanie kodu ze znacznikow, uzupelnianie o bledy, naprawa scierzek, wyswietlanie css i js
- * @author chajr <chajr@bluetree.pl>
- * @package core
- * @version 2.4.4
- * @copyright chajr/bluetree
+ * display class
+ * processing templates, replacing markers, loops, render of whole content
+ * loading external templates, clean from unused markers, set errors, fix paths
+ * display css and js content
+ *
+ * @category    BlueFramework
+ * @package     BlueFramework Core
+ * @subpackage  display
+ * @author      Michał Adamiak    <chajr@bluetree.pl>
+ * @copyright   chajr/bluetree
+ * @version     2.5.0
  * 
- * @todo przerobic display class tak aby mozna bylo stosowac jako biblioteke niezaleznie
- * 
+ * @todo change class to allows use it independent in module
  */
-class display_class {
-	/**
-	 * przechowuje tablice z tresciami pochodzacymi z glownego layoutu oraz modulow
-	 * na koncu sklada tablice i do wlasciwosci zapisuje kompletna tresc
-	 * @var array
-	 */
-	public $DISPLAY = array('core' => '');
-	/**
-	 * jesli pojawily sie elementy majace zostac zaladowane do blokow, to wlasciwosc dostaje tablice z blokami i ich modulami
-	 * @var array tablica z blokami i ich modulami
-	 */
-	public $block = NULL;
-	/**
-	 * tablica js i powiazanych z nimi modulow do zaladowania
-	 * @var array
-	 */
-	private $js = array();
-	/**
-	 * tablica css i powiazanych z nimi modulow do zaladowania
-	 * @var array
-	 */
-	private $css = array();
-	/**
-	 * opcje frameworka
-	 * @var array
-	 */
-	private $options;
-	/**
-	 * kod wybranego jezyka
-	 * @var string
-	 */
-	private $lang;
-	/**
-	 * obiekt get
-	 * @var object
-	 */
-	private $get;
-	/**
-	 * obiekt sesji
-	 * @var object
-	 */
-	private $session;
-	/**
-	 * wyrazenie regularne odpowiadajace wszystkim znacznikom
-	 * @var string
-	 * @access private
+class display_class
+{
+    /**
+     * contains array with rendered content from main layout and modules
+     * at the ane join array to string and save it to this variable
+     * @var array|string
+     */
+    public $DISPLAY = array('core' => '');
+    
+    /**
+     * if their been some elements must be loaded to block
+     * that variable contains array with blocks and their modules
+     * @var array|boolean
+     */
+    public $block = NULL;
+    
+    /**
+     * array of js and contains with them modules to load
+     * @var array
+     */
+    private $_js = array();
+    
+    /**
+     * array of css and contains with them modules to load
+     * @var array
+     */
+    private $_css = array();
+    
+    /**
+     * framework options
+     * @var array
+     */
+    private $_options;
+    
+    /**
+     * selected language code
+     * @var string
+     */
+    private $_lang;
+    
+    /**
+     * get object
+     * @var get
+     */
+    private $_get;
+    
+    /**
+     * session object
+     * @var session
+     */
+    private $_session;
+    
+    /**
+     * regular expression that corresponds to all display class markers
+     * @var string
     */
-	private $tagi_tresci = "{;[\\w=\-|&();\/,]+;}";
-	/**
-	 * laduje glowny layout oraz powiazane z nim pliki zewnetrzne
-	 * naprawia sciarzki, oraz konwertuje znaczniki sciarzek wg ustawionych opcji
-	 * @param string $layout nazwa glownego layoutu do zaladowania, NULL jesli renderuje css/js
-	 * @param object $get obiekt get
-	 * @param object $session obiekt sesji
-	 * @param string $lang kod jezyka jaki zostal ustawiony we frameworku
-	 * @param array $css tablica css-ow do zaladowania
-	 * @param array $js tablica js-ow do zaladowania
-	 * @param array $options opcjonalnie tablica opcji
-	 * @uses display_class::$options
-	 * @uses display_class::$get
-	 * @uses display_class::$session
-	 * @uses display_class::$DISPLAY
-	 * @uses display_class::$lang
-	 * @uses dispaly_class::external()
-	 * @uses starter_class::load()
-	 * @uses display_class::layout()
-	 * @uses get::typ()
-	 * @uses core_class::options()
-	 */
-	public function __construct($layout, $get, $session, $lang, $css, $js, $options = NULL){
-		$this->lang = $lang;
-		$this->css = $css;
-		$this->js = $js;
-		$this->get = $get;
-		$this->session = $session;
-		if($options){
-			$this->options = $options;
-		}else{
-			$this->options = core_class::options();
-		}
-		if($this->get){
-			$typ = $this->get->typ();
-		}else{
-			$typ = NULL;
-		}
-		switch($typ){
-			case'css':
-			case'js':
-				$this->DISPLAY['core'] = '{;css_js;}';
-				break;
-			default:
-				$this->layout($layout);
-               	break;
-		}
-		$this->external();
-	}
-	/**
-	 * umozliwia zaladowanie i wyrenderowanie w szablonie zawartosci css i js
-	 * @uses display_class::$get
-	 * @uses get::typ()
-	 * @uses display_class::read()
-	 * @uses display_class::generate()
-	 * @todo caschowanie js i css, jesli istnieje plik gdzie link = md5(link), to pobiera go, lub twozy
-	 */
-	public function other(){
-		$content = '';
-		if($this->get->typ() == 'css'){
-			header('content-type: text/css');
-		}elseif($this->get->typ() == 'js'){
-			header("content-type: text/javascript");
-		}
-		foreach($this->get as $mod => $param){
-			if(is_array($param)){
-				foreach($param as $val){
-					$content .= $this->read($mod, $val, $this->get->typ());
-				}
-			}else{
-				$content .= $this->read($mod, $param, $this->get->typ());
-			}
-		}
-		$this->generate('css_js', $content);
-	}
-	/**
-	 * umozliwia zastapienie znacznika trescia w danym module, lub grupy znacznikow tablica (gdzie klucz tablicy == znacznik)
-	 * @param mixed $znacznik nazwa znacznika do zastapienia, lub tablica znacznik => wartosc
-	 * @param string $tresc tresc do zastapienia znacznika, lub pusty kiedy przekazywany array
-	 * @param string $modul nazwa modulu zglaszajacego generowanie (core domyslnie)
-	 * @return integer zwraca ilosc zastapionych znacznikow, lub NULL jesli nie znaleziono elementow
-	 * @example generate('znacznik', 'jakas tres do wyswietlenia')
-	 * @example generate('znacznik', 'jakas tres do wyswietlenia', 'modul')
-	 * @example generate(array('znacznik1' => 'tresc', 'znacznik2' => 'inna tresc'), '')
-	 * @uses display_class::$DISPLAY
-	 */
-	public function generate($znacznik, $tresc, $modul = 'core'){
-		if(isset($this->DISPLAY[$modul])){
-			$int = 0;
-			if(!$tresc && is_array($znacznik)){
-				foreach($znacznik as $element => $tresc){
-					$this->DISPLAY[$modul] = str_replace('{;'.$element.';}', $tresc, $this->DISPLAY[$modul], $int2);
-					$int += $int2;
-				}
-			}else{
-				$this->DISPLAY[$modul] = str_replace('{;'.$znacznik.';}', $tresc, $this->DISPLAY[$modul], $int);
-			}
-			return $int;
-		}
-		return NULL;
-	}
-	/**
-	 * przetwarza tablice i generuje na jej podstawie odpowiednia tresc
-	 * @param string $znacznik znacznik do zastapienia
-	 * @param array $tablica dane do zapisania
-	 * @param string $modul opcjonalnie modul ktory zglasza tresc, inaczej zastepuje w szablonie glownym
-	 * @return integer zwraca ilosc zastapionych znacznikow, lub NULL jesli nie znaleziono elementow
-	 * @uses display_class::$DISPLAY
-	 * @example loop('jakis_znacznik', array(array(key => val), array(key2 => val2)), 'mod');
-	 * @example loop('jakis_znacznik', array(array(key => val), array(key2 => val2)));
-	 */
-	public function loop($znacznik, $tablica, $modul = NULL){
-		if(!$modul){
-			$modul = 'core';
-		}
-		$int = NULL;
-		if($tablica){
-			$start = '{;start;'.$znacznik.';}';
-			$end = '{;end;'.$znacznik.';}';
-			$poz1 = strpos($this->DISPLAY[$modul], $start);
-			$poz1 = $poz1 + mb_strlen($start);
-			$poz2 = strpos($this->DISPLAY[$modul], $end);
-			$poz2 = $poz2 - $poz1;
-			if($poz2 < 0){
-				return;
-			}
-			$szablon = substr($this->DISPLAY[$modul], $poz1, $poz2);
-			$end = '';
-			$tmp = '';
-			$int = 0;
-			foreach($tablica as $wiersz){
-				$tmp = $szablon;
-				foreach($wiersz as $klucz => $wartosc){
-					$wzor = '{;'.$znacznik.';'.$klucz.';}';
-					$tmp = str_replace($wzor, $wartosc, $tmp);
-				}
-				$end .= $tmp;
-			}
-			$this->DISPLAY[$modul] = str_replace($szablon, $end, $this->DISPLAY[$modul], $int2);
-			$int += $int2;
-			unset($end);
-			unset($szablon);
-			unset($tablica);
-		}
-		return $int;
-	}
-	/**
-	 * laduje do tablicy informacje o css-ach o js-ach do zaladowania z modulow
-	 * @param string $mod nazwa modulu
-	 * @param string $name nazwa pliku css/js
-	 * @param string $type typ pliku (css lub js)
-	 * @param string $external czy plik pochodzi z zewnetrznego zrodla, czy z frameworka
-	 * @param string $media typ plik css (np. print, mobile)
-	 * @uses display_class::$js
-	 * @uses dispaly_class::$css
-	 */
-	public function set($mod, $name, $type, $external, $media){
-		if($type == 'js'){
-			if($media){
-				$this->js[$external][$mod]['media'][$media][$name] = $name;
-			}else{
-				$this->js[$external][$mod][$name] = $name;
-			}
-		}elseif($type == 'css'){
-			if($media){
-				$this->css[$external][$mod]['media'][$media][$name] = $name;
-			}else{
-				$this->css[$external][$mod][$name] = $name;
-			}
-		}
-	}
-	/**
-	 * scala tresci zawarte w grupach modulow w kompletna strone, zastepuje sciezki,
-	 * naprawia linki, czysci i kompresuje, jesli debug wylaczony usuwa wszystko co zostalo wyswietlone
-	 * @return string kompletna zawartosc strony do wyswietlenia
-	 * @uses display_class::$DISPLAY
-	 * @uses display_class::$block
-	 * @uses display_class::$options
-	 * @uses display_class::path()
-	 * @uses display_class::clean()
-	 * @uses display_class::compress()
-	 * @uses display_class::link()
-	 */
-	public function render(){
-		$blocks = array();
-		foreach($this->DISPLAY as $key => $val){
-			if($key == 'core'){
-				continue;
-			}
-			if($this->block){
-				if(isset($this->block[$key])){
-					if(!isset($blocks[$this->block[$key]])){
-						$blocks[$this->block[$key]] = '';
-					}
-					$blocks[$this->block[$key]] .= $val;
-				}
-			}
-			$this->DISPLAY['core'] = str_replace('{;mod;'.$key.';}', $val, $this->DISPLAY['core']);
-			unset($this->DISPLAY[$key]);
-		}
-		foreach($blocks as $block_name => $block_content){
-			$this->DISPLAY['core'] = str_replace('{;block;'.$block_name.';}', $block_content, $this->DISPLAY['core']);
-		}
-		$this->link('css');
-		$this->link('js');
-		$this->session(1);
-		$this->session(0);
-		$this->DISPLAY = $this->DISPLAY['core'];
-		$this->path();
-		$this->clean();
-		$this->compress();
-		if(!(bool)$this->options['debug']){
-			ob_clean();
-		}
-		return $this->DISPLAY;
-	}
-	/**
-	 * umozliwia zaladowanie layoutu do tablicy DISPLAY (glowny, badz layouty dla modulow)
-	 * @param string $layout nazwa layoutu do zaladowania
-	 * @param string $mod nazwa moulu dla ktorego ladowany layout (jesli FALSE ladowany layout dla core)
-	 * @uses display_class::$DISPLAY
-	 * @uses starter_class::load()
-	 * @example layout('nazwa_layoutu')
-	 * @example layout('nazwa_layoutu', 'mod')
-	 * @throws coreException core_error_2
-	 */
-	public function layout($layout, $mod = FALSE){
-		if(!$mod){
-			$path = "elements/layouts/$layout.html";
-			$mod = 'core';
-		}else{
-			$path = "modules/$mod/layouts/$layout.html";
-		}
-		$this->DISPLAY[$mod] = starter_class::load($path, TRUE);
-		if(!$this->DISPLAY[$mod]){
-			throw new coreException('core_error_2', $mod.' - '.$path);
-		}
-	}
-	/**
-	 * uzupelnia znaczniki session o informacje pochodzace z sesji
-	 * @param boolean $type typ tablicy do przetworzenia (core, lub public. core inf pochodzace z frameworka)
-	 * @uses display_class::$session
-	 * @uses display_class::generate()
-	 * @uses session::returns()
-	 */
-	private function session($type){
-		if($this->session){
-			if($type){
-				$type = 'core';
-				$array = $this->session->returns('display');
-			}else{
-				$type = 'public';
-				$array = $this->session->returns('public');
-			}
-			if($array){
-				foreach($array as $key => $val){
-					$this->generate('session_'.$type.';'.$key.';', $val);
-				}
-			}
-		}
-	}
-	/**
-	 * twozy linki do css/ja z podanych plikow w listach
-	 * @param string $type typ linku do utwozenia (css lub js)
-	 * @uses display_class::$css
-	 * @uses display_class::$js
-	 * @uses display_class::generate()
-	 * @todo sprawdzic jakie sa jeszcze typy w css
-	 */
-	private function link($type){
-		$links = '';
-		$internal = '';
-		switch($type){
-			case'css':
-				$front = '<link href="';
-				$end = '" rel="stylesheet" type="text/css"/>';
-				$arr = $this->css;
-				break;
-			case'js':
-				$front = '<script src="';
-				$end = '" type="text/javascript"></script>';
-				$arr = $this->js;
-				break;
-		}
-		if(!empty($arr['external'])){
-			foreach($arr['external'] as $mod){
-               	foreach($mod as $val){
-					if(is_array($val)){
-						foreach($val as $key => $media){
-							foreach($media as $file){
-								$links .= "\t\t".$front.$file.'" media="'.$key.$end."\n";
-							}
-                       	}
-					}else{
-						$links .= "\t\t".$front.$val.$end."\n";
-					}
-				}
-           	}
-			unset($arr['external']);
-		}
-		if(!empty($arr['internal'])){
-           	$path = '{;core;domain;}{;core;lang;}{;path;core_'.$type.'/';
-			$endpath = ';}';
-			$media = '';
-			$internal = '';
-			$int_media = '';
-           	foreach($arr['internal'] as $mod => $values){
-				if(isset($values['media'])){
-					foreach($values['media'] as $key => $elements){
-						foreach($elements as $file){
-							$int_media .= $mod.','.$file.'/';
-						}
-					}
-					$media .= "\t\t".$front.$path.$int_media.$endpath.'" media="'.$key.$end."\n";
-					unset($values['media']);
-				}
-				foreach($values as $file){
-					$internal .= $mod.','.$file.'/';
-				}
-			}
-			if($internal){
-				$links .= "\t\t".$front.$path.$internal.$endpath.$end."\n";
-			}
-			if($media){
-				$links .= $media;
-			}
-		}
-		$this->generate('core;'.$type, $links);
-	}
-	/**
-	 * odczyt zawartosci pliku css/js
-	 * @param string $mod nazwa modulu zglaszajacego zadanie do css/js
-	 * @param string $param nazwa pliku do odczytania
-	 * @param string $type typ pliku (css lub js)
-	 * @return string zwraca zawartosc pliku, lub pusty string
-	 * @uses starter_class::load()
-	 */
-	private function read($mod, $param, $type){
-		if($mod == 'core'){
-			$main = 'elements/'.$type.'/';
-		}else{
-			$main = 'modules/'.$mod.'/elements/'.$type.'/';
-		}
-		$data = starter_class::load($main.$param.'.'.$type, TRUE);
-		if($data){
-			$content = $data."\n";
-			return $content;
-		}
-		return '';
-	}
-	/**
-	 * laduje dodatkowe szablony do glownego layoutu, badz dodatkowe elementy dla layoutu danego modulu
-	 * @param string $modul opcjonalnie nazwa modulu ktory zglasza ladowanie dodatkowych szablonow
-	 * @uses display_class::$DISPLAY
-	 * @uses starter_class::load()
-	 */
-	private function external($modul = NULL){
-		$tab = array();
-		if(!$modul){
-			$path = 'elements/layouts/';
-			$modul = 'core';
-		}else{
-			$path = 'modules/'.$modul.'/layout/';
-		}
-		preg_match_all('#{;external;([\\w-])+;}#', $this->DISPLAY[$modul], $tab);
-		foreach ($tab[0] as $element){
-			$nazwa = str_replace(
-				array(
-					'{;external;', 
-					';}'
-				), '', $element
-			);
-			$tresc = starter_class::load($path.$nazwa.'.html', TRUE);
-			if(!$tresc){
-				echo 'core_error_3 '.$path.$nazwa.'.html';
-			}
-			$this->DISPLAY[$modul] = str_replace($element, $tresc, $this->DISPLAY[$modul]);
-		}
-	}
-	/**
-	 * sprawdzanie scierzek czy zgloszone przy bledzie, czy przy normalnej stronie
-	 * @uses display_class::$get
-	 * @uses get::path()
-	 * @uses get::real_path()
-	 * @return array tablica scierzek naprawczych
-	 */
-	private function chk_path(){
-		$path = array();
-		if($this->get){
-			$path[0] = $this->get->path();
-			$path[1] = $this->get->path(1);
-		}else{
-			$path[0] = $path[1] = get::real_path($this->options['test']);
-		}
-		return $path;
-	}
-	/**
-	 * zastepuje znaczniki sciezek odpowiednimi danymi
-	 * @example {;core;domain;} - zwraca protokol, domene i folder testowy
-	 * @example {;core;lang;} - zwraca kod jezyka jesli obsluga jezykow wlaczona
-	 * @example {;path;jakas sciezka;} - zwraca skonwertowana sciezke (bez jezyka i domeny)
-	 * @example {;full;jakas sciezka;} - zwraca pelna sciezke wraz z domena i jezykiem
-	 * @example {;rel;jakas sciezka;} - zwraca aktualna sciezke i dopisuje do niej podana sciezke
-	 * @uses display_class::$DISPLAY
-	 * @uses display_class::$options
-	 * @uses display_class::$lang
-	 * @uses display_class::$get
-	 * @uses display_class::separator()
-	 * @uses display_class::convert()
-	 * @uses display_class::chk_path()
-	 * @uses get::path()
-	 */
-	private function path(){
-		$path = $this->chk_path();
-		$this->DISPLAY = preg_replace('#{;core;domain;}#', $path[0], $this->DISPLAY);
-		if(!$this->options['rewrite']){
-			$lang = '?core_lang='.$this->lang.$this->separator();
-		}else{
-			$lang = $this->lang.'/';
-		}
-		$this->DISPLAY = preg_replace('#{;core;lang;}#', $lang, $this->DISPLAY);
-		$this->DISPLAY = preg_replace('#{;core;mainpath;}#', $path[1], $this->DISPLAY);
-		preg_match_all('#{;path;[\\w-/'.$this->options['zmienne_rewrite_sep'].']+;}#', $this->DISPLAY, $tab);
-		$this->convert($tab, 'path');
-		preg_match_all('#{;full;[\\w-/'.$this->options['zmienne_rewrite_sep'].']+;}#', $this->DISPLAY, $tab);
-		$this->convert($tab, 'full');
-		preg_match_all('#{;rel;[\\w-/'.$this->options['zmienne_rewrite_sep'].']+;}#', $this->DISPLAY, $tab);
-		$this->convert($tab, 'rel');
-	}
-	/**
-	 * konwertuje tablice znacznikow scierzek w poprawne zciezki URI
-	 * @param array $tab tablica znacznikow
-	 * @param string $type typ sciezki do przekonwertowania
-	 * @uses display_class::$get
-	 * @uses display_class::$lang
-	 * @uses display_class::$options
-	 * @uses display_class::$DISPLAY
-	 * @uses display_class::convert_rewrite()
-	 * @uses display_class::convert_classic()
-	 * @uses display_class::chk_path()
-	 * @uses display_class::separator()
-	 * @uses get::path()
-	 */
-	private function convert($tab, $type){
-		if($tab){
-			$path = $this->chk_path();
-			switch($type){
-				case'path':
-					$update = '';
-					break;
-				case'full':
-					$update = $path[0];
-					if($this->lang){
-						if($this->options['rewrite']){
-							$update .= $this->lang.'/';
-						}else{
-							$update .= '?core_lang='.$this->lang.$this->separator();
-						}
-					}else{
-						if(!$this->options['rewrite']){
-							$update .= '?';
-						}
-					}
-					break;
-				case'rel':
-					$update = $path[1];
-					if(!$this->options['rewrite']){
-						$update .= '?';
-					}
-					break;
-			}
-			foreach($tab[0] as $link){
-				$path = str_replace(
-					array(
-						'{;'.$type.';',
-						';}'
-					), '', $link);
-				$path = explode('/', $path);
-				$pages = array();
-				$params = array();
-				foreach($path as $value){
-					if(preg_match('#['.$this->options['zmienne_rewrite_sep'].']{1}#', $value)){
-						$params[] = $value;
-					}elseif($value){
-						$pages[] = $value;
-					}
-				}
-				if((bool)$this->options['rewrite']){
-					$final = self::convert_rewrite($params, $pages);
-				}else{
-					$final = self::convert_classic($params, $pages, $this->separator());
-				}
-				if($update){
-					$final = $update.$final;
-				}
-				$this->DISPLAY = str_replace($link, $final, $this->DISPLAY);
-			}
-		}
-	}
-	/**
-	 * tworzy separator z ampersand dla js lub xhtml strict
-	 * @return string skonwertowany separator
-	 * @uses display_class::js
-	 */
-	private function separator(){
-		if(!empty($this->js)){
-			$separator = '&';
-		}else{
-			$separator = '&amp;';
-		}
-		return $separator;
-	}
-	/**
-	 * oczyszcza layout z niewykozystanych znacznikow
-	 * @uses display_class::$DISPLAY
-	 * @uses display_class::clean_chk()
-	 * @uses display_class::$tagi_tresci
-	 */
-	private function clean(){
-		$this->clean_chk('opt');
-		$this->clean_chk('petla');
-		$this->DISPLAY = preg_replace('#'.$this->tagi_tresci.'#', '', $this->DISPLAY);
-	}
-	/**
-	 * oczyszcza layout z petli w ktorych znajduja sie nieobsluzone znaczniki,
-	 * badz niewykozystane znaczniki opcjonalne
-	 * @param string $typ typ do sprawdzenia
-	 * @uses display_class::$tagi_tresc
-	 * @uses display_class::$DISPLAY
-	 */
-	private function clean_chk($typ){
-		switch($typ){
-			case'petla':
-				$reg1 = '#{;(start|end);([\\w-])+;}#';
-				$reg2 = '#{;([\\w-])+;([\\w-])+;}#';
-				$reg3 = '{;start;';
-				$reg4 = '{;end;';
-				break;
-			case'opt':
-				$reg1 = '#{;op;([\\w-])+;}#';
-				$reg2 = $this->tagi_tresci;
-				$reg3 = '{;op;';
-				$reg4 = '{;op_end;';
-				break;
-			default:
-				return;
-				break;
-		}
-		$bool = preg_match_all($reg1, $this->DISPLAY, $tab);
-       	if(!empty($tab) && !empty($tab[0])){
-			foreach($tab[0] as $znacznik){
-               	$start = strpos($this->DISPLAY, $znacznik);
-				$znacznik_end = str_replace($reg3, $reg4, $znacznik);
-				$end = strpos($this->DISPLAY, $znacznik_end);
-				if(!$start || !$end){
-					continue;
-				}
-              	$start_content = $start + mb_strlen($znacznik);
-				$content_len = $end - $start_content;
-				$string = substr($this->DISPLAY, $start_content, $content_len);
-               	$len = ($end += mb_strlen($znacznik_end)) - $start;
-				$string_del = substr($this->DISPLAY, $start, $len);
-               	$bool = preg_match($reg2, $string);
-				if($bool){
-                   	$this->DISPLAY = str_replace($string_del, '', $this->DISPLAY);
-				}else{
-					$this->DISPLAY = str_replace($string_del, $string, $this->DISPLAY);
-				}
-           	}
-		}
-	}
-	/**
-	 * kompresuje zawartosc strony zgodnie z poziomem ustawionej kompresji
-	 * @uses display_class::$options
-	 * @uses display_class::$DISPLAY
-	 */
-	private function compress(){
-		if((bool)$this->options['compress']){
-			header('Content-encoding: gzip');
-			$this->DISPLAY = gzcompress($this->DISPLAY, $this->options['compress']);
-		}
-	}
-	/**
-	 * konwertuje znacznik na standardowa scierzke
-	 * @param array $params tablica parametrow
-	 * @param array $pages tablica stron
-	 * @return string skonwertowany na sciezke znacznik
-	 * @static
-	 */
-	static function convert_classic($params, $pages, $separator = '&'){
-		$licznik = 0;
-		$final = '';
-		foreach($pages as $page){
-			$final .= 'p'.$licznik.'='.$page.$separator;
-			$licznik++;
-		}
-		foreach ($params as $param){
-			$param = str_replace(',', '=', $param);
-			$final .= $param.$separator;
-		}
-		$final = rtrim($final, '&amp;');
-		$final = rtrim($final, '&');
-		return $final;
-	}
-	/**
-	 * konwertuje znacznik wedlug mode_rewrite
-	 * @param array $params tablica parametrow
-	 * @param array $pages tablica stron
-	 * @return string skonwertowany na sciezke znacznik
-	 * @static
-	 */
-	static function convert_rewrite($params, $pages){
-		$final = '';
-		foreach($pages as $page){
-			$final .= $page.'/';
-		}
-		foreach ($params as $param){
-			$final .= $param.'/';
-		}
-		$final = rtrim($final, ',');
-		return $final;
-	}
-	/**
-	 * przetwarza przekazana tablice get i wydziala z niej scierzki i parametry
-	 * @param array $path tablica elementow get do sprawdzenia
-	 * @param string $separator znak odzielajacy nazwe zmiennej od jej wartosci
-	 * @return array tablica stron i parametrow
-	 */
-	static function explode_url($path, $separator){
-		$pages = array();
-		$params = array();
-		foreach($path as $value){
-			if(preg_match('#['.$separator.']{1}#', $value)){
-				$params[] = $value;
-			}elseif($value){
-				$pages[] = $value;
-			}
-		}
-		return array('pages' => $pages, 'params' => $params);
-	}
+    private $_contentMarkers = "{;[\\w=\\-|&();\\/,]+;}";
+    
+    /**
+     * load main layout and related with it external templates
+     * fix paths and convert path markers
+     * 
+     * @param string|boolean $layout main layout name (if css/js NULL)
+     * @param get $get
+     * @param session $session
+     * @param string $lang language code
+     * @param array $css
+     * @param array $js
+     * @param array $options
+     */
+    public function __construct(
+        $layout,
+        $get,
+        $session,
+        $lang,
+        $css,
+        $js,
+        $options = NULL
+    ){
+        $this->_lang    = $lang;
+        $this->_css     = $css;
+        $this->_js      = $js;
+        $this->_get     = $get;
+        $this->_session = $session;
+
+        if ($options) {
+            $this->_options = $options;
+        } else {
+            $this->_options = core_class::options();
+        }
+
+        if ($this->_get) {
+            $typ = $this->_get->pageType();
+        } else {
+            $typ = NULL;
+        }
+
+        switch ($typ) {
+            case'css':
+            case'js':
+                $this->DISPLAY['core'] = '{;css_js;}';
+                break;
+
+            default:
+                $this->layout($layout);
+                   break;
+        }
+
+        $this->_external();
+    }
+
+    /**
+     * allows to render in template css nad js content
+     * 
+     * @todo cache for js and css files
+     */
+    public function other()
+    {
+        $content = '';
+        if ($this->_get->pageType() === 'css') {
+            header('content-type: text/css');
+        } elseif ($this->_get->pageType() === 'js') {
+            header("content-type: text/javascript");
+        }
+        
+        foreach ($this->_get as $mod => $param) {
+            if (is_array($param)) {
+
+                foreach ($param as $val) {
+                    $content .= $this->_read($mod, $val, $this->_get->pageType());
+                }
+            } else {
+                $content .= $this->_read($mod, $param, $this->_get->pageType());
+            }
+        }
+        
+        $this->generate('css_js', $content);
+    }
+
+    /**
+     * allows to replace marker with content, or group of markers by array
+     * 
+     * @param string|array $marker marker name or array (marker => value)
+     * @param string|boolean $content some string or NULL if marker array given
+     * @param string|boolean $module name of module that wants to replace content (default core)
+     * @return integer count of replaced markers
+     * @example generate('marker', 'content')
+     * @example generate('marker', 'content', 'module')
+     * @example generate(array('marker' => 'content', 'marker2' => 'other content'), '')
+     */
+    public function generate($marker, $content, $module = 'core')
+    {
+        $int = 0;
+
+        if (isset($this->DISPLAY[$module])) {
+            if (!$content && is_array($marker)) {
+
+                foreach ($marker as $element => $content) {
+                    $this->DISPLAY[$module] = str_replace(
+                        '{;'.$element.';}',
+                        $content,
+                        $this->DISPLAY[$module],
+                        $int2
+                    );
+                    $int += $int2;
+                }
+
+            } else {
+                $this->DISPLAY[$module] = str_replace(
+                    '{;'.$marker.';}',
+                    $content,
+                    $this->DISPLAY[$module],
+                    $int
+                );
+            }
+        }
+        return $int;
+    }
+
+    /**
+     * process array and generate proper for loop content
+     * 
+     * @param string $marker
+     * @param array $contentArray
+     * @param string|boolean $module name of module that wants to replace content (default core)
+     * @return integer count of replaced markers
+     * @uses display_class::$DISPLAY
+     * @example loop('marker', array(array(key => val), array(key2 => val2)), 'mod');
+     * @example loop('marker', array(array(key => val), array(key2 => val2)));
+     */
+    public function loop($marker, array $contentArray, $module = NULL)
+    {
+        if (!$module) {
+            $module = 'core';
+        }
+        $int = 0;
+
+        if ($contentArray) {
+            $start          = '{;start;'.$marker.';}';
+            $end            = '{;end;'.$marker.';}';
+
+            $position1      = strpos($this->DISPLAY[$module], $start);
+            $position1      = $position1 + mb_strlen($start);
+            $position2      = strpos($this->DISPLAY[$module], $end);
+            $position2      = $position2 - $position1;
+
+            if ($position2 < 0) {
+                return NULL;
+            }
+
+            $template   = substr($this->DISPLAY[$module], $position1, $position2);
+            $end        = '';
+            $int        = 0;
+
+            foreach ($contentArray as $row) {
+                $tmp = $template;
+
+                foreach($row as $key => $value){
+                    $model  = '{;'.$marker.';'.$key.';}';
+                    $tmp    = str_replace($model, $value, $tmp);
+                }
+
+                $end .= $tmp;
+            }
+
+            $this->DISPLAY[$module] = str_replace(
+                $template,
+                $end,
+                $this->DISPLAY[$module],
+                $int2
+            );
+            $int += $int2;
+
+            unset($end);
+            unset($template);
+            unset($contentArray);
+        }
+        return $int;
+    }
+
+    /**
+     * load to array information about css and js to load from modules
+     * 
+     * @param string $module
+     * @param string $name css/js name
+     * @param string $type css or js
+     * @param string $external information that file comes from external source or framework
+     * @param string $media for css (eg. print, mobile)
+     */
+    public function set($module, $name, $type, $external, $media)
+    {
+        if ($type === 'js') {
+            if ($media) {
+                $this->_js[$external][$module]['media'][$media][$name] = $name;
+            } else {
+                $this->_js[$external][$module][$name] = $name;
+            }
+
+        } elseif($type === 'css') {
+            if ($media) {
+                $this->_css[$external][$module]['media'][$media][$name] = $name;
+            } else {
+                $this->_css[$external][$module][$name] = $name;
+            }
+        }
+    }
+
+    /**
+     * join contents included in modules groups in complete page, replace paths
+     * fix urls, clean from markers and optionaly compress
+     * 
+     * @return string complete content to displa 
+     */
+    public function render()
+    {
+        $blocks = array();
+        foreach ($this->DISPLAY as $key => $val) {
+
+            if ($key === 'core') {
+                continue;
+            }
+
+            if ($this->block){ 
+                if (isset($this->block[$key])) {
+                    if (!isset($blocks[$this->block[$key]])) {
+                        $blocks[$this->block[$key]] = '';
+                    }
+
+                    $blocks[$this->block[$key]] .= $val;
+                }
+            }
+
+            $this->DISPLAY['core'] = str_replace(
+                '{;mod;'.$key.';}',
+                $val,
+                $this->DISPLAY['core']
+            );
+            unset($this->DISPLAY[$key]);
+        }
+
+        foreach($blocks as $block_name => $block_content){
+            $this->DISPLAY['core'] = str_replace(
+                '{;block;'.$block_name.';}',
+                $block_content,
+                $this->DISPLAY['core']
+            );
+        }
+
+        $this->_link('css');
+        $this->_link('js');
+        $this->_session(1);
+        $this->_session(0);
+
+        $this->DISPLAY = $this->DISPLAY['core'];
+
+        $this->_path();
+        $this->clean();
+        $this->_compress();
+
+        if (!(bool)$this->_options['debug']) {
+            ob_clean();
+        }
+        return $this->DISPLAY;
+    }
+
+    /**
+     * allows load template to DISPLAY array
+     * 
+     * @param string $layout name of layout to load
+     * @param string|boolean $mod module name (if FALSE load to core)
+     * @example layout('layout_name')
+     * @example layout('layout_name', 'mod')
+     * @throws coreException core_error_2
+     */
+    public function layout($layout, $mod = FALSE)
+    {
+        if (!$mod) {
+            $path = "elements/layouts/$layout.html";
+            $mod  = 'core';
+        } else {
+            $path = "modules/$mod/layouts/$layout.html";
+        }
+
+        $this->DISPLAY[$mod] = starter_class::load($path, TRUE);
+
+        if (!$this->DISPLAY[$mod]) {
+            throw new coreException('core_error_2', $mod . ' - ' . $path);
+        }
+    }
+
+    /**
+     * set data on session markers
+     * 
+     * @param boolean $type array type to set (TRUE = core, FALSE = public)
+     */
+    private function _session($type)
+    {
+        if ($this->_session) {
+            if ($type) {
+                $type  = 'core';
+                $array = $this->_session->returns('display');
+            } else {
+                $type  = 'public';
+                $array = $this->_session->returns('public');
+            }
+
+            if ($array) {
+                foreach ($array as $key => $val) {
+                    $this->generate('session_' . $type . ';' . $key . ';', $val);
+                }
+            }
+        }
+    }
+
+    /**
+     * create URLs to css/js from given on array files
+     * 
+     * @param string $type (css | js)
+     * 
+     * @todo check all css types
+     */
+    private function _link($type){
+        $links      = '';
+        $end        = '';
+        $front      = '';
+
+        switch ($type) {
+            case'css':
+                $front  = '<link href="';
+                $end    = '" rel="stylesheet" type="text/css"/>';
+                $arr    = $this->_css;
+                break;
+
+            case'js':
+                $front  = '<script src="';
+                $end    = '" type="text/javascript"></script>';
+                $arr    = $this->_js;
+                break;
+        }
+
+        if (!empty($arr['external'])) {
+            foreach ($arr['external'] as $mod) {
+                foreach ($mod as $val) {
+                    if (is_array($val)) {
+
+                        foreach ($val as $key => $media) {
+                            foreach ($media as $file) {
+                                $links .= "\t\t" . $front . $file
+                                    . '" media="' . $key . $end."\n";
+                            }
+                        }
+
+                    } else {
+                        $links .= "\t\t" . $front . $val . $end . "\n";
+                    }
+                }
+            }
+            unset($arr['external']);
+        }
+
+        if (!empty($arr['internal'])) {
+            $path       = '{;core;domain;}{;core;lang;}{;path;core_' . $type . '/';
+            $endPath    = ';}';
+            $media      = '';
+            $internal   = '';
+            $intMedia   = '';
+            $key        = '';
+
+            foreach ($arr['internal'] as $mod => $values) {
+                if (isset($values['media'])) {
+
+                    foreach ($values['media'] as $key => $elements) {
+                        foreach ($elements as $file) {
+                            $intMedia .= $mod . ',' . $file . '/';
+                        }
+                    }
+
+                    $media .= "\t\t" . $front . $path . $intMedia
+                        . $endPath . '" media="' . $key . $end."\n";
+                    unset($values['media']);
+                }
+
+                foreach ($values as $file) {
+                    $internal .= $mod . ',' . $file . '/';
+                }
+            }
+
+            if ($internal) {
+                $links .= "\t\t" . $front . $path . $internal . $endPath . $end . "\n";
+            }
+            if ($media) {
+                $links .= $media;
+            }
+        }
+
+        $this->generate('core;'.$type, $links);
+    }
+
+    /**
+     * read content of css/js file
+     * 
+     * @param string $mod
+     * @param string $param file name to read
+     * @param string $type (css | js)
+     * @return string zwraca zawartosc pliku, lub pusty string
+     */
+    private function _read($mod, $param, $type)
+    {
+        if ($mod === 'core') {
+            $main = 'elements/' . $type . '/';
+        } else {
+            $main = 'modules/'  .$mod . '/elements/' . $type . '/';
+        }
+
+        $data = starter_class::load($main . $param . '.' . $type, TRUE);
+
+        if ($data) {
+            $content = $data . "\n";
+
+            if ($type === 'js') {
+                $content .= ';' . "\n";
+            }
+
+            return $content;
+        }
+        return '';
+    }
+
+    /**
+     * load external templates to main template, 
+     * or some external templates to module template
+     *
+     * @param string $module optionaly module name that want to load external template
+     * @throws coreException core_error_3
+     */
+    private function _external($module = NULL)
+    {
+        $array = array();
+
+        if (!$module) {
+            $path   = 'elements/layouts/';
+            $module = 'core';
+        } else {
+            $path = 'modules/' . $module . '/layout/';
+        }
+
+        preg_match_all('#{;external;([\\w-])+;}#', $this->DISPLAY[$module], $array);
+
+        foreach ($array[0] as $element) {
+
+            $name = str_replace(
+                array(
+                    '{;external;',
+                    ';}'
+                ),
+                '',
+                $element
+            );
+
+            $content = starter_class::load($path . $name . '.html', TRUE);
+            if (!$content) {
+                throw new coreException('core_error_3', $path . $name . '.html');
+            }
+
+            $this->DISPLAY[$module] = str_replace(
+                $element,
+                $content,
+                $this->DISPLAY[$module]
+            );
+        }
+    }
+
+    /**
+     * check that path is given on error or normal page
+     * 
+     * @return array of fix paths
+     */
+    private function _checkPath()
+    {
+        $path = array();
+
+        if ($this->_get) {
+            $path[0] = $this->_get->path();
+            $path[1] = $this->_get->path(TRUE);
+         }else {
+            $path[0] = $path[1] = get::realPath($this->_options['test']);
+        }
+
+        return $path;
+    }
+
+    /**
+     * replace paths marker with data
+     * 
+     * @example {;core;domain;} - set protocol, domain and test folder
+     * @example {;core;lang;} - set language code if language support is enabled
+     * @example {;path;jakas sciezka;} - set converted path, without domain and language code
+     * @example {;full;jakas sciezka;} - set full path with domain and language code
+     * @example {;rel;jakas sciezka;} - set current path and write to it given path
+     */
+    private function _path()
+    {
+        $path = $this->_checkPath();
+        $this->DISPLAY = preg_replace(
+            '#{;core;domain;}#',
+            $path[0],
+            $this->DISPLAY
+        );
+
+        if (!$this->_options['rewrite']) {
+            $lang = '?core_lang=' . $this->_lang . $this->_separator();
+        } else {
+            $lang = $this->_lang . '/';
+        }
+
+        $this->DISPLAY = preg_replace('#{;core;lang;}#', $lang, $this->DISPLAY);
+        $this->DISPLAY = preg_replace('#{;core;mainpath;}#', $path[1], $this->DISPLAY);
+
+        preg_match_all(
+            '#{;path;[\\w-/' . $this->_options['zmienne_rewrite_sep'] . ']+;}#',
+            $this->DISPLAY,
+            $array
+        );
+        $this->_convert($array, 'path');
+
+        preg_match_all(
+            '#{;full;[\\w-/' . $this->_options['zmienne_rewrite_sep'] . ']+;}#',
+            $this->DISPLAY,
+            $array
+        );
+        $this->_convert($array, 'full');
+
+        preg_match_all(
+            '#{;rel;[\\w-/' . $this->_options['zmienne_rewrite_sep'] . ']+;}#',
+            $this->DISPLAY,
+            $array);
+        $this->_convert($array, 'rel');
+    }
+
+    /**
+     * convert array of path markers into correct URLs
+     * 
+     * @param array $array array of markers
+     * @param string $type type to convert (path|full|rel)
+     */
+    private function _convert(array $array, $type)
+    {
+        $update = '';
+
+        if ($array) {
+            $path = $this->_checkPath();
+
+            switch ($type) {
+                case'path':
+                    $update = '';
+                    break;
+
+                case'full':
+                    $update = $path[0];
+
+                    if ($this->_lang) {
+                        if ($this->_options['rewrite']) {
+                            $update .= $this->_lang . '/';
+                        } else {
+                            $update .= '?core_lang=' . $this->_lang . $this->_separator();
+                        }
+                    } else {
+                        if (!$this->_options['rewrite']) {
+                            $update .= '?';
+                        }
+                    }
+                    break;
+
+                case'rel':
+                    $update = $path[1];
+
+                    if (!$this->_options['rewrite']) {
+                        $update .= '?';
+                    }
+                    break;
+            }
+
+            foreach ($array[0] as $link) {
+                $path = str_replace(
+                    array(
+                        '{;'.$type.';',
+                        ';}'
+                    ),
+                    '',
+                    $link
+                );
+                $path   = explode('/', $path);
+                $pages  = array();
+                $params = array();
+
+                foreach ($path as $value) {
+                    $bool = preg_match(
+                        '#[' . $this->_options['zmienne_rewrite_sep'] . ']{1}#',
+                        $value
+                    );
+
+                    if ($bool) {
+                        $params[] = $value;
+                    } elseif ($value) {
+                        $pages[] = $value;
+                    }
+                }
+
+                if ((bool)$this->_options['rewrite']) {
+                    $final = self::convertToRewriteUrl($params, $pages);
+                } else {
+                    $final = self::convertToClassicUrl(
+                        $params,
+                        $pages,
+                        $this->_separator()
+                    );
+                }
+
+                if ($update) {
+                    $final = $update . $final;
+                }
+
+                $this->DISPLAY = str_replace($link, $final, $this->DISPLAY);
+            }
+        }
+    }
+
+    /**
+     * return ampersand as char or entity for xhtml or js
+     * 
+     * @return string (& | &amp;)
+     */
+    private function _separator()
+    {
+        if (!empty($this->_js)) {
+            $separator = '&';
+        } else {
+            $separator = '&amp;';
+        }
+
+        return $separator;
+    }
+
+    /**
+     * run clean methods to remove unused markers
+     */
+    private function clean()
+    {
+        $this->_cleanMarkers('optional');
+        $this->_cleanMarkers('loop');
+        
+        $this->DISPLAY = preg_replace(
+            '#' . $this->_contentMarkers . '#',
+            '',
+            $this->DISPLAY
+        );
+    }
+
+    /**
+     * clean template from unused markers on loops and optional values
+     * 
+     * @param string $typ typ do sprawdzenia
+     */
+    private function _cleanMarkers($typ)
+    {
+        switch($typ){
+            case'loop':
+                $reg1 = '#{;(start|end);([\\w-])+;}#';
+                $reg2 = '#{;([\\w-])+;([\\w-])+;}#';
+                $reg3 = '{;start;';
+                $reg4 = '{;end;';
+                break;
+
+            case'optional':
+                $reg1 = '#{;op;([\\w-])+;}#';
+                $reg2 = $this->_contentMarkers;
+                $reg3 = '{;op;';
+                $reg4 = '{;op_end;';
+                break;
+
+            default:
+                return;
+                break;
+        }
+
+        preg_match_all($reg1, $this->DISPLAY, $array);
+        if (!empty($array) && !empty($array[0])) {
+            foreach ($array[0] as $marker) {
+
+                $start      = strpos($this->DISPLAY, $marker);
+                $endMarker  = str_replace($reg3, $reg4, $marker);
+                $end        = strpos($this->DISPLAY, $endMarker);
+
+                if (!$start || !$end) {
+                    continue;
+                }
+
+                $startContent   = $start + mb_strlen($marker);
+                $contentLength  = $end - $startContent;
+                $string         = substr($this->DISPLAY, $startContent, $contentLength);
+                $len            = ($end += mb_strlen($endMarker)) - $start;
+                $stringToRemove = substr($this->DISPLAY, $start, $len);
+                $bool           = preg_match($reg2, $string);
+
+                if ($bool) {
+                    $this->DISPLAY = str_replace($stringToRemove, '', $this->DISPLAY);
+                } else {
+                    $this->DISPLAY = str_replace($stringToRemove, $string, $this->DISPLAY);
+                }
+            }
+        }
+    }
+
+    /**
+     * compress content with given compress level
+     */
+    private function _compress()
+    {
+        if ((bool)$this->_options['compress']) {
+            header('Content-encoding: gzip');
+            $this->DISPLAY = gzcompress($this->DISPLAY, $this->_options['compress']);
+        }
+    }
+
+    /**
+     * convert data to classic URL path
+     * 
+     * @param array $params array of parameters
+     * @param array $pages array of pages
+     * @param string $separator
+     * @return string
+     */
+    static function convertToClassicUrl(array $params, array $pages, $separator = '&')
+    {
+        $counter    = 0;
+        $final      = '';
+
+        foreach ($pages as $page) {
+            $final .= 'p' . $counter . '=' . $page . $separator;
+            $counter++;
+        }
+
+        foreach ($params as $param) {
+            $param  = str_replace(',', '=', $param);
+            $final .= $param . $separator;
+        }
+
+        $final = rtrim($final, '&amp;');
+        $final = rtrim($final, '&');
+
+        return $final;
+    }
+
+    /**
+     * convert data to mode rewrite URL
+     * 
+     * @param array $params array of parameters
+     * @param array $pages array of pages
+     * @return string
+     */
+    static function convertToRewriteUrl(array $params, array $pages)
+    {
+        $final = '';
+
+        foreach ($pages as $page) {
+            $final .= $page . '/';
+        }
+
+        foreach ($params as $param) {
+            $final .= $param . '/';
+        }
+
+        $final = rtrim($final, ',');
+
+        return $final;
+    }
+
+    /**
+     * process given get array and separate from them paths and parameters
+     * 
+     * @param array $path array of get elements to check
+     * @param string $separator char that will separate value from name
+     * @return array
+     */
+    static function explodeUrl($path, $separator)
+    {
+        $pages  = array();
+        $params = array();
+
+        foreach ($path as $value) {
+            if (preg_match('#[' . $separator . ']{1}#', $value)) {
+                $params[] = $value;
+            } elseif ($value) {
+                $pages[] = $value;
+            }
+        }
+
+        return array('pages' => $pages, 'params' => $params);
+    }
 }
-?>
