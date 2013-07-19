@@ -6,7 +6,7 @@
  * @package     BlueFramework Core
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.0.0
+ * @version     1.0.1
  */
 -->
 <!ELEMENT root (default, page*)>
@@ -33,5 +33,5 @@
     <!--page title-->
         <!ATTLIST title update (0|1) #REQUIRED>
         <!--if set on 1 add content to default node value-->
-        <!ATTLIST title tytul CDATA #REQUIRED>
+        <!ATTLIST title title CDATA #REQUIRED>
         <!--page title-->

@@ -805,7 +805,7 @@ class session
     /**
      * clear data in session, some specific information or all from given group
      * 
-     * @param string $name name of info to dremove, or group
+     * @param string $name name of info to remove, or group
      * @example clear() - clear all, without core
      * @example clear('core')
      * @example clear('user')

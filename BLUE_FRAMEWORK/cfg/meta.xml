@@ -7,34 +7,34 @@
 * @package     BlueFramework Core
 * @author      Michał Adamiak    <chajr@bluetree.pl>
 * @copyright   chajr/bluetree
-* @version     1.0.0
+* @version     1.0.1
 */
 -->
 <!DOCTYPE root SYSTEM "dtd/meta.dtd">
 <root>
     <default val="index">
-        <title tytul="{;lang;title;}" update="1"/>
+        <title title="{;lang;title;}" update="1"/>
         <meta name="robots" content="index,follow,all" />
         <meta name="keywords" content="" />
         <meta name="description" content="" />
         <meta name="author" content="bluetree.pl powered by blueFramework 2.0" />
     </default>
     <page val="inna">
-        <title tytul="" update="1"/>
+        <title title="" update="1"/>
         <meta name="robots" content="index,follow,all"/>
         <meta name="keywords" content=", news" update="1"/>
         <meta name="description" content="" update="1"/>
         <meta name="author" content="bluetree.pl powered by blueFramework 2.0" />
     </page>
     <page val="jeszcze_inna">
-        <title tytul="" update="1"/>
+        <title title="" update="1"/>
         <meta name="robots" content="index,follow,all" />
         <meta name="keywords" content=", news" update="1"/>
         <meta name="description" content="" update="1" />
         <meta name="author" content="bluetree.pl powered by blueFramework 2.0" />
     </page>
     <page val="zagniezdzenie">
-        <title tytul="" update="1"/>
+        <title title="" update="1"/>
         <meta name="robots" content="index,follow,all" />
         <meta name="keywords" content=", contact, localization" update="1"/>
         <meta name="description" content="a"  update="1"/>
