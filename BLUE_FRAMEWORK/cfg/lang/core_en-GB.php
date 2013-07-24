@@ -5,7 +5,7 @@
  * @subpackage  language
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.0.0
+ * @version     1.0.1
 */
 
 /**
@@ -20,7 +20,7 @@ $content = array(
     'ok_title'                  => 'some ok',
     'error_other'               => 'other information',
     'modul'                     => 'english moduł',
-    'wymaga'                    => 'require',
+    'require'                   => 'require',
     'testowe_tulmaczenie_core'  => 'test translation',
     'tulmaczenie_przykladowe'   => 'translation example',
     'line'                      => 'english line',
