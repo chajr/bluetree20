@@ -158,8 +158,8 @@ final class error_class
             );
 
             @date_default_timezone_set($time);
-            $data   = strftime('%H:%M:%S - %d-%m-%Y');
-            $buffer = str_replace('{;data;}', $data, $buffer);
+            $date   = strftime('%H:%M:%S - %d-%m-%Y');
+            $buffer = str_replace('{;date;}', $date, $buffer);
 
             if ((bool)$debug) {
                 $buffer = str_replace(
@@ -193,7 +193,7 @@ final class error_class
             $inf['']        = $array[3];
             $other          = self::other();
             $inf            = array_merge($inf, $other);
-            $bool           = self::log('fatal_error', $inf, $data);
+            $bool           = self::log('fatal_error', $inf, $date);
 
             if (!$bool) {
                 $buffer = str_replace('{;log;}', 'log error', $buffer);
@@ -271,7 +271,7 @@ final class error_class
         $inf['ip']      = $_SERVER['REMOTE_ADDR'];
         $inf['browser'] = $_SERVER['HTTP_USER_AGENT'];
         $inf['URI']     = $_SERVER['REQUEST_URI'];
-        $inf['data']    = strftime('%H:%M:%S - %d-%m-%Y');
+        $inf['date']    = strftime('%H:%M:%S - %d-%m-%Y');
 
         return $inf;
     }
@@ -582,7 +582,7 @@ final class error_class
             $other  = self::other();
             $log    = array_merge(self::$list['critic']['core'], $other);
 
-            self::log('critic', $log, $other['data']);
+            self::log('critic', $log, $other['date']);
 
             $this->_display->loop('errors', self::$list['critic']['core']);
             $this->_display->generate($other, '');

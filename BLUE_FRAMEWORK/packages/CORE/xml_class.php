@@ -1,248 +1,300 @@
-<?PHP
+<?php
 /**
- * klasa do odczytu/zapisu opcji konfiguracyjnych
- * @author chajr <chajr@bluetree.pl>
- * @version 1.3
- * @access public
- * @copyright chajr/bluetree
- * @package core
- * @final
-*/
-final class xml_class extends DOMDocument{
-	/**
-	 * Root dokumentu
-	 * @var xmlobject
-	 */
-	public $documentElement;
-	/**
-	 * nazwa wezla
-	 * @var string
-	 */
-	public $nodeName;
-	/**
-	 * typ wezla
-	 * ELEMENT_NODE					(1) element
-	 * ATTRIBUTE_NODE				(2) atrybut
-	 * TEXT_NODE					(3) wezel tekstowy (elementu lub atrybutu)
-	 * CDATA_SECTION_NODE			(4) sekcja CDATA
-	 * ENTITY_REFERENCE_NODE		(5) referencja do encji
-	 * ENTITY_NODE					(6) encja
-	 * PROCESSING_INSTRUCTION_NODE	(7) instrukcja sterujaca
-	 * COMMENT_NODE					(8) komentaz
-	 * DOCUMENT_NODE				(9) dokument (caly dokument xml, glowny element drzewa DOM)
-	 * @var integer
-	 */
-	public $nodeType;
-	/**
-	 * wartosc wezla
-	 * @var mixed
-	 */
-	public $nodeValue;
-	/**
-	 * wezel nadrzedny
-	 * @var xmlobject
-	 */
-	public $parentNode;
-	/**
-	 * zbior wezlow podrzednych
-	 * @var xmlobject
-	 */
-	public $childNodes;
-	/**
-	 * pierwszy wezel podrzedny
-	 * @var xmlobject
-	 */
-	public $firstChild;
-	/**
-	 * ostatni wezel podrzedny
-	 * @var xmlobject
-	 */
-	public $lastChild;
-	/**
-	 * zbior atrybutow
-	 * @var xmlobject
-	 */
-	public $attributes;
-	/**
-	 * nastepny wezel w kolekcji
-	 * @var xmlobject
-	 */
-	public $nextSibling;
-	/**
-	 * poprzedni wezel w kolekcji
-	 * @var xmlobject
-	 */
-	public $previousSibling;
-	/**
-	 * przestrzen nazw biezacego wezla
-	 */
-	public $namespaceURI;
-	/**
-	 * obiekt dokumentu wezla referencyjnego
-	 * @var xmlobject
-	 */
-	public $ownerDocument;
-	/**
-	 * liczba elementow w kolekcji
-	 * @var integer
-	 */
-	public $length;
-	/**
-	 * DTD, jesli jest zwraca obiekt typu documentType
-	 * @var xmlobject
-	 */
-	public $doctype;
-	/**
-	 * sposob implementacji zawartosci dokumentu, zgodny z mime-type dokumentu
-	 */
-	public $implementation;
-	/**
-	 * informacja o ewentualnym bledzie
-	 * @var string
-	 * @access public
+ * extend DOMDocument to use framework xml configuration files
+ *
+ * @category    BlueFramework
+ * @package     BlueFramework Core
+ * @subpackage  xml
+ * @author      Michał Adamiak    <chajr@bluetree.pl>
+ * @copyright   chajr/bluetree
+ * @version     1.4.0
+ */
+class xml_class 
+    extends DOMDocument
+{
+    /**
+     * Root element
+     * @var DOMElement
+     */
+    public $documentElement;
+
+    /**
+     * node name
+     * @var string
+     */
+    public $nodeName;
+
+    /**
+     * node type
+     * ELEMENT_NODE                 (1) element
+     * ATTRIBUTE_NODE               (2) attribute
+     * TEXT_NODE                    (3) text node (element or attribute)
+     * CDATA_SECTION_NODE           (4) CDATA section
+     * ENTITY_REFERENCE_NODE        (5) entity reference
+     * ENTITY_NODE                  (6) entity
+     * PROCESSING_INSTRUCTION_NODE  (7) process instruction
+     * COMMENT_NODE                 (8) comment
+     * DOCUMENT_NODE                (9) main document element
+     * @var integer
+     */
+    public $nodeType;
+
+    /**
+     * node value
+     * @var mixed
+     */
+    public $nodeValue;
+
+    /**
+     * parent node
+     * @var DOMNode
+     */
+    public $parentNode;
+
+    /**
+     * child nodes collection
+     * @var DOMNodeList
+     */
+    public $childNodes;
+
+    /**
+     * first child node
+     * @var DOMNode
+     */
+    public $firstChild;
+
+    /**
+     * last child node
+     * @var DOMNode
+     */
+    public $lastChild;
+
+    /**
+     * collection of attributes
+     * @var DOMNamedNodeMap
+     */
+    public $attributes;
+
+    /**
+     * next node in collection
+     * @var DOMNode
+     */
+    public $nextSibling;
+
+    /**
+     * previous node in collection
+     * @var DOMNode
+     */
+    public $previousSibling;
+
+    /**
+     * przestrzen nazw biezacego wezla
+     * @var string
+     */
+    public $namespaceURI;
+
+    /**
+     * obiekt dokumentu wezla referencyjnego
+     * @var DOMDocument
+     */
+    public $ownerDocument;
+
+    /**
+     * liczba elementow w kolekcji
+     * @var integer
+     */
+    public $length;
+
+    /**
+     * DTD, if return documentType object
+     * @var DOMDocumentType
+     */
+    public $doctype;
+
+    /**
+     * document, implementation type, compatible with document mime type
+     * @var DOMImplementation
+     */
+    public $implementation;
+
+    /**
+     * error information
+     * @var string
     */
    public $err = NULL;
+
    /**
-	 * ostatnie wolne id
-	 * @var string
-	 * @access public
+     * last free id
+     * @var string
     */
-   public $id_list;
+   public $idList;
+
    /**
-	* uruchamia konstruktor DOMDocument, opcjonalnie tworzac nowy xml
-    * @param float $version wersja xml-a
-    * @param string $encoding kodowanie xml-a
-    * @uses DOMDocument::__construct()
+    * start DOMDocument, optionally create new document
+    * 
+    * @param string $version
+    * @param string $encoding
     */
-   public function __construct($version = '', $encoding = ''){
-	   parent::__construct($version, $encoding);
+   public function __construct($version = '', $encoding = '')
+   {
+       parent::__construct($version, $encoding);
    }
+
    /**
-	* wczytuje plik xml, opcjonalnie sprawdza
-    * @example wczytaj ('cfg/config.xml', 1)
-	* @final
-	* @param string $url scierzka do pliku
-    * @param boolean $parse jesli true ma sprawdzic poprawnosc pliku pod wzgledem DTD
-	* @return boolean informacja czy zaladowano plik czy nie
-    * @uses DOMDocument::$preserveWhiteSpace
-    * @uses xml_class::$err
-    * @uses DOMDocument::load()
-    * @uses DOMDocument::validate()
+    * load xml file, optionally check file DTD
+    * 
+    * @param string $url xml file path
+    * @param boolean $parse if TRUE will check file DTD
+    * @return boolean
+    * @example loadXml('cfg/config.xml', TRUE)
     */
-   public final function wczytaj($url, $parse = FALSE){
-	   $this->preserveWhiteSpace = FALSE;
-		$bool = @file_exists($url);
-		if(!$bool){
-			$this->err = 'Plik nie istnieje';
-			return FALSE;
-		}
-		$bool = $this->load($url);
-		if(!$bool){
-			$this->err = 'Błąd podczas ładowania pliku';
-			return FALSE;
-		}
-		if($parse && !@$this->validate()){
-			$this->err = 'Błąd parsowania pliku XML';
-			return FALSE;
-		}
-		return TRUE;
+   public function loadXmlFile($url, $parse = FALSE)
+   {
+       $this->preserveWhiteSpace    = FALSE;
+       $bool                        = @file_exists($url);
+
+       if (!$bool) {
+           $this->err = 'file_not_exists';
+           return FALSE;
+       }
+
+       $bool = $this->load($url);
+       if (!$bool) {
+           $this->err = 'loading_file_error';
+           return FALSE;
+       }
+
+       if ($parse && !@$this->validate()) {
+           $this->err = 'parse_file_error';
+           return FALSE;
+       }
+
+       return TRUE;
    }
-    /**
-	* zapisuje plik xml, opcjonalnie zwraca go jako xml do wykozystania
-	* @final
-	* @example zapisz('sciezka/plik.xml'); zapis do pliku
-	* @example zapisz(0, 1) zwraca jako tekst
-	* @param string $url scierzka do pliku
-    * @param boolean $as_text czy ma zwrucic tresc xml-a
-	* @return mixed informacja czy zapisano plik czy nie, lub gotowy xml
-    * @uses DOMDocument::$formatOutput
-    * @uses xml_class::$err
-    * @uses DOMDocument::save()
-    * @uses DOMDocument::saveXML()
-    */
-   public final function zapisz($url, $as_text = FALSE){
-		$this->formatOutput = TRUE;
-		if($url){
-			$bool = $this->save($url);
-			if(!$bool){
-				$this->err = 'Bład podczas zapisu do pliku';
-				return FALSE;
-			}
-		}
-		if($as_text){
-			$data = $this->saveXML();
-			return $data;
-		}
-		return TRUE;
-   }
+
    /**
-	* generuje wolny identyfikator numeryczny
-	* @final
-	* @param string $url scierzka do pliku
-    * @param boolean $as_text czy ma zwrucic tresc xml-a
-	* @return integer zwraca id, lub 0 jesli nie odanleziono wezlow
-    * @uses DOMDocument::$documentElement
-    * @uses xml_class::$id_list
-    * @uses xml_class::szukaj()
+    * save xml file, optionally will return as string
+    * 
+    * @param string $url xml file path
+    * @param boolean $asString if TRUE return as string
+    * @return string|boolean
+    * @example saveXml('sciezka/plik.xml'); zapis do pliku
+    * @example saveXml(0, 1) zwraca jako tekst
     */
-   public final function free_id(){
-		$root = $this->documentElement;
-		if(!$root->hasChildNodes()){
-			return 0;
-		}else{
-			$tab = array();
-			$tab = $this->szukaj($root->childNodes, $tab, 'id');
-			$tab[] = 'tworzy_nowe_wolne_id';
-			$id = array_keys($tab, 'tworzy_nowe_wolne_id');
-			unset($tab);
-			$this->id_list = $id;
-			return $id[0];
-		}
+   public final function saveXmlFile($url, $asString = FALSE)
+   {
+       $this->formatOutput = TRUE;
+
+       if ($url) {
+           $bool = $this->save($url);
+           if (!$bool) {
+               $this->err = 'save_file_error';
+               return FALSE;
+           }
+       }
+
+       if ($asString) {
+           $data = $this->saveXML();
+           return $data;
+       }
+
+       return TRUE;
    }
-    /**
-	* przeszukuje wezel w poszukiwaniu elementow o podanym atrybucie
-	* @param xml_object $tab xml do przeszukania
-    * @param array $val tablica
-	* @param string $name nazwa atrybutu do sprawdzenia
-	* @return array zwraca tablice
+
+   /**
+    * generate free numeric id
+    * 
+    * @return integer|boolean return ID or NULL if there wasn't any node
     */
-   private function szukaj($tab, $val, $name){
-		foreach($tab as $child){
-			if($child->nodeType == 1){
-				if($child->hasChildNodes()){
-					$val = $this->szukaj($child->childNodes, $val, $name);
-				}
-				$id = $child->getAttribute($name);
-				if($id){
-					$val[$id] = $id;
-				}
-			}
-		}
-		return $val;
+   public final function getFreeId()
+   {
+        $root = $this->documentElement;
+
+       if ($root->hasChildNodes()) {
+           $tab    = $this->_searchByAttribute($root->childNodes, 'id');
+           $tab[]  = 'create_new_free_id';
+           $id     = array_keys($tab, 'create_new_free_id');
+
+           unset($tab);
+           $this->idList = $id;
+           return $id[0];
+       }
+
+       return NULL;
    }
-    /**
-	* przeszukuje wezel w poszukiwaniu elementow o podanym atrybucie
-	* @param string $id id do wyszukania
-    * @uses xml_class::getElementById()
-	* @return boolean zwraca inf czy podany element istnieje
+
+   /**
+    * search node for elements that contains element with give attribute
+    * 
+    * @param DOMNodeList $node
+    * @param string $value attribute value to search
+    * @param array|boolean $list list of find nodes for recurrence
+    * @return array
     */
-   public final function sprawdz_id($id){
-		$id = $this->getElementById($id);
-		if($id){
-			return TRUE;
-		}else{
-			return FALSE;
-		}
+   private function _searchByAttribute(
+       DOMNodeList $node,
+       $value,
+       array $list = array()
+   ){
+       foreach ($node as $child) {
+           if($child->nodeType === 1){
+               
+               if ($child->hasChildNodes()) {
+                   $list = $this->_searchByAttribute(
+                       $child->childNodes,
+                       $value,
+                       $list
+                   );
+               }
+               
+               $id = $child->getAttribute($value);
+               if ($id) {
+                   $list[$id] = $id;
+               }
+           }
+       }
+
+       return $list;
    }
+
     /**
-	* krutszy zapis zwracania elementu po id
-	* @param string $id id do wyszukania
-	* @return xml_object zwraca obiekt xml o podanym id
-	* @uses xml_class::getElementById()
+     * search node for elements that contains element with give attribute
+     *
+     * @param DOMNodeList $node
+     * @param string $value attribute value to search
+     * @return array
+     */
+    public function searchByAttribute(DOMNodeList $node, $value)
+    {
+        return $this->_searchByAttribute($node, $value);
+    }
+
+   /**
+    * check that element with given id exists
+    * 
+    * @param string $id
+    * @return boolean return TRUE if exists
     */
-	public function get_id($id){
-		$id = $this->getElementById($id);
-		return $id;
-	}
+   public final function checkId($id)
+   {
+       $id = $this->getElementById($id);
+
+       if ($id) {
+           return TRUE;
+       } else {
+           return FALSE;
+       }
+   }
+
+   /**
+    * shorter version to return element with given id
+    * 
+    * @param string $id
+    * @return DOMElement
+    */
+    public function getId($id)
+    {
+        $id = $this->getElementById($id);
+        return $id;
+    }
 }
-?>
