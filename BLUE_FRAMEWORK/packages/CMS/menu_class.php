@@ -1,17 +1,16 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of menu_class
- *
- * @author chajr
+ * handling creating menu
+ * 
+ * @category    BlueFramework
+ * @package     CMS
+ * @subpackage  menu
+ * @author      Michał Adamiak    <chajr@bluetree.pl>
+ * @copyright   chajr/bluetree
+ * @version     0.1.0
+ * @todo everything
  */
-class menu_class {
-	//put your code here
-}
+class menu_class
+{
 
-?>
+}
