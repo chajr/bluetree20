@@ -1,17 +1,16 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of gallery_class
+ * model to handle galleries
  *
- * @author chajr
+ * @category    BlueFramework
+ * @package     dataPresentation
+ * @subpackage  gallery
+ * @author      Michał Adamiak    <chajr@bluetree.pl>
+ * @copyright   chajr/bluetree
+ * @version     0.1.0
+ * @todo everything
  */
-class gallery_class {
-	//put your code here
-}
+class gallery_class
+{
 
-?>
+}

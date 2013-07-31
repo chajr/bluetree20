@@ -1,26 +1,25 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of table_class
+ * display, sort, pagination etc of table data
  *
- * @author chajr
+ * @category    BlueFramework
+ * @package     dataPresentation
+ * @subpackage  table
+ * @author      Michał Adamiak    <chajr@bluetree.pl>
+ * @copyright   chajr/bluetree
+ * @version     0.1.0
+ * @todo everything
  */
-class table_class {
-	//put your code here
+class table_class
+{
+    /**
+     * table column sort
+     * sum of columns
+     * name for columns
+     * options for table head and foot
+     * data conversion in cell
+     * pagination
+     * simple data presentation from database 1:1
+     * rows, edit/del
+     */
 }
-/**
- * czy maja byc sortowane
- * kolumny sumowane (i jaka)
- * nazwy dla kolumn
- * opcje dla stopki tabeli
- * konwersja danych w komurce
- * czy ma byc paginacja
- * prosta prezentacja danych, 1:1 z bazy
- * czy ma podlegac edycji, usuwaniu???
- */
-?>

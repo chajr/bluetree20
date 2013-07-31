@@ -1,17 +1,16 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of list_class
+ * 
  *
- * @author chajr
+ * @category    BlueFramework
+ * @package     dataPresentation
+ * @subpackage  list
+ * @author      Michał Adamiak    <chajr@bluetree.pl>
+ * @copyright   chajr/bluetree
+ * @version     0.1.0
+ * @todo everything
  */
-class list_class {
-	//put your code here
-}
+class list_class
+{
 
-?>
+}
