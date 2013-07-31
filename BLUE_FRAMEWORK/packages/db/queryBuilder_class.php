@@ -1,17 +1,12 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of queryBuilder_class
- *
- * @author chajr
+ * @category    BlueFramework
+ * @package     db
+ * @author      Michał Adamiak    <chajr@bluetree.pl>
+ * @copyright   chajr/bluetree
+ * @version     0.1.0
  */
-class queryBuilder_class {
-	//put your code here
+class queryBuilder_class
+{
+    //put your code here
 }
-
-?>

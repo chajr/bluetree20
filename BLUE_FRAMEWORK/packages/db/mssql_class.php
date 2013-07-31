@@ -1,14 +1,39 @@
-<?PHP
-
+<?php
 /**
- * mssql_class
- * @version 
- * @access 
- * @author Administrator
- * @copyright 
+ * handling of MS sql database
+ *
+ * @category    BlueFramework
+ * @package     db
+ * @subpackage  mssql
+ * @author      Michał Adamiak    <chajr@bluetree.pl>
+ * @copyright   chajr/bluetree
+ * @version     0.1.0
+ * @todo everything
  */
-class mssql_class {
-	
-}
+class mssql_class
+    extends abstractSql_class
+{
+    /**
+     * set default connection and run given query
+     */
+    public function __construct($sql)
+    {
 
-?>
+    }
+
+    /**
+     * return data converted to array
+     */
+    public function result()
+    {
+
+    }
+
+    /**
+     * return mysqli_result result object
+     */
+    public function returns()
+    {
+
+    }
+}
