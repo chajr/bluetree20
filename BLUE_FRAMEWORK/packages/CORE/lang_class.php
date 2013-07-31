@@ -6,7 +6,7 @@
  * @subpackage  language
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.5.0
+ * @version     2.5.1
  */
 class lang_class
 {
@@ -169,7 +169,7 @@ class lang_class
                 }
             }
 
-            if ($switch ){
+            if ($switch ) {
                 $mod = 'core';
             }
 
