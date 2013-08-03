@@ -1,226 +1,287 @@
-<?PHP
+<?php
 /**
- * podstawowe operacje na plikach i folderach
- * @author chajr <chajr@bluetree.pl>
- * @package disc
- * @version 1.0.1
- * @copyright chajr/bluetree
+ * base operations on files and directories
+ *
+ * @category    BlueFramework
+ * @package     dics
+ * @subpackage  disc
+ * @author      Michał Adamiak    <chajr@bluetree.pl>
+ * @copyright   chajr/bluetree
+ * @version     0.9.0
  */
-class disc_class {
-	/**
-	 * wyrazenie regularne z zastrzezonymi znakami dla plikow i folderow
-	 * @var string
-	 * @staticvar
-	 */
-	const restrict_symbol = '#[:?*<>"|\\]#';
-	/**
-	 * usuwanie pliku/katalogu wraz z cala zawartoscia
-	 * @param string $path scierzka dla pliku lub katalogu
-	 * @return boolean informacja o powodzeniu operacji, lub NULL jesli scierzka niepoprawna
-	 * @static
-	 */
-	static function delete($path){
-		if(!file_exists($path)){
-			return NULL;
-		}
-		@chmod($path, 0777);
-		if(is_dir($path)){
-			$list = self::read_dir($path);
-			$paths = self::return_paths($list, $path, TRUE);
-			if(isset($paths['file'])){
-				foreach($paths['file'] as $val){
-					unlink($val);
-				}
-			}
-			if(isset($paths['dir'])){
-				foreach($paths['dir'] as $val){
-					rmdir($val);
-				}
-			}
-			rmdir($path);
-		}else{
-           	$bool = @unlink($path);
-		}
-		return $bool;
-   	}
+class disc_class
+{
+    /**
+     * restricted characters for file and directory names
+     * @var string
+     * @staticvar
+     */
+    const RESTRICTED_SYMBOLS = '#[:?*<>"|\\]#';
 
-	static function copy($path, $target){
-		if(!file_exists($path)){
-			return NULL;
-		}
-		if(is_dir($path)){
-			if(!file_exists($target)){
-				mkdir($target);
-           	}
-			$elements = self::read_dir($path);
-			$paths = self::return_paths($elements, '');
-			foreach($paths['dir'] as $dir){
-				mkdir($dir);
-           	}
-			foreach($paths['file'] as $file){
-				copy($path."/$file", $target."/$file");
-			}
-       	}else{
-			if(!$target){
-				$filename = explode('/', $path);
-				$target = end($filename);
-			}else{
-				//sprawdzenie zabronionych symboli
-			}
-			$bool = copy($path, $target);
-		}
-		return $bool;
-   	}
-	/**
-	 * tworzy nowy folder w podanej lokalizacji
-	 * @param string $path scierzka do lokacji i nazwa folderu do utworzenia
-	 * @return informacja o powodzeniu operacji
-	 * @static
-	 */
-	static function mkdir($path){
-		$bool = preg_match(self::restrict_symbol, $path);
-		if(!$bool){
-			$bool = mkdir ($path);
-			return $bool;
-		}else{
-			return FALSE;
-		}
-	}
-	/**
-	 * tworzy pusty plik, opcjonalnie umieszcza w nim dane
-	 * @example mkfile('folder/inn', 'pliczek.txt')
-	 * @example mkfile('folder/inn', 'pliczek.txt', 'sdfklsmndflksmnflksdnflksnf')
-	 * @param string $path scierzka w ktorej ma zostac utworzony plik
-	 * @param string $file nazwa pliku
-	 * @param mixed $data opcjonalnie dane do zapisania w pliku
-	 * @return boolean informacja o powoidzeniu operacji, lub NULL jesli scierzka niepoprawna
-	 * @static
-	 */
-	static function mkfile($path, $file, $data = NULL){
-		if(!file_exists($path)){
-			return NULL;
-		}
-		$bool = preg_match(self::restrict_symbol, $file);
-		if(!$bool){
-			$f = @fopen("$path/$file", 'r');
-			fclose($f);
-			if($data){
-				$bool = file_put_contents("$path/$file", $data);
-				return $bool;
-			}
-		}else{
-			return FALSE;
-		}
-	}
-	static function uploaded(){
+    /**
+     * remove file or directory with all content
+     * 
+     * @param string $path
+     * @return boolean information that operation was successfully, or NULL if path incorrect
+     */
+    static function delete($path)
+    {
+        if(!file_exists($path)){
+            return NULL;
+        }
+        
+        @chmod($path, 0777);
+        
+        if (is_dir($path)) {
+            
+            $list   = self::readDirectory($path);
+            $paths  = self::returnPaths($list, $path, TRUE);
 
-	}
-	/**
-	 * zmiania nazwe pliku lub katalogu, moze sluzyc tez do kopiowania pliku
-	 * @param string $path orginalna scierzka lub nazwa
-	 * @param string $target nowa nazwa
-	 * @return boolean informacja o powoidzeniu operacji, lub NULL jesli scierzka niepoprawna
-	 * @static
-	 */
-	static function rename($path, $target){
-		if(!file_exists($path)){
-			return NULL;
-		}
-		$bool = preg_match(self::restrict_symbol, $target);
-		if(!$bool){
-			$bool = rename($path, $target);
-			return $bool;
-		}else{
-			return FALSE;
-		}
-//		if(!file_exists($path1.$orgin.'.'. $lista['rozsz'])){
-//			echo $path1.$orgin.'.'. $lista['rozsz'].' ble<br/>';
-//		}
-//		$data = file_get_contents($path1.$orgin.'.'. $lista['rozsz']);
-//		if($data){
-//			$bool = file_put_contents($path1.$orgin.'_en.'. $lista['rozsz'], $data);
-//			var_dump($bool);
-//			echo $path1.$orgin.'_en.'. $lista['rozsz'].' ok<br/>';
-//		}
-	}
-	static function move($path, $target){
+            if (isset($paths['file'])) {
+                foreach ($paths['file'] as $val) {
+                    unlink($val);
+                }
+            }
 
-	}
-	/**
-	 * odczytuje zawartosc danego katalogu i zwraca jego katalogi (wraz z ich zawartoscia) i pliki
-	 * posortowane za pomoca funkcji array_multisort
-	 * @example read_dir('folder/jakis_folder') - odczytuje zawartosc jakiegos_folderu
-	 * @example read_dir(); - odczytuje zawartosc folderu w ktorym znajduje sie skrypt (__FILE__)
-	 * @param string $path scierzka do katalogu do przetworzenia
-	 * @param integer $level poziom zagniezdzenia, tylko do uzycia rekurencyjnego
-	 * @return array tablica ze struktura podanego folderu, lub NULL jesli scierzka niepoprawna
-	 * @uses disc_class::read_dir()
-	 * @static
-	 */
-	static function read_dir($path = NULL){
-		if(!$path){
-           	$path = dirname(__FILE__);
-		}
-		if(!file_exists($path)){
-			return NULL;
-		}
-		$uchwyt = opendir($path);
-		if($uchwyt){
-			$tab = array();
-			while($element = readdir($uchwyt)){
-				if($element == '..' || $element == '.'){
-					continue;
-				}
-				if(is_dir("$path/$element")){
-					$tab[$element] = self::read_dir("$path/$element");
-               	}else{
-					$tab[] = $element;
-				}
-			}
-			closedir($uchwyt);
-		}
-		array_multisort($tab);
-       	return $tab;
-	}
-	/**
-	 * transformuje tablice z drzewem katalogow/plikow na liste scierzek pogrupowane na pliki i foldery
-	 * jesli brak defaultowej scierzki
-	 * @example return_paths($array, '')
-	 * @example return_paths($array, '', 1)
-	 * @example return_paths($array, 'jakis_folder/inny', 1)
-	 * @param array $array tablica do przetworzenia
-	 * @param string $path bazowa scierzka dla elementow, jesli brak zwraca scierzki wedlug struktury przetwarzanego katalogu
-	 * @param boolean $reverse inf czy ma odwracac tablice (dla usuwania konieczne)
-	 * @return array tablica z lista scierzek dla plikow (file) i katalogow (dir)
-	 * @uses disc_class::return_paths()
-	 * @static
-	 */
-	static function return_paths($array, $path = '', $reverse = FALSE){
-		if($reverse){
-			$array = array_reverse($array);
-		}
-		$tab = array();
-		foreach($array as $key => $val){
-			if(is_dir($path."/$key")){
-				$arr = self::return_paths($val, $path."/$key");
-				foreach($arr as $element => $value){
-                   	if($element == 'file'){
-						foreach($value as $file){
-							$tab['file'][] = "$file";
-						}
-					}
-					if($element == 'dir'){
-						foreach($value as $dir){
-							$tab['dir'][] = "$dir";
-						}
-                   	}
-               	}
-				$tab['dir'][] = $path."/$key";
-           	}else{
-				$tab['file'][] = $path."/$val";
-			}
-		}
-		return $tab;
-	}
+            if (isset($paths['dir'])) {
+                foreach ($paths['dir'] as $val) {
+                    rmdir($val);
+                }
+            }
+
+            rmdir($path);
+        } else {
+               $bool = @unlink($path);
+        }
+
+        return $bool;
+    }
+
+    /**
+     * copy file or directory to given source
+     * if source directory not exists, create it
+     * 
+     * @param string $path
+     * @param string $target
+     * @return boolean information that operation was successfully, or NULL if path incorrect
+     */
+    static function copy($path, $target)
+    {
+        if (!file_exists($path)) {
+            return NULL;
+        }
+
+        if (is_dir($path)) {
+
+            if (!file_exists($target)) {
+                mkdir($target);
+            }
+
+            $elements   = self::readDirectory($path);
+            $paths      = self::returnPaths($elements, '');
+
+            foreach ($paths['dir'] as $dir) {
+                mkdir($dir);
+            }
+
+            foreach ($paths['file'] as $file) {
+                copy($path . "/$file", $target . "/$file");
+            }
+
+        } else {
+
+            if (!$target) {
+                $filename   = explode('/', $path);
+                $target     = end($filename);
+            } else {
+
+                $bool = self::mkdir($target);
+                if ($bool) {
+                    return NULL;
+                }
+            }
+
+            $bool = copy($path, $target);
+        }
+
+        return $bool;
+    }
+
+    /**
+     * create new directory in given location
+     * 
+     * @param string $path
+     * @return boolean
+     * @static
+     */
+    static function mkdir($path)
+    {
+        $bool = preg_match(self::RESTRICTED_SYMBOLS, $path);
+
+        if (!$bool) {
+            $bool = mkdir ($path);
+            return $bool;
+        }
+
+        return FALSE;
+    }
+
+    /**
+     * create empty file, and optionally put in them some data
+     * 
+     * @param string $path
+     * @param string $fileName
+     * @param mixed $data
+     * @return boolean information that operation was successfully, or NULL if path incorrect
+     * @example mkfile('directory/inn', 'file.txt')
+     * @example mkfile('directory/inn', 'file.txt', 'Lorem ipsum')
+     */
+    static function mkfile($path, $fileName, $data = NULL)
+    {
+        if (!file_exists($path)) {
+            return NULL;
+        }
+
+        $bool = preg_match(self::RESTRICTED_SYMBOLS, $fileName);
+
+        if (!$bool) {
+            $f = @fopen("$path/$fileName", 'r');
+            fclose($f);
+            
+            if ($data) {
+                $bool = file_put_contents("$path/$fileName", $data);
+                return $bool;
+            }
+        }
+
+        return FALSE;
+    }
+
+    /**
+     * change name of file/directory
+     * also can be used to copy operation
+     * 
+     * @param string $path original path or name
+     * @param string $target new path or name
+     * @return boolean information that operation was successfully, or NULL if path incorrect
+     * 
+     * @todo check that destination file or directory exists, and action what then
+     */
+    static function rename($path, $target)
+    {
+        if (!file_exists($path)) {
+            return NULL;
+        }
+
+        $bool = preg_match(self::RESTRICTED_SYMBOLS, $target);
+
+        if (!$bool) {
+            $bool = rename($path, $target);
+            return $bool;
+        }
+
+        return FALSE;
+    }
+
+    /**
+     * move file or directory to given target
+     * 
+     * @param $path
+     * @param $target
+     */
+    static function move($path, $target)
+    {
+
+    }
+
+    /**
+     * read directory content, and return all inside directories (with their content)
+     * sorted by array_multisort function
+     * 
+     * @param string $path
+     * @return array array with given path structure, or NULL if path incorrect
+     * @example readDirectory('dir/some_dir')
+     * @example readDirectory(); - read __FILE__ destination
+     */
+    static function readDirectory($path = NULL)
+    {
+        $list = array();
+
+        if (!$path) {
+            $path = dirname(__FILE__);
+        }
+
+        if (!file_exists($path)) {
+            return NULL;
+        }
+
+        $handle = opendir($path);
+        if ($handle) {
+
+            while ($element = readdir($handle) ){
+                if ($element === '..' || $element === '.') {
+                    continue;
+                }
+
+                if (is_dir("$path/$element")) {
+                    $list[$element] = self::readDirectory("$path/$element");
+                } else {
+                    $list[] = $element;
+                }
+            }
+
+            closedir($handle);
+        }
+
+        array_multisort($list);
+        return $list;
+    }
+
+    /**
+     * transform array wit directory/files tree to list of paths grouped on files and directories
+     * 
+     * @param array $array array to transform
+     * @param string $path base path for elements, if emty use paths from transformed structure
+     * @param boolean $reverse if TRUE revert array (required for deleting)
+     * @return array array with path list for files and directories
+     * @example returnPaths($array, '')
+     * @example returnPaths($array, '', TRUE)
+     * @example returnPaths($array, 'some_dir/dir', TRUE)
+     */
+    static function returnPaths($array, $path = '', $reverse = FALSE)
+    {
+        if($reverse){
+            $array = array_reverse($array);
+        }
+
+        $pathList = array();
+
+        foreach ($array as $key => $val) {
+            if (is_dir($path . "/$key")) {
+
+                $list = self::returnPaths($val, $path . "/$key");
+                foreach ($list as $element => $value) {
+
+                    if ($element === 'file') {
+                        foreach ($value as $file) {
+                            $pathList['file'][] = "$file";
+                        }
+                    }
+
+                    if ($element === 'dir') {
+                        foreach ($value as $dir) {
+                            $pathList['dir'][] = "$dir";
+                        }
+                    }
+
+                }
+                $pathList['dir'][] = $path . "/$key";
+
+            } else {
+                $pathList['file'][] = $path . "/$val";
+            }
+        }
+
+        return $pathList;
+    }
 }
-?>

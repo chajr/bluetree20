@@ -1,30 +1,64 @@
-<?PHP
+<?php
 /**
- * umozliwia zarzadzanie folderem jako obiektem
- * @author chajr <chajr@bluetree.pl>
- * @package disc
- * @version 1.0
- * @copyright chajr/bluetree
+ * allow to manage directory as object
+ *
+ * @category    BlueFramework
+ * @package     dics
+ * @subpackage  file
+ * @author      Michał Adamiak    <chajr@bluetree.pl>
+ * @copyright   chajr/bluetree
+ * @version     0.5.0
  */
-class folder_class extends disc_class{
-	public $elements;
-	public $size;
-	
-	public function __construct($path){
-		if(!file_exists($path)){
-			//tworzy folder
-		}else{
-            //odczytuje folder
+class folder_class 
+    extends disc_class
+{
+    /**
+     * list of founded inside directory elements
+     * @var
+     */
+    public $elements;
+
+    /**
+     * directory size ik bytes
+     * @var
+     */
+    public $size;
+
+    /**
+     * create or read given directory
+     * 
+     * @param $path
+     */
+    public function __construct($path)
+    {
+        if (!file_exists($path)) {
+            //create directory
+        } else {
+            //read directory
         }
-   	}
-	public function del(){
+    }
 
-	}
-	public function mov(){
+    /**
+     * 
+     */
+    public function deleteDirectory()
+    {
 
-	}
-	public function ren(){
-		
-	}
+    }
+
+    /**
+     * 
+     */
+    public function moveDirectory()
+    {
+
+    }
+
+    /**
+     * 
+     */
+    public function renameDirectory()
+    {
+        
+    }
 }
-?>

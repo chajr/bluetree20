@@ -1,76 +1,163 @@
-<?PHP
+<?php
 /**
- * umozliwia zarzadzanie plikiem jako obiektem
- * @author chajr <chajr@bluetree.pl>
- * @package disc
- * @version 1.0
- * @copyright chajr/bluetree
+ * allow to manage file as object
+ *
+ * @category    BlueFramework
+ * @package     dics
+ * @subpackage  file
+ * @author      Michał Adamiak    <chajr@bluetree.pl>
+ * @copyright   chajr/bluetree
+ * @version     0.5.0
  */
-class file_class extends folder_class{
-
+class file_class 
+    extends folder_class
+{
+    /**
+     * contains error information
+     * @var string
+     */
     public $err;
-    //jesli typ == TRUE zwraca liste plikow zgodna z podanymi rozszerzeniami, jesli == FALSE, nie zwraca plikow z rozszerzeniami
-    public static function lista($scierzka, $foldery = FALSE, $rozszerzenia = FALSE, $typ = TRUE){
-        $bool = is_dir($scierzka);
-        if(!$bool){
-            return FALSE;																//zwraca blad jesli nie jest folderem
-        }
-        $uchwyt = opendir($scierzka);													//otwiera uchwyt do folderu
-        if($uchwyt){
-            $tab = array();																//jesli ok, tworzy tablice na zawartosc
-            if($rozszerzenia){															//jesli podano rozszerzenia
-                if(!is_array($rozszerzenia)){											//sprawdza czy tablica z rozszerzeniami
-                    $rozszerzenia = explode(',', trim($rozszerzenia));					//jesli string, rozdziala na tablice
-                }
-            }
-            while ($zawartosc = readdir($uchwyt)){										//przetwarza zawartosc folderu
-                if($zawartosc == '.' || $zawartosc == '..'){							//jesli natrafil na kropki, pomija
-                    continue;
-                }
-                if(!$foldery && is_dir($scierzka.'/'.$zawartosc)){							//jesli wlaczono pomijanie folderow kontynuuje
-                    continue;
-                }
-                if($rozszerzenia && is_file($scierzka.'/'.$zawartosc)){						//jesli podano jakies rozszerzenia i zawartosc jest plikiem
-                    $ext = pathinfo($zawartosc);										//pobiera inf o pliku
-                    $bool = in_array($ext['extension'], $rozszerzenia);					//przeszukuje tablice w poszukiwaniu pliku
-                    if($typ && $bool){													//jesli typ == true i znaleziono rozszerzenie dodajo do listy
-                        $tab[] = $zawartosc;
-                    }elseif(!$typ && !$bool){											//jesli typ == false i nie znaleziono rozszerzenia dodaje plik do listy
-                        $tab[] = $zawartosc;
-                    }
-                }else{
-                    $tab[] = $zawartosc;												//jesli brak rozszerzen dodaje plik
-                }
-            }
-        }else{
-            return NULL;																//blad jesli nie udalo sie otworzyc folderu
-        }
-        closedir($uchwyt);																//zamykanie
-        return $tab;
+
+    /**
+     * create file, or read existing
+     */
+    public function __construct()
+    {
+        //if not exists, first run parent constructor to create directory
     }
-    public static function new_f($path, $start_val = FALSE){							//tworzy nowy plik
-        $bool = @fopen($path, 'w');													//tworzy lik
-        if(!$bool){
-            return FALSE;																//jesli blad false
+
+    /**
+     * return list of files in given directory, correct with given extensions
+     * 
+     * chect what function make, and check possibility to move to parent class
+     * 
+     * @param $path
+     * @param bool $directories
+     * @param bool $extensions
+     * @param bool $type
+     * @return array|bool|null
+     */
+    static function fileList($path, $directories = FALSE, $extensions = FALSE, $type = TRUE)
+    {
+        $bool   = is_dir($path);
+        $list   = array();
+
+        if (!$bool) {
+            return FALSE;
         }
-        if($start_val){																//jesli ustawiono wprowadza wartosc poczatkowa
-            $bool = @fwrite($bool, $start_val);
-            if(!$bool){
+
+        $handle = opendir($path);
+
+        if ($handle) {
+
+            if ($extensions) {
+                if (!is_array($extensions)) {
+                    $extensions = explode(',', trim($extensions));
+                }
+            }
+
+            while ($content = readdir($handle)) {
+                if ($content === '.' || $content === '..') {
+                    continue;
+                }
+
+                if (!$directories && is_dir($path . '/' . $content)) {
+                    continue;
+                }
+
+                if ($extensions && is_file($path . '/' . $content)) {
+                    $ext    = pathinfo($content);
+                    $bool   = in_array($ext['extension'], $extensions);
+
+                    if ($type && $bool) {
+                        $list[] = $content;
+                    } elseif (!$type && !$bool) {
+                        $list[] = $content;
+                    }
+
+                } else {
+                    $list[] = $content;
+                }
+            }
+
+        } else {
+            return NULL;
+        }
+
+        closedir($handle);
+        return $list;
+    }
+
+    /**
+     * create a new file
+     * 
+     * @param $path
+     * @param mixed $data
+     * @return bool
+     */
+    public function newFile($path, $data = FALSE)
+    {
+        $bool = @fopen($path, 'w');
+
+        if (!$bool) {
+            return FALSE;
+        }
+
+        if ($data) {
+            $bool = @fwrite($bool, $data);
+
+            if (!$bool) {
                 return FALSE;
             }
         }
-        @fclose($uchwyt);																//zamyka plik
-        chmod($path, 0777);															//zmienia prawa
+
+        @fclose($bool);
+        chmod($path, 0777);
         return TRUE;
     }
-    public static function del($path){													//usuwa plik
+
+    /**
+     * remove file
+     * 
+     * @param $path
+     * @return bool|void
+     */
+    public function deleteFile($path)
+    {
         $bool = @unlink($path);
-        if(!$bool){
+
+        if (!$bool) {
             return FALSE;
         }
+
         return TRUE;
     }
-    public static function move($loc_1, $loc_2, $rename = FALSE){						//przenoszenie pliku
+
+    /**
+     * move file to other location
+     * 
+     * @param $loc_1
+     * @param $loc_2
+     * @param bool $rename
+     */
+    public static function move($loc_1, $loc_2, $rename = FALSE){
 
     }
+
+    /**
+     * 
+     */
+    public function save()
+    {
+        
+    }
+
+    /**
+     * @return bool|void
+     */
+    public function copyFile()
+    {
+        
+    }
+    
 }
