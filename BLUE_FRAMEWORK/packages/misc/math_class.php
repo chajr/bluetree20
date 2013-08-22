@@ -1,46 +1,59 @@
-<?PHP
+<?php
 /**
- * klasa przechowujaca rozne przydatne wzory matematyczne
- * @author chajr <chajr@bluetree.pl>
- * @version 1.0
- * @access public
- * @copyright chajr/bluetree
- * @package misc
-*/
-class math_class {
-	/**
-	 * oblicza procent jaki stanowi jedna liczba z drugiej liczby
-	 * @param integer $ile liczba ktora stanowi procent calosci
-	 * @param integer $calosc liczba z ktorej obliczamy procent
-	 * @return integer wartosc w procentach 
-	 */
-	static function number_to_percent($ile, $calosc){
-		return ($ile/$calosc)*100;
-	}
-	/**
-	 * oblicza procent z liczby
-	 * @param integer $ile liczba ktora stanowi procent
-	 * @param integer $calosc liczba z ktorej obliczamy procent
-	 * @return integer wartosc w procentach 
-	 */
-	static function percent($ile, $calosc){
-		return ($ile/100)*$calosc;
-	}
-	/**
-	 * oblicza szacowany czas zakonczenia wzgledem ilosci oraz maksymalnej wartosci
-	 * @param integer $naklad maks wyswietlen
-	 * @param integer $wyswietlen ile juz wyswietlono
-	 * @param integer $start czas startu w formie timestamp
-	 * @return integer szacowany czas zakonczenia w formie timestamp 
-	 */
-	static function end($naklad, $wyswietlen, $start){
-		if(!$wyswietlen){
-			return 0;
-		}
-		$teraz = time();
-		$end = $naklad/($wyswietlen/($teraz - $start));
-		$end += $teraz;
-		return $end;
-	}
+ * contains some helpful mathematics models
+ *
+ * @category    BlueFramework
+ * @package     misc
+ * @author      Michał Adamiak    <chajr@bluetree.pl>
+ * @copyright   chajr/bluetree
+ * @version     1.1.0
+ */
+class math_class
+{
+    /**
+     * calculate with percent is one number of other
+     * 
+     * @param float $part value that is percent of other value
+     * @param float $all value to check percent
+     * @return integer|boolean return FALSE if $all was 0 value
+     */
+    static function number_to_percent($part, $all)
+    {
+        if ($all === 0) {
+            return FALSE;
+        }
+        return ($part / $all) *100;
+    }
+
+    /**
+     * calculate percent form value
+     * 
+     * @param float $part value that will be percent of other value
+     * @param float $all value from calculate percent
+     * @return integer
+     */
+    static function percent($part, $all)
+    {
+        return ($part / 100) *$all;
+    }
+
+    /**
+     * estimate time to end, by given current usage value and max value
+     * 
+     * @param float $edition maximum number of value
+     * @param float $used how many was used
+     * @param integer $start start time in unix timestamp
+     * @return integer estimated end time in unix timestamp
+     */
+    static function end($edition, $used, $start){
+        if (!$used) {
+            return 0;
+        }
+
+        $timeNow = time();
+        $end     = $edition / ($used / ($timeNow - $start));
+
+        $end += $timeNow;
+        return $end;
+    }
 }
-?>
