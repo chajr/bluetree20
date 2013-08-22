@@ -9,7 +9,7 @@
  * @subpackage  core
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.3.0
+ * @version     2.3.1
  */
 final class core_class
 {
@@ -97,7 +97,7 @@ final class core_class
     public function __construct()
     {
         self::$_options = option_class::load();
-        benchmark_class::znacznik('load options');
+        benchmark_class::setMarker('load options');
 
         $this->_checkTechBreak();
         $this->_setTimezone();
@@ -113,7 +113,7 @@ final class core_class
         $this->_setLanguage();
 
         $this->render = $this->_display->render();
-        benchmark_class::znacznik('rendering');
+        benchmark_class::setMarker('rendering');
 
         $this->_setEmptyOtherRender();
         $this->_transformGlobalArrays();
@@ -126,13 +126,13 @@ final class core_class
     {
         if ($this->_get->pageType() === 'html') {
             globals_class::destroy();
-            benchmark_class::znacznik('destroy global arrays');
+            benchmark_class::setMarker('destroy global arrays');
 
             $this->_session->setSession();
-            benchmark_class::znacznik('set data in session');
+            benchmark_class::setMarker('set data in session');
 
             $this->_cookie->setCookies();
-            benchmark_class::znacznik('set data in cookie');
+            benchmark_class::setMarker('set data in cookie');
         }
     }
 
@@ -161,10 +161,10 @@ final class core_class
     protected function _setLanguage()
     {
         $this->_lang->setTranslationArray();
-        benchmark_class::znacznik('set translation array');
+        benchmark_class::setMarker('set translation array');
 
         $this->_lang->translate($this->_display);
-        benchmark_class::znacznik('start translation');
+        benchmark_class::setMarker('start translation');
     }
 
     /**
@@ -200,16 +200,16 @@ final class core_class
     protected function _runBaseObjects()
     {
         $this->_get = new get();
-        benchmark_class::znacznik('runs get object');
+        benchmark_class::setMarker('runs get object');
 
         $this->_post = new post();
-        benchmark_class::znacznik('runs post object');
+        benchmark_class::setMarker('runs post object');
 
         $this->_lang = new lang_class($this->_get->getLanguage());
-        benchmark_class::znacznik('runs language object');
+        benchmark_class::setMarker('runs language object');
 
         $this->_error = new error_class($this->_lang);
-        benchmark_class::znacznik('runs error object');
+        benchmark_class::setMarker('runs error object');
     }
 
     /**
@@ -218,22 +218,22 @@ final class core_class
     protected function _htmlPage()
     {
         $this->_session = new session();
-        benchmark_class::znacznik('runs session object');
+        benchmark_class::setMarker('runs session object');
 
         $this->_cookie = new cookie();
-        benchmark_class::znacznik('runs cookie object');
+        benchmark_class::setMarker('runs cookie object');
 
         $this->_files = new files();
-        benchmark_class::znacznik('runs files object');
+        benchmark_class::setMarker('runs files object');
 
         globals_class::destroy();
-        benchmark_class::znacznik('destroy global arrays');
+        benchmark_class::setMarker('destroy global arrays');
 
         $this->_tree = new tree_class(
             $this->_get->fullGetList(),
             $this->_lang->lang
         );
-        benchmark_class::znacznik('runs tree object');
+        benchmark_class::setMarker('runs tree object');
 
         $this->_display = new display_class(
             $this->_tree->layout,
@@ -243,10 +243,10 @@ final class core_class
             $this->_tree->css,
             $this->_tree->js
         );
-        benchmark_class::znacznik('runs display object');
+        benchmark_class::setMarker('runs display object');
 
         $this->_meta = new meta_class($this->_get->fullGetList());
-        benchmark_class::znacznik('runs meta object');
+        benchmark_class::setMarker('runs meta object');
 
         $this->_loader = new loader_class(
             $this->_tree,
@@ -260,13 +260,13 @@ final class core_class
             $this->_files,
             $this->_error
         );
-        benchmark_class::znacznik('loading modules, libraries and start them');
+        benchmark_class::setMarker('loading modules, libraries and start them');
 
         $this->_display->block = $this->_loader->getBlocks();
-        benchmark_class::znacznik('set blocks');
+        benchmark_class::setMarker('set blocks');
 
         $this->_meta->render($this->_display);
-        benchmark_class::znacznik('meta data rendering');
+        benchmark_class::setMarker('meta data rendering');
 
         $this->_checkErrors();
     }
@@ -319,12 +319,12 @@ final class core_class
             NULL,
             NULL
         );
-        benchmark_class::znacznik('runs display object for css/js');
+        benchmark_class::setMarker('runs display object for css/js');
 
         $this->_display->other();
-        benchmark_class::znacznik('rendering css/js');
+        benchmark_class::setMarker('rendering css/js');
 
-        benchmark_class::$session['benchmark']['on'] = FALSE;
+        benchmark_class::turnOffBenchmark();
     }
 
     /**

@@ -1,98 +1,160 @@
-<?PHP
+<?php
 /**
- * @author chajr <chajr@bluetree.pl>
- * @version 1.4.1
- * @access private
- * @copyright chajr/bluetree
-*/
-/**
- * umozliwia testowanie aplikacji pod wzgledem wydajnosci i czasu przetwarzania
- * @package tester
- * @subpackage benchmark
+ * allows to check performance of framework
+ *
+ * @category    BlueFramework
+ * @package     tester
+ * @subpackage  benchmark
+ * @author      Michał Adamiak    <chajr@bluetree.pl>
+ * @copyright   chajr/bluetree
+ * @version     1.5.0
  */
-class benchmark_class{
-	/**
-	 * przechowuje dane aktualnej sesji
-	 * @var array tablica danych
-	 */
-	static $session = array('benchmark');
-	/**
-	 * uruchamia benchmarka, zapisuje w sesji poczatkowy znacznik czasu
-	 * @param boolean $on zapisuje w sesji informacje dla pozostalych metod czy benchamrk wlaczony czy nie
-	 * @static
-	 */
-	public static function start($on = TRUE){
-		if($on){
-			self::$session['benchmark']['memmory_start'] = memory_get_usage();
-			self::$session['benchmark']['benchmark_start'] = self::$session['benchmark']['benchmark_znacznik'] = microtime(TRUE);
-			self::$session['benchmark']['benchmark_znaczniki'] = array();
-			self::$session['benchmark']['on'] = TRUE;
-		}else{
-			self::$session['benchmark']['on'] = FALSE;
-		}
-	}
-	/**
-	 * wstawia znacznik, zapisuje w sesji czas dzialania do aktualnej pozycji
-	 * @param string $nazwa nazwa znacznika
-	 * @static
-	 */
-	public static function znacznik($nazwa){
-		if((bool)self::$session['benchmark']['on']){
-			$czas_znacznika = microtime(TRUE) - self::$session['benchmark']['benchmark_znacznik'];
-			self::$session['benchmark']['benchmark_znacznik'] = microtime(TRUE);
-			self::$session['benchmark']['benchmark_znaczniki'][] = array($nazwa, $czas_znacznika, memory_get_usage());
-		}
-	}
-	/**
-	 * zatrzymuje dzialanie benchmarka, zapisuje ostatni czas
-	 * @static
-	 */
-	public static function stop(){
-		if((bool)self::$session['benchmark']['on']){
-			self::$session['benchmark']['benchmark_koniec'] = microtime(TRUE);
-		}
-	}
-	/**
-	 * przygotowywuje widok i wyswietla liste znacznikow, ich czasw i wartosci procentowych
-	 * @static
-	 */
-	public static function display(){
-		$disp = '';
-		if((bool)self::$session['benchmark']['on']){
-			$disp = '<div style="
-			color: #FFFFFF;
-			background-color: #3d3d3d;
-			border-color: #FFFFFF;
-			border-width: 1px;
-			border-style: solid;
-			margin-left: auto;
-			margin-right: auto;
-			width: 90%;
-			text-align: center;
-			margin-bottom:25px;
-			margin-top:25px;
-			">';
-			$total = (self::$session['benchmark']['benchmark_koniec'] - self::$session['benchmark']['benchmark_start'])*1000;
-			$czas = number_format($total, 5, '.', ' ');
-			$ram = memory_get_usage()/1024;
-           	$disp .= 'Całkowity czas aplikacji: '.$czas.' ms&nbsp;&nbsp;&nbsp;&nbsp;Całkowite zuzycie pamięci: '.number_format($ram, 3, ',', '').' kB<br /><br />';
+class benchmark_class
+{
+    /**
+     * contains data about benchmark started memory usage
+     * @var integer
+     */
+    protected static $_sessionMemoryStart = 0;
 
-			$disp .= 'Czasy znaczników:<br /><table style="width:100%">'."\n";
-           	foreach(self::$session['benchmark']['benchmark_znaczniki'] as $znacznik){
-               	$czas = number_format($znacznik[1]*1000, 5, '.', ' ');
-				$procent = ($znacznik[1]/$total)*100000;
-				$procent = number_format($procent, 5);
-				$ram = ($znacznik[2] - self::$session['benchmark']['memmory_start'])/1024;
-				$disp .= '<tr>
-					<td style="width:40%">'.$znacznik[0].'</td>'."\n";
-				$disp .= '<td style="width:20%">'.$czas.' ms</td>'."\n";
-				$disp .= '<td style="width:20%">'.$procent.' %</td>'."\n";
-				$disp .= '<td style="width:20%">'.number_format($ram, 3, ',', '').' kB</td>
-					</tr>'."\n";
-			}
-			$disp .= '</table></div>';
-		}
-		return $disp;
-	}
+    /**
+     * contains data about started benchmark session time
+     * @var integer
+     */
+    protected static $_sessionBenchmarkStart = 0;
+
+    /**
+     * contains data about benchmark marker time
+     * @var integer
+     */
+    protected static $_sessionBenchmarkMarker = 0;
+    
+    /**
+     * contains data about benchmark markers
+     * @var array
+     */
+    protected static $_sessionBenchmarkMarkers = array();
+
+    /**
+     * contains data about benchmark finish time
+     * @var integer
+     */
+    protected static $_sessionBenchmarkFinish = 0;
+
+    /**
+     * contains information that benchmark is on or off
+     * @var bool
+     */
+    protected static $_sessionBenchmarkOn = TRUE;
+
+    /**
+     * start benchmark, and set in internal session start time
+     * 
+     * @param boolean $on
+     */
+    public static function start($on = TRUE)
+    {
+        if ($on) {
+            $time                           = microtime(TRUE);
+            self::$_sessionMemoryStart      = memory_get_usage();
+            self::$_sessionBenchmarkStart   = $time;
+            self::$_sessionBenchmarkMarker  = $time;
+        } else {
+            self::$_sessionBenchmarkOn      = FALSE;
+        }
+    }
+
+    /**
+     * setr marker and set in session time of run up to current position
+     * 
+     * @param string $name name of marker
+     */
+    public static function setMarker($name)
+    {
+        if (self::$_sessionBenchmarkOn) {
+            $markerTime = microtime(TRUE) - self::$_sessionBenchmarkMarker;
+
+            self::$_sessionBenchmarkMarker    = microtime(TRUE);
+            self::$_sessionBenchmarkMarkers[] = array(
+                $name,
+                $markerTime,
+                memory_get_usage()
+            );
+        }
+    }
+
+    /**
+     * stop benchmark, and time counting, save last run time
+     */
+    public static function stop()
+    {
+        if (self::$_sessionBenchmarkOn) {
+            self::$_sessionBenchmarkFinish = microtime(TRUE);
+        }
+    }
+
+    /**
+     * prepare view and display list of markers, their times and percentage values
+     */
+    public static function display()
+    {
+        $display = '';
+        if (self::$_sessionBenchmarkOn) {
+            $display = '<div style="
+            color: #FFFFFF;
+            background-color: #3d3d3d;
+            border-color: #FFFFFF;
+            border-width: 1px;
+            border-style: solid;
+            margin-left: auto;
+            margin-right: auto;
+            width: 90%;
+            text-align: center;
+            margin-bottom:25px;
+            margin-top:25px;
+            ">';
+
+            $benchmarkStartTime = self::$_sessionBenchmarkStart;
+            $benchmarkEndTime   = self::$_sessionBenchmarkFinish;
+            $total              = ($benchmarkEndTime - $benchmarkStartTime) *1000;
+            $formatTime         = number_format($total, 5, '.', ' ');
+            $memoryUsage        = memory_get_usage()/1024;
+
+            $display .= 'Total application runtime: '
+                . $formatTime 
+                . ' ms&nbsp;&nbsp;&nbsp;&nbsp;Total memory usage: '
+                . number_format($memoryUsage, 3, ',', '')
+                . ' kB<br /><br />';
+            $display .= 'Marker times:<br /><table style="width:100%">'."\n";
+               foreach (self::$_sessionBenchmarkMarkers as $marker) {
+                    $time     = number_format($marker[1] *1000, 5, '.', ' ');
+                    $percent  = ($marker[1] / $total) *100000;
+                    $percent  = number_format($percent, 5);
+                    $ram      = ($marker[2] - self::$_sessionMemoryStart) / 1024;
+                    $display .= '<tr><td style="width:40%">' . $marker[0] . '</td>'."\n";
+                    $display .= '<td style="width:20%">' . $time . ' ms</td>'."\n";
+                    $display .= '<td style="width:20%">' . $percent . ' %</td>'."\n";
+                    $display .= '<td style="width:20%">' . number_format($ram, 3, ',', '') . ' kB</td>
+                    </tr>'."\n";
+            }
+            $display .= '</table></div>';
+        }
+        return $display;
+    }
+
+    /**
+     * turn off benchmark
+     */
+    public static function turnOffBenchmark()
+    {
+        self::$_sessionBenchmarkOn = FALSE;
+    }
+    
+    /**
+     * turn on benchmark
+     */
+    public static function turnOnBenchmark()
+    {
+        self::$_sessionBenchmarkOn = TRUE;
+    }
 }
-?>

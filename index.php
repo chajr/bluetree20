@@ -6,7 +6,7 @@
  * @package     Start
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.2.0
+ * @version     2.2.1
  */
 starter_class::load('packages/tester/benchmark_class.php');
 benchmark_class::start();
@@ -21,9 +21,9 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-benchmark_class::znacznik('start error handling and session');
+benchmark_class::setMarker('start error handling and session');
 starter_class::run();
-benchmark_class::znacznik('the end');
+benchmark_class::setMarker('the end');
 
 ob_end_flush();
 benchmark_class::stop();
@@ -58,7 +58,7 @@ final class starter_class
 
         try {
             $bool = starter_class::package('CORE');
-            benchmark_class::znacznik('load core package');
+            benchmark_class::setMarker('load core package');
 
             if (!$bool) {
                 throw new coreException('core_error_0');
