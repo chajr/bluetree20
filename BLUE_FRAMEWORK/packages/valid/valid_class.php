@@ -1,21 +1,33 @@
 <?php
 /**
- * @author chajr <chajr@bluetree.pl>
- * @version 0.1
- * @access public
- * @copyright chajr/bluetree
- * @package valid
-*/
-/**
- * obiekt walidujacy zbiory danych i formularze
+ * validate data models and forms
+ *
+ * @category    BlueFramework
+ * @package     valid
+ * @author      Michał Adamiak    <chajr@bluetree.pl>
+ * @copyright   chajr/bluetree
+ * @version     0.1.0
+ *
+ * @todo all
  */
-class valid_class{
-	public function __construct() {
-		//jesli barak laduje simpleValid_class;
-		//laduje formularz do walidacji
-	}
-	public function ret(){
-		return 'informacja z biblioteki';
-	}
+class valid_class
+{
+    /**
+     * create object to validate
+     */
+    public function __construct()
+    {
+        //if empty loads simpleValid_class
+        //load form to validate
+    }
+
+    /**
+     * return some data to be used by module
+     * 
+     * @return string
+     */
+    public function ret()
+    {
+        return 'some info from library';
+    }
 }
-?>
