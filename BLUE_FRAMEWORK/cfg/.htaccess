@@ -1,0 +1,7 @@
+#/**
+# * @author chajr <chajr@bluetree.pl>
+# * @version 1.0.0
+# * @copyright chajr/bluetree
+# * @package BlueTree3.0
+#*/
+deny from all
