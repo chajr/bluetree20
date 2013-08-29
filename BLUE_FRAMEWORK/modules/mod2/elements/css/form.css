@@ -1,14 +1,14 @@
 .form_error{
-	background-color: #CC0000;
+    background-color: #CC0000;
 }
 .input_error label{
-	color:#000;
-	border:1px solid #fff;
+    color:#000;
+    border:1px solid #fff;
 }
 .input_error input{
-	background-color: #f00;
+    background-color: #f00;
 }
 label{
-	width:100px;
-	display: inline-block;
+    width:100px;
+    display: inline-block;
 }

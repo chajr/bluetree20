@@ -1,29 +1,36 @@
 <?php
 /**
- * @author 
- * @version 
- * @access 
- * @copyright 
- * @package 
+ * example module number 3
+ *
+ * @category    BlueFramework
+ * @package     modules
+ * @subpackage  mod3
+ * @author      Michał Adamiak    <chajr@bluetree.pl>
+ * @copyright   chajr/bluetree
+ * @version     0.1.0
  */
-class mod3 extends module_class {
-	static $version = '0.1';
-	static $name = 'modul numer 3';
-	public $require_libs = array();
-	public $require_modules = array('modul1');
-	public function run(){
-		//ladowanie szablonow
-		$this->layout('layout1');
-		
-		//tresc do layoutu
-		$this->generate('znacznik', 'jakas tresc do zastaapienia');
-		
-	
-	}
-	public function error_mode(){
-		$this->generate('znacznik', 'to jest tryb bledu modulu 3');
-	}
-	public function install(){}
-	public function uninstall(){}
+class mod3 
+    extends module_class
+{
+    static $version             = '0.1.0';
+    static $name                = 'module number 3';
+    public $requireLibraries    = array();
+    public $requireModules      = array('modul1');
+
+    public function run()
+    {
+        //load layout
+        $this->layout('layout1');
+
+        //set content to layout
+        $this->generate('marker', 'some content to replace');
+    }
+
+    public function runErrorMode()
+    {
+        $this->generate('marker', 'that is error mode from module 3');
+    }
+
+    public function install(){}
+    public function uninstall(){}
 }
-?>

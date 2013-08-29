@@ -1,49 +1,56 @@
-<h3>to jest layout z modulu nr 2</h3>
+<h3>this is layout from module 2</h3>
 <fieldset>
-	<legend>
-		tresc z modulu 1
-	</legend>
-	{;znacznik;}
-</fieldset>
-<fieldset class="baza">
-	<legend>
-		baza danych
-	</legend>
-	Połączenie: {;connection;}<br/>
-	Ilośc wierszy: {;select;}<br/>
-	Dodane id: {;insert;}
+    <legend>
+        content from module 1
+    </legend>
+    {;marker;}
 </fieldset>
 <fieldset>
-	<legend>
-		test czasu
-	</legend>
-	{;znacznik1;}
-	<br/>
-	{;znacznik2;}
-	<br/>
-	{;znacznik3;}
-	<br/>
-	{;znacznik4;}
-	<br/>
-	{;znacznik5;}
-	<br/>
-	{;znacznik6;}
-	<br/>
-	{;znacznik7;}
-	<br/>
-	{;znacznik8;}
-	<br/>
-	{;znacznik9;}
+    <legend>
+        image library test
+    </legend>
+    <img src="{;core;domain;}elementy/Right.png" alt="image"/>
+    <img src="{;core;domain;}elementy/Right_copy.jpg" alt="image after rotate"/>
 </fieldset>
 <fieldset class="baza">
-	<legend>
-		testowy formularz
-	</legend>
-	{;form;}
-	<div style="width: 400px;overflow: hidden">
-		<h4>
-			Zserializowane dane z post
-		</h4>
-		{;post_serialize;}
-	</div>
+    <legend>
+        database test
+    </legend>
+    Connection: {;connection;}<br/>
+    Row count: {;select;}<br/>
+    Last insert id: {;insert;}
+</fieldset>
+<fieldset>
+    <legend>
+        time test
+    </legend>
+    {;marker1;}
+    <br/>
+    {;marker2;}
+    <br/>
+    {;marker3;}
+    <br/>
+    {;marker4;}
+    <br/>
+    {;marker5;}
+    <br/>
+    {;marker6;}
+    <br/>
+    {;marker7;}
+    <br/>
+    {;marker8;}
+    <br/>
+    {;marker9;}
+</fieldset>
+<fieldset class="baza">
+    <legend>
+        test form
+    </legend>
+    {;form;}
+    <div style="width: 400px;overflow: hidden">
+        <h4>
+            Serialized post data
+        </h4>
+        {;post_serialize;}
+    </div>
 </fieldset>

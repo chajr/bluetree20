@@ -1,27 +1,39 @@
-<?PHP
+<?php
 /**
- * @author
- * @version
- * @access
- * @copyright
- * @package
+ * module to create main menu
+ *
+ * @category    BlueFramework
+ * @package     modules
+ * @subpackage  mainMenu
+ * @author      Michał Adamiak    <chajr@bluetree.pl>
+ * @copyright   chajr/bluetree
+ * @version     0.1.0
  */
-class mainMenu extends module_class {
-	static $version = '0.1';
-	static $name = 'Menu główne';
-	public $require_libs = array();
-	public $require_modules = array();
-	public function run(){
-		
-	}
-	public function error_mode(){
+class mainMenu
+    extends module_class
+{
+    static $version             = '0.1.0';
+    static $name                = 'Main menu';
+    public $requireLibraries    = array();
+    public $requireModules      = array();
 
-	}
-	public function install(){
+    public function run()
+    {
+        
+    }
 
-	}
-	public function uninstall(){
+    public function runErrorMode()
+    {
 
-	}
+    }
+
+    public function install()
+    {
+
+    }
+
+    public function uninstall()
+    {
+
+    }
 }
-?>
