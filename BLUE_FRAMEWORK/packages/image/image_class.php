@@ -7,7 +7,7 @@
  * @subpackage  image
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.7.0 beta
+ * @version     1.8.0 beta
  * 
  * Display <a href="http://sam.zoy.org/wtfpl/COPYING">Do What The Fuck You Want To Public License</a>
  * @license http://sam.zoy.org/wtfpl/COPYING Do What The Fuck You Want To Public License
@@ -100,13 +100,13 @@ class image_class
         $this->_checkTempDirectory();
         $this->_fileReference   = $file;
         $this->_time            = time();
-        
+
         if (isset($file['x']) && isset($file['y'])) {
             $this->_imageHandler    = imagecreatetruecolor($file['x'], $file['y']);
             $this->_imageHeight     = $file['y'];
             $this->_imageWidth      = $file['x'];
             $colors                 = self::html2rgb($this->_fileReference['color']);
-            
+
             if (isset($this->_fileReference['alpha'])) {
                 imagealphablending($this->_imageHandler, 0);
                 $color = imagecolorallocatealpha(
@@ -445,10 +445,18 @@ class image_class
      */
     public function rotate($degree, $backgroundColor, $transparent = 0)
     {
+        $colors     = self::html2rgb($backgroundColor);
+        $color      = imagecolorallocate(
+            $this->_imageHandler,
+            $colors[0],
+            $colors[1],
+            $colors[2]
+        );
+
         $this->_imageHandler = imagerotate(
             $this->_imageHandler,
             $degree,
-            $backgroundColor,
+            $color,
             $transparent
         );
     }
