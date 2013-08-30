@@ -1,1 +1,1 @@
-//alert('javascript 1');
+console.log('some js log from core js');

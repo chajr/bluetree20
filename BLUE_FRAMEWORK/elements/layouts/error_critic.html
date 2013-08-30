@@ -1,9 +1,14 @@
-			{;start;errors;}
-			<div class="error_block">
-				<b>{;errors;error_code;}</b>
-				{;op;extend_message;}<br/>{;lang;error_other;}: {;errors;extend_message;}{;op_end;extend_message;}<br/>
-				{;op;line;}<br/><br/>{;lang;line;}: {;errors;line;}{;op_end;line;}
-				{;op;file;}<br/>{;lang;file;}: {;errors;file;}{;op_end;file;}
-				{;op;module;}<br/>{;lang;modul;}: {;errors;module;}{;op_end;module;}
-			</div>
-			{;end;errors;}
+            {;start;errors;}
+            <div class="error_block">
+                <b>{;errors;error_code;}</b>
+                {;op;extend_message;}<br/>
+                {;lang;error_other;}: {;errors;extend_message;}{;op_end;extend_message;}<br/>
+                {;op;line;}
+                <br/><br/>
+                {;lang;line;}: {;errors;line;}{;op_end;line;}
+                {;op;file;}
+                <br/>{;lang;file;}: {;errors;file;}{;op_end;file;}
+                {;op;module;}<br/>
+                {;lang;modul;}: {;errors;module;}{;op_end;module;}
+            </div>
+            {;end;errors;}
