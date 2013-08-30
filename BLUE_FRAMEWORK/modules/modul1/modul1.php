@@ -1,194 +1,252 @@
 <?php
 /**
- * @author 
- * @version 
- * @access 
- * @copyright 
- * @package 
+ * example module number 1
+ *
+ * @category    BlueFramework
+ * @package     modules
+ * @subpackage  modul1
+ * @author      Michał Adamiak    <chajr@bluetree.pl>
+ * @copyright   chajr/bluetree
+ * @version     1.1.0
+ * 
+ * @todo example of multi loops
  */
-class modul1 extends module_class {
-	static $version = '0.1';
-	static $name = 'modul numer 1';
-	public $require_libs = array();
-	public $require_modules = array();
-	public function run(){
-		
-		//umozliwia tulmaczenie modulu
-		$this->translate();
-		
-		//ladowanie szablonow
-		$this->layout('layout1');//layout1
-		
-		//tresc do layoutu
-		$this->generate('znacznik', 'jakas treść do zastąpienia');
-		
-		//tresc do glownego layoutu
-		$this->generate('znacznik', 'jakas tresc do zastaapienia w glownym szablonie', 1);
-		
-		//generowanie tresci dla gropy znacznikow
-		$tresci = array('znacznik-a' => 'tresc a', 'znacznik-b' => 'tresc b');
-		$this->generate($tresci);
-		
-		//uruchamianie zaladowanych bibliotek
-		$valid = new valid_class();
-		$this->generate('lib', $valid->ret());
-		
-		//dodawanie js i css
-		$this->set('https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js', 'js', 'external');
-		$this->set('jakis_skrypt', 'js');
-		$this->set('base', 'css', 'internal', 'print');//?
-		$this->set('base2', 'css');
-		
-		//generowanie tresci (zwykle, petla, opcjonalne, z sesji)
-		$tab = array(array('item1' => 'val a1', 'item2' => 'val a2'), 
-			array('item1' => 'val b1', 'item2' => 'val b2'));
-		$this->loop('petla1', $tab);
-		$arr = array(array('aaa' => 'val aaa1', 'bbb' => 'val bbb2', 'oo' => 'ooo'), 
-			array('aaa' => 'val ccc1', 'bbb' => 'val ddd2', 'oo2' => 'op2'));
-		$this->loop('petla2', $arr);
-		
-		//dane z sesji
-		$this->generate(array(
-			'public' => $this->session->val, 
-			'user' => $this->return_session('val_user', 'user')));
-		if($this->session->val){
-			$this->session->val += 1;
-		}else{
-			$this->session->val = 1;
-		}
-		if($this->return_session('val_user', 'user')){
-			$v_u = $this->return_session('val_user', 'user') +1;
-		}else{
-			$v_u = 1;
-		}
-		$this->set_session('val_user', $v_u, 'user');
-		$this->generate(array('public2' => $this->session->val, 
-			'user2' => $this->return_session('val_user', 'user')));
-		
-		//oczyszczanie sesji
-		//$this->clear_session('val');					//!!DZIALA
-		
-		//generowanie breadcrumbs
-		$bread = var_export($this->breadcrumbs(), 1);
-		$this->generate('breadcrumbs', $bread);
-		
-		//ustawienie danych w cookie
-		$this->generate('cookie', $this->cookie->jakaszmienna);
-		if($this->cookie->jakaszmienna){
-			$this->cookie->jakaszmienna += 1;
-		}else{
-			$this->cookie->jakaszmienna = 1;
-		}
-		$this->generate('cookie2', $this->cookie->jakaszmienna);
-		
-		//dostep do danych z get, post, files
-		$arr = array('val1' => $this->get->val1, 'val2' => $this->get->val2, 'val3' => $this->get->val3);
-		$this->generate($arr);
-		
-		//dostep do obiektu get
-		//dorobic metoduy zwacajace nowe wartosci w module_class i sprawdzic to samo przy innych obiektach
-		$gettab = array(
-			'path' => get::real_path(),
-			'rget' => var_export(get::rewrite_get('', 'val/val2/val3'), 1),
-			'lang' => $this->get->get_lang(),
-			'current_page' => $this->get->get_current_page(),
-			'parrent' => $this->get->get_parrent(),
-			'master' => $this->get->get_master(),
-			'full' => var_export( $this->get->full_get(), 1),
-			'full2' => var_export( $this->get->full_get(1), 1),
-			'type' => $this->get->typ(),
-			'path_domain' => $this->get->path(),
-			'path' => $this->get->path(1),
-		);
-		$this->generate($gettab);
-		
-		//generowanie scierzek url
-		$this->generate('jakas_scierzka', '{;core;domain;}{;core;lang;}{;path;/strona2;}');
-		
-		//zglaszanie dodatkowych metatagow
-		$this->add_meta('<meta name="jakismeta" content="cos"/>');
-		$this->add_to_meta('keywords', 'slowo 1, slowo 2');
-		
-		//odczyt danych z innego modulu
-		$this->zmienna_modulu = 'aaaaaaaaaaa';
-		
-		//mapa strony
-		$map = '<pre>'.var_export($this->map(), 1).'</pre>';
-		$this->generate('mapa', $map);
-		
-		//ladowanie modulu do elementu blokowego
-		
-		//odczyt parametrow dla modulu
-		$param = '<pre>'.var_export($this->params, 1).'</pre>';
-		$this->generate('param', $param);
-		
-		//odczyt konfiguracji modulu
-		$list = '<pre>'.var_export($this->load_options(), 1).'</pre>';
-		$this->generate('tablica_cfg', $list);
-				
-		//sprawdzanie wymaganych modulow
-		//w mod 3						//!!DZIALA
-		
-		//pomijanie wybranych modulow
-		//$this->dissemble('mod2');		//!!DZIALA
-		
-		//zatrzymywanie frameworka
-		//$this->stop();				//!!DZIALA
+class modul1 
+    extends module_class
+{
+    static $version             = '1.1.0';
+    static $name                = 'module number 1';
+    public $requireLibraries    = array();
+    public $requireModules      = array();
+    public $moduleVariable;
 
-		//jakis standardowy blad
-		//echo $adfdsf;					//!!DZIALA
+    public function run()
+    {
 
-		//zglaszanie bledow poprzez renderig, throw i do konkretnego znacznika
-		
-		//blad zatrzymujacy frameworka
-		//throw new coreException('core_error_20', 'jakieś dodatkowe informacje {;lang;tekst_do_tulmaczenia;}');			//!!DZIALA
-		
-		//blad zatrzymujacy modul
-		//throw new modException('blad_z_modulu', 'jakieś dodatkowe informacje {;lang;tekst_do_tulmaczenia;}');			//!!DZIALA
-		$this->error('critic', 'blad_z_modulu', '<b>tulmaczenie z modulu: {;lang;tekst_do_tulmaczenia_error;}</b>');	//!!DZIALA
-		
-		//warning
-		//throw new warningException('kod_ostrzezenia', 'dodatkowe info z warninga');									//!!DZIALA
-		$this->error('warning', 'kod_ostrzezenia', 'jakieś dodatkowe informacje1');										//!!DZIALA
-		
-		//info
-		//throw new infoException('kod_info', 'dodatkowe info z info');													//!!DZIALA
-		$this->error('info', 'kod_info', '<b>tulmaczenie z core: {;lang;core;tekst_do_tulmaczenia;}</b>');				//!!DZIALA
-		
-		//ok
-		//throw new okException('kod_ok', 'dodatkowe info z ok');														//!!DZIALA
-		$this->error('ok', 'kod_ok', 'jakieś dodatkowe informacje3');													//!!DZIALA
-		
-		//blad do konkretnego znacznika
-		//sprawdzic dzialanie w poprzedniej wersji frameworka
-		$this->error('znacznik_bledu', 'jakis_kod', 'jakieś dodatkowe informacje4 {;lang;tekst_do_tulmaczenia_error;}');//!!DZIALA
-		$this->error('znacznik_bledu1', 'jakis_kod', 'inf dodatkowe');													//!!DZIALA
-				
-		//zwykly wyjatek
-		//throw new Exception('jakiś zwykły wyjątek');																	//!!DZIALA
-		
-		//tablica zgloszen o bledach, informacjach
-		$errors = '<pre>'.var_export($this->error, 1).'</pre>';
-		$this->generate('tablica_bledow', $errors);
-		
-		
-		
-		//konwersja scierzek wymuszona
-		
-		
-		
-		//dodac metoda umozliwiajaca wczesniejsze tulmaczenie
-		//dla np zglaszania bledu do znacznika bledu
-		
-		//dodatkowa tablica do tulmaczen
-		$this->set_translate(array('kod_dodatkowy' => 'fsdfsdfsdfd'));			//do dorobienia !!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		
+        //set module translations
+        $this->_translate();
 
-	}
-	public function error_mode(){
-		$this->generate('znacznik', 'to jest tryb bledu modulu 1');
-	}
-	public function install(){}
-	public function uninstall(){}
+        //load module layout
+        $this->layout('layout1');
+
+        //generate some simple content
+        $this->generate('marker', 'some content to replace');
+
+        //generate some simple content in main template
+        $this->generate('marker', 'some content to replace in main template', TRUE);
+
+        //generate content to group of markers
+        $content = array(
+            'marker-a' => 'content a',
+            'marker-b' => 'content b'
+        );
+        $this->generate($content);
+
+        //run loaded libraries
+        $valid = new valid_class();
+        $this->generate('lib', $valid->ret());
+
+        //add css and js
+        $this->set(
+            'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js',
+            'js',
+            'external'
+        );
+        $this->set('script', 'js');
+        $this->set('base', 'css', 'internal', 'print');
+        $this->set('base2', 'css');
+
+        //generate some content (normal, loop, optional and from session)
+        $tab = array(
+            array(
+                'item1' => 'val a1',
+                'item2' => 'val a2'
+            ), 
+            array(
+                'item1' => 'val b1',
+                'item2' => 'val b2'
+            )
+        );
+        $this->loop('loop1', $tab);
+
+        $arr = array(
+            array(
+                'aaa' => 'val aaa1',
+                'bbb' => 'val bbb2',
+                'oo' => 'ooo'
+            ), 
+            array('aaa' => 'val ccc1',
+                  'bbb' => 'val ddd2',
+                  'oo2' => 'op2'
+            )
+        );
+        $this->loop('loop2', $arr);
+
+        //data from session
+        $this->generate(array(
+            'public'    => $this->session->val, 
+            'user'      => $this->getSessionVariable('val_user', 'user')
+        ));
+
+        if ($this->session->val) {
+            $this->session->val += 1;
+        } else {
+            $this->session->val = 1;
+        }
+        
+        if ($this->getSessionVariable('val_user', 'user')) {
+            $userValue = $this->getSessionVariable('val_user', 'user') +1;
+        } else {
+            $userValue = 1;
+        }
+
+        $this->setSession('val_user', $userValue, 'user');
+        $this->generate(array(
+            'public2'   => $this->session->val, 
+            'user2'     => $this->getSessionVariable('val_user', 'user')
+        ));
+        
+        //clear session
+        //$this->clearSession('val');                    //!!WORKS
+        
+        //generate breadcrumbs
+        $bread = var_export($this->breadcrumbs(), TRUE);
+        $this->generate('breadcrumbs', $bread);
+
+        //set data in cookies
+        $this->generate('cookie', $this->cookie->cookieVariable);
+        if ($this->cookie->cookieVariable) {
+            $this->cookie->cookieVariable += 1;
+        } else {
+            $this->cookie->cookieVariable = 1;
+        }
+        $this->generate('cookie2', $this->cookie->cookieVariable);
+
+        //access to POST, GET and FILES variables
+        $arr = array(
+            'val1' => $this->get->val1,
+            'val2' => $this->get->val2,
+            'val3' => $this->get->val3
+        );
+        $this->generate($arr);
+
+        //access to get_class
+        $getArray = array(
+            'path'          => get::realPath(),
+            'rget'          => var_export(get::convertGet('', 'val/val2/val3'), TRUE),
+            'lang'          => $this->get->getLanguage(),
+            'current_page'  => $this->get->getCurrentPage(),
+            'parent'        => $this->get->getParentPage(),
+            'master'        => $this->get->getMasterPage(),
+            'full'          => var_export($this->get->fullGetList(TRUE), TRUE),
+            'full2'         => var_export($this->get->fullGetList(), TRUE),
+            'type'          => $this->get->pageType(),
+            'path_domain'   => $this->get->path(),
+            'path'          => $this->get->path(TRUE),
+        );
+        $this->generate($getArray);
+
+        //generate URL paths
+        $this->generate(
+            'some_path',
+            '{;core;domain;}{;core;lang;}{;path;/strona2;}'
+        );
+
+        //add some meta tag
+        $this->addMetaTag('<meta name="some_meta" content="something"/>');
+        $this->addToMetaTag('keywords', 'word 1, word 2');
+
+        //add content to be readed by other module
+        $this->moduleVariable = 'aaaaaaaaaaa';
+
+        //create page map
+        $map = '<pre>' . var_export($this->map(), TRUE) . '</pre>';
+        $this->generate('site_map', $map);
+
+        //loading module to block
+
+        //read parameters for module
+        $param = '<pre>' . var_export($this->params, TRUE) . '</pre>';
+        $this->generate('param', $param);
+
+        //read module configuration
+        $list = '<pre>' . var_export($this->loadModuleOptions(), TRUE) . '</pre>';
+        $this->generate('module_config', $list);
+
+        //checking required modules
+        //in mod 3                        //!!WORKS
+
+        //skipping modules
+        //$this->_disabled('mod2');        //!!WORKS
+
+        //stop framework
+        //$this->_stop();                //!!WORKS
+
+        //some error from php
+        //echo $adfdsf;                    //!!WORKS
+
+        //set error by rendering and throw to specific marker
+
+        //error that will stop framework
+        //throw new coreException(
+        //    'core_error_20',
+        //    'some other information {;lang;string_to_translate;}'
+        //);            //!!WORKS
+
+        //error that stop module
+        //throw new modException(
+        //    'error_from_module',
+        //    'some other information {;lang;string_to_translate;}'
+        //);            //!!WORKS
+
+        //show some critic error, that wont stop module
+        $this->error(
+            'critic',
+            'error_from_module',
+            '<b>translation from module: {;lang;string_to_translate_error;}</b>'
+        );
+
+        //warning
+        //throw new warningException('warning_code', 'some other information');                              //!!WORKS
+        $this->error('warning', 'warning_code', 'some other information');                                   //!!WORKS
+
+        //info
+        //throw new infoException('info_code', 'some other information');                                    //!!WORKS
+        $this->error(
+            'info',
+            'info_code',
+            '<b>translation from core: {;lang;core;string_to_translate;}</b>'
+        );//!!DZIALA
+
+        //ok
+        //throw new okException('ok_code', 'some other information');                                         //!!WORKS
+        $this->error('ok', 'ok_code', 'some other information');                                              //!!WORKS
+
+        //error to given marker
+        $this->error(
+            'error_marker',
+            'some_code',
+            'some other information {;lang;string_to_translate_error;}'
+        );  //!!WORKS
+        $this->error('error_marker1', 'some_code', 'additional info');                                        //!!WORKS
+
+        //normal exception
+        //throw new Exception('some exception');                                                              //!!WORKS
+
+        //array of errors and information
+        $errors = '<pre>' . var_export($this->error, TRUE).'</pre>';
+        $this->generate('errors_list', $errors);
+
+        //forced path conversion
+
+        //additional array to translate
+        $this->_setTranslationArray(array('additional_translation' => 'fsdfsdfsdfd'));            //TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    }
+    
+    public function runErrorMode(){
+        $this->generate('marker', 'that is module 1 error mode');
+    }
+
+    public function install(){}
+    public function uninstall(){}
 }
-?>

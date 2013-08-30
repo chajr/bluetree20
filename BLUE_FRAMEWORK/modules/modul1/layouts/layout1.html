@@ -1,132 +1,135 @@
-<h3>to jest layout z modulu 1</h3>
+<h3>that is layout from module 1</h3>
 <fieldset>
-	<legend>
-		zwykły znacznik
-	</legend>
-	{;znacznik;}
+    <legend>
+        simple marker
+    </legend>
+    {;marker;}
 </fieldset>
 <fieldset>
-	<legend>
-		zawartości opcjonalne
-	</legend>
-	opcjonalny {;op;oo;} 1: {;znacznika;}{;op_end;oo;}<br/>
-	opcjonalny {;op;ooa;} 2: {;znacznik;}{;op_end;ooa;}
+    <legend>
+        optional content
+    </legend>
+    optional {;op;oo;} 1: {;marker_a;}{;op_end;oo;}<br/>
+    optional {;op;ooa;} 2: {;marker;}{;op_end;ooa;}
 </fieldset>
 <fieldset>
-	<legend>
-		tablica znaczników
-	</legend>
-	{;znacznik-a;} - {;znacznik-b;} {;jakisznacznik;}
+    <legend>
+        markers array
+    </legend>
+    {;marker-a;} - {;marker-b;} {;some_marker;}
 </fieldset>
 <fieldset style="border-color: #ff0000">
-	<legend>
-		znacznik z bledem
-	</legend>
-	{;znacznik_bledu;}<br/>
-	{;znacznik_bledu1;}
+    <legend>
+        marker with error
+    </legend>
+    {;error_marker;}<br/>
+    {;error_marker1;}
 </fieldset>
 <fieldset style="border-color: #ff0000">
-	<legend>
-		tablica inforemacji o zgloszonych bledach, informacjach
-	</legend>
-	{;tablica_bledow;}
+    <legend>
+        array with errors and information
+    </legend>
+    {;errors_list;}
 </fieldset>
 <fieldset>
-	<legend>
-		zwykła petla
-	</legend>
-	{;start;petla1;}
-	<b>{;petla1;item1;}</b> {;petla1;item2;}<br/>
-	{;end;petla1;}
+    <legend>
+        simple loop
+    </legend>
+    {;start;loop1;}
+    <b>{;loop1;item1;}</b>
+    {;loop1;item2;}<br/>
+    {;end;loop1;}
 </fieldset>
 <fieldset>
-	<legend>
-		petla z opcjonalnymi znacznikami
-	</legend>
-	{;start;petla2;}
-	<b>{;petla2;aaa;}</b> {;petla2;bbb;} - {;op;oo;}opcjonalny {;petla2;oo;}{;op_end;oo;}{;op;oo2;}opcjonalny2 {;petla2;oo2;}{;op_end;oo2;}<br/>
-	{;end;petla2;}
+    <legend>
+        loop with optional marker
+    </legend>
+    {;start;loop2;}
+    <b>{;loop2;aaa;}</b>
+    {;loop2;bbb;} - {;op;oo;}optional {;loop2;oo;}{;op_end;oo;}{;op;oo2;}optional 2 {;loop2;oo2;}{;op_end;oo2;}
+    <br/>
+    {;end;loop2;}
 </fieldset>
 <fieldset>
-	<legend>
-		SESJA
-	</legend>
-	<div>public: <strong>{;public;}</strong> - newpublic: <strong>{;public2;}</strong></div>
-	<div>user: <strong>{;user;}</strong> - newuser: <strong>{;user2;}</strong></div>
+    <legend>
+        SESSION
+    </legend>
+    <div>public: <strong>{;public;}</strong> - newpublic: <strong>{;public2;}</strong></div>
+    <div>user: <strong>{;user;}</strong> - newuser: <strong>{;user2;}</strong></div>
 </fieldset>
 <fieldset>
-	<legend>
-		breadcrumbs
-	</legend>
-	<div>{;breadcrumbs;}</div>
+    <legend>
+        breadcrumbs
+    </legend>
+    <div>{;breadcrumbs;}</div>
 </fieldset>
 <fieldset>
-	<legend>
-		mapa
-	</legend>
-	{;mapa;}
+    <legend>
+        site map
+    </legend>
+    {;site_map;}
 </fieldset>
 <fieldset>
-	<legend>
-		generowanie scierzki z modulu
-	</legend>
-	<div>{;jakas_scierzka;}</div>
+    <legend>
+        generate path from module
+    </legend>
+    <div>{;some_path;}</div>
 </fieldset>
 <fieldset>
-	<legend>
-		informacja z uruchomionej biblioteki
-	</legend>
-	<div>{;lib;}</div>
+    <legend>
+        informations from library
+    </legend>
+    <div>{;lib;}</div>
 </fieldset>
 <fieldset>
-	<legend>
-		cookie
-	</legend>
-	<div>cookie1: {;cookie;}</div>
-	<div>cookie2: {;cookie2;}</div>
+    <legend>
+        cookie
+    </legend>
+    <div>cookie1: {;cookie;}</div>
+    <div>cookie2: {;cookie2;}</div>
 </fieldset>
 <fieldset>
-	<legend>
-		wartosci z get
-	</legend>
-	<div>val1: <strong>{;val1;}</strong></div>
-	<div>val2: <strong>{;val2;}</strong></div>
-	<div>val3: <strong>{;val3;}</strong></div>
+    <legend>
+        data from GET
+    </legend>
+    <div>val1: <strong>{;val1;}</strong></div>
+    <div>val2: <strong>{;val2;}</strong></div>
+    <div>val3: <strong>{;val3;}</strong></div>
 </fieldset>
 <fieldset>
-	<legend>
-		obiekt GET
-	</legend>
-	<div>path: <strong>{;path;}</strong></div>
-	<div>rewrite get: <strong>{;rget;}</strong></div>
-	<div>lang code: <strong>{;lang;}</strong></div>
-	<div>current page: <strong>{;current_page;}</strong></div>
-	<div>parrent page: <strong>{;parrent;}</strong></div>
-	<div>master page: <strong>{;master;}</strong></div>
-	<div>full get: <strong>{;full;}</strong></div>
-	<div>full get (TRUE): <strong>{;full2;}</strong></div>
-	<div>type: <strong>{;type;}</strong></div>
-	<div>path with domain <strong>{;path_domain;}</strong></div>
-	<div>compleat path <strong>{;path;}</strong></div>
+    <legend>
+        GET object
+    </legend>
+    <div>path:              <strong>{;path;}</strong></div>
+    <div>rewrite get:       <strong>{;rget;}</strong></div>
+    <div>lang code:         <strong>{;lang;}</strong></div>
+    <div>current page:      <strong>{;current_page;}</strong></div>
+    <div>parent page:       <strong>{;parent;}</strong></div>
+    <div>master page:       <strong>{;master;}</strong></div>
+    <div>full get:          <strong>{;full;}</strong></div>
+    <div>full get (TRUE):   <strong>{;full2;}</strong></div>
+    <div>type:              <strong>{;type;}</strong></div>
+    <div>path with domain   <strong>{;path_domain;}</strong></div>
+    <div>complete path      <strong>{;path;}</strong></div>
 </fieldset>
 <fieldset>
-	<legend>
-		tablica parametrow dla modulu
-	</legend>
-	<div>{;param;}</div>
+    <legend>
+        array of parameters for module
+    </legend>
+    <div>{;param;}</div>
 </fieldset>
 <fieldset>
-	<legend>
-		tułmaczenia
-	</legend>
-	<div>tułmaczenie z modułu: <strong>{;lang;tekst_do_tulmaczenia;}</strong></div>
-	<div>tułmaczenie z frameworka: <strong>{;lang;core;testowe_tulmaczenie_core;}</strong></div>
-	<div>tułmaczenie na podany kod jezykowy z modulu- <strong>{;lang-en-GB;tekst_do_tulmaczenia;}</strong></div>
-	<div>tułmaczenie na podany kod jezykowy z core- <strong>{;lang-en-GB;core;tekst_do_tulmaczenia;}</strong></div>
+    <legend>
+        translations
+    </legend>
+    <div>translation from module:       <strong>{;lang;string_to_translate;}</strong></div>
+    <div>translation from framework:    <strong>{;lang;core;testowe_tulmaczenie_core;}</strong></div>
+    <div>translation for given language code from module: <strong>{;lang-en-GB;string_to_translate;}</strong></div>
+    <div>translation for given language code from core:   <strong>{;lang-en-GB;core;tekst_do_tulmaczenia;}</strong></div>
 </fieldset>
 <fieldset>
-	<legend>
-		tablica konfiguracyjna modułu
-	</legend>
-	<div>{;tablica_cfg;}</div>
+    <legend>
+        module configuration array
+    </legend>
+    <div>{;module_config;}</div>
 </fieldset>
