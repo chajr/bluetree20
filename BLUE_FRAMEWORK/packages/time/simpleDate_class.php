@@ -7,7 +7,7 @@
  * @subpackage  simpleDate
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.3.0
+ * @version     1.3.1
  *
  * @todo number of week
  * @todo time conversion (change second to days etc)
@@ -160,7 +160,7 @@ class simpleDate_class
      * 
      * @param integer|array|string|boolean $stamp unix timestamp or array (day, month, year) or day number as string
      * @param boolean $short if TRUE will return a short version of day name
-     * @return mixed day name, or its number in week
+     * @return mixed day name, or its number in week, or FALSE if wrong data was given
      * @example getDayName(23424234);
      * @example getDayName(array(12, 12, 1983))
      * @example getDayName(0); - sunday
@@ -217,6 +217,8 @@ class simpleDate_class
                 return strftime($short, 1312617709);
                 break;
         }
+
+        return FALSE;
     }
 
     /**
@@ -244,7 +246,7 @@ class simpleDate_class
      * return number of days in month
      * 
      * @param string|array|boolean $stamp unix timestamp or array(month, year) if NULL use current month
-     * @return integer
+     * @return integer|boolean
      * @example getDayInMonth()
      * @example getDayInMonth(34234234)
      * @example getDayInMonth(array(12, 1983))
@@ -440,9 +442,9 @@ class simpleDate_class
      * @param boolean $name if TRUE return as name
      * @param boolean $short if TRUE return as short name
      * @return integer|string
-     * @example miesiac(3424234, 1)
-     * @example miesiac()
-     * @example miesiac(234234234, 1, 1) wersja skrocona
+     * @example getMonth(3424234, 1)
+     * @example getMonth()
+     * @example getMonth(234234234, 1, 1) short version
      */
     static function getMonth($stamp = NULL, $name = FALSE, $short = FALSE)
     {

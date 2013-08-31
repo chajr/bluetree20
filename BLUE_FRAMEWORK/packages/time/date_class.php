@@ -7,7 +7,7 @@
  * @subpackage  date
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.1.0
+ * @version     1.1.1
  * 
  * @todo coverage time intervals (check if date overlap themselves)
  * @todo return datetime for database
@@ -318,7 +318,7 @@ class date_class
      * 
      * @param date_class $data
      * @param string $differenceType type of differences (default all)
-     * @param boolean if FALSE will return absolute comparison, else depending of other parameters
+     * @param boolean $relative if FALSE will return absolute comparison, else depending of other parameters
      * @return mixed return difference, or array of differences
      * @example diff($data_object, 0, 1)
      * @example diff($data_object)
@@ -377,7 +377,7 @@ class date_class
     }
 
     /**
-     * return unix timestamp whne try to get object as string
+     * return unix timestamp when try to get object as string
      * 
      * @return string
      */
