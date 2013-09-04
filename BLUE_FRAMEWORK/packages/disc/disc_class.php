@@ -7,16 +7,15 @@
  * @subpackage  disc
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     0.9.0
+ * @version     0.9.1
  */
 class disc_class
 {
     /**
      * restricted characters for file and directory names
      * @var string
-     * @staticvar
      */
-    const RESTRICTED_SYMBOLS = '#[:?*<>"|\\]#';
+    const RESTRICTED_SYMBOLS = '#[:?*<>"|\\\]#';
 
     /**
      * remove file or directory with all content
@@ -26,6 +25,8 @@ class disc_class
      */
     static function delete($path)
     {
+        $bool = TRUE;
+
         if(!file_exists($path)){
             return NULL;
         }
@@ -145,7 +146,7 @@ class disc_class
         $bool = preg_match(self::RESTRICTED_SYMBOLS, $fileName);
 
         if (!$bool) {
-            $f = @fopen("$path/$fileName", 'r');
+            $f = @fopen("$path/$fileName", 'w');
             fclose($f);
             
             if ($data) {

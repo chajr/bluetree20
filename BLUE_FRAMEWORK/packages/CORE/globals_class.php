@@ -5,7 +5,7 @@
  * @subpackage  globals
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.1.0
+ * @version     2.1.1
  */
 
 /**
@@ -904,13 +904,19 @@ class files
                 }
 
                 $path = pathinfo($file['name']);
+                if (isset($path['extension'])) {
+                    $extension = $path['extension'];
+                } else {
+                    $extension = NULL;
+                }
+
                 $this->$key = array(
                     'name'      => $file['name'],
                     'type'      => $file['type'],
                     'tmp_name'  => $file['tmp_name'],
                     'error'     => $file['error'],
                     'size'      => $file['size'],
-                    'extension' => $path['extension'],
+                    'extension' => $extension,
                     'basename'  => $path['filename']
                 );
                }
@@ -935,19 +941,22 @@ class files
     {
         if (is_array($destination)) {
             if ($name) {
+                $fileData = $this->$name;
 
                 foreach ($destination as $path) {
-                    $this->put($this->$name['tmp_name'], $path);
+                    $this->put($fileData['tmp_name'], $path);
                 }
             } else {
 
                 foreach ($destination as $key => $path) {
-                    $this->put($this->$key['tmp_name'], $path);
+                    $fileData = $this->$key;
+                    $this->put($fileData['tmp_name'], $path);
                 }
             }
         } else {
             if ($name) {
-                $this->put($this->$name['tmp_name'], $destination);
+                $fileData = $this->$name;
+                $this->put($fileData['tmp_name'], $destination);
             } else {
 
                 foreach ($this as $key => $val) {

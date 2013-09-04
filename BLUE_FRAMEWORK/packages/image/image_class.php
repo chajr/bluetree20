@@ -27,10 +27,10 @@ class image_class
     public $pngQuality = 9;
 
     /**
-     * temporaty directory location
+     * temporary directory location
      * @var string
      */
-    public $tmpLocation = 'BLUE_FRAMEWORK/TMP';
+    public $tmpLocation;
 
     /**
      * filters for png files
@@ -60,7 +60,6 @@ class image_class
 
     /**
      * opened image handler
-     * uchwyt otwartego pliku do wykozystania
      * @var resource
      */
     protected $_imageHandler;
@@ -97,6 +96,7 @@ class image_class
      */
     public function __construct($file, $chk = FALSE)
     {
+        $this->tmpLocation = starter_class::path(TRUE) . '/' . $this->tmpLocation;
         $this->_checkTempDirectory();
         $this->_fileReference   = $file;
         $this->_time            = time();
@@ -228,7 +228,7 @@ class image_class
     {
         if ($destination) {
             if ($extension) {
-                $destination = $destination . '.' . $type;
+                $destination = $destination . '/' . $type;
             }
         } else {
             $location = NULL;

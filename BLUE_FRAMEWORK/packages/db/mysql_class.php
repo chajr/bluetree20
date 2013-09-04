@@ -7,7 +7,7 @@
  * @subpackage  mysql
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     3.3.0
+ * @version     3.3.1
  * 
  * Display <a href="http://sam.zoy.org/wtfpl/COPYING">Do What The Fuck You Want To Public License</a>
  * @license http://sam.zoy.org/wtfpl/COPYING Do What The Fuck You Want To Public License
@@ -76,6 +76,17 @@ class mysql_class
         }
 
         return NULL;
+    }
+
+    /**
+     * return full result from query
+     * used $this->result(TRUE); method
+     * 
+     * @return array
+     */
+    public function fullResult()
+    {
+        return $this->result(TRUE);
     }
 
     /**
