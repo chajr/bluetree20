@@ -10,9 +10,7 @@
  * @subpackage  display
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.5.0
- * 
- * @todo change class to allows use it independent in module
+ * @version     2.6.0
  */
 class display_class
 {
@@ -34,73 +32,88 @@ class display_class
      * array of js and contains with them modules to load
      * @var array
      */
-    private $_js = array();
+    protected $_js = array();
     
     /**
      * array of css and contains with them modules to load
      * @var array
      */
-    private $_css = array();
+    protected $_css = array();
     
     /**
      * framework options
      * @var array
      */
-    private $_options;
+    protected $_options;
     
     /**
      * selected language code
      * @var string
      */
-    private $_lang;
+    protected $_lang;
     
     /**
      * get object
      * @var get
      */
-    private $_get;
+    protected $_get;
     
     /**
      * session object
      * @var session
      */
-    private $_session;
+    protected $_session;
     
     /**
      * regular expression that corresponds to all display class markers
      * @var string
     */
-    private $_contentMarkers = "{;[\\w=\\-|&();\\/,]+;}";
+    protected $_contentMarkers = "{;[\\w=\\-|&();\\/,]+;}";
+
+    protected $_defaultOptions = array(
+        'template'      => '',
+        'independent'   => FALSE,
+        'get'           => NULL,
+        'session'       => NULL,
+        'language'      => NULL,
+        'css'           => NULL,
+        'js'            => NULL,
+        'options'       => array(),
+    );
     
+    /**
+     * load templates and create layout to use in core, or individually
+     * 
+     * string|boolean $layout main layout name (if css/js NULL)
+     * @param array $options
+     */
+    public function __construct(array $options)
+    {
+        $this->_defaultOptions = array_merge($this->_defaultOptions, $options);
+
+        if ($this->_defaultOptions['independent']) {
+            $this->layout($this->_defaultOptions['template']);
+        } else {
+            $this->_constructMainLayout();
+        }
+
+        $this->_external();
+    }
+
     /**
      * load main layout and related with it external templates
      * fix paths and convert path markers
-     * 
-     * @param string|boolean $layout main layout name (if css/js NULL)
-     * @param get $get
-     * @param session $session
-     * @param string $lang language code
-     * @param array $css
-     * @param array $js
-     * @param array $options
      */
-    public function __construct(
-        $layout,
-        $get,
-        $session,
-        $lang,
-        $css,
-        $js,
-        $options = NULL
-    ){
-        $this->_lang    = $lang;
-        $this->_css     = $css;
-        $this->_js      = $js;
-        $this->_get     = $get;
-        $this->_session = $session;
+    protected function _constructMainLayout()
+    {
+        $this->_lang    = $this->_defaultOptions['language'];
+        $this->_css     = $this->_defaultOptions['css'];
+        $this->_js      = $this->_defaultOptions['js'];
+        $this->_get     = $this->_defaultOptions['get'];
+        $this->_session = $this->_defaultOptions['session'];
 
-        if ($options) {
-            $this->_options = $options;
+        if ($this->_defaultOptions['options']) {
+            $this->_options = $this->_defaultOptions['options'];
         } else {
             $this->_options = core_class::options();
         }
@@ -112,17 +125,14 @@ class display_class
         }
 
         switch ($typ) {
-            case'css':
-            case'js':
-                $this->DISPLAY['core'] = '{;css_js;}';
-                break;
+            case'css': case'js':
+            $this->DISPLAY['core'] = '{;css_js;}';
+            break;
 
             default:
-                $this->layout($layout);
-                   break;
+                $this->layout($this->_defaultOptions['template']);
+                break;
         }
-
-        $this->_external();
     }
 
     /**
@@ -342,26 +352,43 @@ class display_class
     /**
      * allows load template to DISPLAY array
      * 
-     * @param string $layout name of layout to load
-     * @param string|boolean $mod module name (if FALSE load to core)
+     * @param string $template name of layout to load
+     * @param string|boolean $module module name (default core)
      * @example layout('layout_name')
-     * @example layout('layout_name', 'mod')
+     * @example layout('layout_name', 'module')
      * @throws coreException core_error_2
      */
-    public function layout($layout, $mod = FALSE)
+    public function layout($template, $module = 'core')
     {
-        if (!$mod) {
-            $path = "elements/layouts/$layout.html";
-            $mod  = 'core';
+        $path                   = $this->_checkTemplatePath($template, $module);
+        $this->DISPLAY[$module] = starter_class::load($path, TRUE);
+
+        if (!$this->DISPLAY[$module]) {
+            throw new coreException('core_error_2', $module . ' - ' . $path);
+        }
+    }
+
+    /**
+     * return correct path for required templates
+     * 
+     * @param string $template
+     * @param string $module
+     * @return string
+     */
+    protected function _checkTemplatePath($template, $module)
+    {
+        
+        if ($this->_defaultOptions['independent']) {
+            return $template;
+        }
+
+        if ($module === 'core') {
+            $path = "elements/layouts/$template.html";
         } else {
-            $path = "modules/$mod/layouts/$layout.html";
+            $path = "modules/$module/layouts/$template.html";
         }
 
-        $this->DISPLAY[$mod] = starter_class::load($path, TRUE);
-
-        if (!$this->DISPLAY[$mod]) {
-            throw new coreException('core_error_2', $mod . ' - ' . $path);
-        }
+        return $path;
     }
 
     /**
@@ -369,7 +396,7 @@ class display_class
      * 
      * @param boolean $type array type to set (TRUE = core, FALSE = public)
      */
-    private function _session($type)
+    protected function _session($type)
     {
         if ($this->_session) {
             if ($type) {
@@ -395,7 +422,7 @@ class display_class
      * 
      * @todo check all css types
      */
-    private function _link($type){
+    protected function _link($type){
         $links      = '';
         $end        = '';
         $front      = '';
@@ -478,9 +505,9 @@ class display_class
      * @param string $mod
      * @param string $param file name to read
      * @param string $type (css | js)
-     * @return string zwraca zawartosc pliku, lub pusty string
+     * @return string return file content or empty string
      */
-    private function _read($mod, $param, $type)
+    protected function _read($mod, $param, $type)
     {
         if ($mod === 'core') {
             $main = 'elements/' . $type . '/';
@@ -506,36 +533,26 @@ class display_class
      * load external templates to main template, 
      * or some external templates to module template
      *
-     * @param string $module optionaly module name that want to load external template
+     * @param string $module optionally module name that want to load external template
      * @throws coreException core_error_3
      */
-    private function _external($module = NULL)
+    protected function _external($module = 'core')
     {
         $array = array();
-
-        if (!$module) {
-            $path   = 'elements/layouts/';
-            $module = 'core';
-        } else {
-            $path = 'modules/' . $module . '/layout/';
-        }
-
         preg_match_all('#{;external;([\\w-])+;}#', $this->DISPLAY[$module], $array);
 
         foreach ($array[0] as $element) {
 
             $name = str_replace(
-                array(
-                    '{;external;',
-                    ';}'
-                ),
+                array('{;external;', ';}'),
                 '',
                 $element
             );
 
-            $content = starter_class::load($path . $name . '.html', TRUE);
+            $finalPath = $this->_checkTemplatePath($name, $module);
+            $content = starter_class::load($finalPath, TRUE);
             if (!$content) {
-                throw new coreException('core_error_3', $path . $name . '.html');
+                throw new coreException('core_error_3', $finalPath . '.html');
             }
 
             $this->DISPLAY[$module] = str_replace(
@@ -551,14 +568,14 @@ class display_class
      * 
      * @return array of fix paths
      */
-    private function _checkPath()
+    protected function _checkPath()
     {
         $path = array();
 
         if ($this->_get) {
             $path[0] = $this->_get->path();
             $path[1] = $this->_get->path(TRUE);
-         }else {
+        } else {
             $path[0] = $path[1] = get::realPath($this->_options['test']);
         }
 
@@ -570,11 +587,11 @@ class display_class
      * 
      * @example {;core;domain;} - set protocol, domain and test folder
      * @example {;core;lang;} - set language code if language support is enabled
-     * @example {;path;jakas sciezka;} - set converted path, without domain and language code
-     * @example {;full;jakas sciezka;} - set full path with domain and language code
-     * @example {;rel;jakas sciezka;} - set current path and write to it given path
+     * @example {;path;some path;} - set converted path, without domain and language code
+     * @example {;full;some path;} - set full path with domain and language code
+     * @example {;rel;some path;} - set current path and write to it given path
      */
-    private function _path()
+    protected function _path()
     {
         $path = $this->_checkPath();
         $this->DISPLAY = preg_replace(
@@ -619,7 +636,7 @@ class display_class
      * @param array $array array of markers
      * @param string $type type to convert (path|full|rel)
      */
-    private function _convert(array $array, $type)
+    protected function _convert(array $array, $type)
     {
         $update = '';
 
@@ -706,7 +723,7 @@ class display_class
      * 
      * @return string (& | &amp;)
      */
-    private function _separator()
+    protected function _separator()
     {
         if (!empty($this->_js)) {
             $separator = '&';
@@ -720,7 +737,7 @@ class display_class
     /**
      * run clean methods to remove unused markers
      */
-    private function clean()
+    protected function clean()
     {
         $this->_cleanMarkers('optional');
         $this->_cleanMarkers('loop');
@@ -735,11 +752,11 @@ class display_class
     /**
      * clean template from unused markers on loops and optional values
      * 
-     * @param string $typ typ do sprawdzenia
+     * @param string $type type to check
      */
-    private function _cleanMarkers($typ)
+    protected function _cleanMarkers($type)
     {
-        switch($typ){
+        switch ($type) {
             case'loop':
                 $reg1 = '#{;(start|end);([\\w-])+;}#';
                 $reg2 = '#{;([\\w-])+;([\\w-])+;}#';
@@ -774,7 +791,8 @@ class display_class
                 $startContent   = $start + mb_strlen($marker);
                 $contentLength  = $end - $startContent;
                 $string         = substr($this->DISPLAY, $startContent, $contentLength);
-                $len            = ($end += mb_strlen($endMarker)) - $start;
+                $end            += mb_strlen($endMarker);
+                $len            = $end - $start;
                 $stringToRemove = substr($this->DISPLAY, $start, $len);
                 $bool           = preg_match($reg2, $string);
 
@@ -790,7 +808,7 @@ class display_class
     /**
      * compress content with given compress level
      */
-    private function _compress()
+    protected function _compress()
     {
         if ((bool)$this->_options['compress']) {
             header('Content-encoding: gzip');
