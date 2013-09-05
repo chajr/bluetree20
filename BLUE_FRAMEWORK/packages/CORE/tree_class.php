@@ -7,7 +7,7 @@
  * @subpackage  tree
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.3.0
+ * @version     2.3.1
  * 
  * @todo add lang attribute, to load given page only in given language
  */
@@ -195,10 +195,10 @@ class tree_class
      * internal recurrent function return subpages tree and seatch inside another
      * process structure for sitemap
      * 
-     * @param DOMElement $nodes collection of xml nodes to process
+     * @param DOMNodeList $nodes collection of xml nodes to process
      * @param string $path parent path for elements
      */
-    private function _siteSubMap(DOMElement $nodes, $path = '')
+    private function _siteSubMap(DOMNodeList $nodes, $path = '')
     {
         foreach ($nodes as $child) {
             if ($child->nodeType == 8) {
