@@ -5,7 +5,7 @@
  * @subpackage  globals
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.1.1
+ * @version     2.2.0
  */
 
 /**
@@ -78,7 +78,7 @@ abstract class globals_class
     }
 
     /**
-     * destroy all superglobal arrays
+     * destroy all super global arrays
      */
     public static function destroy()
     {
@@ -160,7 +160,7 @@ abstract class globals_class
     /**
      * check length of parameter
      * 
-     * @param string $parameter parametr + value to check
+     * @param string $parameter parameter + value to check
      * @throws coreException core_error_6
      */
     protected function _maxLength($parameter)
@@ -863,13 +863,31 @@ class session
 }
 
 /**
- * procces uploaded files
+ * process uploaded files
  */
 class files 
     extends globals_class
 {
     /**
      * array of uploaded files errors
+     * 
+     * UPLOAD_ERR_OK
+     * Value: 0; There is no error, the file uploaded with success.
+     * UPLOAD_ERR_INI_SIZE
+     * Value: 1; The uploaded file exceeds the upload_max_filesize directive in php.ini.
+     * UPLOAD_ERR_FORM_SIZE
+     * Value: 2; The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.
+     * UPLOAD_ERR_PARTIAL
+     * Value: 3; The uploaded file was only partially uploaded.
+     * UPLOAD_ERR_NO_FILE
+     * Value: 4; No file was uploaded.
+     * UPLOAD_ERR_NO_TMP_DIR
+     * Value: 6; Missing a temporary folder. Introduced in PHP 4.3.10 and PHP 5.0.3.
+     * UPLOAD_ERR_CANT_WRITE
+     * Value: 7; Failed to write file to disk. Introduced in PHP 5.1.0.
+     * UPLOAD_ERR_EXTENSION
+     * Value: 8; File upload stopped by extension. Introduced in PHP 5.2.0.
+     * 
      * @var array 
      */
     public $uploadErrors = array();
@@ -919,7 +937,11 @@ class files
                     'extension' => $extension,
                     'basename'  => $path['filename']
                 );
-               }
+
+                if ($file['error'] !== UPLOAD_ERR_OK) {
+                    $this->uploadErrors[$key] = $file['error'];
+                }
+            }
         }
     }
 
@@ -933,41 +955,55 @@ class files
      * @example move(array('form1' => 'path', 'form2' => 'path2'))
      * @example move('some/path', 'form2')
      * @example move('some/path') - move all uploaded files to given path
-     * 
-     * @todo check that path exists and create it if not
-     * @todo what if file already exists in directory, replace, error, or check
      */
     public function move($destination, $name = NULL)
     {
         if (is_array($destination)) {
             if ($name) {
-                $fileData = $this->$name;
 
                 foreach ($destination as $path) {
-                    $this->put($fileData['tmp_name'], $path);
+                    $this->_createData($path, $this->$name['tmp_name']);
                 }
             } else {
 
                 foreach ($destination as $key => $path) {
-                    $fileData = $this->$key;
-                    $this->put($fileData['tmp_name'], $path);
+                    $this->_createData($path, $this->$key['tmp_name']);
                 }
             }
         } else {
             if ($name) {
-                $fileData = $this->$name;
-                $this->put($fileData['tmp_name'], $destination);
+                $this->_createData($destination, $this->$name['tmp_name']);
             } else {
 
                 foreach ($this as $key => $val) {
                     if ($key === '_uploadFullSize' || $key === 'uploadErrors') {
                         continue;
                     }
-
-                    $this->put($val['tmp_name'], $destination);
+                    $this->_createData($destination, $val['tmp_name']);
                 }
             }
         }
+    }
+
+    /**
+     * check if directory exist and create it if not and put file to directory
+     * 
+     * @param string $path
+     * @param string $valueToPut
+     * @return bool
+     */
+    protected function _createData($path, $valueToPut)
+    {
+        if (!self::exist($path)) {
+            $bool = mkdir ($path);
+
+            if (!$bool) {
+                $this->uploadErrors['create_directory'][] = $path;
+                return FALSE;
+            }
+        }
+
+        return $this->put($valueToPut, $path);
     }
 
     /**
@@ -1020,6 +1056,7 @@ class files
      * @example returns('extension')
      * @example returns('basename')
      * @example returns('error')
+     * @example returns() - all data array
      * 
      * UPLOAD_ERR_OK
      * Value: 0; There is no error, the file uploaded with success.
@@ -1037,10 +1074,8 @@ class files
      * Value: 7; Failed to write file to disk. Introduced in PHP 5.1.0.
      * UPLOAD_ERR_EXTENSION
      * Value: 8; File upload stopped by extension. Introduced in PHP 5.2.0.
-     * 
-     * @todo handling of upload errors
      */
-    public function returns($type)
+    public function returns($type = NULL)
     {
         $array = array();
 
@@ -1077,12 +1112,11 @@ class files
                 case"error":
                     if ($val['error'] !== UPLOAD_ERR_OK) {
                         $array[$key] = $val['error'];
-                    } else {
-                        $this->uploadErrors;
                     }
                     break;
 
                 default:
+                    $array[$key] = $val;
                     break;
             }
         }
@@ -1136,16 +1170,24 @@ class files
      * 
      * @param string $filename name of file in tmp directory
      * @param string $destination
+     * @return boolean
      * @throws coreException core_error_12
      * @example put('file_from_tmp', '/some_path/directory/file.name')
      */
     private function put($filename, $destination)
     {
+        if (self::exist($destination . '/' . $filename)) {
+            $this->uploadErrors['put_file'][] = $destination . '/' . $filename;
+            return FALSE;
+        }
+
         $bool = move_uploaded_file($filename, $destination);
         if (!$bool) {
             throw new coreException(
                 'core_error_12', $filename . ' => ' . $destination
             );
         }
+
+        return TRUE;
     }
 }

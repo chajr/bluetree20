@@ -7,7 +7,7 @@
  * @subpackage  disc
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     0.9.1
+ * @version     1.0.0
  */
 class disc_class
 {
@@ -68,13 +68,13 @@ class disc_class
      */
     static function copy($path, $target)
     {
-        if (!file_exists($path)) {
+        if (!files::exist($path)) {
             return NULL;
         }
 
         if (is_dir($path)) {
 
-            if (!file_exists($target)) {
+            if (!files::exist($target)) {
                 mkdir($target);
             }
 
@@ -139,7 +139,7 @@ class disc_class
      */
     static function mkfile($path, $fileName, $data = NULL)
     {
-        if (!file_exists($path)) {
+        if (!files::exist($path)) {
             return NULL;
         }
 
@@ -165,13 +165,15 @@ class disc_class
      * @param string $path original path or name
      * @param string $target new path or name
      * @return boolean information that operation was successfully, or NULL if path incorrect
-     * 
-     * @todo check that destination file or directory exists, and action what then
      */
     static function rename($path, $target)
     {
         if (!file_exists($path)) {
             return NULL;
+        }
+
+        if (files::exist($target)) {
+            return FALSE;
         }
 
         $bool = preg_match(self::RESTRICTED_SYMBOLS, $target);
@@ -212,7 +214,7 @@ class disc_class
             $path = dirname(__FILE__);
         }
 
-        if (!file_exists($path)) {
+        if (!files::exist($path)) {
             return NULL;
         }
 

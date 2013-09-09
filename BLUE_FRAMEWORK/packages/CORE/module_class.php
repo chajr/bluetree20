@@ -7,7 +7,7 @@
  * @subpackage  module
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.3.0
+ * @version     2.4.0
  */
 abstract class module_class
 {
@@ -128,16 +128,6 @@ abstract class module_class
      * method to start module when some exception was throw
      */
     abstract public function runErrorMode();
-
-    /**
-     * method responsible for module installation
-     */
-    abstract public function install();
-
-    /**
-     * method responsible for remove module
-     */
-    abstract public function uninstall();
 
     /**
      * run helper object, and start module run method

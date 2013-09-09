@@ -148,9 +148,7 @@ class mysql_class
  * @subpackage  mysql
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.2.0
- * 
- * @todo define some other charset
+ * @version     1.2.1
  * 
  * Display <a href="http://sam.zoy.org/wtfpl/COPYING">Do What The Fuck You Want To Public License</a>
  * @license http://sam.zoy.org/wtfpl/COPYING Do What The Fuck You Want To Public License
