@@ -5,7 +5,7 @@
  * @subpackage  error
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.1.5
+ * @version     2.1.6
  */
 
 /**
@@ -103,15 +103,11 @@ final class error_class
             }
 
             $this->_lang     = new lang_class($lang, $this->_options);
-            $this->_display  = new display_class(
-                'error',
-                NULL,
-                NULL,
-                $this->_lang->lang,
-                NULL,
-                NULL,
-                $this->_options
-            );
+            $this->_display  = new display_class(array(
+                'template' => 'error',
+                'language' => $this->_lang->lang,
+                'options'  => $this->_options,
+            ));
         } else {
             $this->_lang     = $lang;
             $this->_options  = core_class::options();
@@ -506,15 +502,11 @@ final class error_class
                             foreach ($modules as $errorBlock) {
                                 foreach ($errorBlock as $blockName => $errorContent) {
 
-                                    $this->_display = new display_class(
-                                        'error_' . $type,
-                                        NULL,
-                                        NULL,
-                                        $this->_lang->lang,
-                                        NULL,
-                                        NULL,
-                                        $this->_options
-                                    );
+                                    $this->_display = new display_class(array(
+                                        'template' => 'error_' . $type,
+                                        'language' => $this->_lang->lang,
+                                        'options'  => $this->_options,
+                                    ));
 
                                     $this->_display->generate(
                                         array(
@@ -542,15 +534,11 @@ final class error_class
                             }
                             
                         } else {
-                            $this->_display = new display_class(
-                                'error_' . $type,
-                                NULL,
-                                NULL,
-                                $this->_lang->lang,
-                                NULL,
-                                NULL,
-                                $this->_options
-                            );
+                            $this->_display = new display_class(array(
+                                'template' => 'error_' . $type,
+                                'language' => $this->_lang->lang,
+                                'options'  => $this->_options,
+                            ));
 
                             $this->_display->loop('errors', $array);
 

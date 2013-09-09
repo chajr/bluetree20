@@ -9,7 +9,7 @@
  * @subpackage  core
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.3.1
+ * @version     2.3.2
  */
 final class core_class
 {
@@ -235,14 +235,14 @@ final class core_class
         );
         benchmark_class::setMarker('runs tree object');
 
-        $this->_display = new display_class(
-            $this->_tree->layout,
-            $this->_get,
-            $this->_session,
-            $this->_lang->lang,
-            $this->_tree->css,
-            $this->_tree->js
-        );
+        $this->_display = new display_class(array(
+            'template'  => $this->_tree->layout,
+            'get'       => $this->_get,
+            'session'   => $this->_session,
+            'language'  => $this->_lang->lang,
+            'css'       => $this->_tree->css,
+            'js'        => $this->_tree->js,
+        ));
         benchmark_class::setMarker('runs display object');
 
         $this->_meta = new meta_class($this->_get->fullGetList());
@@ -311,14 +311,10 @@ final class core_class
      */
     protected function _otherPage()
     {
-        $this->_display = new display_class(
-            NULL,
-            $this->_get,
-            NULL,
-            $this->_lang->lang,
-            NULL,
-            NULL
-        );
+        $this->_display = new display_class(array(
+            'get'       => $this->_get,
+            'language'  => $this->_lang->lang,
+        ));
         benchmark_class::setMarker('runs display object for css/js');
 
         $this->_display->other();
