@@ -7,7 +7,7 @@
  * @subpackage  configuration
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.2.0
+ * @version     2.2.1
  */
 final class option_class 
 {
@@ -29,7 +29,7 @@ final class option_class
     {
         $xml = new xml_class();
 
-        if (isset(self::$_optionsList[$module]) || !$forceRead) {
+        if (isset(self::$_optionsList[$module]) && !$forceRead) {
             return self::$_optionsList[$module];
         }
 
