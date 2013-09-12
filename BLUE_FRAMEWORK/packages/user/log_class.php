@@ -8,9 +8,6 @@
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
  * @version     1.1.1
- * 
- * @todo add session id to code session_id();
- * @todo handling of multi hashing password and code
  */
 class log_class
 {

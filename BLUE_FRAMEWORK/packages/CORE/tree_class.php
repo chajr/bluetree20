@@ -8,8 +8,6 @@
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
  * @version     2.3.1
- * 
- * @todo add lang attribute, to load given page only in given language
  */
 class tree_class
 {

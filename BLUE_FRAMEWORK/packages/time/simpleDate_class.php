@@ -9,9 +9,6 @@
  * @copyright   chajr/bluetree
  * @version     1.3.1
  *
- * @todo number of week
- * @todo time conversion (change second to days etc)
- *
  * Display <a href="http://sam.zoy.org/wtfpl/COPYING">Do What The Fuck You Want To Public License</a>
  * @license http://sam.zoy.org/wtfpl/COPYING Do What The Fuck You Want To Public License
  */

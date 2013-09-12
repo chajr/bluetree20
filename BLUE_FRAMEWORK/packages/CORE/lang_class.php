@@ -436,9 +436,6 @@ class lang_class
      * 
      * @param array $get GET array, given as reference, to remove language code
      * @return string|boolean language code, or NULL
-     * 
-     * @todo getting parameters from URL if their wasn't language
-     * @todo set language if classic URL is on
      */
     static function checkLanguage(&$get)
     {

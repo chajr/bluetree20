@@ -8,8 +8,6 @@
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
  * @version     1.1.0
- * 
- * @todo example of multi loops
  */
 class modul1 
     extends module_class
@@ -240,7 +238,7 @@ class modul1
         //forced path conversion
 
         //additional array to translate
-        $this->_setTranslationArray(array('additional_translation' => 'fsdfsdfsdfd'));            //TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        $this->_setTranslationArray(array('additional_translation' => 'fsdfsdfsdfd'));
     }
     
     public function runErrorMode(){

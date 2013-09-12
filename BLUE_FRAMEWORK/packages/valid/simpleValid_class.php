@@ -7,9 +7,6 @@
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
  * @version     0.8.0
- * 
- * @todo check that string contains html tags
- * @todo checking dates
  */
 class simpleValid_class
 {

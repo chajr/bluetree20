@@ -9,8 +9,6 @@
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
  * @version     2.1.0
- * 
- * @todo handling meta charset from html-5 <meta charset="utf-8"> and some custom tags
  */
 class meta_class
 {

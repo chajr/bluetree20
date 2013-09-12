@@ -314,7 +314,6 @@ class loader_class
     }
 
     /**
-     * @todo add another translation array, can replace some translations
      * @param $array
      */
     public function setTranslationArray($array){

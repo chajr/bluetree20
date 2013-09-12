@@ -9,10 +9,6 @@
  * @copyright   chajr/bluetree
  * @version     1.1.1
  * 
- * @todo coverage time intervals (check if date overlap themselves)
- * @todo return datetime for database
- * @todo fix time differences
- * 
  * Display <a href="http://sam.zoy.org/wtfpl/COPYING">Do What The Fuck You Want To Public License</a>
  * @license http://sam.zoy.org/wtfpl/COPYING Do What The Fuck You Want To Public License
  */

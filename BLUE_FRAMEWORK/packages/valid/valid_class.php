@@ -8,7 +8,6 @@
  * @copyright   chajr/bluetree
  * @version     0.1.0
  *
- * @todo all
  */
 class valid_class
 {

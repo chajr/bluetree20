@@ -656,8 +656,6 @@ class session
 
     /**
      * process SESSION array and save value in 4 groups (public, core, user, display)
-     * 
-     * @todo some problem with SESSION[display] in if(!$val){$val=array()} statement
      */
     public function run()
     {

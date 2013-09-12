@@ -137,8 +137,6 @@ class display_class
 
     /**
      * allows to render in template css nad js content
-     * 
-     * @todo cache for js and css files
      */
     public function other()
     {
@@ -419,8 +417,6 @@ class display_class
      * create URLs to css/js from given on array files
      * 
      * @param string $type (css | js)
-     * 
-     * @todo check all css types
      */
     protected function _link($type){
         $links      = '';

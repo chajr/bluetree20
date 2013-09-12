@@ -384,9 +384,6 @@ final class error_class
      * @param array $errorMessage some other error info
      * @param string $mod name of module that want to sent error, if false error come from core
      * @return array
-     * 
-     * @todo change translations to handle translating information (problem with log method)
-     * @todo convert method variables to array, and use array merge when debug option on
      */
     private final function _statement(
         $number,
@@ -591,8 +588,6 @@ final class error_class
      * 
      * @param string $pack nazwa pliku do zaladowania i scierzki do niego
      * @return array tablica z kodami bledow i ich tresciami, lub false jesli blad
-     * 
-     * @todo read from similar language pack
      */
     private function _pack($pack)
     {
