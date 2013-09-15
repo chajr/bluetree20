@@ -7,12 +7,12 @@
  * @subpackage  mod3
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     0.1.0
+ * @version     0.1.1
  */
 class mod3 
     extends module_class
 {
-    static $version             = '0.1.0';
+    static $version             = '0.1.1';
     static $name                = 'module number 3';
     public $requireLibraries    = array();
     public $requireModules      = array('modul1');
@@ -21,6 +21,8 @@ class mod3
     {
         //load layout
         $this->layout('layout1');
+
+        $this->_translate();
 
         //set content to layout
         $this->generate('marker', 'some content to replace');

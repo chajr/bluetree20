@@ -1,1 +1,1 @@
-console.log('some js log from core js');
+console.log('{;lang;js_log;}');

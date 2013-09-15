@@ -1,28 +1,28 @@
-<h3>this is layout from module 2</h3>
+<h3>{;lang;title;}</h3>
 <fieldset>
     <legend>
-        content from module 1
+        {;lang;mod_content;}
     </legend>
     {;marker;}
 </fieldset>
 <fieldset>
     <legend>
-        image library test
+        {;lang;image_test;}
     </legend>
-    <img src="{;core;domain;}elementy/Right.png" alt="image"/>
-    <img src="{;core;domain;}elementy/Right_copy.jpg" alt="image after rotate"/>
+    <img src="{;core;domain;}elementy/Right.png" alt="{;lang;image;}"/>
+    <img src="{;core;domain;}elementy/Right_copy.jpg" alt="{;lang;rotate;}"/>
 </fieldset>
 <fieldset class="baza">
     <legend>
-        database test
+        {;lang;database;}
     </legend>
-    Connection: {;connection;}<br/>
-    Row count: {;select;}<br/>
-    Last insert id: {;insert;}
+    {;lang;connection;}: {;connection;}<br/>
+    {;lang;row;}: {;select;}<br/>
+    {;lang;last_id;}: {;insert;}
 </fieldset>
 <fieldset>
     <legend>
-        time test
+        {;lang;time;}
     </legend>
     {;marker1;}
     <br/>
@@ -44,12 +44,12 @@
 </fieldset>
 <fieldset class="baza">
     <legend>
-        test form
+        {;lang;form;}
     </legend>
     {;form;}
     <div style="width: 400px;overflow: hidden">
         <h4>
-            Serialized post data
+            {;lang;post_data;}
         </h4>
         {;post_serialize;}
     </div>

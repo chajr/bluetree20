@@ -7,12 +7,12 @@
  * @subpackage  mod2
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.1.0
+ * @version     1.1.1
  */
 class mod2 
     extends module_class
 {
-    static $version         = '';
+    static $version         = '1.1.1';
     static $name            = '';
     public $require_libs    = array('abstractSql', 'mysql', 'simpleDate');
     public $require_modules = array();
@@ -24,6 +24,8 @@ class mod2
     {
         //set layout template
         $this->layout('lay');
+
+        $this->_translate();
 
         //read some data from other module
         if (isset($this->modules['modul1'])) {

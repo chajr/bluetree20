@@ -9,7 +9,7 @@
         <header>
             <fieldset>
                 <legend>
-                    external html from layouts group
+                    {;lang;external_legend;}
                 </legend>
                 {;external;ext;}
             </fieldset>
@@ -20,34 +20,34 @@
         <section id="main">
             <fieldset>
                 <legend>
-                    replace paths
+                    {;lang;replace_paths;}
                 </legend>
                 <a href="{;core;domain;}{;core;lang;}{;path;/strona2;}">
-                    internal link
+                    {;lang;internal_link;}
                 </a>
                 <br/>
                 <a href="http://www.bluetree.pl">link</a>
                 <a href="mailto:sdfsdf@asd.cv">link</a><br/>
-                <img src="{;core;domain;}elementy/Right.png" alt="some image"/>
+                <img src="{;core;domain;}elementy/Right.png" alt="{;lang;image;}"/>
             </fieldset>
             <fieldset>
                 <legend>
-                    important system markers
+                    {;lang;system_markers;}
                 </legend>
-                {;path;/strona/podstrona/param,val/p2,v/;} - path ({ ;path;/strona/podstrona/param,val/p2,v/; })<br/>
-                {;full;/strona/podstrona/param,val/p2,v/;} - full ({ ;full;/strona/podstrona/param,val/p2,v/; })<br/>
-                {;core;domain;} - domain ({ ;core;domain; })<br/>
-                {;core;lang;} - lang ({ ;core;lang; })<br/>
-                {;core;mainpath;} - mainpath ({ ;core;mainpath; })
+                {;path;/strona/podstrona/param,val/p2,v/;} - {;lang;path;} ({ ;path;/strona/podstrona/param,val/p2,v/; })<br/>
+                {;full;/strona/podstrona/param,val/p2,v/;} - {;lang;full;} ({ ;full;/strona/podstrona/param,val/p2,v/; })<br/>
+                {;core;domain;} - {;lang;domain;} ({ ;core;domain; })<br/>
+                {;core;lang;} - {;lang;lang;} ({ ;core;lang; })<br/>
+                {;core;mainpath;} - {;lang;main_path;} ({ ;core;mainpath; })
             </fieldset>
             <fieldset>
                 <legend>
-                    translations
+                    {;lang;translations;}
                 </legend>
-                translation from framework: <strong>{;lang;tulmaczenie_przykladowe;}</strong><br/>
-                translation from module:    <strong>{;lang;modul1;string_to_translate;}</strong><br/>
-                translation for given language code from module: <strong>{;lang-en-GB;modul1;string_to_translate;}</strong><br/>
-                translation for given language code from core:  <strong>{;lang-en-GB;tekst_do_tulmaczenia;}</strong>
+                {;lang;framework_translations;}:        <strong>{;lang;tulmaczenie_przykladowe;}</strong><br/>
+                {;lang;module_translations;}:           <strong>{;lang;modul1;string_to_translate;}</strong><br/>
+                {;lang;module_code_translations;}:      <strong>{;lang-en-GB;modul1;string_to_translate;}</strong><br/>
+                {;lang;framework_code_translations;}:   <strong>{;lang-en-GB;tekst_do_tulmaczenia;}</strong>
             </fieldset>
         </section>
         <section id="content">
@@ -56,10 +56,10 @@
         <aside>
             <section>
                 <h3>
-                    other blocks
+                    {;lang;blocks;}
                 </h3>
                 <fieldset>
-                    <legend>test block (modules loaded to block)</legend>
+                    <legend>{;lang;test_block;}</legend>
                     {;block;blok_testowy;}
                 </fieldset>
             </section>
@@ -67,7 +67,7 @@
                 {;op;core_errors;}
                 <fieldset class="error">
                     <legend>
-                        ERROR {;lang;error_title;}
+                        {;lang;error;} {;lang;error_title;}
                     </legend>
                     {;core_error;}
                 </fieldset>
@@ -75,7 +75,7 @@
                 {;op;core_warnings;}
                 <fieldset class="warning">
                     <legend>
-                        WARNING {;lang;warning_title;}
+                        {;lang;warning;} {;lang;warning_title;}
                     </legend>
                     {;core_warning;}
                 </fieldset>
@@ -83,7 +83,7 @@
                 {;op;core_infos;}
                 <fieldset class="info">
                     <legend>
-                        INFO {;lang;info_title;}
+                        {;lang;info;} {;lang;info_title;}
                     </legend>
                     {;core_info;}
                 </fieldset>
