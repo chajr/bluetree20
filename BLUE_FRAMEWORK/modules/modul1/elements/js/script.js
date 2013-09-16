@@ -1,1 +1,1 @@
-console.log('some javascript');
+console.log('{;lang;js;}');

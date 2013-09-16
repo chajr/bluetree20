@@ -14,4 +14,6 @@ $content = array(
     'time'                          => 'test czasu',
     'form'                          => 'test formularzy',
     'post_data'                     => 'Zserializowane dane post',
+    'mod_crash'                     => 'modul się wysypał i nie mamy z niego informacji :(',
+    'connection_on'                 => 'Połączenie ustanowione',
 );

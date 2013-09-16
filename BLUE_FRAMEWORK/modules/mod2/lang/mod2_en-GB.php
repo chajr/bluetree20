@@ -14,4 +14,6 @@ $content = array(
     'time'                          => 'time test',
     'form'                          => 'test form',
     'post_data'                     => 'Serialized post data',
+    'mod_crash'                     => 'module1 crash and we don\'t have any information :(',
+    'connection_on'                 => 'Connection established',
 );

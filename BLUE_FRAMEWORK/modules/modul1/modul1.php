@@ -7,12 +7,12 @@
  * @subpackage  modul1
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.1.0
+ * @version     1.1.1
  */
 class modul1 
     extends module_class
 {
-    static $version             = '1.1.0';
+    static $version             = '1.1.1';
     static $name                = 'module number 1';
     public $requireLibraries    = array();
     public $requireModules      = array();
@@ -28,15 +28,15 @@ class modul1
         $this->layout('layout1');
 
         //generate some simple content
-        $this->generate('marker', 'some content to replace');
+        $this->generate('marker', '{;lang;content_to_replace;}');
 
         //generate some simple content in main template
-        $this->generate('marker', 'some content to replace in main template', TRUE);
+        $this->generate('marker', '{;lang;content_to_replace_core;}', TRUE);
 
         //generate content to group of markers
         $content = array(
-            'marker-a' => 'content a',
-            'marker-b' => 'content b'
+            'marker-a' => '{;lang;content;} a',
+            'marker-b' => '{;lang;content;} b'
         );
         $this->generate($content);
 
@@ -57,24 +57,24 @@ class modul1
         //generate some content (normal, loop, optional and from session)
         $tab = array(
             array(
-                'item1' => 'val a1',
-                'item2' => 'val a2'
+                'item1' => '{;lang;val;} a1',
+                'item2' => '{;lang;val;} a2'
             ), 
             array(
-                'item1' => 'val b1',
-                'item2' => 'val b2'
+                'item1' => '{;lang;val;} b1',
+                'item2' => '{;lang;val;} b2'
             )
         );
         $this->loop('loop1', $tab);
 
         $arr = array(
             array(
-                'aaa' => 'val aaa1',
-                'bbb' => 'val bbb2',
+                'aaa' => '{;lang;val;} aaa1',
+                'bbb' => '{;lang;val;} bbb2',
                 'oo' => 'ooo'
             ), 
-            array('aaa' => 'val ccc1',
-                  'bbb' => 'val ddd2',
+            array('aaa' => '{;lang;val;} ccc1',
+                  'bbb' => '{;lang;val;} ddd2',
                   'oo2' => 'op2'
             )
         );
@@ -122,9 +122,9 @@ class modul1
 
         //access to POST, GET and FILES variables
         $arr = array(
-            'val1' => $this->get->val1,
-            'val2' => $this->get->val2,
-            'val3' => $this->get->val3
+            'val1' => var_export($this->get->val1, TRUE),
+            'val2' => var_export($this->get->val2, TRUE),
+            'val3' => var_export($this->get->val3, TRUE)
         );
         $this->generate($arr);
 
@@ -206,30 +206,34 @@ class modul1
 
         //warning
         //throw new warningException('warning_code', 'some other information');                              //!!WORKS
-        $this->error('warning', 'warning_code', 'some other information');                                   //!!WORKS
+        $this->error('warning', 'warning_code', '{;lang;other_info;}');                                      //!!WORKS
 
         //info
         //throw new infoException('info_code', 'some other information');                                    //!!WORKS
         $this->error(
             'info',
             'info_code',
-            '<b>translation from core: {;lang;core;string_to_translate;}</b>'
+            '<b>{;lang;core;string_to_translate;}</b>'//{;lang;core_translation;}:
         );//!!DZIALA
 
         //ok
         //throw new okException('ok_code', 'some other information');                                         //!!WORKS
-        $this->error('ok', 'ok_code', 'some other information');                                              //!!WORKS
+        $this->error('ok', 'ok_code', '{;lang;other_info;}');                                              //!!WORKS
 
         //error to given marker
         $this->error(
             'error_marker',
             'some_code',
-            'some other information {;lang;string_to_translate_error;}'
+            '{;lang;other_info;} {;lang;string_to_translate_error;}'
         );  //!!WORKS
-        $this->error('error_marker1', 'some_code', 'additional info');                                        //!!WORKS
+        $this->error('error_marker1', 'some_code', '{;lang;other_info;}');                                        //!!WORKS
 
         //normal exception
-        //throw new Exception('some exception');                                                              //!!WORKS
+        try{
+            throw new Exception('some exception');                                                              //!!WORKS
+        } catch (Exception $e) {
+            $this->error('error_marker2', 'some_code', '{;lang;_normal_exception;}');
+        }
 
         //array of errors and information
         $errors = '<pre>' . var_export($this->error, TRUE).'</pre>';
@@ -238,11 +242,13 @@ class modul1
         //forced path conversion
 
         //additional array to translate
-        $this->_setTranslationArray(array('additional_translation' => 'fsdfsdfsdfd'));
+        $this->_setTranslationArray(array(
+            'additional_translation' => 'fsdfsdfsdfd'
+        ));
     }
     
     public function runErrorMode(){
-        $this->generate('marker', 'that is module 1 error mode');
+        $this->generate('marker', '{;lang;modul1_error_mode;}');
     }
 
     public function install(){}

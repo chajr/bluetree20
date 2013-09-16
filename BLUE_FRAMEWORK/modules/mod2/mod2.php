@@ -7,12 +7,12 @@
  * @subpackage  mod2
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.1.1
+ * @version     1.1.2
  */
 class mod2 
     extends module_class
 {
-    static $version         = '1.1.1';
+    static $version         = '1.1.2';
     static $name            = '';
     public $require_libs    = array('abstractSql', 'mysql', 'simpleDate');
     public $require_modules = array();
@@ -33,7 +33,7 @@ class mod2
                 $this->generate('marker', $this->modules['modul1']->moduleVariable);
             }
         } else {
-            $this->generate('marker', 'module1 crash and we don\'t have any information :(');
+            $this->generate('marker', '{;lang;mod_crash;}');
         }
 
         //runs test of database connection
@@ -64,7 +64,7 @@ class mod2
         if ($conn->err) {
             throw new modException('db_conn_error', $conn->err);
         } else {
-            $this->generate('connection', 'Connection established');
+            $this->generate('connection', '{;lang;connection_on;}');
         }
 
         $query = new mysql_class('SELECT * FROM test');        //work with error
@@ -106,7 +106,7 @@ class mod2
             "%A - nazwa tygodnia zgodna z lokalizacją 
             (przy wyłączonej opcji poprawy polskich znaków, dla błędnego
             ustawiania setlocale<br/>
-            dziuała tylko gdy ma konwertowaćz iso na utf)"
+            działa tylko gdy ma konwertować z iso na utf)"
         ));
 
         $date2  = new date_class(1214257275);
