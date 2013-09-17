@@ -7,7 +7,7 @@
  * @subpackage  modul1
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.1.1
+ * @version     1.2.0
  */
 class modul1 
     extends module_class
@@ -201,38 +201,38 @@ class modul1
         $this->error(
             'critic',
             'error_from_module',
-            '<b>translation from module: {;lang;string_to_translate_error;}</b>'
+            '<b>{;lang;mod_translation;} - {;lang;string_to_translate_error;}</b>'
         );
 
         //warning
         //throw new warningException('warning_code', 'some other information');                              //!!WORKS
-        $this->error('warning', 'warning_code', '{;lang;other_info;}');                                      //!!WORKS
+        $this->error('warning', 'warning_code', '{;lang;other_info;}');
 
         //info
         //throw new infoException('info_code', 'some other information');                                    //!!WORKS
         $this->error(
             'info',
             'info_code',
-            '<b>{;lang;core;string_to_translate;}</b>'//{;lang;core_translation;}:
-        );//!!DZIALA
+            '<b>{;lang;core_translation;} - {;lang;core;string_to_translate;}</b>'//{;lang;core_translation;}:
+        );
 
         //ok
         //throw new okException('ok_code', 'some other information');                                         //!!WORKS
-        $this->error('ok', 'ok_code', '{;lang;other_info;}');                                              //!!WORKS
+        $this->error('ok', 'ok_code', '{;lang;other_info;}');
 
         //error to given marker
         $this->error(
             'error_marker',
             'some_code',
-            '{;lang;other_info;} {;lang;string_to_translate_error;}'
-        );  //!!WORKS
-        $this->error('error_marker1', 'some_code', '{;lang;other_info;}');                                        //!!WORKS
+            '{;lang;other_info;} - {;lang;string_to_translate_error;}'
+        );
+        $this->error('error_marker1', 'some_code', '{;lang;other_info;}');
 
         //normal exception
         try{
-            throw new Exception('some exception');                                                              //!!WORKS
+            throw new Exception('some exception');
         } catch (Exception $e) {
-            $this->error('error_marker2', 'some_code', '{;lang;_normal_exception;}');
+            $this->error('error_marker2', 'some_code', '{;lang;normal_exception;}');
         }
 
         //array of errors and information

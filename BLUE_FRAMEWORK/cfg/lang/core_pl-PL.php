@@ -5,7 +5,7 @@
  * @subpackage  language
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.1.0
+ * @version     1.2.0
  */
 
 /**
@@ -52,4 +52,5 @@ $content = array(
     'page'                          => 'strona',
     'sub_page'                      => 'podstrona',
     'js_log'                        => 'js log dla frameworka',
+    'string_to_translate'           => 'tekst z corowego pliku tułmaczeń',
 );

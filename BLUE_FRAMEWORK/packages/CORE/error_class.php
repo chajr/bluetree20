@@ -5,7 +5,7 @@
  * @subpackage  error
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.1.6
+ * @version     2.1.7
  */
 
 /**
@@ -294,24 +294,26 @@ final class error_class
         $line,
         $file,
         $errorMessage,
-        $mod = FALSE
+        $mod = 'core'
     ){
-        if (!$mod) {
-            $mod = 'core';
-        } else {
-            preg_match_all(
-                lang_class::$translationMarkers[0],
-                $errorMessage,
-                $capture
+        preg_match_all(
+            lang_class::$translationMarkers[0],
+            $errorMessage,
+            $capture
+        );
+
+        foreach ($capture[0] as $marker) {
+            $newMarker = str_replace(
+                '{;lang;',
+                '{;lang;' . $mod . ';',
+                $marker
             );
 
-            foreach ($capture[0] as $arr) {
-                $errorMessage = str_replace(
-                    '{;lang;',
-                    '{;lang;' . $mod . ';',
-                    $errorMessage
-                );
-            }
+            $errorMessage = str_replace(
+                $marker,
+                $newMarker,
+                $errorMessage
+            );
         }
 
         switch ($type) {
@@ -512,8 +514,8 @@ final class error_class
                                         ),
                                         ''
                                     );
- 
-                                    $this->_lang->translate($this->_display, 1);
+
+                                    $this->_lang->translate($this->_display, TRUE);
                                     $content = $this->_display->render();
                                     unset($this->_display);
 
