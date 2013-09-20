@@ -10,7 +10,7 @@
  * @subpackage  display
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.6.0
+ * @version     2.6.1
  */
 class display_class
 {
@@ -190,12 +190,14 @@ class display_class
                 }
 
             } else {
-                $this->DISPLAY[$module] = str_replace(
+                $string             = $this->DISPLAY[$module];
+                $convertedString    = str_replace(
                     '{;'.$marker.';}',
                     $content,
-                    $this->DISPLAY[$module],
+                    $string,
                     $int
                 );
+                $this->DISPLAY[$module] = $convertedString;
             }
         }
         return $int;
