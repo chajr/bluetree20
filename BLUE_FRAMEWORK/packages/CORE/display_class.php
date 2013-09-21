@@ -10,7 +10,7 @@
  * @subpackage  display
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.6.1
+ * @version     2.6.2
  */
 class display_class
 {
@@ -174,7 +174,8 @@ class display_class
      */
     public function generate($marker, $content, $module = 'core')
     {
-        $int = 0;
+        $int        = 0;
+        $content    = $this->_checkContent($content);
 
         if (isset($this->DISPLAY[$module])) {
             if (!$content && is_array($marker)) {
@@ -201,6 +202,24 @@ class display_class
             }
         }
         return $int;
+    }
+
+    /**
+     * check if content is array, and return serialized array and info to log
+     * 
+     * @param string|array $content
+     * @return string
+     */
+    protected function _checkContent($content)
+    {
+        if (is_array($content)) {
+            $exportContent = var_export($content, TRUE);
+            error_class::log('inf', "detected content as array \n\n $exportContent");
+
+            return serialize($content);
+        }
+
+        return $content;
     }
 
     /**
