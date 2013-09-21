@@ -7,7 +7,7 @@
 * @package     BlueFramework Core
 * @author      Michał Adamiak    <chajr@bluetree.pl>
 * @copyright   chajr/bluetree
-* @version     1.0.0
+* @version     1.0.1
 */
 -->
 <!DOCTYPE root SYSTEM "dtd/config.dtd">
@@ -65,7 +65,7 @@
     <!--send log on modules errors (0 -none, 1 -all, 2 -only stop errors)-->
     <option id="core_procedural_mod_check" value="0"/>
     <!--check that module is procedural -->
-    <option id="errors_log" value="111"/>
+    <option id="errors_log" value="110"/>
     <!--witch errors will be saved on log file (1 -errors, 2 -warnings, 3 -errors throwed from pointer)-->
 
     <option id="one_lang" value="0"/>
