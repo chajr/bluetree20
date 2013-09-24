@@ -6,7 +6,7 @@
  * @subpackage  language
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.5.1
+ * @version     2.6.0
  */
 class lang_class
 {
@@ -102,6 +102,8 @@ class lang_class
             $code       = $this->_options['lang'];
             $language   = str_replace('-', '_', $code);
             setlocale(LC_ALL, $language . '.UTF8');
+
+            $this->_setLanguage($lang);
             return;
         }
 
@@ -434,53 +436,84 @@ class lang_class
      * return information that language is given as code, or NULL if not
      * if language code is not in GET and language support is on, redirect to correct language
      * 
-     * @param array $get GET array, given as reference, to remove language code
+     * @param array $get GET
      * @return string|boolean language code, or NULL
      */
     static function checkLanguage(&$get)
     {
-        if (isset($get['core_lang'])) {
-            $lang = $get['core_lang'];
-        } else {
-            $lang = $get[0];
-        }
-
         if (core_class::options('lang_support')) {
 
+            $lang = self::_checkLanguageCode($get);
+
             if (in_array($lang, self::$codes)) {
-                unset($get[0]);
-                unset($get['core_lang']);
                 return $lang;
             } else {
-                $url = display_class::explodeUrl(
-                    $get,
-                    core_class::options('zmienne_rewrite_sep')
-                );
-
-                if ((bool)core_class::options('rewrite')) {
-                    $final = display_class::convertToRewriteUrl(
-                        $url['params'],
-                        $url['pages']
-                    );
-                    $final = core_class::options('lang') . '/' . $final;
-                } else {
-                    $final = display_class::convertToClassicUrl(
-                        $url['params'],
-                        $url['pages']
-                    );
-                    $final = '?core_lang=' . core_class::options('lang') . '&' . $final;
-                }
-
-                if (core_class::options('test')) {
-                    header('Location: /' . core_class::options('test') . '/' . $final);
-                    exit;
-                }
-
-                header('Location: /' . $final);
-                exit;
+                self::_redirectWithLanguageCode($get);
             }
+
         } else {
             return NULL;
         }
+    }
+
+    /**
+     * @param array $get GET array, given as reference, to remove language code
+     * @return string|null
+     */
+    static protected function _checkLanguageCode(&$get)
+    {
+        if (isset($get['core_lang'])) {
+            $languageCode = $get['core_lang'];
+            unset($get['core_lang']);
+            return $languageCode;
+        }
+
+        if (isset($get[0])) {
+            $languageCode = $get[0];
+            unset($get[0]);
+            return $languageCode;
+        }
+
+        self::_redirectWithLanguageCode($get);
+    }
+
+    /**
+     * redirect to page with language code, if language code was missing
+     * 
+     * @param array $get GET
+     */
+    static protected function _redirectWithLanguageCode($get)
+    {
+        $url = display_class::explodeUrl(
+            $get,
+            core_class::options('zmienne_rewrite_sep')
+        );
+
+        if ((bool)core_class::options('rewrite')) {
+            $convertedUrl = display_class::convertToRewriteUrl(
+                $url['params'],
+                $url['pages']
+            );
+            $finalUrl = core_class::options('lang') . '/' . $convertedUrl;
+        } else {
+            $convertedUrl = display_class::convertToClassicUrl(
+                $url['params'],
+                $url['pages']
+            );
+
+            if ($convertedUrl) {
+                $convertedUrl = '&' . $convertedUrl;
+            }
+            
+            $finalUrl = '?core_lang=' . core_class::options('lang') . $convertedUrl;
+        }
+
+        if (core_class::options('test')) {
+            header('Location: /' . core_class::options('test') . '/' . $finalUrl);
+            exit;
+        }
+
+        header('Location: /' . $finalUrl);
+        exit;
     }
 }
