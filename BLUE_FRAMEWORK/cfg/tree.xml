@@ -7,7 +7,7 @@
 * @package     BlueFramework Core
 * @author      Michał Adamiak    <chajr@bluetree.pl>
 * @copyright   chajr/bluetree
-* @version     1.0.0
+* @version     1.0.1
 */
 -->
 <!DOCTYPE root SYSTEM 'dtd/tree.dtd'>
@@ -41,8 +41,6 @@
 
     <page id="strona2" name="Page 2" layout="strona2" options="1111" changefreq="always" priority="0.8">
         <sub id="podstrona1" name="Subpage 1" layout="strona2" options="11111" changefreq="always" priority="0.8">
-            <lib on="1">db/abstractSql</lib>
-            <lib on="1">db/mysql</lib>
             <!--<lib on="1">files</lib>-->
             <!--<mod on="1">mod4</mod>-->
             <css>css4</css>
@@ -56,6 +54,11 @@
             <js>js5</js>
         </sub>
 
+        <lib on="1">db/abstractSql</lib>
+        <lib on="1">db/mysql</lib>
+        <lib on="1">image</lib>
+        <lib on="1">time</lib>
+        <lib on="1">forms</lib>
         <mod on="1" block="blok_testowy">mod2</mod>
         <css external="0">css2</css>
         <css external="0">css3</css>
