@@ -5,7 +5,7 @@
  * @subpackage  globals
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.2.0
+ * @version     2.2.1
  */
 
 /**
@@ -286,7 +286,9 @@ class get
      */
     protected function _classicUrl($uri)
     {
-        if (!empty($_GET) ){
+        $this->_coreLanguage = lang_class::checkLanguage($_GET);
+
+        if (!empty($_GET) ) {
             $uri = str_replace(
                 array(
                     core_class::options('test'),
@@ -295,9 +297,8 @@ class get
                 ), '', $uri
             );
 
-            $get                = explode('&', $uri);
-            $counter            = 0;
-            $this->_coreLanguage = lang_class::checkLanguage($_GET);
+            $get        = explode('&', $uri);
+            $counter    = 0;
 
             foreach ($get as $element) {
                 $counter++;

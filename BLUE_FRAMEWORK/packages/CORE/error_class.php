@@ -5,7 +5,7 @@
  * @subpackage  error
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.1.7
+ * @version     2.1.8
  */
 
 /**
@@ -79,7 +79,10 @@ final class error_class
      */
     public function __construct($lang = FALSE)
     {
-        if (!$lang) {
+        if ($lang) {
+            $this->_lang     = $lang;
+            $this->_options  = core_class::options();
+        } else {
             starter_class::package(
                 'CORE/lang_class,option_class,display_class,globals_class'
             );
@@ -108,9 +111,6 @@ final class error_class
                 'language' => $this->_lang->lang,
                 'options'  => $this->_options,
             ));
-        } else {
-            $this->_lang     = $lang;
-            $this->_options  = core_class::options();
         }
     }
 
@@ -588,8 +588,8 @@ final class error_class
     /**
      * load array with error codes
      * 
-     * @param string $pack nazwa pliku do zaladowania i scierzki do niego
-     * @return array tablica z kodami bledow i ich tresciami, lub false jesli blad
+     * @param string $pack name of file to load and path to it
+     * @return array|boolean with errors code and some description
      */
     private function _pack($pack)
     {
