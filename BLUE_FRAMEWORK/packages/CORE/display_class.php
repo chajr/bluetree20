@@ -10,7 +10,7 @@
  * @subpackage  display
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.6.2
+ * @version     2.6.3
  */
 class display_class
 {
@@ -353,8 +353,7 @@ class display_class
 
         $this->_link('css');
         $this->_link('js');
-        $this->_session(1);
-        $this->_session(0);
+        $this->_session();
 
         $this->DISPLAY = $this->DISPLAY['core'];
 
@@ -412,23 +411,19 @@ class display_class
 
     /**
      * set data on session markers
-     * 
-     * @param boolean $type array type to set (TRUE = core, FALSE = public)
+     * only from public and display
      */
-    protected function _session($type)
+    protected function _session()
     {
         if ($this->_session) {
-            if ($type) {
-                $type  = 'core';
-                $array = $this->_session->returns('display');
-            } else {
-                $type  = 'public';
-                $array = $this->_session->returns('public');
-            }
+            $array = array_merge(
+                $this->_session->returns('public'),
+                $this->_session->returns('display')
+            );
 
             if ($array) {
                 foreach ($array as $key => $val) {
-                    $this->generate('session_' . $type . ';' . $key . ';', $val);
+                    $this->generate('session_display;' . $key, $val);
                 }
             }
         }

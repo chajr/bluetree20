@@ -7,7 +7,7 @@
  * @subpackage  module
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.4.0
+ * @version     2.4.1
  */
 abstract class module_class
 {
@@ -231,23 +231,14 @@ abstract class module_class
 
     /**
      * set information in session, default in public section
+     * data from public and display can be display by markers ({;session_display;marker;})
      * 
      * @param string $name variable name
      * @param mixed $value mixed
-     * @param string $type (user or public)
+     * @param string $type (user, public, display or core)
      */
     public function setSession($name, $value, $type = 'public')
     {
-        switch ($type) {
-            case'user':
-                $type = 'user';
-                break;
-
-            default:
-                $type = 'public';
-                break;
-        }
-
         $this->core->session->set($name, $value, $type);
     }
 

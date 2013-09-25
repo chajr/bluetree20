@@ -49,4 +49,6 @@ $content = array(
     'modul1_error_mode'         => 'to jest tryb błędu modul1',
     'normal_exception'          => 'zwykły Exception',
     'js'                        => 'jakis javascript',
+    'session_template'          => 'generowanie tresci bezpośrednio z sesji',
+    'session_test_content'      => '(nie obsługuje tułmaczeń)',
 );

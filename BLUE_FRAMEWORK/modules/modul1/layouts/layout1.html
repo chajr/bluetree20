@@ -1,23 +1,26 @@
 <h3>{;lang;title;}</h3>
+
 <fieldset>
     <legend>
         {;lang;simple_marker;}
     </legend>
     {;marker;}
 </fieldset>
+
 <fieldset>
     <legend>
         {;lang;optional_content;}
     </legend>
     {;lang;optional;} {;op;oo;} 1: {;marker_a;}{;op_end;oo;}<br/>
     {;lang;optional;} {;op;ooa;} 2: {;marker;}{;op_end;ooa;}
-</fieldset>
+
 <fieldset>
     <legend>
         {;lang;markers_array;}
     </legend>
     {;marker-a;} - {;marker-b;} {;some_marker;}
 </fieldset>
+
 <fieldset style="border-color: #ff0000">
     <legend>
         {;lang;error_marker;}
@@ -26,12 +29,14 @@
     {;error_marker1;}
     {;error_marker2;}
 </fieldset>
+
 <fieldset style="border-color: #ff0000">
     <legend>
         {;lang;errors_array;}
     </legend>
     {;errors_list;}
 </fieldset>
+
 <fieldset>
     <legend>
         {;lang;simple_loop;}
@@ -41,6 +46,7 @@
     {;loop1;item2;}<br/>
     {;end;loop1;}
 </fieldset>
+
 <fieldset>
     <legend>
         {;lang;optional_loop;}
@@ -51,6 +57,7 @@
     <br/>
     {;end;loop2;}
 </fieldset>
+
 <fieldset>
     <legend>
         {;lang;session;}
@@ -58,30 +65,46 @@
     <div>{;lang;public;}: <strong>{;public;}</strong> - {;lang;new_public;}: <strong>{;public2;}</strong></div>
     <div>{;lang;user;}: <strong>{;user;}</strong> - {;lang;new_user;}: <strong>{;user2;}</strong></div>
 </fieldset>
+
+<fieldset>
+    <legend>
+        {;lang;session_template;}
+    </legend>
+    <fieldset class="warning">
+        {;lang;session_test_content;}
+    </fieldset>
+    <div>{;session_display;session_display_test;}</div>
+    <div>{;session_display;session_display_test_public;}</div>
+</fieldset>
+
 <fieldset>
     <legend>
         {;lang;breadcrumbs;}
     </legend>
     <div>{;breadcrumbs;}</div>
 </fieldset>
+
 <fieldset>
     <legend>
         {;lang;site_map;}
     </legend>
     {;site_map;}
 </fieldset>
+
 <fieldset>
     <legend>
         {;lang;module_path;}
     </legend>
     <div>{;some_path;}</div>
 </fieldset>
+
 <fieldset>
     <legend>
         {;lang;lib_info;}
     </legend>
     <div>{;lib;}</div>
 </fieldset>
+
 <fieldset>
     <legend>
         {;lang;cookie;}
@@ -89,6 +112,7 @@
     <div>{;lang;cookie;}-1: {;cookie;}</div>
     <div>{;lang;cookie;}-2: {;cookie2;}</div>
 </fieldset>
+
 <fieldset>
     <legend>
         {;lang;get_data;}
@@ -97,6 +121,7 @@
     <div>{;lang;val;}-2: <strong>{;val2;}</strong></div>
     <div>{;lang;val;}-3: <strong>{;val3;}</strong></div>
 </fieldset>
+
 <fieldset>
     <legend>
         {;lang;get_object;}
@@ -113,12 +138,14 @@
     <div>{;lang;with_domain;}        <strong>{;path_domain;}</strong></div>
     <div>{;lang;complete_path;}      <strong>{;path;}</strong></div>
 </fieldset>
+
 <fieldset>
     <legend>
         {;lang;mod_params;}
     </legend>
     <div>{;param;}</div>
 </fieldset>
+
 <fieldset>
     <legend>
         {;lang;translations;}
@@ -130,6 +157,7 @@
     <div>{;lang;mod_translation_code;} pl-PL:    <strong>{;lang-pl-PL;string_to_translate;}</strong></div>
     <div>{;lang;core_translation_code;} pl-PL:   <strong>{;lang-pl-PL;core;tekst_do_tulmaczenia;}</strong></div>
 </fieldset>
+
 <fieldset>
     <legend>
         {;lang;mod_conf;}

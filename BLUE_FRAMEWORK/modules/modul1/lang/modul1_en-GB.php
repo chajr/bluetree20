@@ -49,4 +49,6 @@ $content = array(
     'modul1_error_mode'         => 'that is module 1 error mode',
     'normal_exception'          => 'normal Exception',
     'js'                        => 'some javascript',
+    'session_template'          => 'generate content directly from session',
+    'session_test_content'      => '(don\'t handle translation)',
 );

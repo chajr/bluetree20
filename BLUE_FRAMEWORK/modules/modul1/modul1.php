@@ -7,12 +7,12 @@
  * @subpackage  modul1
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.2.0
+ * @version     1.3.0
  */
 class modul1 
     extends module_class
 {
-    static $version             = '1.1.1';
+    static $version             = '1.3.0';
     static $name                = 'module number 1';
     public $requireLibraries    = array();
     public $requireModules      = array();
@@ -245,6 +245,17 @@ class modul1
         $this->_setTranslationArray(array(
             'additional_translation' => 'fsdfsdfsdfd'
         ));
+
+        $this->setSession(
+            'session_display_test',
+            $this->session->val . ' - display',
+            'display'
+        );
+
+        $this->setSession(
+            'session_display_test_public',
+            $this->session->val . ' - public'
+        );
     }
     
     public function runErrorMode(){
