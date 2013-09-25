@@ -6,7 +6,7 @@
  * @subpackage  language
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.6.0
+ * @version     2.6.1
  */
 class lang_class
 {
@@ -83,11 +83,11 @@ class lang_class
     /**
      * start language support
      * 
-     * @param string $lang language code from URL or NULL if URL dot have language code
+     * @param string $languageCode language code from URL or NULL if URL dot have language code
      * @param array|boolean $options
      * @throws coreException core_error_17
      */
-    public function __construct($lang, $options = NULL)
+    public function __construct($languageCode, $options = NULL)
     {
         if ($options) {
             $this->_options = $options;
@@ -99,27 +99,32 @@ class lang_class
             $this->_languageSupport = TRUE;
         } else {
             $this->_languageSupport = FALSE;
-            $code       = $this->_options['lang'];
-            $language   = str_replace('-', '_', $code);
-            setlocale(LC_ALL, $language . '.UTF8');
-
-            $this->_setLanguage($lang);
+            $this->_setLanguageLocalization($languageCode);
             return;
+        }
+
+        if ($languageCode && !in_array($languageCode, $this->_options['lang_on'])) {
+            throw new coreException('core_error_17', $languageCode);
         }
 
         if ((bool)$this->_options['one_lang']) {
-            $this->_setLanguage();
+            $this->_setLanguageLocalization();
             return;
         }
 
-        if ($lang && !in_array($lang, $this->_options['lang_on'])) {
-            throw new coreException('core_error_17', $lang);
-        }
+       $this->_setLanguageLocalization($languageCode);
+    }
 
-        $code       = $this->_options['lang'];
-        $language   = str_replace('-', '_', $code);
+    /**
+     * set language and default language with localization
+     * 
+     * @param null|string $languageCode
+     */
+    protected function _setLanguageLocalization($languageCode = NULL)
+    {
+        $this->_setLanguage($languageCode);
+        $language = str_replace('-', '_', $this->lang);
         setlocale(LC_ALL, $language . '.UTF8');
-        $this->_setLanguage($lang);
     }
 
     /**
