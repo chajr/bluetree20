@@ -5,7 +5,7 @@
  * @subpackage  error
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.1.8
+ * @version     2.1.9
  */
 
 /**
@@ -97,7 +97,6 @@ final class error_class
                 $get  = get::convertGet($this->_options['test'], $uri);
                 $lang = lang_class::checkLanguage($get);
             } else {
-                //$lang = lang_class::checkLanguage($_GET);
                 $lang =  $this->_options['lang'];
             }
 
@@ -598,7 +597,7 @@ final class error_class
             'content',
             TRUE
         );
- 
+
         if (!$bool) {
             $bool = starter_class::load(
                 $pack . '_' . $this->_lang->default . '.php',
