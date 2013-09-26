@@ -20,6 +20,7 @@ class modul1
 
     public function run()
     {
+        log_class::setSessionModel($this->session);
 
         //set module translations
         $this->_translate();
@@ -252,10 +253,6 @@ class modul1
             'display'
         );
 
-        $this->setSession(
-            'session_display_test_public',
-            $this->session->val . ' - public'
-        );
     }
     
     public function runErrorMode(){

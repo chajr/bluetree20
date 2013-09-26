@@ -10,7 +10,7 @@
  * @subpackage  display
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.6.3
+ * @version     2.6.4
  */
 class display_class
 {
@@ -415,16 +415,9 @@ class display_class
      */
     protected function _session()
     {
-        if ($this->_session) {
-            $array = array_merge(
-                $this->_session->returns('public'),
-                $this->_session->returns('display')
-            );
-
-            if ($array) {
-                foreach ($array as $key => $val) {
-                    $this->generate('session_display;' . $key, $val);
-                }
+        if ($this->_session && $this->_session->returns('display')) {
+            foreach ($this->_session->returns('display') as $key => $val) {
+                $this->generate('session_display;' . $key, $val);
             }
         }
     }
