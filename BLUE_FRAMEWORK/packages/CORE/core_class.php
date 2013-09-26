@@ -9,7 +9,7 @@
  * @subpackage  core
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.3.2
+ * @version     2.4.0
  */
 final class core_class
 {
@@ -105,7 +105,9 @@ final class core_class
         $this->_runBaseObjects();
 
         if ($this->_get->pageType() === 'html') {
+            benchmark_class::startGroup('html group');
             $this->_htmlPage();
+            benchmark_class::endGroup('html group');
         } else {
             $this->_otherPage();
         }
@@ -248,6 +250,7 @@ final class core_class
         $this->_meta = new meta_class($this->_get->fullGetList());
         benchmark_class::setMarker('runs meta object');
 
+        benchmark_class::startGroup('loader group');
         $this->_loader = new loader_class(
             $this->_tree,
             $this->_display,
@@ -261,6 +264,7 @@ final class core_class
             $this->_error
         );
         benchmark_class::setMarker('loading modules, libraries and start them');
+        benchmark_class::endGroup('loader group');
 
         $this->_display->block = $this->_loader->getBlocks();
         benchmark_class::setMarker('set blocks');

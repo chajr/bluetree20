@@ -9,6 +9,7 @@
  * @version     2.2.1
  */
 starter_class::load('packages/tester/benchmark_class.php');
+starter_class::load('packages/tester/tracer_class.php');
 benchmark_class::start();
 
 $bool = starter_class::load('packages/CORE/error_class.php');
@@ -29,6 +30,8 @@ ob_end_flush();
 benchmark_class::stop();
 
 echo benchmark_class::display();
+echo tracer_class::display();
+tracer_class::saveToFile();
 
 /**
  * framework core
@@ -39,7 +42,7 @@ echo benchmark_class::display();
  * @package     Start
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.1.0
+ * @version     2.2.0
  * @final
  */
 final class starter_class
@@ -53,6 +56,7 @@ final class starter_class
     */
     static final function run()
     {
+        tracer_class::marker(array('run framework', debug_backtrace()));
         error_reporting (E_ERROR | E_WARNING | E_PARSE | E_NOTICE | E_STRICT | E_ALL);
         set_error_handler ("error");
 
@@ -64,8 +68,11 @@ final class starter_class
                 throw new coreException('core_error_0');
             }
 
+            benchmark_class::startGroup('core group');
             $core = new core_class();
-            if ($core->render !== NULL && !empty($core->render) && $core->render ){
+            benchmark_class::endGroup('core group');
+
+            if ($core->render !== NULL && !empty($core->render) && $core->render){
                 echo $core->render;
                 unset($core->render);
             } else {
@@ -92,8 +99,8 @@ final class starter_class
      */
     static final function load($path, $read = FALSE, $type = '')
     {
-        $path = self::path().$path;
-        
+        $path = self::path() . $path;
+
         if (!file_exists($path)) {
                return FALSE;
         }
@@ -147,6 +154,7 @@ final class starter_class
      */
     static final function package($pack)
     {
+        tracer_class::marker(array('load package', debug_backtrace()));
         $preg = preg_match('#^[\w-]+\/([\w-]+[,]?)+$#', $pack);
 
         if($preg){
