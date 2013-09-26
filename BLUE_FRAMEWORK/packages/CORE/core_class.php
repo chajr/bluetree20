@@ -9,7 +9,7 @@
  * @subpackage  core
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.4.0
+ * @version     2.4.1
  */
 final class core_class
 {
@@ -325,6 +325,7 @@ final class core_class
         benchmark_class::setMarker('rendering css/js');
 
         benchmark_class::turnOffBenchmark();
+        tracer_class::turnOffTracer();
     }
 
     /**

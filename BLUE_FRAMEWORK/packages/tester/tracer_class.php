@@ -3,7 +3,7 @@
  * trace witch classes, files, functions are run
  * 
  * @author Michał Adamiak <chajr@bluetree.pl>
- * @version 1.2.2
+ * @version 1.3.0
  * @copyright chajr/bluetree
  * @package     tester
  * @subpackage  tracer
@@ -26,16 +26,16 @@ class tracer_class
      * information that tracer is on, or off
      * @var boolean 
      */
-    static $tracerOn = TRUE;
+    protected static $_tracerOn = TRUE;
 
     /**
-     * if set to false tracing data wont be displayed, for nlny saving file
+     * if set to false tracing data wont be displayed, for only saving file
      * @var boolean 
      */
-    static $display  = TRUE;
+    static $display = TRUE;
 
     /**
-     *contains number of step for current given marker
+     * contains number of step for current given marker
      * @var integer
      */
     static $traceStep = 0;
@@ -50,7 +50,7 @@ class tracer_class
         if ($on) {
             self::marker(array('Tracer started'));
         } else {
-            self::$tracerOn = FALSE;
+            self::$_tracerOn = FALSE;
         }
     }
 
@@ -63,7 +63,7 @@ class tracer_class
      */
     public static function marker($data)
     {
-        if ((bool)self::$tracerOn) {
+        if ((bool)self::$_tracerOn) {
             ++self::$traceStep;
 
             $time       = microtime(TRUE);
@@ -104,7 +104,7 @@ class tracer_class
      */
     public static function display()
     {
-        if ((bool)self::$tracerOn && self::$display) {
+        if (self::$_tracerOn && self::$display) {
             self::stop();
             self::$_display = '<div style="
             color: #FFFFFF;
@@ -193,10 +193,26 @@ class tracer_class
      */
     public static function saveToFile()
     {
-        if ((bool)self::$tracerOn) {
+        if (self::$_tracerOn) {
             self::display();
             self::$_display .= '<pre>' . var_export($_SERVER, TRUE) . '</pre>';
             error_class::log('tracer', self::$_display);
         }
+    }
+
+    /**
+     * turn off tracer
+     */
+    public static function turnOffTracer()
+    {
+        self::$_tracerOn = FALSE;
+    }
+
+    /**
+     * turn on tracer
+     */
+    public static function turnOnTracer()
+    {
+        self::$_tracerOn = TRUE;
     }
 }
