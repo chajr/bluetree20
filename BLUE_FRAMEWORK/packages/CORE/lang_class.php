@@ -89,6 +89,13 @@ class lang_class
      */
     public function __construct($languageCode, $options = NULL)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'start language class',
+                debug_backtrace()
+            ));
+        }
+
         if ($options) {
             $this->_options = $options;
         } else {
@@ -122,6 +129,13 @@ class lang_class
      */
     protected function _setLanguageLocalization($languageCode = NULL)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'set localization and language',
+                debug_backtrace()
+            ));
+        }
+
         $this->_setLanguage($languageCode);
         $language = str_replace('-', '_', $this->lang);
         setlocale(LC_ALL, $language . '.UTF8');
@@ -143,6 +157,13 @@ class lang_class
         $languageCode   = NULL,
         $switch         = NULL
     ){
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'set translations',
+                debug_backtrace()
+            ));
+        }
+
         if($this->_languageSupport){
             if (!$mod || $mod == 'core') {
                 $mod  = 'core';
@@ -211,6 +232,13 @@ class lang_class
      */
     public function translate(display_class $display)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'translate templates and modules',
+                debug_backtrace()
+            ));
+        }
+
         if ($this->_languageSupport) {
             $this->_display = $display;
 
@@ -255,6 +283,13 @@ class lang_class
      */
     private function _markersReplace($type, $name, $markers)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'replace markers with translations',
+                debug_backtrace()
+            ));
+        }
+
         foreach ($markers as $marker) {
             $marker = str_replace(
                 array('{;', ';}'),
@@ -346,6 +381,13 @@ class lang_class
      */
     private function _loadLanguage($path, $languageCode = NULL)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'load language',
+                debug_backtrace()
+            ));
+        }
+
         if (!$languageCode) {
             $languageCode = $this->lang;
         }
@@ -377,6 +419,13 @@ class lang_class
      */
     private function _setLanguage($current = NULL)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'sets language',
+                debug_backtrace()
+            ));
+        }
+
         if ($current) { 
             $this->lang = $current;
         } else {
@@ -399,6 +448,13 @@ class lang_class
      */
     private function _similar($path)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'search for similar language',
+                debug_backtrace()
+            ));
+        }
+
         $similar    = explode('-', $this->lang);
         $search     = starter_class::path() . $path . '_' . $similar[0] . '*.php';
         $arr        = glob($search);
@@ -423,6 +479,13 @@ class lang_class
      */
     private function _detectLanguage()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'detect language',
+                debug_backtrace()
+            ));
+        }
+
         if (!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])){ 
             $this->lang = $this->_options['lang'];
         }
@@ -446,6 +509,13 @@ class lang_class
      */
     static function checkLanguage(&$get)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'check language code',
+                debug_backtrace()
+            ));
+        }
+
         if (core_class::options('lang_support')) {
 
             $lang = self::_checkLanguageCode($get);
@@ -489,6 +559,13 @@ class lang_class
      */
     static protected function _redirectWithLanguageCode($get)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'redirect to page with language code',
+                debug_backtrace()
+            ));
+        }
+
         $url = display_class::explodeUrl(
             $get,
             core_class::options('zmienne_rewrite_sep')

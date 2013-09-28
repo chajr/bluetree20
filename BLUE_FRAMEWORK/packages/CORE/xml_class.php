@@ -7,7 +7,7 @@
  * @subpackage  xml
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.4.0
+ * @version     1.5.0
  */
 class xml_class 
     extends DOMDocument
@@ -137,6 +137,13 @@ class xml_class
     */
    public function __construct($version = '', $encoding = '')
    {
+       if (class_exists('tracer_class')) {
+           tracer_class::marker(array(
+               'start xml class',
+               debug_backtrace()
+           ));
+       }
+
        parent::__construct($version, $encoding);
    }
 
@@ -150,6 +157,13 @@ class xml_class
     */
    public function loadXmlFile($url, $parse = FALSE)
    {
+       if (class_exists('tracer_class')) {
+           tracer_class::marker(array(
+               'load xml file',
+               debug_backtrace()
+           ));
+       }
+
        $this->preserveWhiteSpace    = FALSE;
        $bool                        = @file_exists($url);
 
@@ -183,6 +197,13 @@ class xml_class
     */
    public final function saveXmlFile($url, $asString = FALSE)
    {
+       if (class_exists('tracer_class')) {
+           tracer_class::marker(array(
+               'save xml file',
+               debug_backtrace()
+           ));
+       }
+
        $this->formatOutput = TRUE;
 
        if ($url) {

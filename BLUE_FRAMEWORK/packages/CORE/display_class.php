@@ -10,7 +10,7 @@
  * @subpackage  display
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.6.4
+ * @version     2.7.0
  */
 class display_class
 {
@@ -89,6 +89,10 @@ class display_class
      */
     public function __construct(array $options)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array('start display class', debug_backtrace()));
+        }
+
         $this->_defaultOptions = array_merge($this->_defaultOptions, $options);
 
         if ($this->_defaultOptions['independent']) {
@@ -106,6 +110,13 @@ class display_class
      */
     protected function _constructMainLayout()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'create main layout for display',
+                debug_backtrace()
+            ));
+        }
+
         $this->_lang    = $this->_defaultOptions['language'];
         $this->_css     = $this->_defaultOptions['css'];
         $this->_js      = $this->_defaultOptions['js'];
@@ -140,6 +151,13 @@ class display_class
      */
     public function other()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'render css or js content in template',
+                debug_backtrace()
+            ));
+        }
+
         $content = '';
         if ($this->_get->pageType() === 'css') {
             header('content-type: text/css');
@@ -318,6 +336,13 @@ class display_class
      */
     public function render()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'render content of display class',
+                debug_backtrace()
+            ));
+        }
+
         $blocks = array();
         foreach ($this->DISPLAY as $key => $val) {
 
@@ -378,6 +403,13 @@ class display_class
      */
     public function layout($template, $module = 'core')
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'load layout to display class',
+                debug_backtrace()
+            ));
+        }
+
         $path                   = $this->_checkTemplatePath($template, $module);
         $this->DISPLAY[$module] = starter_class::load($path, TRUE);
 
@@ -395,7 +427,13 @@ class display_class
      */
     protected function _checkTemplatePath($template, $module)
     {
-        
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'create path for required templates',
+                debug_backtrace()
+            ));
+        }
+
         if ($this->_defaultOptions['independent']) {
             return $template;
         }
@@ -415,6 +453,13 @@ class display_class
      */
     protected function _session()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'set data on session markers',
+                debug_backtrace()
+            ));
+        }
+
         if ($this->_session && $this->_session->returns('display')) {
             foreach ($this->_session->returns('display') as $key => $val) {
                 $this->generate('session_display;' . $key, $val);
@@ -427,7 +472,15 @@ class display_class
      * 
      * @param string $type (css | js)
      */
-    protected function _link($type){
+    protected function _link($type)
+    {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'create urls to js/css files',
+                debug_backtrace()
+            ));
+        }
+
         $links      = '';
         $end        = '';
         $front      = '';
@@ -514,6 +567,13 @@ class display_class
      */
     protected function _read($mod, $param, $type)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'read contnt of js/css files',
+                debug_backtrace()
+            ));
+        }
+
         if ($mod === 'core') {
             $main = 'elements/' . $type . '/';
         } else {
@@ -543,6 +603,13 @@ class display_class
      */
     protected function _external($module = 'core')
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'load external template',
+                debug_backtrace()
+            ));
+        }
+
         $array = array();
         preg_match_all('#{;external;([\\w-])+;}#', $this->DISPLAY[$module], $array);
 
@@ -575,6 +642,13 @@ class display_class
      */
     protected function _checkPath()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'check that path is given on error or normal page',
+                debug_backtrace()
+            ));
+        }
+
         $path = array();
 
         if ($this->_get) {
@@ -598,6 +672,13 @@ class display_class
      */
     protected function _path()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'replace path markers',
+                debug_backtrace()
+            ));
+        }
+
         $path = $this->_checkPath();
         $this->DISPLAY = preg_replace(
             '#{;core;domain;}#',
@@ -643,6 +724,13 @@ class display_class
      */
     protected function _convert(array $array, $type)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'convert path markers to url',
+                debug_backtrace()
+            ));
+        }
+
         $update = '';
 
         if ($array) {
@@ -744,6 +832,13 @@ class display_class
      */
     protected function clean()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'remove unused markers',
+                debug_backtrace()
+            ));
+        }
+
         $this->_cleanMarkers('optional');
         $this->_cleanMarkers('loop');
         
@@ -815,6 +910,13 @@ class display_class
      */
     protected function _compress()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'compress page',
+                debug_backtrace()
+            ));
+        }
+
         if ((bool)$this->_options['compress']) {
             header('Content-encoding: gzip');
             $this->DISPLAY = gzcompress($this->DISPLAY, $this->_options['compress']);
@@ -831,6 +933,13 @@ class display_class
      */
     static function convertToClassicUrl(array $params, array $pages, $separator = '&')
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'conversion to classic url',
+                debug_backtrace()
+            ));
+        }
+
         $counter    = 0;
         $final      = '';
 
@@ -859,6 +968,13 @@ class display_class
      */
     static function convertToRewriteUrl(array $params, array $pages)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'conversion to mode rewrite url',
+                debug_backtrace()
+            ));
+        }
+
         $final = '';
 
         foreach ($pages as $page) {
@@ -883,6 +999,13 @@ class display_class
      */
     static function explodeUrl($path, $separator)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'return url parameters',
+                debug_backtrace()
+            ));
+        }
+
         $pages  = array();
         $params = array();
 

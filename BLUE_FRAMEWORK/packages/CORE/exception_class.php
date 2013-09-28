@@ -5,7 +5,7 @@
  * @subpackage  error
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.1.0
+ * @version     2.2.0
  */
 
  /**
@@ -59,6 +59,13 @@ abstract class exception_class
     */
     public function __construct($code, $message = '', $mod = '')
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'create exception class',
+                debug_backtrace()
+            ));
+        }
+
         $this->_errorCode     = $code;
         $this->_errorMessage  = $message;
         $this->_errorFile     = $this->getFile();
@@ -112,6 +119,13 @@ class coreException
     */
     public function show(error_class $error, $moduleName = '')
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'show error',
+                debug_backtrace()
+            ));
+        }
+
         if ($moduleName) {
             $this->_moduleName = $moduleName;
         }
@@ -137,6 +151,13 @@ class coreException
      */
     public function showCore()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'show core error',
+                debug_backtrace()
+            ));
+        }
+
         $error          = new error_class();
         $formatError  = $error->addError(
             'critic',
@@ -173,6 +194,13 @@ class modException
      */
     public function show(error_class $error, $moduleName = '')
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'show mod error',
+                debug_backtrace()
+            ));
+        }
+
         if ($moduleName) {
             $this->_moduleName = $moduleName;
         }
@@ -209,6 +237,13 @@ class libException
      */
     public function show(error_class $error, $moduleName = '')
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'show lib error',
+                debug_backtrace()
+            ));
+        }
+
         if ($moduleName) {
             $this->_moduleName = $moduleName;
         }
@@ -243,6 +278,13 @@ class warningException
      */
     public function show(error_class $error, $moduleName = '')
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'show warning',
+                debug_backtrace()
+            ));
+        }
+
         $formatError = $error->addError(
             'warning',
             $this->_integerCode,
@@ -273,6 +315,13 @@ class infoException
      */
     public function show(error_class $error, $moduleName = '')
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'show info',
+                debug_backtrace()
+            ));
+        }
+
         $error->addError(
             'info',
             $this->_integerCode,
@@ -298,6 +347,13 @@ class okException
      */
     public function show(error_class $error, $moduleName = '')
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'show ok',
+                debug_backtrace()
+            ));
+        }
+
         $error->addError(
             'ok',
             $this->_integerCode,
@@ -323,6 +379,13 @@ class packageException
      */
     public function show(error_class $error, $moduleName = '')
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'show package error',
+                debug_backtrace()
+            ));
+        }
+
         if ($moduleName) {
             $this->_moduleName = $moduleName;
         }

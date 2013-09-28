@@ -8,7 +8,7 @@
  * @subpackage  meta
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.1.0
+ * @version     2.2.0
  */
 class meta_class
 {
@@ -39,6 +39,13 @@ class meta_class
      */
      public function __construct($get)
      {
+         if (class_exists('tracer_class')) {
+             tracer_class::marker(array(
+                 'start meta class',
+                 debug_backtrace()
+             ));
+         }
+
          if (!(bool)core_class::options('meta')) {
              $this->_on = FALSE;
          } else {
@@ -108,6 +115,13 @@ class meta_class
      */
     public function render(display_class $display)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'render metatags',
+                debug_backtrace()
+            ));
+        }
+
         if ($this->_on) {
             $buffer = '';
 
@@ -133,6 +147,13 @@ class meta_class
      */
     private function _read(DOMElement $element)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'read existing meta elements',
+                debug_backtrace()
+            ));
+        }
+
         $update = $element->firstChild->getAttribute('update');
         if ((bool)$update && isset($this->_meta['title'])) {
             $this->_meta['title'] .= $element->firstChild->getAttribute('title');

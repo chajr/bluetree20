@@ -7,7 +7,7 @@
  * @subpackage  configuration
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.2.1
+ * @version     2.3.0
  */
 final class option_class 
 {
@@ -27,6 +27,13 @@ final class option_class
     */
     public static function load($module = 'core', $forceRead = FALSE)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'load configuration',
+                debug_backtrace()
+            ));
+        }
+
         $xml = new xml_class();
 
         if (isset(self::$_optionsList[$module]) && !$forceRead) {
@@ -68,6 +75,13 @@ final class option_class
      */
     public static function show($option, $module = 'core', $forceRead = FALSE)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'get single option',
+                debug_backtrace()
+            ));
+        }
+
         $xml    = new xml_class();
 
         if (isset(self::$_optionsList[$module][$option]) || !$forceRead) {
@@ -99,6 +113,13 @@ final class option_class
      */
     protected static function _getAllOptions(xml_class $xml)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'read all options',
+                debug_backtrace()
+            ));
+        }
+
         $options = array();
 
         $list = $xml->documentElement;

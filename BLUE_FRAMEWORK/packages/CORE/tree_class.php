@@ -7,7 +7,7 @@
  * @subpackage  tree
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.3.1
+ * @version     2.4.0
  */
 class tree_class
 {
@@ -15,7 +15,7 @@ class tree_class
      * contains xml_class object with sitemap
      * @var xml_class 
      */
-    private $_sitemap;
+    private $_siteMap;
 
     /**
      * list of GET parameters with page names
@@ -126,6 +126,13 @@ class tree_class
      */
     public function __construct(array $get, $language)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'start tree class',
+                debug_backtrace()
+            ));
+        }
+
         $this->_language        = $language;
         $this->_get             = $get;
         $this->_treeStructure   = new xml_class();
@@ -149,6 +156,13 @@ class tree_class
      */
     public function map($xml = 'tree', $full = FALSE)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'build map',
+                debug_backtrace()
+            ));
+        }
+
         $bool = $this->_treeStructure->loadXmlFile(
             starter_class::path('cfg') . $xml . '.xml',
             TRUE
@@ -176,21 +190,21 @@ class tree_class
     public function sitemap()
     {
         $mainPage       = $this->_treeStructure->documentElement->childNodes;
-        $this->_sitemap = new xml_class(1.0, 'UTF-8');
-        $root           = $this->_sitemap->createElement('urlset');
+        $this->_siteMap = new xml_class(1.0, 'UTF-8');
+        $root           = $this->_siteMap->createElement('urlset');
 
         $root->setAttribute(
             'xmlns',
             'http://www.sitemaps.org/schemas/sitemap/0.9'
         );
-        $this->_sitemap->appendChild($root);
+        $this->_siteMap->appendChild($root);
         $this->_siteSubMap($mainPage);
 
-        return $this->_sitemap->saveXmlFile(FALSE, TRUE);
+        return $this->_siteMap->saveXmlFile(FALSE, TRUE);
     }
 
     /**
-     * internal recurrent function return subpages tree and seatch inside another
+     * internal recurrent function return subpages tree and search inside another
      * process structure for sitemap
      * 
      * @param DOMNodeList $nodes collection of xml nodes to process
@@ -221,13 +235,13 @@ class tree_class
                 $this->_siteSubMap($child->childNodes, "$path/$id");
             }
 
-            $url        = $this->_sitemap->createElement('url');
+            $url        = $this->_siteMap->createElement('url');
             $changeFreq = $child->getAttribute('changefreq');
             if (!$changeFreq) {
                 $changeFreq = 'never';
             }
 
-            $changeFreq = $this->_sitemap->createElement('changefreq', $changeFreq);
+            $changeFreq = $this->_siteMap->createElement('changefreq', $changeFreq);
             $priority   = $child->getAttribute('priority');
             if (!$priority) {
                 $priority = '0.1';
@@ -235,8 +249,8 @@ class tree_class
 
             $folder     = get::realPath(core_class::options('test'));
             $lang       = $this->_language;
-            $priority   = $this->_sitemap->createElement('priority', $priority);
-            $loc        = $this->_sitemap->createElement(
+            $priority   = $this->_siteMap->createElement('priority', $priority);
+            $loc        = $this->_siteMap->createElement(
                 'loc',
                 "$folder$lang$path/$id"
             );
@@ -244,7 +258,7 @@ class tree_class
             $url->appendChild($loc);
             $url->appendChild($changeFreq);
             $url->appendChild($priority);
-            $this->_sitemap->documentElement->appendChild($url);
+            $this->_siteMap->documentElement->appendChild($url);
         }
     }
 
@@ -313,6 +327,13 @@ class tree_class
      */
     private function _breadcrumbs()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'create breadcrumbs',
+                debug_backtrace()
+            ));
+        }
+
         $options = $this->_mainPage->getAttribute('options');
 
         if ((bool)$options{3}) {
@@ -331,6 +352,13 @@ class tree_class
      */
     private function _chk404()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'check that page exists',
+                debug_backtrace()
+            ));
+        }
+
         if (!$this->_mainPage && (bool)core_class::options('error404')) {
             $path = 'error404';
             if (!(bool)core_class::options('rewrite')) {
@@ -355,10 +383,17 @@ class tree_class
 
     /**
      * check that given page will load other xml tree file 
-     * if wiil, clear all loaded elements and load new tree, keeping all navigation paths
+     * if will, clear all loaded elements and load new tree, keeping all navigation paths
      */
     private function _external()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'check for external tree',
+                debug_backtrace()
+            ));
+        }
+
         if ((bool)$this->_mainPage->getAttribute('external')) {
             $this->_clear();
             $this->load($this->_mainPage->getAttribute('external'));
@@ -414,6 +449,13 @@ class tree_class
      */
     private function _on()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'check that page is on or off',
+                debug_backtrace()
+            ));
+        }
+
         $options = $this->_mainPage->getAttribute('options');
 
         if (!(bool)$options{0}) {
@@ -428,6 +470,13 @@ class tree_class
      */
     private function _set($root = FALSE)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'set list of modules/libs/css/js',
+                debug_backtrace()
+            ));
+        }
+
         if (!$root) {
             $this->layout = $this->_mainPage->getAttribute('layout');
         }
@@ -485,6 +534,13 @@ class tree_class
      */
     private function _clear()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'clear list for inheritance switched off',
+                debug_backtrace()
+            ));
+        }
+
         $this->layout = '';
         $this->lib      = array();
         $this->mod      = array();
@@ -501,11 +557,19 @@ class tree_class
 
     /**
      * load tree xml file, load content to memory and start processing 
+     * 
      * @param string $xml xml file name, default is tree
      * @throws coreException core_error_13
      */
     private function load($xml = 'tree')
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'load tree xml file',
+                debug_backtrace()
+            ));
+        }
+
         $bool = $this->_treeStructure->loadXmlFile(
             starter_class::path('cfg') . $xml . '.xml',
             TRUE
@@ -560,7 +624,7 @@ class tree_class
     }
 
     /**
-     * process parameters given by libraris/modules
+     * process parameters given by libraries/modules
      * return parameters converted to array
      * 
      * @param string $param
@@ -589,6 +653,13 @@ class tree_class
      */
     private function _menu()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'set link between pages and subpages',
+                debug_backtrace()
+            ));
+        }
+
         $options = $this->_mainPage->getAttribute('options');
 
         if ((bool)$options{2}) {
@@ -626,6 +697,13 @@ class tree_class
      */
     private function _checkDate($node = FALSE)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'check page show/expire time',
+                debug_backtrace()
+            ));
+        }
+
         if (!$node) {
             $node = $this->_mainPage;
         }

@@ -5,7 +5,7 @@
  * @subpackage  error
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.1.9
+ * @version     2.2.0
  */
 
 /**
@@ -79,6 +79,13 @@ final class error_class
      */
     public function __construct($lang = FALSE)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'create error',
+                debug_backtrace()
+            ));
+        }
+
         if ($lang) {
             $this->_lang     = $lang;
             $this->_options  = core_class::options();
@@ -214,6 +221,13 @@ final class error_class
      */
     static final function log($type, $data, $time = FALSE, $path = FALSE)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'create log file',
+                debug_backtrace()
+            ));
+        }
+
         if ($time) {
             $time = preg_replace('#[ :]#', '_', $time);
         } else {
@@ -295,6 +309,13 @@ final class error_class
         $errorMessage,
         $mod = 'core'
     ){
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'add some error',
+                debug_backtrace()
+            ));
+        }
+
         preg_match_all(
             lang_class::$translationMarkers[0],
             $errorMessage,
@@ -394,6 +415,13 @@ final class error_class
         $errorMessage,
         $mod
     ){
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'create formatted statement',
+                debug_backtrace()
+            ));
+        }
+
         $kom  = array();
         $bool = $this->_pack("modules/$mod/lang/" . $mod . '_error');
         
@@ -464,6 +492,13 @@ final class error_class
      */
     public final function render($type = FALSE)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'render error',
+                debug_backtrace()
+            ));
+        }
+
         if ($type) {
             $tempList = array(
                 'critic'    => '',
@@ -592,6 +627,13 @@ final class error_class
      */
     private function _pack($pack)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'load array with error codes',
+                debug_backtrace()
+            ));
+        }
+
         $bool = starter_class::load(
             $pack . '_' . $this->_lang->lang . '.php',
             'content',

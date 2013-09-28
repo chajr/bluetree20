@@ -5,7 +5,7 @@
  * @subpackage  globals
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.2.1
+ * @version     2.3.0
  */
 
 /**
@@ -82,6 +82,13 @@ abstract class globals_class
      */
     public static function destroy()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'destroy global arraysr',
+                debug_backtrace()
+            ));
+        }
+
         unset($_GET);
         unset($_POST);
 
@@ -100,6 +107,13 @@ abstract class globals_class
      */
     protected function _checkParameter($uri)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'cgeck url parameters',
+                debug_backtrace()
+            ));
+        }
+
         if ((bool) core_class::options('rewrite')) {
             $bool = preg_match(core_class::options('reg_exp_rewrite'), $uri);
         } else {
@@ -123,6 +137,13 @@ abstract class globals_class
      */
     protected function _maxParameters($counter, $type)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'check max parameters count',
+                debug_backtrace()
+            ));
+        }
+
         $error          = '';
         $globalArray    = '';
         $option         = '';
@@ -165,6 +186,13 @@ abstract class globals_class
      */
     protected function _maxLength($parameter)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'show error',
+                debug_backtrace()
+            ));
+        }
+
         if (core_class::options('get_len')) {
             $length = mb_strlen($parameter);
 
@@ -192,7 +220,7 @@ abstract class globals_class
 }
 
 /**
- * procees GET array
+ * process GET array
  */
 class get 
     extends globals_class
@@ -228,6 +256,13 @@ class get
      */
     public function run()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'start get class',
+                debug_backtrace()
+            ));
+        }
+
         $this->_subdomain();
 
         if (isset($_SERVER['REQUEST_URI'])) {
@@ -251,6 +286,13 @@ class get
      */
     protected function _modeRewrite($uri)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'parse mode rewrite url',
+                debug_backtrace()
+            ));
+        }
+
         $get                = self::convertGet(core_class::options('test'), $uri);
         $counter            = 0;
         $this->_coreLanguage = lang_class::checkLanguage($get);
@@ -286,6 +328,13 @@ class get
      */
     protected function _classicUrl($uri)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'parse classic url',
+                debug_backtrace()
+            ));
+        }
+
         $this->_coreLanguage = lang_class::checkLanguage($_GET);
 
         if (!empty($_GET) ) {
@@ -423,13 +472,20 @@ class get
 
     /**
      * return full array with pages/subpages and their GET parameters
-     * or onlu pages/subpages
+     * or only pages/subpages
      * 
      * @param boolean $parameters if TRUE return with GET parameters
      * @return array
      */
     public function fullGetList($parameters = FALSE)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'return all get parameters',
+                debug_backtrace()
+            ));
+        }
+
         if ($parameters) {
             $array = array(
                 'params' => array(),
@@ -473,6 +529,13 @@ class get
      */
     public function path($completePath = FALSE)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'return main path',
+                debug_backtrace()
+            ));
+        }
+
         if ($completePath) {
             if (core_class::options('rewrite')) {
 
@@ -507,6 +570,13 @@ class get
      */
     private function _type()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'checking page type',
+                debug_backtrace()
+            ));
+        }
+
         if (!empty($this->_corePages)) {
 
             switch ($this->_corePages[0]) {
@@ -532,6 +602,13 @@ class get
      */
     private function _subdomain()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'check subdomain',
+                debug_backtrace()
+            ));
+        }
+
         if ((bool)core_class::options('subdomain')) {
             $host = preg_replace(
                 core_class::options('domain'),
@@ -567,6 +644,13 @@ class post
      */
     public function run()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'start post class',
+                debug_backtrace()
+            ));
+        }
+
         if (!empty($_POST)) {
             $counter = 0;
 
@@ -601,6 +685,13 @@ class cookie
      */
     public function run()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'start cookie class',
+                debug_backtrace()
+            ));
+        }
+
         if (!empty($_COOKIE)) {
             
             foreach ($_COOKIE as $key => $parameter) {
@@ -617,6 +708,13 @@ class cookie
      */
     public function setCookies()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'set cookies form object',
+                debug_backtrace()
+            ));
+        }
+
         foreach ($this as $key => $val) {
             if ($key === 'PHPSESSID') {
                 session_regenerate_id();
@@ -660,6 +758,13 @@ class session
      */
     public function run()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'start session class',
+                debug_backtrace()
+            ));
+        }
+
         if (!empty($_SESSION)) {
             foreach ($_SESSION as $key => $val) {
 
@@ -718,6 +823,13 @@ class session
      */
     public function set($name, $val, $group = 'public')
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'set session variable',
+                debug_backtrace()
+            ));
+        }
+
         switch ($group) {
             case"public":
                 $this->$name = $val;
@@ -753,6 +865,13 @@ class session
      */
     public function returns($group)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'return session variables from group',
+                debug_backtrace()
+            ));
+        }
+
         switch ($group) {
             case"core":
                 return $this->_coreCore;
@@ -795,6 +914,13 @@ class session
      */
     public function setSession()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'set session global array',
+                debug_backtrace()
+            ));
+        }
+
         $_SESSION['public']     = $this->returns('public');
         $_SESSION['core']       = $this->returns('core');
         $_SESSION['user']       = $this->returns('user');
@@ -812,6 +938,13 @@ class session
      */
     public function clear($name = NULL)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'clear data in session',
+                debug_backtrace()
+            ));
+        }
+
         if (!$name) {
             foreach ($this as $param => $val){ 
 
@@ -903,6 +1036,13 @@ class files
      */
     public function run()
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'start files class',
+                debug_backtrace()
+            ));
+        }
+
         if (!empty($_FILES)) {
             $counter = 0;
 
@@ -957,6 +1097,13 @@ class files
      */
     public function move($destination, $name = NULL)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'move file to given destination',
+                debug_backtrace()
+            ));
+        }
+
         if (is_array($destination)) {
             if ($name) {
 
@@ -993,6 +1140,13 @@ class files
      */
     protected function _createData($path, $valueToPut)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'check if exist and create directory',
+                debug_backtrace()
+            ));
+        }
+
         if (!self::exist($path)) {
             $bool = mkdir ($path);
 
@@ -1015,6 +1169,13 @@ class files
      */
     public function read($name = NULL)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'return data from file',
+                debug_backtrace()
+            ));
+        }
+
         if ($name) {
             return $this->single($name);
         } else {
@@ -1076,6 +1237,13 @@ class files
      */
     public function returns($type = NULL)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'return all file parameters',
+                debug_backtrace()
+            ));
+        }
+
         $array = array();
 
         foreach ($this as $key => $val) {
@@ -1148,6 +1316,13 @@ class files
      */
     private function single($file)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'return content of single file',
+                debug_backtrace()
+            ));
+        }
+
         $name = starter_class::path('TMP').'tmp';
         $bool = move_uploaded_file($this->$file, $name);
 
@@ -1175,6 +1350,13 @@ class files
      */
     private function put($filename, $destination)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'move file to destination',
+                debug_backtrace()
+            ));
+        }
+
         if (self::exist($destination . '/' . $filename)) {
             $this->uploadErrors['put_file'][] = $destination . '/' . $filename;
             return FALSE;

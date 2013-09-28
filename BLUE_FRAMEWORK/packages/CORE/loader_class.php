@@ -6,7 +6,7 @@
  * @subpackage  loader
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.3.0
+ * @version     2.4.0
  */
 class loader_class
 {
@@ -138,6 +138,13 @@ class loader_class
         files           $files, 
         error_class     $error
     ) {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'start loader class',
+                debug_backtrace()
+            ));
+        }
+
         $this->_tree        = $tree;
         $this->_display     = $display;
         $this->_language    = $lang;
@@ -328,6 +335,13 @@ class loader_class
      */
     private function _load($type)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'load library or module',
+                debug_backtrace()
+            ));
+        }
+
         foreach ($this->_tree->$type as $name => $val) {
             if ($type === 'lib') {
                 $libs = starter_class::package($name);
@@ -389,6 +403,13 @@ class loader_class
      */
     private function _run($execute, $module, $params)
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'run module',
+                debug_backtrace()
+            ));
+        }
+
         $unThrow = core_class::options('unthrow');
         try {
             $bool = class_exists($execute);
