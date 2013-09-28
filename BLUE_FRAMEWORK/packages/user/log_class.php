@@ -7,10 +7,102 @@
  * @subpackage  benchmark
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.1.1
+ * @version     1.2.0
  */
 class log_class
 {
+    /**
+     * name for $_SESSION global array model
+     */
+    const SESSION_ARRAY = 'session_array';
+
+    /**
+     * name for session class model
+     */
+    const SESSION_CLASS = 'session_class';
+
+    /**
+     * contains session model
+     * @var array|session
+     */
+    protected static $_sessionModel;
+
+    /**
+     * set in variable correct session model
+     * allowed is $_SESSION global array or session object
+     * 
+     * @param array|session $model
+     */
+    public static function setSessionModel(&$model)
+    {
+        self::$_sessionModel = $model;
+    }
+
+    /**
+     * return variable value from correct session model
+     * 
+     * @param string $varName
+     * @return mixed
+     */
+    public static function getSessionVar($varName)
+    {
+        if (self::_checkModelType() === self::SESSION_ARRAY) {
+            if (isset(self::$_sessionModel[$varName])) {
+                return self::$_sessionModel[$varName];
+            }
+        }
+
+        if (self::_checkModelType() === self::SESSION_CLASS) {
+            $userData = self::$_sessionModel->returns('user');
+
+            if (isset($userData[$varName])) {
+                return $userData[$varName];
+            }
+        }
+
+        return FALSE;
+    }
+
+    /**
+     * set a variable in correct session model
+     * 
+     * @param string $varName
+     * @param mixed $varValue
+     * @return bool
+     */
+    public static function setSessionVar($varName, $varValue)
+    {
+        if (self::_checkModelType() === self::SESSION_ARRAY) {
+            self::$_sessionModel[$varName] = $varValue;
+            return TRUE;
+        }
+
+        if (self::_checkModelType() === self::SESSION_CLASS) {
+            self::$_sessionModel->set($varName, $varValue, 'user');
+            return TRUE;
+        }
+
+        return FALSE;
+    }
+
+    /**
+     * check given model type and return its name or false if incorrect model
+     * 
+     * @return bool|string
+     */
+    protected static function _checkModelType()
+    {
+        if (is_array(self::$_sessionModel)) {
+            return self::SESSION_ARRAY;
+        }
+
+        if (self::$_sessionModel instanceof session) {
+            return self::SESSION_CLASS;
+        }
+
+        return FALSE;
+    }
+
     /**
      * set user as logged in, and save his option in session
      * @param integer $uid
@@ -19,13 +111,17 @@ class log_class
      */
     public static function logOn($uid, $options, $group)
     {
+        if (!self::getSessionVar('log_class_session_id')) {
+            self::setSessionVar('log_class_session_id', session_id());
+        }
         $code                             = self::_code();
-        $_SESSION['log_class']['log']     = TRUE;
-        $_SESSION['log_class']['uid']     = $uid;
-        $_SESSION['log_class']['code']    = $code;
-        $_SESSION['log_class']['options'] = $options;
-        $_SESSION['log_class']['group']   = $group;
-        $_SESSION['log_class']['time']    = time() + 60*60;
+
+        self::setSessionVar('log_class_log', TRUE);
+        self::setSessionVar('log_class_uid', $uid);
+        self::setSessionVar('log_class_code', $code);
+        self::setSessionVar('log_class_options', $options);
+        self::setSessionVar('log_class_group', $group);
+        self::setSessionVar('log_class_time', time() + 60*60);
     }
 
     /**
@@ -33,8 +129,19 @@ class log_class
      */
     public static function logOff()
     {
-        $_SESSION['log_class'] = array();
-        unset($_SESSION['log_class']);
+        if (self::_checkModelType() === self::SESSION_ARRAY) {
+            unset(self::$_sessionModel['log_class_log']);
+            unset(self::$_sessionModel['log_class_uid']);
+            unset(self::$_sessionModel['log_class_code']);
+            unset(self::$_sessionModel['log_class_options']);
+            unset(self::$_sessionModel['log_class_group']);
+            unset(self::$_sessionModel['log_class_time']);
+            unset(self::$_sessionModel['log_class_session_id']);
+        }
+
+        if (self::_checkModelType() === self::SESSION_CLASS) {
+            self::$_sessionModel->clear('user');
+        }
     }
 
     /**
@@ -45,32 +152,35 @@ class log_class
      */
     public static function verifyUser()
     {
-        if (   !isset($_SESSION['log_class']['log'])
-            || !isset($_SESSION['log_class']['uid'])
-            || !isset($_SESSION['log_class']['code'])
-            || !isset($_SESSION['log_class']['options'])
-            || !isset($_SESSION['log_class']['group'])
-            || !isset($_SESSION['log_class']['time'])
-            || !$_SESSION['log_class']['log']
+        if (   !self::getSessionVar('log_class_log')
+            || !self::getSessionVar('log_class_uid')
+            || !self::getSessionVar('log_class_code')
+            || !self::getSessionVar('log_class_options')
+            || !self::getSessionVar('log_class_group')
+            || !self::getSessionVar('log_class_time')
         ){
             return FALSE;
+
         } else {
-            if ($_SESSION['log_class']['code'] === self::_code()) {
-                if ($_SESSION['log_class']['options']{0} === '0') {
+            if (self::getSessionVar('log_class_code') === self::_code()) {
+                $options = self::getSessionVar('log_class_options');
+
+                if ($options{0} === '0') {
                     throw new LibraryException('no_reg');
                 }
 
-                if ($_SESSION['log_class']['options']{1} === '0') {
+                if ($options{1} === '0') {
                     throw new LibraryException('blocked');
                 }
 
-                if ($_SESSION['log_class']['time'] < time()) {
+                if (self::getSessionVar('log_class_time') < time()) {
                     return FALSE;
                 }
 
-                $_SESSION['log_class']['time'] = time() + 60*60;
                 @session_regenerate_id();
-                $_SESSION['log_class']['code'] = self::_code();
+                self::setSessionVar('log_class_time', time() + 60 * 60);
+                self::setSessionVar('log_class_session_id', session_id());
+                self::setSessionVar('log_class_code', self::_code());
 
                 return TRUE;
             } else {
@@ -86,11 +196,14 @@ class log_class
      */
     protected static function _code()
     {
-        $client     = $_SERVER['HTTP_USER_AGENT'];
-        $ip         = $_SERVER['REMOTE_ADDR'];
+        $sessionId   = self::getSessionVar('session_id');
+        $client      = $_SERVER['HTTP_USER_AGENT'];
+        $ip          = $_SERVER['REMOTE_ADDR'];
+        $language    = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+
         $code        = hash(
             'sha256',
-            $client . $ip
+            $client . $ip . $sessionId . $language
         );
 
         return $code;
