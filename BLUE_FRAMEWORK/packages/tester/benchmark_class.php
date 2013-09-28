@@ -7,7 +7,7 @@
  * @subpackage  benchmark
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.6.0
+ * @version     1.6.1
  */
 class benchmark_class
 {
@@ -97,7 +97,7 @@ class benchmark_class
                 $markerColor = self::$_backgroundColor;
                 foreach (self::$_group as $marker => $info) {
                     if (!isset(self::$_group[$marker]['time'])) {
-                        $groupMarkerTime = 0;
+                        $groupMarkerTime = $markerTime;
                     } else {
                         $groupMarkerTime = self::$_group[$marker]['time'] + $markerTime;
                     }
@@ -127,8 +127,8 @@ class benchmark_class
 
             self::$_sessionBenchmarkMarkers[] = array(
                 'marker_name'       => $groupName . ' START',
-                'marker_time'       => 0,
-                'marker_memory'     => memory_get_usage(),
+                'marker_time'       => '',
+                'marker_memory'     => '',
                 'marker_color'      => self::$_backgroundColor
             );
 
@@ -214,18 +214,33 @@ class benchmark_class
                     $additionalColor = '';
                 }
 
-                $time     = number_format($marker['marker_time'] *1000, 5, '.', ' ');
-                $percent  = ($marker['marker_time'] / $total) *100000;
-                $percent  = number_format($percent, 5);
-                $ram      = ($marker['marker_memory'] - self::$_sessionMemoryStart) / 1024;
+                if ($marker['marker_time'] === '') {
+                    $time       = '-';
+                    $percent    = '-';
+                    $ram        = '-';
+                } else {
+                    $ram      = ($marker['marker_memory'] - self::$_sessionMemoryStart) / 1024;
+                    $ram      = number_format($ram, 3, ',', '');
+                    $percent  = ($marker['marker_time'] / $total) *100000;
+                    $percent  = number_format($percent, 5);
+                    $time     = number_format(
+                        $marker['marker_time'] *1000,
+                        5,
+                        '.',
+                        ' '
+                    );
+                    $time       .= ' ms';
+                    $percent    .= ' %';
+                    $ram        .= ' kB';
+                }
+
+                
+                
                 $display .= '<tr style="' . $additionalColor . '">
                     <td style="width:40%;color:#fff">' . $marker['marker_name'] . '</td>' . "\n";
-                $display .= '<td style="width:20%">' . $time . ' ms</td>'."\n";
-                $display .= '<td style="width:20%">' . $percent . ' %</td>'."\n";
-                $display .= '
-                    <td style="width:20%;color:#fff">
-                        ' . number_format($ram, 3, ',', '') . '
-                    kB</td>
+                $display .= '<td style="width:20%">' . $time . '</td>'."\n";
+                $display .= '<td style="width:20%">' . $percent . '</td>'."\n";
+                $display .= '<td style="width:20%;color:#fff">' . $ram . '</td>
                     </tr>' . "\n";
             }
             $display .= '</table></div>';
