@@ -9,7 +9,7 @@
  * @subpackage  core
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.5.0
+ * @version     2.6.0
  */
 final class core_class
 {
@@ -96,7 +96,12 @@ final class core_class
     */
     public function __construct()
     {
-        tracer_class::marker(array('start framework core', debug_backtrace()));
+        tracer_class::marker(array(
+            'start framework core',
+            debug_backtrace(),
+            '#006C94'
+        ));
+
         self::$_options = option_class::load();
         benchmark_class::setMarker('load options');
 
@@ -127,7 +132,12 @@ final class core_class
      */
     protected function _transformGlobalArrays()
     {
-        tracer_class::marker(array('transforming global arrays', debug_backtrace()));
+        tracer_class::marker(array(
+            'transforming global arrays',
+            debug_backtrace(),
+            '#006C94'
+        ));
+
         if ($this->_get->pageType() === 'html') {
             globals_class::destroy();
             benchmark_class::setMarker('destroy global arrays');
@@ -145,7 +155,6 @@ final class core_class
      */
     protected function _setEmptyOtherRender()
     {
-        tracer_class::marker(array('set empty page render', debug_backtrace()));
         if (empty($this->render)
             && (
                    $this->_get->pageType() === 'css' 
@@ -165,7 +174,12 @@ final class core_class
      */
     protected function _setLanguage()
     {
-        tracer_class::marker(array('setting language', debug_backtrace()));
+        tracer_class::marker(array(
+            'setting language',
+            debug_backtrace(),
+            '#006C94'
+        ));
+
         $this->_lang->setTranslationArray();
         benchmark_class::setMarker('set translation array');
 
@@ -195,7 +209,6 @@ final class core_class
      */
     protected function _setTimezone()
     {
-        tracer_class::marker(array('set timezone', debug_backtrace()));
         if (self::$_options['timezone']) {
             @date_default_timezone_set(self::$_options['timezone']);
         }
@@ -206,7 +219,12 @@ final class core_class
      */
     protected function _runBaseObjects()
     {
-        tracer_class::marker(array('start base objects', debug_backtrace()));
+        tracer_class::marker(array(
+            'start base objects',
+            debug_backtrace(),
+            '#006C94'
+        ));
+
         $this->_get = new get();
         benchmark_class::setMarker('runs get object');
 
@@ -225,7 +243,12 @@ final class core_class
      */
     protected function _htmlPage()
     {
-        tracer_class::marker(array('start create of html page', debug_backtrace()));
+        tracer_class::marker(array(
+            'start create of html page',
+            debug_backtrace(),
+            '#006C94'
+        ));
+
         $this->_session = new session();
         benchmark_class::setMarker('runs session object');
 
@@ -288,7 +311,12 @@ final class core_class
      */
     protected function _checkErrors()
     {
-        tracer_class::marker(array('check that errors exists', debug_backtrace()));
+        tracer_class::marker(array(
+            'check that errors exists',
+            debug_backtrace(),
+            '#006C94'
+        ));
+
         $errorList = $this->_error->render(1);
 
         if ($errorList['pointer']) {
@@ -323,7 +351,12 @@ final class core_class
      */
     protected function _otherPage()
     {
-        tracer_class::marker(array('start create other page type', debug_backtrace()));
+        tracer_class::marker(array(
+            'start create other page type',
+            debug_backtrace(),
+            '#006C94'
+        ));
+
         $this->_display = new display_class(array(
             'get'       => $this->_get,
             'language'  => $this->_lang->lang,
@@ -346,7 +379,12 @@ final class core_class
      */
     public static function options($name = FALSE)
     {
-        tracer_class::marker(array('return framework options', debug_backtrace()));
+        tracer_class::marker(array(
+            'return framework options',
+            debug_backtrace(),
+            '#006C94'
+        ));
+
         if ($name) {
             if (!isset(self::$_options[$name])) {
                 return NULL;

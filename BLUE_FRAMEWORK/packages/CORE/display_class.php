@@ -10,7 +10,7 @@
  * @subpackage  display
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.7.0
+ * @version     2.8.0
  */
 class display_class
 {
@@ -90,7 +90,11 @@ class display_class
     public function __construct(array $options)
     {
         if (class_exists('tracer_class')) {
-            tracer_class::marker(array('start display class', debug_backtrace()));
+            tracer_class::marker(array(
+                'start display class',
+                debug_backtrace(),
+                '#006400'
+            ));
         }
 
         $this->_defaultOptions = array_merge($this->_defaultOptions, $options);
@@ -113,7 +117,8 @@ class display_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'create main layout for display',
-                debug_backtrace()
+                debug_backtrace(),
+                '#006400'
             ));
         }
 
@@ -154,7 +159,8 @@ class display_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'render css or js content in template',
-                debug_backtrace()
+                debug_backtrace(),
+                '#006400'
             ));
         }
 
@@ -339,7 +345,8 @@ class display_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'render content of display class',
-                debug_backtrace()
+                debug_backtrace(),
+                '#006400'
             ));
         }
 
@@ -406,7 +413,8 @@ class display_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'load layout to display class',
-                debug_backtrace()
+                debug_backtrace(),
+                '#006400'
             ));
         }
 
@@ -430,7 +438,8 @@ class display_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'create path for required templates',
-                debug_backtrace()
+                debug_backtrace(),
+                '#006400'
             ));
         }
 
@@ -456,7 +465,8 @@ class display_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'set data on session markers',
-                debug_backtrace()
+                debug_backtrace(),
+                '#006400'
             ));
         }
 
@@ -477,7 +487,8 @@ class display_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'create urls to js/css files',
-                debug_backtrace()
+                debug_backtrace(),
+                '#006400'
             ));
         }
 
@@ -570,7 +581,8 @@ class display_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'read contnt of js/css files',
-                debug_backtrace()
+                debug_backtrace(),
+                '#006400'
             ));
         }
 
@@ -606,7 +618,8 @@ class display_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'load external template',
-                debug_backtrace()
+                debug_backtrace(),
+                '#006400'
             ));
         }
 
@@ -645,7 +658,8 @@ class display_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'check that path is given on error or normal page',
-                debug_backtrace()
+                debug_backtrace(),
+                '#006400'
             ));
         }
 
@@ -675,7 +689,8 @@ class display_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'replace path markers',
-                debug_backtrace()
+                debug_backtrace(),
+                '#006400'
             ));
         }
 
@@ -727,7 +742,8 @@ class display_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'convert path markers to url',
-                debug_backtrace()
+                debug_backtrace(),
+                '#006400'
             ));
         }
 
@@ -835,7 +851,8 @@ class display_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'remove unused markers',
-                debug_backtrace()
+                debug_backtrace(),
+                '#006400'
             ));
         }
 
@@ -910,13 +927,6 @@ class display_class
      */
     protected function _compress()
     {
-        if (class_exists('tracer_class')) {
-            tracer_class::marker(array(
-                'compress page',
-                debug_backtrace()
-            ));
-        }
-
         if ((bool)$this->_options['compress']) {
             header('Content-encoding: gzip');
             $this->DISPLAY = gzcompress($this->DISPLAY, $this->_options['compress']);
@@ -936,7 +946,8 @@ class display_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'conversion to classic url',
-                debug_backtrace()
+                debug_backtrace(),
+                '#006400'
             ));
         }
 
@@ -971,7 +982,8 @@ class display_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'conversion to mode rewrite url',
-                debug_backtrace()
+                debug_backtrace(),
+                '#006400'
             ));
         }
 
@@ -1002,7 +1014,8 @@ class display_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'return url parameters',
-                debug_backtrace()
+                debug_backtrace(),
+                '#006400'
             ));
         }
 

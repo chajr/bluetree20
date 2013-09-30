@@ -6,7 +6,7 @@
  * @subpackage  loader
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.4.0
+ * @version     2.5.0
  */
 class loader_class
 {
@@ -141,7 +141,8 @@ class loader_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'start loader class',
-                debug_backtrace()
+                debug_backtrace(),
+                '#008E85'
             ));
         }
 
@@ -338,7 +339,8 @@ class loader_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'load library or module',
-                debug_backtrace()
+                debug_backtrace(),
+                '#008E85'
             ));
         }
 
@@ -406,7 +408,8 @@ class loader_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'run module',
-                debug_backtrace()
+                debug_backtrace(),
+                '#008E85'
             ));
         }
 

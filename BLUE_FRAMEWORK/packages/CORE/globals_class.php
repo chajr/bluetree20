@@ -5,7 +5,7 @@
  * @subpackage  globals
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.3.0
+ * @version     2.4.0
  */
 
 /**
@@ -85,7 +85,8 @@ abstract class globals_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'destroy global arraysr',
-                debug_backtrace()
+                debug_backtrace(),
+                '#004396'
             ));
         }
 
@@ -109,8 +110,9 @@ abstract class globals_class
     {
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
-                'cgeck url parameters',
-                debug_backtrace()
+                'check url parameters',
+                debug_backtrace(),
+                '#004396'
             ));
         }
 
@@ -140,7 +142,8 @@ abstract class globals_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'check max parameters count',
-                debug_backtrace()
+                debug_backtrace(),
+                '#004396'
             ));
         }
 
@@ -189,7 +192,8 @@ abstract class globals_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'show error',
-                debug_backtrace()
+                debug_backtrace(),
+                '#004396'
             ));
         }
 
@@ -259,7 +263,8 @@ class get
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'start get class',
-                debug_backtrace()
+                debug_backtrace(),
+                '#00306A'
             ));
         }
 
@@ -289,7 +294,8 @@ class get
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'parse mode rewrite url',
-                debug_backtrace()
+                debug_backtrace(),
+                '#00306A'
             ));
         }
 
@@ -331,7 +337,8 @@ class get
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'parse classic url',
-                debug_backtrace()
+                debug_backtrace(),
+                '#00306A'
             ));
         }
 
@@ -482,7 +489,8 @@ class get
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'return all get parameters',
-                debug_backtrace()
+                debug_backtrace(),
+                '#00306A'
             ));
         }
 
@@ -532,7 +540,8 @@ class get
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'return main path',
-                debug_backtrace()
+                debug_backtrace(),
+                '#00306A'
             ));
         }
 
@@ -573,7 +582,8 @@ class get
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'checking page type',
-                debug_backtrace()
+                debug_backtrace(),
+                '#00306A'
             ));
         }
 
@@ -605,7 +615,8 @@ class get
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'check subdomain',
-                debug_backtrace()
+                debug_backtrace(),
+                '#00306A'
             ));
         }
 
@@ -647,7 +658,8 @@ class post
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'start post class',
-                debug_backtrace()
+                debug_backtrace(),
+                '#002046'
             ));
         }
 
@@ -688,7 +700,8 @@ class cookie
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'start cookie class',
-                debug_backtrace()
+                debug_backtrace(),
+                '#213A59'
             ));
         }
 
@@ -711,7 +724,8 @@ class cookie
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'set cookies form object',
-                debug_backtrace()
+                debug_backtrace(),
+                '#213A59'
             ));
         }
 
@@ -761,7 +775,8 @@ class session
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'start session class',
-                debug_backtrace()
+                debug_backtrace(),
+                '#374557'
             ));
         }
 
@@ -826,7 +841,8 @@ class session
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'set session variable',
-                debug_backtrace()
+                debug_backtrace(),
+                '#374557'
             ));
         }
 
@@ -868,7 +884,8 @@ class session
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'return session variables from group',
-                debug_backtrace()
+                debug_backtrace(),
+                '#374557'
             ));
         }
 
@@ -917,7 +934,8 @@ class session
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'set session global array',
-                debug_backtrace()
+                debug_backtrace(),
+                '#374557'
             ));
         }
 
@@ -941,7 +959,8 @@ class session
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'clear data in session',
-                debug_backtrace()
+                debug_backtrace(),
+                '#374557'
             ));
         }
 
@@ -1039,7 +1058,8 @@ class files
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'start files class',
-                debug_backtrace()
+                debug_backtrace(),
+                '#516E91'
             ));
         }
 
@@ -1100,7 +1120,8 @@ class files
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'move file to given destination',
-                debug_backtrace()
+                debug_backtrace(),
+                '#516E91'
             ));
         }
 
@@ -1143,7 +1164,8 @@ class files
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'check if exist and create directory',
-                debug_backtrace()
+                debug_backtrace(),
+                '#516E91'
             ));
         }
 
@@ -1172,7 +1194,8 @@ class files
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'return data from file',
-                debug_backtrace()
+                debug_backtrace(),
+                '#516E91'
             ));
         }
 
@@ -1240,7 +1263,8 @@ class files
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'return all file parameters',
-                debug_backtrace()
+                debug_backtrace(),
+                '#516E91'
             ));
         }
 
@@ -1319,7 +1343,8 @@ class files
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'return content of single file',
-                debug_backtrace()
+                debug_backtrace(),
+                '#516E91'
             ));
         }
 
@@ -1353,7 +1378,8 @@ class files
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'move file to destination',
-                debug_backtrace()
+                debug_backtrace(),
+                '#516E91'
             ));
         }
 

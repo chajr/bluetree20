@@ -6,7 +6,7 @@
  * @package     Start
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.2.1
+ * @version     2.3.0
  */
 starter_class::load('packages/tester/benchmark_class.php');
 starter_class::load('packages/tester/tracer_class.php');
@@ -99,6 +99,14 @@ final class starter_class
      */
     static final function load($path, $read = FALSE, $type = '')
     {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'loading file',
+                debug_backtrace(),
+                '#000'
+            ));
+        }
+
         $path = self::path() . $path;
 
         if (!file_exists($path)) {
@@ -154,7 +162,12 @@ final class starter_class
      */
     static final function package($pack)
     {
-        tracer_class::marker(array('load package', debug_backtrace()));
+        tracer_class::marker(array(
+            'load package',
+            debug_backtrace(),
+            '#000'
+        ));
+
         $preg = preg_match('#^[\w-]+\/([\w-]+[,]?)+$#', $pack);
 
         if($preg){

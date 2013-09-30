@@ -3,7 +3,7 @@
  * trace witch classes, files, functions are run
  * 
  * @author Michał Adamiak <chajr@bluetree.pl>
- * @version 1.3.0
+ * @version 1.4.0
  * @copyright chajr/bluetree
  * @package     tester
  * @subpackage  tracer
@@ -56,13 +56,18 @@ class tracer_class
 
     /**
      * create marker with given data
+     * optionally add debug_backtrace and marker background color
      * @param array $data
      * 
      * @example marker(array('marker name'))
      * @example marker(array('marker name', debug_backtrace()))
+     * @example marker(array('marker name', debug_backtrace(), '#000000'))
      */
     public static function marker($data)
     {
+        $defaultData = array('', NULL, NULL);
+        $data = array_merge($data, $defaultData);
+
         if ((bool)self::$_tracerOn) {
             ++self::$traceStep;
 
@@ -70,7 +75,7 @@ class tracer_class
             $time       = preg_split('#\.|,#', $time);
             $markerTime = gmstrftime('%d-%m-%Y<br/>%H:%M:%S:', $time[0]) . $time[1];
 
-            if (!isset($data[1]) || !$data[1]) {
+            if (!$data[1]) {
                 $data[1] = array(array(
                     'file'      => '', 
                     'line'      => '', 
@@ -84,7 +89,8 @@ class tracer_class
             self::$_session['markers'][] = array(
                 'time'      => $markerTime,
                 'name'      => $data[0],
-                'debug'     => $data[1]
+                'debug'     => $data[1],
+                'color'     => $data[2]
             );
         }
     }
@@ -150,6 +156,10 @@ class tracer_class
                     $background = 'background-color:#4D4D4D';
                 } else {
                     $background = '';
+                }
+
+                if ($marker['color']) {
+                    $background = 'background-color:' . $marker['color'];
                 }
 
                 self::$_display .= '<div style="' . $background . '">

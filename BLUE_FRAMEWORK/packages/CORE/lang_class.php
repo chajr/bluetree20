@@ -6,7 +6,7 @@
  * @subpackage  language
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.6.1
+ * @version     2.7.0
  */
 class lang_class
 {
@@ -92,7 +92,8 @@ class lang_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'start language class',
-                debug_backtrace()
+                debug_backtrace(),
+                '#6802CF'
             ));
         }
 
@@ -132,7 +133,8 @@ class lang_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'set localization and language',
-                debug_backtrace()
+                debug_backtrace(),
+                '#6802CF'
             ));
         }
 
@@ -160,7 +162,8 @@ class lang_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'set translations',
-                debug_backtrace()
+                debug_backtrace(),
+                '#6802CF'
             ));
         }
 
@@ -235,7 +238,8 @@ class lang_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'translate templates and modules',
-                debug_backtrace()
+                debug_backtrace(),
+                '#6802CF'
             ));
         }
 
@@ -286,7 +290,8 @@ class lang_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'replace markers with translations',
-                debug_backtrace()
+                debug_backtrace(),
+                '#6802CF'
             ));
         }
 
@@ -384,7 +389,8 @@ class lang_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'load language',
-                debug_backtrace()
+                debug_backtrace(),
+                '#6802CF'
             ));
         }
 
@@ -422,7 +428,8 @@ class lang_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'sets language',
-                debug_backtrace()
+                debug_backtrace(),
+                '#6802CF'
             ));
         }
 
@@ -451,7 +458,8 @@ class lang_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'search for similar language',
-                debug_backtrace()
+                debug_backtrace(),
+                '#6802CF'
             ));
         }
 
@@ -482,7 +490,8 @@ class lang_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'detect language',
-                debug_backtrace()
+                debug_backtrace(),
+                '#6802CF'
             ));
         }
 
@@ -512,7 +521,8 @@ class lang_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'check language code',
-                debug_backtrace()
+                debug_backtrace(),
+                '#6802CF'
             ));
         }
 
@@ -562,7 +572,8 @@ class lang_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'redirect to page with language code',
-                debug_backtrace()
+                debug_backtrace(),
+                '#6802CF'
             ));
         }
 

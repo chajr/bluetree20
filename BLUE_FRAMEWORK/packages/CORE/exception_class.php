@@ -5,7 +5,7 @@
  * @subpackage  error
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.2.0
+ * @version     2.3.0
  */
 
  /**
@@ -62,7 +62,8 @@ abstract class exception_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'create exception class',
-                debug_backtrace()
+                debug_backtrace(),
+                '#4E0000'
             ));
         }
 
@@ -122,7 +123,8 @@ class coreException
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'show error',
-                debug_backtrace()
+                debug_backtrace(),
+                '#4E0000'
             ));
         }
 
@@ -154,7 +156,8 @@ class coreException
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'show core error',
-                debug_backtrace()
+                debug_backtrace(),
+                '#4E0000'
             ));
         }
 
@@ -197,7 +200,8 @@ class modException
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'show mod error',
-                debug_backtrace()
+                debug_backtrace(),
+                '#4E0000'
             ));
         }
 
@@ -240,7 +244,8 @@ class libException
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'show lib error',
-                debug_backtrace()
+                debug_backtrace(),
+                '#4E0000'
             ));
         }
 
@@ -281,7 +286,8 @@ class warningException
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'show warning',
-                debug_backtrace()
+                debug_backtrace(),
+                '#4E0000'
             ));
         }
 
@@ -318,7 +324,8 @@ class infoException
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'show info',
-                debug_backtrace()
+                debug_backtrace(),
+                '#4E0000'
             ));
         }
 
@@ -350,7 +357,8 @@ class okException
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'show ok',
-                debug_backtrace()
+                debug_backtrace(),
+                '#4E0000'
             ));
         }
 
@@ -382,7 +390,8 @@ class packageException
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'show package error',
-                debug_backtrace()
+                debug_backtrace(),
+                '#4E0000'
             ));
         }
 

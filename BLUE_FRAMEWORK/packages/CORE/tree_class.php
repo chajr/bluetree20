@@ -7,7 +7,7 @@
  * @subpackage  tree
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.4.0
+ * @version     2.5.0
  */
 class tree_class
 {
@@ -129,7 +129,8 @@ class tree_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'start tree class',
-                debug_backtrace()
+                debug_backtrace(),
+                '#BF5702'
             ));
         }
 
@@ -159,7 +160,8 @@ class tree_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'build map',
-                debug_backtrace()
+                debug_backtrace(),
+                '#BF5702'
             ));
         }
 
@@ -330,7 +332,8 @@ class tree_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'create breadcrumbs',
-                debug_backtrace()
+                debug_backtrace(),
+                '#BF5702'
             ));
         }
 
@@ -355,7 +358,8 @@ class tree_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'check that page exists',
-                debug_backtrace()
+                debug_backtrace(),
+                '#BF5702'
             ));
         }
 
@@ -390,7 +394,8 @@ class tree_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'check for external tree',
-                debug_backtrace()
+                debug_backtrace(),
+                '#BF5702'
             ));
         }
 
@@ -452,7 +457,8 @@ class tree_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'check that page is on or off',
-                debug_backtrace()
+                debug_backtrace(),
+                '#BF5702'
             ));
         }
 
@@ -473,7 +479,8 @@ class tree_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'set list of modules/libs/css/js',
-                debug_backtrace()
+                debug_backtrace(),
+                '#BF5702'
             ));
         }
 
@@ -537,7 +544,8 @@ class tree_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'clear list for inheritance switched off',
-                debug_backtrace()
+                debug_backtrace(),
+                '#BF5702'
             ));
         }
 
@@ -566,7 +574,8 @@ class tree_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'load tree xml file',
-                debug_backtrace()
+                debug_backtrace(),
+                '#BF5702'
             ));
         }
 
@@ -656,7 +665,8 @@ class tree_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'set link between pages and subpages',
-                debug_backtrace()
+                debug_backtrace(),
+                '#BF5702'
             ));
         }
 
@@ -700,7 +710,8 @@ class tree_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'check page show/expire time',
-                debug_backtrace()
+                debug_backtrace(),
+                '#BF5702'
             ));
         }
 

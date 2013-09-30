@@ -5,7 +5,7 @@
  * @subpackage  error
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.2.0
+ * @version     2.3.0
  */
 
 /**
@@ -82,7 +82,8 @@ final class error_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'create error',
-                debug_backtrace()
+                debug_backtrace(),
+                '#900000'
             ));
         }
 
@@ -224,7 +225,8 @@ final class error_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'create log file',
-                debug_backtrace()
+                debug_backtrace(),
+                '#900000'
             ));
         }
 
@@ -312,7 +314,8 @@ final class error_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'add some error',
-                debug_backtrace()
+                debug_backtrace(),
+                '#900000'
             ));
         }
 
@@ -418,7 +421,8 @@ final class error_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'create formatted statement',
-                debug_backtrace()
+                debug_backtrace(),
+                '#900000'
             ));
         }
 
@@ -495,7 +499,8 @@ final class error_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'render error',
-                debug_backtrace()
+                debug_backtrace(),
+                '#900000'
             ));
         }
 
@@ -630,7 +635,8 @@ final class error_class
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'load array with error codes',
-                debug_backtrace()
+                debug_backtrace(),
+                '#900000'
             ));
         }
 
