@@ -5,7 +5,7 @@
  * @subpackage  globals
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.4.0
+ * @version     2.4.1
  */
 
 /**
@@ -408,6 +408,8 @@ class get
     {
         if ($test) {
             $uri = str_replace('/' . $test . '/', '', $uri);
+        } else {
+            $uri = trim($uri, '/');
         }
 
         $get = explode('/', $uri);
