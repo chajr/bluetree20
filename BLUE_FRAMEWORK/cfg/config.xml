@@ -7,12 +7,12 @@
 * @package     BlueFramework Core
 * @author      Michał Adamiak    <chajr@bluetree.pl>
 * @copyright   chajr/bluetree
-* @version     1.0.1
+* @version     1.0.2
 */
 -->
 <!DOCTYPE root SYSTEM "dtd/config.dtd">
 <root>
-    <option id="domain" value="#(www.)?localhost#"/>
+    <option id="domain" value="#(www.)?adamiak\.cz#"/>
     <!--main domain for regular expression-->
     <option id="debug" value="1"/>
     <!--is detailed error on-->
@@ -37,8 +37,8 @@
     <!--max number of POST parameters (0 -no limit)-->
     <option id="get_len" value="20"/>
     <!--max length of GET parameter, include name + comma + variable (0 -no limit)-->
-    <option id="test" value="bluetree20"/>
-    <!--place where is index file localed on domain, use when page is localed in domain dir (0 -none)-->
+    <option id="test" value=""/>
+    <!--place where is index file localed on domain, use when page is localed in domain dir (empty -none)-->
     <option id="post_secure" value="1"/>
     <!--if different on 0 secure POST values on entities or quotes (0 -none, 1 -quotes, 2 -entities)-->
     <option id="file_max_size" value="1000"/>
