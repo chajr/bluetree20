@@ -98,7 +98,7 @@ class form_class {
 			return FALSE;
 		}
 		$this->xml = new xml_class();
-		$bool = $this->xml->wczytaj($definition, 0);
+		$bool = $this->xml->loadXmlFile($definition, 0);
 		if(!$bool){
 			$this->error = $xml->err;
 			return FALSE;
@@ -157,7 +157,7 @@ class form_class {
 			}
 		}
 		//$this->check_list();
-		$form = $this->display->zapisz(0, 1);
+		$form = $this->display->saveXmlFile(0, 1);
 		$form = str_replace('<?xml version="1.0" encoding="UTF-8"?>', '', $form);
 		$form = preg_replace('#<!DOCTYPE root SYSTEM "[\\w/_-]+\.dtd">#ui', '', $form);
 		return $form;
@@ -608,7 +608,7 @@ class form_class {
 		if(($step || $step == 0) && $step != ''){
 			$name = $this->current_input->getAttribute('name');
 			$default = $this->current_input->getAttribute('value');
-			$check = simpleValid_class::step($step, $val, $default);
+			$check = simpleValid_class::step($val, $step, $default);
 			if(!$check){
 				$this->set_error($name, 'step');
 			}
@@ -675,8 +675,8 @@ class form_class {
 		if($entities){
 			$val = htmlentities($val);
 		}
-		$min_bool = simpleValid_class::char_lenght($val, $min, NULL);
-		$max_bool = simpleValid_class::char_lenght($val, NULL, $max);
+		$min_bool = simpleValid_class::stringLength($val, $min, NULL);
+		$max_bool = simpleValid_class::stringLength($val, NULL, $max);
 		if(!$min_bool){
 			$this->set_error($name, 'minlength');
 		}
