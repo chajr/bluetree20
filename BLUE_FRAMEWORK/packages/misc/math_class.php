@@ -6,7 +6,7 @@
  * @package     misc
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.1.0
+ * @version     1.2.0
  */
 class math_class
 {
@@ -17,11 +17,12 @@ class math_class
      * @param float $all value to check percent
      * @return integer|boolean return FALSE if $all was 0 value
      */
-    static function number_to_percent($part, $all)
+    static function numberToPercent($part, $all)
     {
         if ($all === 0) {
             return FALSE;
         }
+
         return ($part / $all) *100;
     }
 
