@@ -6,7 +6,7 @@
  * @subpackage  language
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.7.0
+ * @version     2.7.1
  */
 class lang_class
 {
@@ -512,6 +512,7 @@ class lang_class
     /**
      * return information that language is given as code, or NULL if not
      * if language code is not in GET and language support is on, redirect to correct language
+     * get given as reference, to remove language code
      * 
      * @param array $get GET
      * @return string|boolean language code, or NULL
@@ -531,6 +532,9 @@ class lang_class
             $lang = self::_checkLanguageCode($get);
 
             if (in_array($lang, self::$codes)) {
+                unset($get['core_lang']);
+                unset($get[0]);
+
                 return $lang;
             } else {
                 self::_redirectWithLanguageCode($get);
@@ -542,20 +546,21 @@ class lang_class
     }
 
     /**
-     * @param array $get GET array, given as reference, to remove language code
+     * check that first element isn't empty, or has language code and return it
+     * or start redirecting to page with language code
+     * 
+     * @param array $get GET array
      * @return string|null
      */
-    static protected function _checkLanguageCode(&$get)
+    static protected function _checkLanguageCode($get)
     {
         if (isset($get['core_lang'])) {
             $languageCode = $get['core_lang'];
-            unset($get['core_lang']);
             return $languageCode;
         }
 
         if (isset($get[0])) {
             $languageCode = $get[0];
-            unset($get[0]);
             return $languageCode;
         }
 
