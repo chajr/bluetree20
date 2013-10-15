@@ -51,4 +51,7 @@ $content = array(
     'js'                        => 'jakis javascript',
     'session_template'          => 'generowanie tresci bezpośrednio z sesji',
     'session_test_content'      => '(nie obsługuje tułmaczeń)',
+    'empty_loop_message'        => 'Brak treści do wyświetlenia',
+    'simple_loop_empty'         => 'Przykład wiadomości dla pustej pętli',
+    'data_expected'             => 'tu powinna być wartość',
 );

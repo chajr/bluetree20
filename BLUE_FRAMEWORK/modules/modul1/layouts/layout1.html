@@ -44,7 +44,22 @@
     {;start;loop1;}
     <b>{;loop1;item1;}</b>
     {;loop1;item2;}<br/>
+    {;loop1;item3;}<br/>
     {;end;loop1;}
+    {;start_empty;loop1;}
+    <b>{;lang;empty_loop_message;}</b>
+    {;end_empty;loop1;}
+
+    <legend>
+        {;lang;simple_loop_empty;}
+    </legend>
+    {;start;loop_empty;}
+        {;loop_empty;item1;}
+        {;loop_empty;item2;}<br/>
+    {;end;loop_empty;}
+    {;start_empty;loop_empty;}
+    <b>{;lang;empty_loop_message;}</b>
+    {;end_empty;loop_empty;}
 </fieldset>
 
 <fieldset>
@@ -53,8 +68,11 @@
     </legend>
     {;start;loop2;}
     <b>{;loop2;aaa;}</b>
-    {;loop2;bbb;} - {;op;oo;}{;lang;optional;} {;loop2;oo;}{;op_end;oo;}{;op;oo2;}{;lang;optional;} 2 {;loop2;oo2;}{;op_end;oo2;}
     <br/>
+    {;loop2;bbb;} - {;lang;data_expected;}: {;op;oo;}{;lang;optional;} {;loop2;oo;}{;op_end;oo;}
+    <br/>
+    {;lang;data_expected;}: {;op;oo2;}{;lang;optional;} 2 {;loop2;oo2;}{;op_end;oo2;}
+    <hr/>
     {;end;loop2;}
 </fieldset>
 

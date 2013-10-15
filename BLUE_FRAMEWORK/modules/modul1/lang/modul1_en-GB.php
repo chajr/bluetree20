@@ -51,4 +51,7 @@ $content = array(
     'js'                        => 'some javascript',
     'session_template'          => 'generate content directly from session',
     'session_test_content'      => '(don\'t handle translation)',
+    'empty_loop_message'        => 'No content to display',
+    'simple_loop_empty'         => 'Example of message for empty loop',
+    'data_expected'             => 'here should be some data',
 );

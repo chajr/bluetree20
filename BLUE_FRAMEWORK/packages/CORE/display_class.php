@@ -10,7 +10,7 @@
  * @subpackage  display
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.8.0
+ * @version     2.9.0
  */
 class display_class
 {
@@ -253,7 +253,6 @@ class display_class
      * @param array $contentArray
      * @param string|boolean $module name of module that wants to replace content (default core)
      * @return integer count of replaced markers
-     * @uses display_class::$DISPLAY
      * @example loop('marker', array(array(key => val), array(key2 => val2)), 'mod');
      * @example loop('marker', array(array(key => val), array(key2 => val2)));
      */
@@ -262,25 +261,32 @@ class display_class
         if (!$module) {
             $module = 'core';
         }
-        $int = 0;
+        $int                = 0;
+        $startMarker        = '{;start;' . $marker . ';}';
+        $endMarker          = '{;end;' . $marker . ';}';
+        $messageStartMarker = '{;start_empty;' . $marker . ';}';
+        $messageEndMarker   = '{;end_empty;' . $marker . ';}';
+        $end                = '';
+        $template           = $this->_getGroupMarkerContent(
+            $module,
+            $startMarker,
+            $endMarker
+        );
 
-        if ($contentArray) {
-            $start          = '{;start;'.$marker.';}';
-            $end            = '{;end;'.$marker.';}';
+        if (NULL === $template) {
+            return NULL;
+        }
 
-            $position1      = strpos($this->DISPLAY[$module], $start);
-            $position1      = $position1 + mb_strlen($start);
-            $position2      = strpos($this->DISPLAY[$module], $end);
-            $position2      = $position2 - $position1;
+        if (empty($contentArray)) {
+            $this->DISPLAY[$module] = str_replace(
+                $template,
+                '',
+                $this->DISPLAY[$module]
+            );
 
-            if ($position2 < 0) {
-                return NULL;
-            }
-
-            $template   = substr($this->DISPLAY[$module], $position1, $position2);
-            $end        = '';
-            $int        = 0;
-
+            $this->generate($messageStartMarker, '', $module);
+            $this->generate($messageEndMarker, '', $module);
+        } else {
             foreach ($contentArray as $row) {
                 $tmp = $template;
 
@@ -300,11 +306,64 @@ class display_class
             );
             $int += $int2;
 
-            unset($end);
-            unset($template);
-            unset($contentArray);
+            $emptyMessage = $this->_getGroupMarker(
+                $module,
+                $messageStartMarker,
+                $messageEndMarker
+            );
+
+            $this->DISPLAY[$module] = str_replace(
+                $emptyMessage,
+                '',
+                $this->DISPLAY[$module]
+            );
         }
+
         return $int;
+    }
+
+    /**
+     * get whole content without markers of marker group
+     * 
+     * @param string $module
+     * @param string $startMarker
+     * @param string $endMarker
+     * @return null|string
+     */
+    protected function _getGroupMarkerContent($module, $startMarker, $endMarker)
+    {
+        $position1      = strpos($this->DISPLAY[$module], $startMarker);
+        $position1      = $position1 + mb_strlen($startMarker);
+        $position2      = strpos($this->DISPLAY[$module], $endMarker);
+        $position2      = $position2 - $position1;
+
+        if ($position2 < 0 || !$position1) {
+            return NULL;
+        }
+
+        return substr($this->DISPLAY[$module], $position1, $position2);
+    }
+
+    /**
+     * get whole content with markers of marker group (eg. loop marker and content)
+     * 
+     * @param string $module
+     * @param string $startMarker
+     * @param string $endMarker
+     * @return null|string
+     */
+    protected function _getGroupMarker($module, $startMarker, $endMarker)
+    {
+        $position1      = strpos($this->DISPLAY[$module], $startMarker);
+        $position2      = strpos($this->DISPLAY[$module], $endMarker);
+        $position2      = $position2 + mb_strlen($endMarker);
+        $position2      = $position2 - $position1;
+
+        if ($position2 < 0 || !$position1) {
+            return NULL;
+        }
+
+        return substr($this->DISPLAY[$module], $position1, $position2);
     }
 
     /**
@@ -857,8 +916,8 @@ class display_class
         }
 
         $this->_cleanMarkers('optional');
-        $this->_cleanMarkers('loop');
-        
+        //$this->_cleanMarkers('loop');
+
         $this->DISPLAY = preg_replace(
             '#' . $this->_contentMarkers . '#',
             '',
