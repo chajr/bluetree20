@@ -10,7 +10,7 @@
  * @subpackage  display
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.9.0
+ * @version     2.9.1
  */
 class display_class
 {
@@ -538,7 +538,7 @@ class display_class
 
     /**
      * create URLs to css/js from given on array files
-     * 
+     *
      * @param string $type (css | js)
      */
     protected function _link($type)
@@ -577,7 +577,7 @@ class display_class
                         foreach ($val as $key => $media) {
                             foreach ($media as $file) {
                                 $links .= "\t\t" . $front . $file
-                                    . '" media="' . $key . $end."\n";
+                                    . '" media="' . $key . $end . "\n";
                             }
                         }
 
@@ -586,7 +586,6 @@ class display_class
                     }
                 }
             }
-            unset($arr['external']);
         }
 
         if (!empty($arr['internal'])) {
@@ -607,7 +606,7 @@ class display_class
                     }
 
                     $media .= "\t\t" . $front . $path . $intMedia
-                        . $endPath . '" media="' . $key . $end."\n";
+                        . $endPath . '" media="' . $key . $end . "\n";
                     unset($values['media']);
                 }
 
@@ -619,12 +618,13 @@ class display_class
             if ($internal) {
                 $links .= "\t\t" . $front . $path . $internal . $endPath . $end . "\n";
             }
+
             if ($media) {
                 $links .= $media;
             }
         }
 
-        $this->generate('core;'.$type, $links);
+        $this->generate('core;' . $type, $links);
     }
 
     /**
@@ -770,21 +770,21 @@ class display_class
         $this->DISPLAY = preg_replace('#{;core;mainpath;}#', $path[1], $this->DISPLAY);
 
         preg_match_all(
-            '#{;path;[\\w-/' . $this->_options['zmienne_rewrite_sep'] . ']+;}#',
+            '#{;path;[\\w-/\.' . $this->_options['zmienne_rewrite_sep'] . ']+;}#',
             $this->DISPLAY,
             $array
         );
         $this->_convert($array, 'path');
 
         preg_match_all(
-            '#{;full;[\\w-/' . $this->_options['zmienne_rewrite_sep'] . ']+;}#',
+            '#{;full;[\\w-/\.' . $this->_options['zmienne_rewrite_sep'] . ']+;}#',
             $this->DISPLAY,
             $array
         );
         $this->_convert($array, 'full');
 
         preg_match_all(
-            '#{;rel;[\\w-/' . $this->_options['zmienne_rewrite_sep'] . ']+;}#',
+            '#{;rel;[\\w-/\.' . $this->_options['zmienne_rewrite_sep'] . ']+;}#',
             $this->DISPLAY,
             $array);
         $this->_convert($array, 'rel');
