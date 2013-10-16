@@ -5,7 +5,7 @@
  * @subpackage  globals
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.4.1
+ * @version     2.4.2
  */
 
 /**
@@ -35,6 +35,7 @@ abstract class globals_class
      */
     public function __get($name)
     {
+        $this->_checkKey($name);
         $this->$name = NULL;
     }
 
@@ -46,6 +47,7 @@ abstract class globals_class
      */
     public function __set($name, $value)
     {
+        $this->_checkKey($name);
         $this->$name = $value;
     }
 
@@ -58,6 +60,8 @@ abstract class globals_class
      */
     protected function _add($name, $value)
     {
+        $this->_checkKey($name);
+
         if (isset($this->$name)) {
             if (is_array($this->$name)) {
                 $new            = array($value => $value);
@@ -220,6 +224,18 @@ abstract class globals_class
         }
 
         return serialize($dataArray);
+    }
+
+    protected function _checkKey($key)
+    {
+        $keyCheck = preg_match(core_class::options('global_var_check'), $key);
+
+        if (!$keyCheck) {
+            throw new coreException(
+                'core_error_25',
+                $key . ' - rewrite: ' . core_class::options('global_var_check')
+            );
+        }
     }
 }
 
@@ -669,6 +685,8 @@ class post
             $counter = 0;
 
             foreach ($_POST as $key => $parameter) {
+                $this->_checkKey($key);
+
                 $counter++;
                 $this->_maxParameters($counter, 'post');
 
@@ -710,6 +728,7 @@ class cookie
         if (!empty($_COOKIE)) {
             
             foreach ($_COOKIE as $key => $parameter) {
+                $this->_checkKey($key);
                 $this->$key = $parameter;
             }
         } else {
@@ -789,6 +808,8 @@ class session
                     $val = array();
                 }
 
+                $this->_checkKey($key);
+
                 switch ($key) {
                     case"public":
                         foreach ($val as $key2 => $val2) {
@@ -847,6 +868,8 @@ class session
                 '#374557'
             ));
         }
+
+        $this->_checkKey($name);
 
         switch ($group) {
             case"public":
@@ -967,7 +990,9 @@ class session
         }
 
         if (!$name) {
-            foreach ($this as $param => $val){ 
+            foreach ($this as $param => $val){
+
+                $this->_checkKey($param);
 
                 if ($param == '_coreCore') {
                     continue;
@@ -1003,11 +1028,14 @@ class session
                         ){
                             continue;
                         }
+
+                        $this->_checkKey($param);
                         unset($this->$param);
                     }
                     break;
 
                 default:
+                    $this->_checkKey($name);
                     unset($this->$name);
                     break;
             }
@@ -1069,6 +1097,8 @@ class files
             $counter = 0;
 
             foreach ($_FILES as $key => $file) {
+                $this->_checkKey($key);
+
                 $this->_maxParameters($counter, 'files');
 
                 if ($file['size'] > core_class::options('file_max_size')) {
@@ -1126,6 +1156,8 @@ class files
                 '#516E91'
             ));
         }
+
+        $this->_checkKey($name);
 
         if (is_array($destination)) {
             if ($name) {
@@ -1349,6 +1381,8 @@ class files
                 '#516E91'
             ));
         }
+
+        $this->_checkKey($file);
 
         $name = starter_class::path('TMP').'tmp';
         $bool = move_uploaded_file($this->$file, $name);

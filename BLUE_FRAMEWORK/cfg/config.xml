@@ -28,9 +28,11 @@
     <!--if different on 0, then use subdomain as main page, value number is page a nesting level-->
 
     <option id="reg_exp_rewrite" value="#^[\w-\\,\/]*$#"/>
-    <!--regular expresion to check URL on mode rewrite on-->
-    <option id="reg_exp_classic" value="#^[\w\./?=&amp;-]*$#"/>
-    <!--regular expresion to check URL on mode rewrite off -->
+    <!--regular expression to check URL on mode rewrite on-->
+    <option id="reg_exp_classic" value="#^[\w\/?=&amp;-]*$#"/>
+    <!--regular expression to check URL on mode rewrite off-->
+    <option id="global_var_check" value="#^[a-zA-Z][\w]*$#"/>
+    <!--regular expression to check all variable names given in post,files etc-->
     <option id="max_get" value="11"/>
     <!--max number of URL parameters (0 -no limit)-->
     <option id="max_post" value="45"/>

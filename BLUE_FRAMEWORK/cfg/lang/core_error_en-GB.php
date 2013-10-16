@@ -39,4 +39,5 @@ $content = array(
     'core_error_22' => 'No proper object to load',
     'core_error_23' => 'Page will be displayed soon',
     'core_error_24' => 'Page loose their valid',
+    'core_error_25' => 'Wrong key name for variable',
 );

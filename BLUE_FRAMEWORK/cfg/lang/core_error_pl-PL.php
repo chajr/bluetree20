@@ -39,4 +39,5 @@ $content = array(
     'core_error_22' => 'Brak odpowiedniego obiektu do załadowania',
     'core_error_23' => 'Strona pojawi się dopiero wkrótce',
     'core_error_24' => 'Strona straciła swoją ważność',
+    'core_error_25' => 'Błędna nazwa klucza dla zmiennej',
 );
