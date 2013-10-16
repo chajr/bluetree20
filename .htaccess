@@ -1,8 +1,7 @@
 AddOutputFilterByType DEFLATE application/x-httpd-php
 RewriteEngine On
-#RewriteBase /
+RewriteBase /
 #AllowOverride All
-#dla netart
+
 #RewriteRule ^/?([,\w/-]*)?$ /index.php
-#dla localhost
 RewriteRule ^/?([,\w/-]*)?$ index.php
