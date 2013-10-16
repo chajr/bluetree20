@@ -5,7 +5,7 @@
  * @subpackage  error
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.3.0
+ * @version     2.4.0
  */
 
 /**
@@ -204,6 +204,13 @@ final class error_class
 
             $buffer = preg_replace('#{;([\\w;-])+;}#', '', $buffer);
         }
+
+        if ((bool)$debug) {
+            if (class_exists('tracer_class')) {
+                $buffer .= tracer_class::display();
+            }
+        }
+
         return $buffer;
     }
 
@@ -620,7 +627,15 @@ final class error_class
             }
 
             $this->_lang->translate($this->_display);
-            return $this->_display->render();
+            $content = $this->_display->render();
+
+            if ($this->_options['debug']) {
+                if (class_exists('tracer_class')) {
+                    $content .= tracer_class::display();
+                }
+            }
+
+            return $content;
         }
     }
 
