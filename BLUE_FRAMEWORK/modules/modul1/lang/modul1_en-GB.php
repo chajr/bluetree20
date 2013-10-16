@@ -54,4 +54,8 @@ $content = array(
     'empty_loop_message'        => 'No content to display',
     'simple_loop_empty'         => 'Example of message for empty loop',
     'data_expected'             => 'here should be some data',
+    'nested_values'             => 'nested values',
+    'nested_value'              => 'nested value',
+    'optional_nested'           => 'optional nested value',
+    'nested_loops'              => 'nested loops',
 );

@@ -64,6 +64,30 @@
 
 <fieldset>
     <legend>
+        {;lang;nested_loops;}
+    </legend>
+    {;start;app_category_groups;}
+    {;app_category_groups;name;} - {;app_category_groups;id;}
+    <br/>
+    {;lang;nested_values;}:<br/><br/>
+
+    {;start;app_category_{;app_category_groups;id;};}
+    {;lang;nested_value;}: {;app_category_{;app_category_groups;id;};id;}<br/>
+    {;lang;nested_value;}: {;app_category_{;app_category_groups;id;};name;}
+    <br/>
+    {;lang;optional_nested;}:
+    {;op;app_category_{;app_category_groups;id;};}
+    {;app_category_{;app_category_groups;id;};optional;}
+    {;op_end;app_category_{;app_category_groups;id;};}
+    <br/>
+
+    {;end;app_category_{;app_category_groups;id;};}
+    <hr/>
+    {;end;app_category_groups;}
+</fieldset>
+
+<fieldset>
+    <legend>
         {;lang;optional_loop;}
     </legend>
     {;start;loop2;}

@@ -7,12 +7,12 @@
  * @subpackage  modul1
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.4.0
+ * @version     1.5.0
  */
 class modul1 
     extends module_class
 {
-    static $version             = '1.4.0';
+    static $version             = '1.5.0';
     static $name                = 'module number 1';
     public $requireLibraries    = array();
     public $requireModules      = array();
@@ -68,6 +68,46 @@ class modul1
         );
         $this->loop('loop1', $tab);
         $this->loop('loop_empty', array());
+
+        
+        $nestedLoopBase = array(
+            array(
+                'id'    => 1,
+                'name'  => 'name 1',
+            ),
+            array(
+                'id'    => 2,
+                'name'  => 'name 2',
+            ),
+            array(
+                'id'    => 3,
+                'name'  => 'name 3',
+            ),
+        );
+
+        $nestedLoopSecond = array(
+            array(
+                'id'    => 1,
+                'name'  => 'second name 1',
+            ),
+            array(
+                'id'    => 2,
+                'name'  => 'second name 2',
+            ),
+            array(
+                'id'        => 3,
+                'name'      => 'second name 3',
+                'optional'  => 'ok',
+            ),
+        );
+
+        $this->loop('app_category_groups', $nestedLoopBase);
+
+        foreach ($nestedLoopSecond as $catCategory) {
+            $loopName = 'app_category_' . $catCategory['id'];
+            var_dump($loopName, $catCategory);
+            $this->loop($loopName, $nestedLoopSecond);
+        }
 
         $arr = array(
             array(

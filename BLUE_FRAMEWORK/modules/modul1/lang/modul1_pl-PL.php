@@ -54,4 +54,8 @@ $content = array(
     'empty_loop_message'        => 'Brak treści do wyświetlenia',
     'simple_loop_empty'         => 'Przykład wiadomości dla pustej pętli',
     'data_expected'             => 'tu powinna być wartość',
+    'nested_values'             => 'zagnieżdżona pętla',
+    'nested_value'              => 'zagnieżdżona wartość',
+    'optional_nested'           => 'opcjonalna zagnieżdżona wartość',
+    'nested_loops'              => 'zagnieżdżone pętle',
 );
