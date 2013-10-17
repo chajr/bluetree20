@@ -5,7 +5,7 @@
  * @subpackage  error
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.4.0
+ * @version     2.4.1
  */
 
 /**
@@ -203,11 +203,11 @@ final class error_class
             }
 
             $buffer = preg_replace('#{;([\\w;-])+;}#', '', $buffer);
-        }
 
-        if ((bool)$debug) {
-            if (class_exists('tracer_class')) {
-                $buffer .= tracer_class::display();
+            if ((bool)$debug) {
+                if (class_exists('tracer_class')) {
+                    $buffer .= tracer_class::display();
+                }
             }
         }
 
