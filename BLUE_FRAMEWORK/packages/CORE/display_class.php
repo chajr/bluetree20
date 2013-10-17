@@ -10,7 +10,7 @@
  * @subpackage  display
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.9.1
+ * @version     2.9.2
  */
 class display_class
 {
@@ -694,7 +694,8 @@ class display_class
             );
 
             $finalPath = $this->_checkTemplatePath($name, $module);
-            $content = starter_class::load($finalPath, TRUE);
+            $content   = starter_class::load($finalPath, TRUE);
+
             if (!$content) {
                 throw new coreException('core_error_3', $finalPath . '.html');
             }
