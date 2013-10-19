@@ -1,0 +1,232 @@
+<section id="commit_generator">
+    <header>
+        <h1>
+            {;lang;commit_gen;}
+        </h1>
+    </header>
+    <section>
+        <form method="post" action="{;full;/commit/generate;}" id="commit_generator_form"
+              role="form" class="form-inline"
+        >
+            <div id="commit_base_info" class="form-inline">
+                <div class="form-group">
+                    <label class="sr-only" for="title">{;lang;commit_title;}</label>
+                    <input type="text" class="form-control" id="title"
+                           placeholder="{;lang;commit_title;}" name="title"
+                    />
+
+                    <label class="sr-only" for="version">{;lang;commit_version;}</label>
+                    <input type="text" class="form-control" id="version"
+                           placeholder="{;lang;commit_version;}" name="version"
+                    />
+
+                    <label class="sr-only" for="issue">{;lang;commit_issue;}</label>
+                    <input type="text" class="form-control" id="issue"
+                           placeholder="{;lang;commit_issue;}" name="issue"
+                    />
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                        <input name="alpha" type="checkbox"/>
+                        {;lang;commit_alpha;} THIS IS PRE-ALPHA SOFTWARE, use it at your own risk.
+                    </label>
+                </div>
+
+                <textarea class="form-control" rows="6"
+                          placeholder="{;lang;commit_description;}"
+                ></textarea>
+            </div>
+
+            <div id="buttons">
+                <button type="button" class="btn btn-success" data-type="add">
+                    <i class="icon-file-new"></i>
+                    {;lang;commit_add_file;}
+                </button>
+                <button type="button" class="btn btn-primary" data-type="modify">
+                    <i class="icon-file-edit"></i>
+                    {;lang;commit_modify_file;}
+                </button>
+                <button type="button" class="btn btn-danger" data-type="remove">
+                    <i class="icon-remove-circle"></i>
+                    {;lang;commit_remove_file;}
+                </button>
+                <button type="button" class="btn btn-info" data-type="modify_version">
+                    <i class="icon-tag"></i>
+                    {;lang;commit_version_c;} config.xml
+                </button>
+            </div>
+
+            <div id="content">
+                <div id="messages"></div>
+
+                <div id="empty_messages">
+                    <div class="message_add message">
+                        <div class="form-group file_label">
+                            <label class="col-lg-2 control-label">
+                                {;lang;added;}
+                            </label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control"
+                                       placeholder="{;lang;file_path;}" name="add"
+                                />
+                            </div>
+                            <button type="button" class="btn btn-danger">
+                                &nbsp;-&nbsp;
+                            </button>
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="form-group buttons_method">
+                            <button type="button" class="btn btn-success"
+                                    data-type="{;lang;commit_add;}"
+                            >
+                                <i class="icon-file-new"></i>
+                                {;lang;commit_add;}
+                            </button>
+                            <button type="button" class="btn btn-primary"
+                                    data-type="{;lang;commit_modify;}"
+                            >
+                                <i class="icon-file-edit"></i>
+                                {;lang;commit_modify;}
+                            </button>
+                            <button type="button" class="btn btn-danger"
+                                    data-type="{;lang;commit_remove;}"
+                            >
+                                <i class="icon-remove-circle"></i>
+                                {;lang;commit_remove;}
+                            </button>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div class="message_modify message">
+                        <div class="form-group file_label">
+                            <label class="col-lg-2 control-label">
+                                {;lang;modified;}
+                            </label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control"
+                                       placeholder="{;lang;file_path;}"
+                                       name="modify"
+                                />
+                            </div>
+                            <button type="button" class="btn btn-danger">
+                                &nbsp;-&nbsp;
+                            </button>
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="form-group buttons_method">
+                            <button type="button" class="btn btn-success"
+                                    data-type="{;lang;commit_add;}"
+                                    >
+                                <i class="icon-file-new"></i>
+                                {;lang;commit_add;}
+                            </button>
+                            <button type="button" class="btn btn-primary"
+                                    data-type="{;lang;commit_modify;}"
+                                    >
+                                <i class="icon-file-edit"></i>
+                                {;lang;commit_modify;}
+                            </button>
+                            <button type="button" class="btn btn-danger"
+                                    data-type="{;lang;commit_remove;}"
+                                    >
+                                <i class="icon-remove-circle"></i>
+                                {;lang;commit_remove;}
+                            </button>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div class="message_remove message">
+                        <div class="form-group file_label">
+                            <label class="col-lg-2 control-label">
+                                {;lang;removed;}
+                            </label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control"
+                                       placeholder="{;lang;file_path;}"
+                                       name="removed"
+                                />
+                            </div>
+                            <button type="button" class="btn btn-danger">
+                                &nbsp;-&nbsp;
+                            </button>
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="form-group buttons_method">
+                            <button type="button" class="btn btn-success"
+                                    data-type="{;lang;commit_add;}"
+                                    >
+                                <i class="icon-file-new"></i>
+                                {;lang;commit_add;}
+                            </button>
+                            <button type="button" class="btn btn-primary"
+                                    data-type="{;lang;commit_modify;}"
+                                    >
+                                <i class="icon-file-edit"></i>
+                                {;lang;commit_modify;}
+                            </button>
+                            <button type="button" class="btn btn-danger"
+                                    data-type="{;lang;commit_remove;}"
+                                    >
+                                <i class="icon-remove-circle"></i>
+                                {;lang;commit_remove;}
+                            </button>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div class="message_modify_version message">
+                        <div class="form-group file_label">
+                            <label class="col-lg-2 control-label">
+                                {;lang;modified;}
+                            </label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control"
+                                       placeholder="{;lang;file_path;}"
+                                       name="removed"
+                                />
+                            </div>
+                            <button type="button" class="btn btn-danger">
+                                &nbsp;-&nbsp;
+                            </button>
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="form-group version">
+                            {;lang;version_change;}
+                            <input type="text" class="form-control" name="from"/>
+                            {;lang;version_to;}
+                            <input type="text" class="form-control" name="to"/>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div class="file_textarea">
+                        <textarea class="form-control" rows="2"
+                                  placeholder="{;lang;description;}"
+                        ></textarea>
+                        <button type="button" class="btn btn-danger">
+                            &nbsp;-&nbsp;
+                        </button>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </form>
+    </section>
+
+    <footer>
+        <button type="button" class="btn btn-default btn-lg btn-block" id="submit">
+            <span>
+                <i class="icon-cogs"></i>
+            </span>
+            <b>{;lang;generate;}</b><br/>
+            {;lang;commit_message;}
+        </button>
+    </footer>
+</section>

@@ -11,6 +11,8 @@
 starter_class::load('packages/tester/benchmark_class.php');
 starter_class::load('packages/tester/tracer_class.php');
 benchmark_class::start();
+benchmark_class::turnOffBenchmark();
+tracer_class::turnOffTracer();
 
 $bool = starter_class::load('packages/CORE/error_class.php');
 if (!$bool) {

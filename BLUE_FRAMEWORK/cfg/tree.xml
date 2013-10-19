@@ -15,8 +15,9 @@
     <lib on="1">valid</lib>
     <lib on="0">jakas_biblioteka</lib>
     <lib on="1">user</lib>
-    <mod on="1" param="jakis">modul1</mod>
     <css>css1</css>
+    <css>elusive-webfont</css>
+    <css>elusive-webfont-ie7</css>
     <!--
     <css external="1">http://domenaaaa.pl/css.css</css>
     <css media="print" external="1">http://domenaaaa.pl/cssasd.css</css>
@@ -25,6 +26,7 @@
     <js external="1">http://domenaaaa.pl/js.js</js>
     -->
     <js>js1</js>
+    <js>bootstrap-min</js>
 
     <page id="index" name="Main Page" layout="index" options="1111" changefreq="always" priority="0.8">
         <lib on="1">db/abstractSql</lib>
@@ -32,6 +34,7 @@
         <lib on="1">time</lib>
         <lib on="1">image/image</lib>
         <lib on="1">forms</lib>
+        <mod on="1" param="jakis">modul1</mod>
         <mod on="1" block="blok_testowy">mod2</mod>
         <mod on="1" block="blok_testowy">mod3</mod>
         <css external="0">css2</css>
@@ -60,6 +63,7 @@
         <lib on="1">image</lib>
         <lib on="1">time</lib>
         <lib on="1">forms</lib>
+        <mod on="1" param="jakis">modul1</mod>
         <mod on="1" block="blok_testowy">mod2</mod>
         <css external="0">css2</css>
         <css external="0">css3</css>
@@ -77,8 +81,17 @@
         </sub>
 
         <lib on="1">db/mysql</lib>
+        <mod on="1" param="jakis">modul1</mod>
         <mod on="1">mod3</mod>
         <mod on="1">modd</mod>
+    </page>
+
+    <page id="commit" name="Commit creator" layout="commit" options="1111">
+        <sub id="generate" name="Commit creator" layout="commit" options="11110">
+            <mod on="1" param="generate">commit</mod>
+        </sub>
+        <mod on="1">commit</mod>
+        <css>bootstrap</css>
     </page>
 
     <page id="ajax_test" layout="ajax" name="Ajax" options="1000">
@@ -93,5 +106,10 @@
     <page id="sitemap" name="sitemap" layout="empty" options="1001">
         <mod on="1" param="sitemap">main</mod>
     </page>
+
+    <page id="forum" name="forum" layout="empty" options="1001"
+          redirect="http://wataha.at/forum"
+    />
+
 
 </root>

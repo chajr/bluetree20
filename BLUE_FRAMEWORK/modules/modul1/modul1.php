@@ -7,12 +7,12 @@
  * @subpackage  modul1
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.5.0
+ * @version     1.5.1
  */
 class modul1 
     extends module_class
 {
-    static $version             = '1.5.0';
+    static $version             = '1.5.1';
     static $name                = 'module number 1';
     public $requireLibraries    = array();
     public $requireModules      = array();
@@ -47,7 +47,7 @@ class modul1
 
         //add css and js
         $this->set(
-            'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js',
+            'https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js',
             'js',
             'external'
         );
@@ -105,7 +105,6 @@ class modul1
 
         foreach ($nestedLoopSecond as $catCategory) {
             $loopName = 'app_category_' . $catCategory['id'];
-            var_dump($loopName, $catCategory);
             $this->loop($loopName, $nestedLoopSecond);
         }
 
