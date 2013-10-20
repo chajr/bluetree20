@@ -1,3 +1,5 @@
+var blockCounter = 0;
+
 $(document).ready(function()
 {
     $('#buttons button').click(function()
@@ -31,17 +33,35 @@ $(document).ready(function()
 
 function duplicateBlock(element)
 {
-    fullBlock = $('#empty_messages .message_' + element).clone();
+    blockCounter++;
+    var fullBlock = $('#empty_messages .message_' + element).clone();
 
-    $('#content #messages').append(fullBlock);
+    fullBlock.data('block_counter', blockCounter);
+    fullBlock.find('[name="add"]')      .attr('name', 'add_' + blockCounter);
+    fullBlock.find('[name="modify"]')   .attr('name', 'modify_' + blockCounter);
+    fullBlock.find('[name="removed"]')  .attr('name', 'removed_' + blockCounter);
+    fullBlock.find('[name="from"]')     .attr('name', 'from_' + blockCounter);
+    fullBlock.find('[name="to"]')       .attr('name', 'to_' + blockCounter);
+
+    fullBlock.find('textarea[name="added"]') .attr('name', 'added_' + blockCounter);
+    fullBlock.find('textarea[name="remove"]').attr('name', 'remove_' + blockCounter);
+
+    $('#content #messages').prepend(fullBlock);
 }
 
 function duplicateDescription(type, parent)
 {
-    fullBlock       = $('#empty_messages .file_textarea').clone();
-    placeholder     = fullBlock.find('textarea').attr('placeholder');
-    newPlaceholder  = type + ' ' + placeholder;
+    var fullBlock       = $('#empty_messages > .file_textarea').clone();
+    var placeholder     = fullBlock.find('textarea').attr('placeholder');
+    var newPlaceholder  = type + ' ' + placeholder;
+    var counter         = parent.data('counter');
+    var parentCounter   = parent.data('block_counter');
+
+    counter++;
+    parent.data('counter', counter);
+    var name = type + '_' + parentCounter + '_' + counter;
 
     fullBlock.find('textarea').attr('placeholder', newPlaceholder);
+    fullBlock.find('textarea').attr('name', name);
     parent.append(fullBlock);
 }

@@ -22,11 +22,14 @@ class commit
     public function run()
     {
         $this->_createLayout();
+        echo '<pre>';
+        var_dump($this->post);
+        echo '</pre>';
     }
 
     public function generateCommit()
     {
-        echo 'ok';
+        
     }
 
     protected function _createLayout()

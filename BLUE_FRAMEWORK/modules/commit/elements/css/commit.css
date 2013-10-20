@@ -117,3 +117,6 @@ footer .btn-block b{
 .message_add{
     background-color: #e2f2e3;
 }
+.message button.btn-danger{
+    width: 40px;
+}

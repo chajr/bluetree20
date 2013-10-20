@@ -59,165 +59,135 @@
 
             <div id="content">
                 <div id="messages"></div>
-
-                <div id="empty_messages">
-                    <div class="message_add message">
-                        <div class="form-group file_label">
-                            <label class="col-lg-2 control-label">
-                                {;lang;added;}
-                            </label>
-                            <div class="col-lg-9">
-                                <input type="text" class="form-control"
-                                       placeholder="{;lang;file_path;}" name="add"
-                                />
-                            </div>
-                            <button type="button" class="btn btn-danger">
-                                &nbsp;-&nbsp;
-                            </button>
-                            <div class="clear"></div>
-                        </div>
-
-                        <div class="form-group buttons_method">
-                            <button type="button" class="btn btn-success"
-                                    data-type="{;lang;commit_add;}"
-                            >
-                                <i class="icon-file-new"></i>
-                                {;lang;commit_add;}
-                            </button>
-                            <button type="button" class="btn btn-primary"
-                                    data-type="{;lang;commit_modify;}"
-                            >
-                                <i class="icon-file-edit"></i>
-                                {;lang;commit_modify;}
-                            </button>
-                            <button type="button" class="btn btn-danger"
-                                    data-type="{;lang;commit_remove;}"
-                            >
-                                <i class="icon-remove-circle"></i>
-                                {;lang;commit_remove;}
-                            </button>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-
-                    <div class="message_modify message">
-                        <div class="form-group file_label">
-                            <label class="col-lg-2 control-label">
-                                {;lang;modified;}
-                            </label>
-                            <div class="col-lg-9">
-                                <input type="text" class="form-control"
-                                       placeholder="{;lang;file_path;}"
-                                       name="modify"
-                                />
-                            </div>
-                            <button type="button" class="btn btn-danger">
-                                &nbsp;-&nbsp;
-                            </button>
-                            <div class="clear"></div>
-                        </div>
-
-                        <div class="form-group buttons_method">
-                            <button type="button" class="btn btn-success"
-                                    data-type="{;lang;commit_add;}"
-                                    >
-                                <i class="icon-file-new"></i>
-                                {;lang;commit_add;}
-                            </button>
-                            <button type="button" class="btn btn-primary"
-                                    data-type="{;lang;commit_modify;}"
-                                    >
-                                <i class="icon-file-edit"></i>
-                                {;lang;commit_modify;}
-                            </button>
-                            <button type="button" class="btn btn-danger"
-                                    data-type="{;lang;commit_remove;}"
-                                    >
-                                <i class="icon-remove-circle"></i>
-                                {;lang;commit_remove;}
-                            </button>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-
-                    <div class="message_remove message">
-                        <div class="form-group file_label">
-                            <label class="col-lg-2 control-label">
-                                {;lang;removed;}
-                            </label>
-                            <div class="col-lg-9">
-                                <input type="text" class="form-control"
-                                       placeholder="{;lang;file_path;}"
-                                       name="removed"
-                                />
-                            </div>
-                            <button type="button" class="btn btn-danger">
-                                &nbsp;-&nbsp;
-                            </button>
-                            <div class="clear"></div>
-                        </div>
-
-                        <div class="form-group buttons_method">
-                            <button type="button" class="btn btn-success"
-                                    data-type="{;lang;commit_add;}"
-                                    >
-                                <i class="icon-file-new"></i>
-                                {;lang;commit_add;}
-                            </button>
-                            <button type="button" class="btn btn-primary"
-                                    data-type="{;lang;commit_modify;}"
-                                    >
-                                <i class="icon-file-edit"></i>
-                                {;lang;commit_modify;}
-                            </button>
-                            <button type="button" class="btn btn-danger"
-                                    data-type="{;lang;commit_remove;}"
-                                    >
-                                <i class="icon-remove-circle"></i>
-                                {;lang;commit_remove;}
-                            </button>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-
-                    <div class="message_modify_version message">
-                        <div class="form-group file_label">
-                            <label class="col-lg-2 control-label">
-                                {;lang;modified;}
-                            </label>
-                            <div class="col-lg-9">
-                                <input type="text" class="form-control"
-                                       placeholder="{;lang;file_path;}"
-                                       name="removed"
-                                />
-                            </div>
-                            <button type="button" class="btn btn-danger">
-                                &nbsp;-&nbsp;
-                            </button>
-                            <div class="clear"></div>
-                        </div>
-
-                        <div class="form-group version">
-                            {;lang;version_change;}
-                            <input type="text" class="form-control" name="from"/>
-                            {;lang;version_to;}
-                            <input type="text" class="form-control" name="to"/>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-
-                    <div class="file_textarea">
-                        <textarea class="form-control" rows="2"
-                                  placeholder="{;lang;description;}"
-                        ></textarea>
-                        <button type="button" class="btn btn-danger">
-                            &nbsp;-&nbsp;
-                        </button>
-                    </div>
-                </div>
                 <div class="clear"></div>
             </div>
         </form>
+
+        <div id="empty_messages">
+            <div class="message_add message" data-counter="0">
+                <div class="form-group file_label">
+                    <label class="col-lg-2 control-label">
+                        {;lang;added;}
+                    </label>
+                    <div class="col-lg-9">
+                        <input type="text" class="form-control"
+                               placeholder="{;lang;file_path;}" name="add"
+                                />
+                    </div>
+                    <button type="button" class="btn btn-danger">
+                        <i class="icon-minus-sign"></i>
+                    </button>
+                    <div class="clear"></div>
+                </div>
+
+                <div class="file_textarea">
+                    <textarea class="form-control" rows="2" name="added"
+                              placeholder="{;lang;description;}"
+                            ></textarea>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            <div class="message_modify message" data-counter="0">
+                <div class="form-group file_label">
+                    <label class="col-lg-2 control-label">
+                        {;lang;modified;}
+                    </label>
+                    <div class="col-lg-9">
+                        <input type="text" class="form-control"
+                               placeholder="{;lang;file_path;}"
+                               name="modify"
+                                />
+                    </div>
+                    <button type="button" class="btn btn-danger">
+                        <i class="icon-minus-sign"></i>
+                    </button>
+                    <div class="clear"></div>
+                </div>
+
+                <div class="form-group buttons_method">
+                    <button type="button" class="btn btn-success"
+                            data-type="{;lang;commit_add;}"
+                            >
+                        <i class="icon-file-new"></i>
+                        {;lang;commit_add;}
+                    </button>
+                    <button type="button" class="btn btn-primary"
+                            data-type="{;lang;commit_modify;}"
+                            >
+                        <i class="icon-file-edit"></i>
+                        {;lang;commit_modify;}
+                    </button>
+                    <button type="button" class="btn btn-danger"
+                            data-type="{;lang;commit_remove;}"
+                            >
+                        <i class="icon-remove-circle"></i>
+                        {;lang;commit_remove;}
+                    </button>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            <div class="message_remove message" data-counter="0">
+                <div class="form-group file_label">
+                    <label class="col-lg-2 control-label">
+                        {;lang;removed;}
+                    </label>
+                    <div class="col-lg-9">
+                        <input type="text" class="form-control"
+                               placeholder="{;lang;file_path;}"
+                               name="removed"
+                                />
+                    </div>
+                    <button type="button" class="btn btn-danger">
+                        <i class="icon-minus-sign"></i>
+                    </button>
+                    <div class="clear"></div>
+                </div>
+
+                <div class="file_textarea">
+                    <textarea class="form-control" rows="2" name="remove"
+                              placeholder="{;lang;description;}"
+                            ></textarea>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            <div class="message_modify_version message" data-counter="0">
+                <div class="form-group file_label">
+                    <label class="col-lg-2 control-label">
+                        {;lang;modified;}
+                    </label>
+                    <div class="col-lg-9">
+                        <input type="text" class="form-control"
+                               placeholder="{;lang;file_path;}"
+                               name="removed"
+                                />
+                    </div>
+                    <button type="button" class="btn btn-danger">
+                        &nbsp;<i class="icon-minus-sign"></i>
+                    </button>
+                    <div class="clear"></div>
+                </div>
+
+                <div class="form-group version">
+                    {;lang;version_change;}
+                    <input type="text" class="form-control" name="from"/>
+                    {;lang;version_to;}
+                    <input type="text" class="form-control" name="to"/>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            <div class="file_textarea">
+                <textarea class="form-control" rows="2" name=""
+                          placeholder="{;lang;description;}"
+                        ></textarea>
+                <button type="button" class="btn btn-danger">
+                    <i class="icon-minus-sign"></i>
+                </button>
+            </div>
+        </div>
     </section>
 
     <footer>
