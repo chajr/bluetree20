@@ -22,4 +22,5 @@ $content = array(
     'version_change'        => 'changed version from:',
     'version_to'            => 'to:',
     'description'           => 'description:',
+    'commit_updated'        => 'updated',
 );

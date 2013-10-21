@@ -40,8 +40,8 @@ function duplicateBlock(element)
     fullBlock.find('[name="add"]')      .attr('name', 'add_' + blockCounter);
     fullBlock.find('[name="modify"]')   .attr('name', 'modify_' + blockCounter);
     fullBlock.find('[name="removed"]')  .attr('name', 'removed_' + blockCounter);
-    fullBlock.find('[name="from"]')     .attr('name', 'from_' + blockCounter);
-    fullBlock.find('[name="to"]')       .attr('name', 'to_' + blockCounter);
+    fullBlock.find('[name="from"]')     .attr('name', 'from_' + blockCounter + '_1');
+    fullBlock.find('[name="to"]')       .attr('name', 'to_' + blockCounter + '_1');
 
     fullBlock.find('textarea[name="added"]') .attr('name', 'added_' + blockCounter);
     fullBlock.find('textarea[name="remove"]').attr('name', 'remove_' + blockCounter);
