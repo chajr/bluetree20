@@ -31,24 +31,43 @@ $(document).ready(function()
     });
 });
 
+/**
+ * create message block
+ * 
+ * @param element string
+ */
 function duplicateBlock(element)
 {
     blockCounter++;
     var fullBlock = $('#empty_messages .message_' + element).clone();
 
     fullBlock.data('block_counter', blockCounter);
-    fullBlock.find('[name="add"]')      .attr('name', 'add_' + blockCounter);
-    fullBlock.find('[name="modify"]')   .attr('name', 'modify_' + blockCounter);
-    fullBlock.find('[name="removed"]')  .attr('name', 'removed_' + blockCounter);
-    fullBlock.find('[name="from"]')     .attr('name', 'from_' + blockCounter + '_1');
-    fullBlock.find('[name="to"]')       .attr('name', 'to_' + blockCounter + '_1');
+    fullBlock.find('[name="add"]')          .attr('name', 'add_' + blockCounter);
+    fullBlock.find('[name="modify"]')       .attr('name', 'modify_' + blockCounter);
+    fullBlock.find('[name="modifyVersion"]').attr('name', 'modifyVersion_' + blockCounter);
+    fullBlock.find('[name="removed"]')      .attr('name', 'removed_' + blockCounter);
+    fullBlock.find('[name="from"]')         .attr('name', 'from_' + blockCounter + '_1');
+    fullBlock.find('[name="to"]')           .attr('name', 'to_' + blockCounter + '_1');
 
-    fullBlock.find('textarea[name="added"]') .attr('name', 'added_' + blockCounter);
-    fullBlock.find('textarea[name="remove"]').attr('name', 'remove_' + blockCounter);
+    fullBlock.find('textarea[name="added"]').attr(
+        'name',
+        'added_' + blockCounter + '_1'
+    );
+
+    fullBlock.find('textarea[name="remove"]').attr(
+        'name',
+        'remove_' + blockCounter + '_1'
+    );
 
     $('#content #messages').prepend(fullBlock);
 }
 
+/**
+ * create description element
+ * 
+ * @param type string
+ * @param parent jQuery object
+ */
 function duplicateDescription(type, parent)
 {
     var fullBlock       = $('#empty_messages > .file_textarea').clone();

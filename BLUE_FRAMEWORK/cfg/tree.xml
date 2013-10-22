@@ -87,7 +87,7 @@
     </page>
 
     <page id="commit" name="Commit creator" layout="commit" options="1111">
-        <sub id="generate" name="Commit creator" layout="commit" options="11110">
+        <sub id="generate" name="Commit creator" layout="commit" options="11111">
             <mod on="1" param="generate">commit</mod>
         </sub>
         <mod on="1">commit</mod>

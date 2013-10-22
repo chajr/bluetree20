@@ -23,4 +23,6 @@ $content = array(
     'version_to'            => 'na:',
     'description'           => 'opis:',
     'commit_updated'        => 'zmodyfikowano',
+    'commit_return'         => 'powrót',
+    'parent'                => 'do poprzedniej strony',
 );
