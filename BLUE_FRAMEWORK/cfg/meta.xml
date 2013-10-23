@@ -7,7 +7,7 @@
 * @package     BlueFramework Core
 * @author      Michał Adamiak    <chajr@bluetree.pl>
 * @copyright   chajr/bluetree
-* @version     1.0.1
+* @version     1.1.0
 */
 -->
 <!DOCTYPE root SYSTEM "dtd/meta.dtd">
@@ -39,5 +39,8 @@
         <meta name="keywords" content=", contact, localization" update="1"/>
         <meta name="description" content="a"  update="1"/>
         <meta name="author" content="bluetree.pl powered by blueFramework 2.0" />
+    </page>
+    <page val="commit">
+        <title title="Commit generator" update="0"/>
     </page>
 </root>
