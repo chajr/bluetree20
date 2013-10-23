@@ -1,0 +1,122 @@
+html{
+    background-color: #fff;
+    background-image: none;
+}
+#commit_generator{
+    width: 900px;
+    margin: 20px auto;
+    border: 1px solid #222;
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+.sr-only{
+    display: none;
+}
+#commit_generator input{
+    height: 40px;
+    font-size: 14px;
+    padding: 10px;
+}
+#commit_generator input, #commit_generator textarea, #commit_generator .btn{
+    border-radius: 0!important;
+}
+#commit_generator #title{
+    width: 550px;
+}
+#commit_generator #version, #commit_generator #issue{
+    width: 160px;
+}
+.form-control:focus{
+    border-color: rgba(61, 61, 61, 0.8);
+}
+#commit_base_info .checkbox{
+    line-height: 46px;
+}
+#commit_base_info .checkbox input{
+    outline: none;
+    /*margin-top: 16px;*/
+}
+#buttons{
+    margin: 10px auto;
+}
+#buttons .btn{
+    width:216px;
+    display: inline-block;
+    outline: none;
+}
+/*#content{*/
+    /*border: 1px dashed #888;*/
+/*}*/
+footer .btn-block{
+    margin: 15px auto;
+    width: 400px!important;
+    position: relative;
+}
+footer .btn-block b{
+    font-size: 18px;
+}
+#commit_generator footer .btn-block span{
+    display: block;
+    height: 62px;
+    width: 62px;
+    position: absolute;
+    background-color: #555;
+    top:0;
+}
+#commit_generator footer .btn-block span i{
+    margin: 0!important;
+    padding: 0!important;
+    line-height: 62px;
+    font-size: 30px;
+}
+.clear{
+    clear: both;
+}
+#empty_messages{
+    display: none;
+}
+#content .message{
+    margin: 10px 0 20px 0;
+    padding: 10px 0;
+}
+#content .message textarea{
+    width: 650px;
+}
+#content .file_textarea{
+    margin: 5px 0 5px 161px;
+    width: 700px;
+}
+#content .message label{
+   line-height: 40px;
+}
+#content .message_modify_version .version{
+    width: 700px;
+    float: right;
+    margin-top: 5px;
+}
+#content .message_modify_version .version input{
+    display: inline-block;
+    width: 100px;
+    margin: 0 10px;
+}
+#content .message .buttons_method button{
+    outline: none;
+}
+#content .message .buttons_method{
+    margin: 5px 0 5px 161px;
+}
+#commit_generator .form-group{
+    margin-bottom: 0;
+}
+.message_modify, .message_modify_version{
+    background-color: #E6E9F4;
+}
+.message_remove{
+    background-color: #f2e7e4;
+}
+.message_add{
+    background-color: #e2f2e3;
+}
+.message button.btn-danger.width{
+    width: 40px;
+}

@@ -1,0 +1,32 @@
+<section id="commit_generator">
+    <header>
+        <h1>
+            {;lang;commit_gen;}
+        </h1>
+    </header>
+    <section>
+        <pre>
+{;title;} {;op;version;}[{;version;}] {;op_end;version;}{;op;issue;}(issue #{;issue;}){;op_end;issue;}
+{;op;alpha;}THIS IS PRE-ALPHA SOFTWARE, use it at your own risk.{;alpha;}{;op_end;alpha;}{;op;description;}
+This version introduces multiple enhancements:
+
+{;description;}
+{;op_end;description;}
+{;op;messages;}Details of additions/deletions below:
+--------------------------------------------------------------
+
+{;messages;}{;op_end;messages;}
+</pre>
+    </section>
+    <footer>
+        <a type="button" class="btn btn-default btn-lg btn-block"
+           href="{;core;domain;}{;core;lang;}{;parent;}"
+        >
+            <span>
+                <i class="icon-repeat"></i>
+            </span>
+            <b>{;lang;commit_return;}</b><br/>
+            {;lang;parent;}
+        </a>
+    </footer>
+</section>

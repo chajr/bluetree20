@@ -29,7 +29,7 @@
 
     <option id="reg_exp_rewrite" value="#^[\w-\\,\/]*$#"/>
     <!--regular expression to check URL on mode rewrite on-->
-    <option id="reg_exp_classic" value="#^[\w\/?=&amp;-]*$#"/>
+    <option id="reg_exp_classic" value="#^[\w\.\/?=&amp;-]*$#"/>
     <!--regular expression to check URL on mode rewrite off-->
     <option id="global_var_check" value="#^[a-zA-Z][\w]*$#"/>
     <!--regular expression to check all variable names given in post,files etc-->
@@ -37,7 +37,7 @@
     <!--max number of URL parameters (0 -no limit)-->
     <option id="max_post" value="45"/>
     <!--max number of POST parameters (0 -no limit)-->
-    <option id="get_len" value="20"/>
+    <option id="get_len" value="25"/>
     <!--max length of GET parameter, include name + comma + variable (0 -no limit)-->
     <option id="test" value=""/>
     <!--place where is index file localed on domain, use when page is localed in domain dir (empty -none)-->
@@ -60,7 +60,7 @@
     <!--if 1 use mode rewrite to check url, else use classical URL parameters-->
     <option id="zmienne_rewrite_sep" value=","/>
     <!--if use mode rewrite determinate separator for name and value (/name,value/name2,value)-->
-    
+
     <option id="unthrow" value="0"/>
     <!--dont throw errors from libraries/modules-->
     <option id="log_all_errors" value="1"/>
@@ -76,7 +76,7 @@
     <!--default language, use when other language was not specified or don't detected-->
     <option id="lang_support" value="1"/>
     <!--if 0 dont translate language variables-->
-    <option id="detect_lang" value="0"/>
+    <option id="detect_lang" value="1"/>
     <!--if language wasn't specified and set to 1 will automatically detect language-->
 
     <option id="compress" value="0"/>

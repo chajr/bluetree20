@@ -47,7 +47,7 @@ class modul1
 
         //add css and js
         $this->set(
-            'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js',
+            'https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js',
             'js',
             'external'
         );

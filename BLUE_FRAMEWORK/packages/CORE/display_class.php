@@ -10,7 +10,7 @@
  * @subpackage  display
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.9.2
+ * @version     2.9.3
  */
 class display_class
 {
@@ -68,7 +68,7 @@ class display_class
      * regular expression that corresponds to all display class markers
      * @var string
     */
-    protected $_contentMarkers = "{;[\\w=\\-|&();\\/,]+;}";
+    protected $_contentMarkers = "#{;[\\w=\\-|&();\\/,]+;}#";
 
     protected $_defaultOptions = array(
         'template'      => '',
@@ -920,7 +920,7 @@ class display_class
         //$this->_cleanMarkers('loop');
 
         $this->DISPLAY = preg_replace(
-            '#' . $this->_contentMarkers . '#',
+            $this->_contentMarkers,
             '',
             $this->DISPLAY
         );
