@@ -5,7 +5,7 @@
  * @subpackage  globals
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.4.2
+ * @version     2.4.3
  */
 
 /**
@@ -328,13 +328,13 @@ class get
             $this->_maxParameters($counter, 'get');
             $this->_maxLength($parameter);
             $bool = preg_match(
-                '#[\\w]*'.core_class::options('zmienne_rewrite_sep').'[\\w]*#',
+                '#[\\w]*'.core_class::options('var_rewrite_sep').'[\\w]*#',
                 $parameter
             );
 
             if ($bool) {
                 $parameter = explode(
-                    core_class::options('zmienne_rewrite_sep'),
+                    core_class::options('var_rewrite_sep'),
                     $parameter
                 );
                 $this->_add($parameter[0], $parameter[1]);

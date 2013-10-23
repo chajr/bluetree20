@@ -10,7 +10,7 @@
  * @subpackage  display
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.9.3
+ * @version     2.9.4
  */
 class display_class
 {
@@ -771,21 +771,21 @@ class display_class
         $this->DISPLAY = preg_replace('#{;core;mainpath;}#', $path[1], $this->DISPLAY);
 
         preg_match_all(
-            '#{;path;[\\w-/\.' . $this->_options['zmienne_rewrite_sep'] . ']+;}#',
+            '#{;path;[\\w-/\.' . $this->_options['var_rewrite_sep'] . ']+;}#',
             $this->DISPLAY,
             $array
         );
         $this->_convert($array, 'path');
 
         preg_match_all(
-            '#{;full;[\\w-/\.' . $this->_options['zmienne_rewrite_sep'] . ']+;}#',
+            '#{;full;[\\w-/\.' . $this->_options['var_rewrite_sep'] . ']+;}#',
             $this->DISPLAY,
             $array
         );
         $this->_convert($array, 'full');
 
         preg_match_all(
-            '#{;rel;[\\w-/\.' . $this->_options['zmienne_rewrite_sep'] . ']+;}#',
+            '#{;rel;[\\w-/\.' . $this->_options['var_rewrite_sep'] . ']+;}#',
             $this->DISPLAY,
             $array);
         $this->_convert($array, 'rel');
@@ -857,7 +857,7 @@ class display_class
 
                 foreach ($path as $value) {
                     $bool = preg_match(
-                        '#[' . $this->_options['zmienne_rewrite_sep'] . ']{1}#',
+                        '#[' . $this->_options['var_rewrite_sep'] . ']{1}#',
                         $value
                     );
 

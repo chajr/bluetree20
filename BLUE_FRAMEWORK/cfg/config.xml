@@ -7,84 +7,50 @@
 * @package     BlueFramework Core
 * @author      Michał Adamiak    <chajr@bluetree.pl>
 * @copyright   chajr/bluetree
-* @version     1.0.2
+* @version     1.1.0
 */
 -->
 <!DOCTYPE root SYSTEM "dtd/config.dtd">
 <root>
     <option id="domain" value="#(www.)?adamiak\.cz#"/>
-    <!--main domain for regular expression-->
     <option id="debug" value="1"/>
-    <!--is detailed error on-->
     <option id="core_mail" value="chajr@bluetree.pl"/>
-    <!--main framework email -->
     <option id="error404" value="1"/>
-    <!--if page was't find redirect to error 404 page-->
     <option id="meta" value="1"/>
-    <!--if 1 meta description handling by meta_class is on-->
     <option id="techbreak" value="0"/>
-    <!--if 1 stops framework and display technical break page-->
     <option id="subdomain" value="1"/>
-    <!--if different on 0, then use subdomain as main page, value number is page a nesting level-->
 
     <option id="reg_exp_rewrite" value="#^[\w-\\,\/]*$#"/>
-    <!--regular expression to check URL on mode rewrite on-->
     <option id="reg_exp_classic" value="#^[\w\.\/?=&amp;-]*$#"/>
-    <!--regular expression to check URL on mode rewrite off-->
     <option id="global_var_check" value="#^[a-zA-Z][\w]*$#"/>
-    <!--regular expression to check all variable names given in post,files etc-->
     <option id="max_get" value="11"/>
-    <!--max number of URL parameters (0 -no limit)-->
     <option id="max_post" value="45"/>
-    <!--max number of POST parameters (0 -no limit)-->
     <option id="get_len" value="25"/>
-    <!--max length of GET parameter, include name + comma + variable (0 -no limit)-->
     <option id="test" value=""/>
-    <!--place where is index file localed on domain, use when page is localed in domain dir (empty -none)-->
     <option id="post_secure" value="1"/>
-    <!--if different on 0 secure POST values on entities or quotes (0 -none, 1 -quotes, 2 -entities)-->
     <option id="file_max_size" value="1000"/>
-    <!--set one file max size in kbb-->
     <option id="files_max_size" value="10000"/>
-    <!--set common size of uploaded files in kb-->
     <option id="files_max" value="10"/>
-    <!--set max number of uploaded files-->
     <option id="cookielifetime" value="3600"/>
-    <!--cookie lifetime in seconds (3600 == 1h)-->
 
     <option id="mod_check" value="1"/>
-    <!--if 0 wont throw exception when module defined on list.xml won't be found -->
     <option id="param_sep" value="::"/>
-    <!--param separator for modules, libraries, css and js -->
     <option id="rewrite" value="1"/>
-    <!--if 1 use mode rewrite to check url, else use classical URL parameters-->
-    <option id="zmienne_rewrite_sep" value=","/>
-    <!--if use mode rewrite determinate separator for name and value (/name,value/name2,value)-->
+    <option id="var_rewrite_sep" value=","/>
 
     <option id="unthrow" value="0"/>
-    <!--dont throw errors from libraries/modules-->
     <option id="log_all_errors" value="1"/>
-    <!--send log on modules errors (0 -none, 1 -all, 2 -only stop errors)-->
     <option id="core_procedural_mod_check" value="0"/>
-    <!--check that module is procedural -->
     <option id="errors_log" value="110"/>
-    <!--witch errors will be saved on log file (1 -errors, 2 -warnings, 3 -errors throwed from pointer)-->
 
     <option id="one_lang" value="0"/>
-    <!--if set 1, use only default language-->
     <option id="lang" value="pl-PL"/>
-    <!--default language, use when other language was not specified or don't detected-->
     <option id="lang_support" value="1"/>
-    <!--if 0 dont translate language variables-->
     <option id="detect_lang" value="1"/>
-    <!--if language wasn't specified and set to 1 will automatically detect language-->
 
     <option id="compress" value="0"/>
-    <!--html document compression (0-none, 9-max)-->
     <option id="timezone" value="Europe/Berlin"/>
-    <!--main timezone-->
 
-    <!--list of languages that is switch on framework-->
     <langs id="lang_on" value="1">
         <lang id="pl-PL" on="1"/>
         <lang id="en-GB" on="1"/>

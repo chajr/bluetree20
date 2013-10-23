@@ -6,7 +6,7 @@
  * @subpackage  language
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.7.1
+ * @version     2.7.2
  */
 class lang_class
 {
@@ -584,7 +584,7 @@ class lang_class
 
         $url = display_class::explodeUrl(
             $get,
-            core_class::options('zmienne_rewrite_sep')
+            core_class::options('var_rewrite_sep')
         );
 
         if ((bool)core_class::options('rewrite')) {
