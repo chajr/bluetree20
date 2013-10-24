@@ -6,85 +6,49 @@
  * @package     BlueFramework Core
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.0.0
+ * @version     1.0.1
  */
 -->
 <!ELEMENT root (lib*, mod*, css*, js*, page*)>
     <!ATTLIST root options (1|0) #REQUIRED>
-    <!--information that whole framework is on-->
     <!ELEMENT lib (#PCDATA)>
-        <!--main libraries, always required for all pages-->
         <!ATTLIST lib on (1|0) #REQUIRED>
-        <!--library on/off-->
 
     <!ELEMENT mod (#PCDATA)>
-    <!--main modules, always required for all pages-->
         <!ATTLIST mod on (1|0) #REQUIRED>
-        <!--modle on/off-->
         <!ATTLIST mod param CDATA #IMPLIED>
-        <!--list of module special parameters-->
         <!ATTLIST mod exec CDATA #IMPLIED>
-        <!--module start file if different than default-->
         <!ATTLIST mod block CDATA #IMPLIED>
-        <!--name of block to load module, order == position-->
 
     <!ELEMENT css (#PCDATA)>
-    <!--css files name, or links to external css files-->
         <!ATTLIST css media CDATA #IMPLIED>
-        <!--css file media type-->
         <!ATTLIST css external (0|1) #IMPLIED>
-        <!--is an external css file-->
 
     <!ELEMENT js (#PCDATA)>
-    <!--js files name, or links to external js files-->
         <!ATTLIST js external (0|1) #IMPLIED>
-        <!--is an external js file-->
 
     <!ELEMENT page (menu*, sub*, lib*, mod*, css*, js*)>
-    <!--list of first level pages, with their subpages, libraries, modules, and other files-->
         <!ATTLIST page id ID #REQUIRED>
-        <!--page id and url page name-->
         <!ATTLIST page layout CDATA #REQUIRED>
-        <!--name of page main html template (if 0 dont load)-->
         <!ATTLIST page external CDATA #IMPLIED>
-        <!--name of external tree xml file (like admin.xml)-->
         <!ATTLIST page name CDATA #REQUIRED>
-        <!--page name, for html page title and navigation-->
         <!ATTLIST page options CDATA #REQUIRED>
-        <!--page options (on, on tree, on menu, on breadcrumbs)-->
         <!ATTLIST page redirect CDATA #IMPLIED>
-        <!--id of page to be redirected-->
         <!ATTLIST page startDate CDATA #IMPLIED>
-        <!--unix timestamp fromm page will be available-->
         <!ATTLIST page endDate CDATA #IMPLIED>
-        <!--unix timestamp to page will be available-->
         <!ATTLIST page changefreq CDATA #IMPLIED>
-        <!--frequency of page changes (sitemap)-->
         <!ATTLIST page priority CDATA #IMPLIED>
-        <!--page priority-->
 
     <!ELEMENT sub (menu*, sub*, lib*, mod*, css*, js*)>
-    <!--optional subpage node-->
         <!ATTLIST sub id CDATA #REQUIRED>
-        <!---page id and url page name-->
         <!ATTLIST sub layout CDATA #REQUIRED>
-        <!--name of page main html template (if 0 dont load)-->
         <!ATTLIST sub name CDATA #REQUIRED>
-        <!--page name, for html page title and navigation-->
         <!ATTLIST sub external CDATA #IMPLIED>
-        <!--name of external tree xml file (like admin.xml)-->
         <!ATTLIST sub options CDATA #REQUIRED>
-        <!--page options (on, on tree, on menu, on breadcrumbs, inheritance)-->
         <!ATTLIST sub redirect CDATA #IMPLIED>
-        <!--id of page to be redirected-->
         <!ATTLIST sub startDate CDATA #IMPLIED>
-        <!--unix timestamp fromm page will be available-->
         <!ATTLIST sub endDate CDATA #IMPLIED>
-        <!--unix timestamp to page will be available-->
         <!ATTLIST sub changefreq CDATA #IMPLIED>
-        <!--frequency of page changes (sitemap)-->
         <!ATTLIST sub priority CDATA #IMPLIED>
-        <!--page priority-->
 
     <!ELEMENT menu (#PCDATA)>
-    <!--list of menu ids witch page/subpage will be linked (main sets main site menu)-->
