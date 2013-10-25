@@ -5,7 +5,7 @@
  * @subpackage  globals
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.4.3
+ * @version     2.4.4
  */
 
 /**
@@ -319,7 +319,7 @@ class get
         $counter            = 0;
         $this->_coreLanguage = lang_class::checkLanguage($get);
 
-        foreach($get as $parameter){
+        foreach ($get as $parameter) {
             if ($parameter === '') {
                 continue;
             }
@@ -328,7 +328,7 @@ class get
             $this->_maxParameters($counter, 'get');
             $this->_maxLength($parameter);
             $bool = preg_match(
-                '#[\\w]*'.core_class::options('var_rewrite_sep').'[\\w]*#',
+                '#[\\w]*' . core_class::options('var_rewrite_sep') . '[\\w]*#',
                 $parameter
             );
 
