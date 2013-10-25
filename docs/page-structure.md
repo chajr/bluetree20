@@ -44,6 +44,7 @@ Doctype definition
 8. **menu** - list of menu ids witch page/subpage will be linked `main sets main site menu`
 
 ### DTD Structure
+
 ```
 <!ELEMENT root (lib*, mod*, css*, js*, page*)>
     <!ATTLIST root options (1|0) #REQUIRED>
@@ -90,6 +91,44 @@ Doctype definition
 
     <!ELEMENT menu (#PCDATA)>
 ```
+
+Page and subpage idea
+--------------
+Pages and subpages create site tree defined in tree.xml file. Each page is independent of
+ other page, but has common modules, libraries, css and js defined on the top of root element.
+ Each page can have their own modules, libraries etc. and unlimited subpages as their children's.
+ Each children ins an part of page, and parent subpage if its have it and inherit all
+ libraries, modules and etc. elements defined in parent element (inheritance can be disabled).  
+In that way we can create structure of dependent elements like: `my-site.pl/articles/article/id,123`
+ Article is an part of articles and inherit from articles some elements. In that way we
+ can create more advanced dependencies `my-site.pl/products/software/open-source/id,123` or
+ `my-site.pl/admin/configuration/users/permissions`
+
+Example of page dependency:  
+| pages         | subpage level 1 | subpage level 2    | subpage level 3    |
+| ------------- |:---------------:| ------------------:|-------------------:|
+| index         |                 |                    |                    |
+| page          | subpage         |                    |                    |
+|               | subpage2        | sub-subpage        |                    |
+|               |                 | some-other-subpage |                    |
+|               | subpage3        | sub3               | sub-sub3           |
+|               | last-one        |                    |                    |
+| page2         |                 | some-other-subpage |                    |
+|               | subpage         |                    |                    |
+
+idex
+page  
+  |--subpage  
+  |--subpage2  
+  |     |--sub-subpage  
+  |     |--some-other-subpage  
+  |--subpage3  
+  |     |--sub3  
+  |          |--sub-sub3  
+  |--last-one  
+page2
+  |--subpage
+
 Create base structure
 --------------
 ### Create main page
@@ -187,11 +226,46 @@ This example show simply subpage that we can access by `my-site.pl/another/subpa
 
 Access to subpages in above example: `my-site.pl/another/subpage/sub_subpage`, `my-site.pl/another/subpage2`.
 
-### Page options
+### Page and subpage options
+Pages and subpages has some several options, that was basically described in DTD elements description.
+
+1. **id** - most important, required and unique only for page node value. Define page name in url
+ that route can find correct page/subpage. Subpges can have non unique ids, bu be careful
+ with usage the same values of id, because you can get the page you don't want to.  
+ Route build form id for mode rewrite: `my-site.pl/page/subpage1/subpage2`  
+ Route build form id for classic url: `my-site.pl?p0=page&p1=subpage1&p2=subpage2`
+2. **layout** - main layout for page, always required, define name of html file with
+ template to load for current chosen page/subpage. Contain only file name without extension
+ or path with filename. All templates for pages subpages are located in `BLUE_FRAMEWORK/elements/layouts`
+ directory and all templates must have `html` extension.
+3. **name** - this is a default page title, always required, used when page don't have meta definition.
+ Value of that attribute wil be displayed as page title.
+4. **options** - page options, always required, described as four binary values `0 or 1`. Subpage has five of it. Contains the following information:
+   * first index - if 0 page will be disabled, if 1 page work normally
+   * second index - if 0 page will be disabled for sitemap creating, if 1 page work normally
+   * third index - if 0 page will be disabled for menus, if 1 page work normally
+   * fourth index - if 0 page will be disabled for breadcrumbs, if 1 page work normally
+   * fifth index - `only for subpages, define inheritance` if 0 page will have switched off inheritance for it own and children, if 1 page work normally
+5. **external** - name of other tree file, with other defined page/subpage structure.
+ Give as file name, without extension, localed in `BLUE_FRAMEWORK/cfg` directory.
+ That attribute can be used to very big structures (external tree is loaded only if page with it was called)
+ or some pages that has other destiny, like admin panel. External tree replace main tree, so
+ all common modules, libraries, scripts, js must be loaded again.
+6. **redirect** - here give an page /subpage route, or some url that framework will redirect.
+7. **startDate** - as unix timestamp, give the date fom page will be available
+8. **endDate** - as unix timestamp, give the date up to page will be available
+9. **changefreq** - attribute for creating sitemap, inform how often page will be checked by bot
+10. **priority** - attribute for creating sitemap, inform how big priority page has instead to other pages
 
 Load css and js scripts
 --------------
 ### Load css file
+To use cascade style sheets on page we must load it on. We can make it by two ways.
+First is load in page tree and that will be described here, and second is load it in module...
+To load css we must simply define special marker `<css>css_file_name</css>` that load
+css file localized in `BLUE_FRAMEWORK/elements/css` directory. Of course we give file name without extension,
+and we can give some path localized in css directory.  
+Css element has some special attributes:
 
 ### Load js file
 
