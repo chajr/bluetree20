@@ -3,21 +3,21 @@ Create page structure and routers
 
 Doctype definition
 --------------
-### DTD elements description
+### DTD nodes description
 
-1. **root** - main element of tree, always required, contains nodes `lib, mod, css, js, page`
+1. **root** - main node of tree, always required, contains nodes `lib, mod, css, js, page`
   * `options` - *required*, numeric value `0 or 1`, if 0 whole framework is of
-2. **lib** - node with library name, that library will be always loaded in children elements
+2. **lib** - node with library name, that library will be always loaded in children nodes
    * `on` - *required*, numeric value `0 or 1` if 0 library is switched off
-3. **mod** - node with module name, that module will be always loaded in children elements
+3. **mod** - node with module name, that module will be always loaded in children nodes
    * `on` - *required*, numeric value `0 or 1` if 0 module is switched off
    * `param` - module parameters as string separated by param_sep configuration value
    * `exec` - name of file in module directory to run if is different than default
    * `block` - name of block to load module, `order == position on tree`
-4. **css** - node with css name, that css will be always loaded in children elements
+4. **css** - node with css name, that css will be always loaded in children nodes
    * `media` - css file media type
    * `external` - numeric value `0 or 1` if set to `1` then in node content write url of css to load
-5. **js** - node with js name, that js will be always loaded in children elements
+5. **js** - node with js name, that js will be always loaded in children nodes
    * `external` - numeric value `0 or 1` if set to `1` then in node content write url of js to load
 6. **page** - list of first level pages, node defined first nested page like: `my-site.pl/`, `my-site.pl/page`, contains nodes `menu, sub, lib, mod, css, js`
    * `id` - *required*, page id and url page name
@@ -95,12 +95,12 @@ Doctype definition
 Page and subpage idea
 --------------
 Pages and subpages create site tree defined in tree.xml file. Each page is independent of
- other page, but has common modules, libraries, css and js defined on the top of root element.
+ other page, but has common modules, libraries, css and js defined on the top of root node.
  Each page can have their own modules, libraries etc. and unlimited subpages as their children's.
  Each children ins an part of page, and parent subpage if its have it and inherit all
- libraries, modules and etc. elements defined in parent element (inheritance can be disabled).  
-In that way we can create structure of dependent elements like: `my-site.pl/articles/article/id,123`
- Article is an part of articles and inherit from articles some elements. In that way we
+ libraries, modules and etc. nodes defined in parent node (inheritance can be disabled).  
+In that way we can create structure of dependent nodes like: `my-site.pl/articles/article/id,123`
+ Article is an part of articles and inherit from articles some nodes. In that way we
  can create more advanced dependencies `my-site.pl/products/software/open-source/id,123` or
  `my-site.pl/admin/configuration/users/permissions`
 
@@ -117,6 +117,26 @@ page
 ..|--last-one  
 page2
 ..|--subpage
+
+Order of the nodes
+--------------
+All nodes must be written in proper order. That order written in tree DTD.  
+In root node we decelerate nodes in that order:
+
+1. libraries
+2. modules
+3. css files
+4. java script files
+5. pages definitions
+
+Similar order we must keep in page and subpage structure. Bau then we have an new node `menu`.
+
+1. menu definitions
+2. subpages
+3. libraries
+4. modules
+5. css files
+6. java script files
 
 Create base structure
 --------------
@@ -135,7 +155,7 @@ To create simply start page we must use construction like bellow:
 </root>  
 ```
 
-In that code we create in root element node named page. Give im `id=index` 
+In that code we create in root node named page. Give im `id=index` 
 to inform framework to run it as site main page. In that example wi also add one
 library, module, js and css. This page can be run as `my-site.pl` or `my-site.pl/index`
 
@@ -166,7 +186,7 @@ This example use the same layout, but no library and module. Access to that page
 To create pages tree we must create subpages, that will be part of some page. All
  subpages will inherit styles, scripts, modules and libraries of main page, or
  main subpage. We can create an unlimited nested subpages with working inheritance.
- In assumption we build an tree of related pages, that have some common elements.
+ In assumption we build an tree of related pages, that have some common nodes.
 
 ```xml
 <page id="another" name="Main test page 2" layout="index" options="1111">  
@@ -216,7 +236,7 @@ This example show simply subpage that we can access by `my-site.pl/another/subpa
 Access to subpages in above example: `my-site.pl/another/subpage/sub_subpage`, `my-site.pl/another/subpage2`.
 
 ### Page and subpage options
-Pages and subpages has some several options, that was basically described in DTD elements description.
+Pages and subpages has some several options, that was basically described in DTD nodes description.
 
 1. **id** - most important, required and unique only for page node value. Define page name in url
  that route can find correct page/subpage. Subpges can have non unique ids, bu be careful
@@ -250,23 +270,95 @@ Load css and js scripts
 --------------
 ### Load css file
 To use cascade style sheets on page we must load it on. We can make it by two ways.
-First is load in page tree and that will be described here, and second is load it in module...
+First is load in page tree and that will be described here, and second is load it in module.
 To load css we must simply define special marker `<css>css_file_name</css>` that load
 css file localized in `BLUE_FRAMEWORK/elements/css` directory. Of course we give file name without extension,
 and we can give some path localized in css directory.  
-Css element has some special attributes:
+Css node has some special attributes:
+
+* **media** - describe type of css to load `print, screen etc.`
+* **external** - numeric value `0 or 1` if set to `1`, if set to 1 then will load css form external source (as name give full url)
 
 ### Load js file
+Using java script files in page structure is similar than css files. We can make in by the same ways
+ as css (in module and tree). We load js file be marker `<js>js_file_name</js>`
+ that will read js from `BLUE_FRAMEWORK/elements/js` directory. Remember to give
+ only file name, without extension.
+JS nodes has only one special attribute:    
+* **external** - numeric value `0 or 1` if set to `1`, if set to 1 then will load js form external source (as name give full url)  
 
 ### Load for common usage
+If we wat to use `css, js, modules or libraries` for all pages we decelerate it in root node
+ before pages definitions. If page has inheritance switched off, then all nodes
+ from parent nodes, even from root node. All children pages also will have
+ cleared inheritance.
 
-### Load for specific page sub page
+```ruby
+<root options="1">
+    <lib on="1">library</lib>  -\
+    <mod on="1">module</mod>   --\___ nodes that will be always loaded
+    <css>css</css>             --/
+    <js>js</js>                -/
+
+    <page id="index" name="Main Page" layout="index" options="1111">
+    </page>
+</root>
+```
+
+### Load for specific page or subpage
+To use `css, js, modules or libraries` for specific page or subpage, just decelerate 
+it for that page or subpage. But remember that all children subpages will have 
+all decelerated nodes as we have in pages idea.
+In pages and subpages we decelerate nodes after pages/subpages
+
+```ruby
+<page id="index" name="Main Page" layout="index" options="1111">
+    <sub id="index" name="Main Sub Page" layout="index" options="1111"></sub>
+
+    <lib on="1">library</lib>  -\
+    <mod on="1">module</mod>   --\___ nodes that will be always loaded
+    <css>css</css>             --/
+    <js>js</js>                -/
+</page>
+```
 
 Load libraries and modules
 --------------
 ### Load library
+Library in framework give some common for modules logic. Basically modules give some 
+methods that can be used by modules to do something. Create node with library declaration 
+`<lib on="1">library</lib>` will only load library file or files tht must be run 
+in modules.  
+We have two possibilities to load library, one by loading full package with all library files 
+and second to load one single, or some library files.
+
+* loading full package - just give package name `<lib on="1">valid</lib>`
+* loading single library - is more complicated, because we give package name and library file separated by `/` `<lib on="1">db/mysql</lib>`
+* loading some files from package - we just separate files by coma `,` `<lib on="1">db/mysql,mssql,fb</lib>`
+
+Library node has only one attribute:
+
+* **on** - `required` as integer value `1 or 0` that inform to load or not library
+
+Libraries are grouped in packages localized in `/BLUE_FRAMEWORK/packages/` directory.  
+Remember to give library file name without `_class` suffix and without extension.  
+Framework is flexible in level that use many other scripts by library in framework.
 
 ### Load module
+Modules are responsible for elementary system work. All we want to make by using 
+that framework will be written in modules. Create node with module declaration 
+`<mod on="1">module</mod>` will load module and lunch method `run` decelerated in
+ module class file.
+
+Library node has some following options:
+
+1. **on** - `required` the same as in library, allow to load and lunch module or not
+2. **param** - module parameters as string separated by param_sep configuration value `param1::param2::param3`, parameters will be returned as array
+3. **exec** - name of file in module directory to lunch module. Default module is lunched from php file with name of library, here we can give some other file
+4. **block** - name of block in template (`{;block;some_block;}`) to load module, `order == position on tree`
+
+Modules are localized in `/BLUE_FRAMEWORK/modules/` directory with their css, js and layouts  
+Remember to give library file name without `_class` suffix and without extension.  
 
 ### Load for common usage
 
@@ -274,10 +366,6 @@ Load libraries and modules
 
 Load external trees
 --------------
-
-Pages special options
---------------
-changefreq="always" priority="0.8
 
 Inheritance of pages, css, js, libraries and modules
 --------------
