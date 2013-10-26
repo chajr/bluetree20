@@ -40,9 +40,9 @@ class mod2
         $this->connectionTest();
 
         //usage of image library
-        $img = new image_class(array('name'=>'elementy/Right.png'));
+        $img = new image_class(array('name'=>'elementy/images/bluetree_base_big.jpg'));
         $img->rotate(90, '#ffffff');
-        $img->save('elementy/Right_copy.jpg', 'jpg');
+        $img->save('elementy/images/bluetree_base_big_copy.jpg', 'jpg');
 
         //test dates
         $this->dateTest();
