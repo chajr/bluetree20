@@ -105,29 +105,18 @@ In that way we can create structure of dependent elements like: `my-site.pl/arti
  `my-site.pl/admin/configuration/users/permissions`
 
 Example of page dependency:  
-| pages         | subpage level 1 | subpage level 2    | subpage level 3    |
-| ------------- |:---------------:| ------------------:|-------------------:|
-| index         |                 |                    |                    |
-| page          | subpage         |                    |                    |
-|               | subpage2        | sub-subpage        |                    |
-|               |                 | some-other-subpage |                    |
-|               | subpage3        | sub3               | sub-sub3           |
-|               | last-one        |                    |                    |
-| page2         |                 | some-other-subpage |                    |
-|               | subpage         |                    |                    |
-
-idex
+idex  
 page  
-  |--subpage  
-  |--subpage2  
-  |     |--sub-subpage  
-  |     |--some-other-subpage  
-  |--subpage3  
-  |     |--sub3  
-  |          |--sub-sub3  
-  |--last-one  
+..|--subpage  
+..|--subpage2  
+..|.....|--sub-subpage  
+..|.....|--some-other-subpage  
+..|--subpage3  
+..|.....|--sub3  
+..|..........|--sub-sub3  
+..|--last-one  
 page2
-  |--subpage
+..|--subpage
 
 Create base structure
 --------------
