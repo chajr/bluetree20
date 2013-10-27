@@ -8,39 +8,39 @@ Doctype definition
 1. **root** - main node of tree, always required, contains nodes `lib, mod, css, js, page`
   * `options` - *required*, numeric value `0 or 1`, if 0 whole framework is of
 2. **lib** - node with library name, that library will be always loaded in children nodes
-   * `on` - *required*, numeric value `0 or 1` if 0 library is switched off
+  * `on` - *required*, numeric value `0 or 1` if 0 library is switched off
 3. **mod** - node with module name, that module will be always loaded in children nodes
-   * `on` - *required*, numeric value `0 or 1` if 0 module is switched off
-   * `param` - module parameters as string separated by param_sep configuration value
-   * `exec` - name of file in module directory to run if is different than default
-   * `block` - name of block to load module, `order == position on tree`
+  * `on` - *required*, numeric value `0 or 1` if 0 module is switched off
+  * `param` - module parameters as string separated by param_sep configuration value
+  * `exec` - name of file in module directory to run if is different than default
+  * `block` - name of block to load module, `order == position on tree`
 4. **css** - node with css name, that css will be always loaded in children nodes
-   * `media` - css file media type
-   * `external` - numeric value `0 or 1` if set to `1` then in node content write url of css to load
+  * `media` - css file media type
+  * `external` - numeric value `0 or 1` if set to `1` then in node content write url of css to load
 5. **js** - node with js name, that js will be always loaded in children nodes
-   * `external` - numeric value `0 or 1` if set to `1` then in node content write url of js to load
+  * `external` - numeric value `0 or 1` if set to `1` then in node content write url of js to load
 6. **page** - list of first level pages, node defined first nested page like: `my-site.pl/`, `my-site.pl/page`, contains nodes `menu, sub, lib, mod, css, js`
-   * `id` - *required*, page id and url page name
-   * `layout` - *required*, name of page main html template `if 0 dont load`
-   * `external` - name of external tree xml file `like admin.xml`
-   * `name` - *required*, page name, for html page title and navigation
-   * `options` - *required*, page options `on, on tree, on menu, on breadcrumbs`
-   * `redirect` - id or url of page to be redirected
-   * `startDate` - unix timestamp with data from page will be available
-   * `endDate` - unix timestamp with date until page will be unavailable
-   * `changefreq` - frequency of page changes `use in sitemap`
-   * `priority` - page priority `use in sitemap`
+  * `id` - *required*, page id and url page name
+  * `layout` - *required*, name of page main html template `if 0 dont load`
+  * `external` - name of external tree xml file `like admin.xml`
+  * `name` - *required*, page name, for html page title and navigation
+  * `options` - *required*, page options `on, on tree, on menu, on breadcrumbs`
+  * `redirect` - id or url of page to be redirected
+  * `startDate` - unix timestamp with data from page will be available
+  * `endDate` - unix timestamp with date until page will be unavailable
+  * `changefreq` - frequency of page changes `use in sitemap`
+  * `priority` - page priority `use in sitemap`
 7. **sub** - list of second and other level pages, node define nested page like: `my-site.pl/page/subpage`, `my-site.pl/page/subpage/another`, contains nodes `menu, sub, lib, mod, css, js`
-   * `id` - *required*, page id and url page name
-   * `layout` - *required*, name of page main html template `if 0 dont load`
-   * `external` - name of external tree xml file `like admin.xml`
-   * `name` - *required*, page name, for html page title and navigation
-   * `options` - *required*, page options `on, on tree, on menu, on breadcrumbs, inheritance`
-   * `redirect` - id or url of page to be redirected
-   * `startDate` - unix timestamp with data from page will be available
-   * `endDate` - unix timestamp with date until page will be unavailable
-   * `changefreq` - frequency of page changes `use in sitemap`
-   * `priority` - page priority `use in sitemap`
+  * `id` - *required*, page id and url page name
+  * `layout` - *required*, name of page main html template `if 0 dont load`
+  * `external` - name of external tree xml file `like admin.xml`
+  * `name` - *required*, page name, for html page title and navigation
+  * `options` - *required*, page options `on, on tree, on menu, on breadcrumbs, inheritance`
+  * `redirect` - id or url of page to be redirected
+  * `startDate` - unix timestamp with data from page will be available
+  * `endDate` - unix timestamp with date until page will be unavailable
+  * `changefreq` - frequency of page changes `use in sitemap`
+  * `priority` - page priority `use in sitemap`
 8. **menu** - list of menu ids witch page/subpage will be linked `main sets main site menu`
 
 ### DTD Structure
@@ -105,18 +105,20 @@ In that way we can create structure of dependent nodes like: `my-site.pl/article
  `my-site.pl/admin/configuration/users/permissions`
 
 Example of page dependency:  
-idex  
-page  
-..|--subpage  
-..|--subpage2  
-..|.....|--sub-subpage  
-..|.....|--some-other-subpage  
-..|--subpage3  
-..|.....|--sub3  
-..|..........|--sub-sub3  
-..|--last-one  
+```ruby
+idex
+page
+  |--subpage
+  |--subpage2
+  |     |--sub-subpage
+  |     |--some-other-subpage
+  |--subpage3
+  |     |--sub3
+  |          |--sub-sub3
+  |--last-one
 page2
-..|--subpage
+  |--subpage
+```
 
 Order of the nodes
 --------------
@@ -250,11 +252,11 @@ Pages and subpages has some several options, that was basically described in DTD
 3. **name** - this is a default page title, always required, used when page don't have meta definition.
  Value of that attribute wil be displayed as page title.
 4. **options** - page options, always required, described as four binary values `0 or 1`. Subpage has five of it. Contains the following information:
-   * first index - if 0 page will be disabled, if 1 page work normally
-   * second index - if 0 page will be disabled for sitemap creating, if 1 page work normally
-   * third index - if 0 page will be disabled for menus, if 1 page work normally
-   * fourth index - if 0 page will be disabled for breadcrumbs, if 1 page work normally
-   * fifth index - `only for subpages, define inheritance` if 0 page will have switched off inheritance for it own and children, if 1 page work normally
+  * first index - if 0 page will be disabled, if 1 page work normally
+  * second index - if 0 page will be disabled for sitemap creating, if 1 page work normally
+  * third index - if 0 page will be disabled for menus, if 1 page work normally
+  * fourth index - if 0 page will be disabled for breadcrumbs, if 1 page work normally
+  * fifth index - `only for subpages, define inheritance` if 0 page will have switched off inheritance for it own and children, if 1 page work normally
 5. **external** - name of other tree file, with other defined page/subpage structure.
  Give as file name, without extension, localed in `BLUE_FRAMEWORK/cfg` directory.
  That attribute can be used to very big structures (external tree is loaded only if page with it was called)
@@ -316,7 +318,7 @@ In pages and subpages we decelerate nodes after pages/subpages
     <sub id="index" name="Main Sub Page" layout="index" options="1111"></sub>
 
     <lib on="1">library</lib>  -\
-    <mod on="1">module</mod>   --\___ nodes that will be always loaded
+    <mod on="1">module</mod>   --\___ nodes that will be always loaded for given page
     <css>css</css>             --/
     <js>js</js>                -/
 </page>
@@ -361,11 +363,49 @@ Modules are localized in `/BLUE_FRAMEWORK/modules/` directory with their css, js
 Remember to give library file name without `_class` suffix and without extension.  
 
 ### Load for common usage
+To load library and module (module will be lunched) for common usage, just put node
+ in root node, like css or js.
+ 
+```ruby
+<root options="1">
+    <lib on="1">library</lib>  -\
+    <mod on="1">module</mod>   --\___ nodes that will be always loaded
+    <css>css</css>             --/
+    <js>js</js>                -/
+
+    <page id="index" name="Main Page" layout="index" options="1111">
+    </page>
+</root>
+```
 
 ### Load for specific page sub page
 
+```ruby
+<page id="index" name="Main Page" layout="index" options="1111">
+    <sub id="index" name="Main Sub Page" layout="index" options="1111"></sub>
+
+    <lib on="1">library</lib>  -\
+    <mod on="1">module</mod>   --\___ nodes that will be always loaded for given page
+    <css>css</css>             --/
+    <js>js</js>                -/
+</page>
+```
+
 Load external trees
 --------------
+Framework allow to use some different routers declaration. Of course `tree.xml`
+ will be always loaded, but in main tree we can decelerate that some pages/subpages
+ load some other tree that will replace default tree. All libraries, modules, css
+ and js will be removed and loaded from new tree. External trees ale localed in
+ the same directory where default `BLUE_FRAMEWORK/cfg` and to load it we give
+ an **external** attribute with file name (without extension) to page or subpage node.
 
 Inheritance of pages, css, js, libraries and modules
 --------------
+Structure of pages and subpages will default inherit all nodes that have parent node.
+ All children nodes will have css, js and libraries of parent element and also will
+ run modules of all parent elements. Of course we can skip that feature by setting
+ inheritance option to 0. Its anf fifth index of node options attribute
+ `options="11111" - on` `options="11110" - off`.  
+Inheritance can be only switched off for subpages, main pages will always have nodes
+ decelerated in root element.
