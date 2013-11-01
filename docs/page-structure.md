@@ -105,7 +105,7 @@ In that way we can create structure of dependent nodes like: `my-site.pl/article
  `my-site.pl/admin/configuration/users/permissions`
 
 Example of page dependency:  
-```ruby
+```php
 idex
 page
   |--subpage
