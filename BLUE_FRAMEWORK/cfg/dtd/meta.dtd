@@ -6,32 +6,22 @@
  * @package     BlueFramework Core
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.0.1
+ * @version     1.0.2
  */
 -->
 <!ELEMENT root (default, page*)>
     <!ELEMENT default (title, meta*)>
-    <!--default values, writen when page don't heve own values or have update value-->
         <!ATTLIST default val ID #REQUIRED>
-        <!--information to witch page (lista.xml) will appeal current value-->
 
     <!ELEMENT page (title, meta*)>
-    <!--single page-->
         <!ATTLIST page val ID #REQUIRED>
-        <!--information to witch page (lista.xml) will appeal current value-->
 
     <!ELEMENT meta (#PCDATA)>
-    <!--meta tag-->
         <!ATTLIST meta content CDATA #REQUIRED>
-        <!--tag value-->
         <!ATTLIST meta update (0|1) #IMPLIED>
-        <!--if set on 1 add content to default node value-->
         <!ATTLIST meta name CDATA #IMPLIED>
         <!ATTLIST meta http-equiv CDATA #IMPLIED>
 
     <!ELEMENT title (#PCDATA)>
-    <!--page title-->
         <!ATTLIST title update (0|1) #REQUIRED>
-        <!--if set on 1 add content to default node value-->
         <!ATTLIST title title CDATA #REQUIRED>
-        <!--page title-->
