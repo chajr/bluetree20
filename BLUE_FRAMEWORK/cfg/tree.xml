@@ -26,7 +26,7 @@
     <js external="1">http://domenaaaa.pl/js.js</js>
     -->
     <js>js1</js>
-    <js>bootstrap-min</js>
+    <js>bootstrap</js>
 
     <page id="index" name="Main Page" layout="index" options="1111" changefreq="always" priority="0.8">
         <lib on="1">db/abstractSql</lib>
