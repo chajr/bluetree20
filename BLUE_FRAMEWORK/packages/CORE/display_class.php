@@ -10,7 +10,7 @@
  * @subpackage  display
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.9.4
+ * @version     2.10.0
  */
 class display_class
 {
@@ -449,7 +449,7 @@ class display_class
         $this->DISPLAY = $this->DISPLAY['core'];
 
         $this->_path();
-        $this->clean();
+        $this->_clean();
         $this->_compress();
 
         if (!(bool)$this->_options['debug']) {
@@ -755,20 +755,24 @@ class display_class
         }
 
         $path = $this->_checkPath();
+
         $this->DISPLAY = preg_replace(
             '#{;core;domain;}#',
             $path[0],
             $this->DISPLAY
         );
 
-        if (!$this->_options['rewrite']) {
-            $lang = '?core_lang=' . $this->_lang . $this->_separator();
-        } else {
-            $lang = $this->_lang . '/';
-        }
+        $this->DISPLAY = preg_replace(
+            '#{;core;lang;}#',
+            $this->_getLanguageCode(),
+            $this->DISPLAY
+        );
 
-        $this->DISPLAY = preg_replace('#{;core;lang;}#', $lang, $this->DISPLAY);
-        $this->DISPLAY = preg_replace('#{;core;mainpath;}#', $path[1], $this->DISPLAY);
+        $this->DISPLAY = preg_replace(
+            '#{;core;mainpath;}#',
+            $path[1],
+            $this->DISPLAY
+        );
 
         preg_match_all(
             '#{;path;[\\w-/\.' . $this->_options['var_rewrite_sep'] . ']+;}#',
@@ -787,8 +791,25 @@ class display_class
         preg_match_all(
             '#{;rel;[\\w-/\.' . $this->_options['var_rewrite_sep'] . ']+;}#',
             $this->DISPLAY,
-            $array);
+            $array
+        );
         $this->_convert($array, 'rel');
+    }
+
+    /**
+     * return language code for url depends of system url type
+     * 
+     * @return string
+     */
+    protected function _getLanguageCode()
+    {
+        if (!$this->_options['rewrite']) {
+            $lang = '?core_lang=' . $this->_lang . $this->_separator();
+        } else {
+            $lang = $this->_lang . '/';
+        }
+
+        return $lang;
     }
 
     /**
@@ -906,7 +927,7 @@ class display_class
     /**
      * run clean methods to remove unused markers
      */
-    protected function clean()
+    protected function _clean()
     {
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
