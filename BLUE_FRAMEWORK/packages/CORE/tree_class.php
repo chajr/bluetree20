@@ -7,7 +7,7 @@
  * @subpackage  tree
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.5.0
+ * @version     2.5.1
  */
 class tree_class
 {
@@ -412,13 +412,13 @@ class tree_class
      */
     private function _tree()
     {
-        if (   $this->_mainPage->firstChild->nodeName === 'sub' 
+        if (   $this->_mainPage->firstChild->nodeName === 'sub'
             && isset($this->_get[$this->_pointer])
         ){
             $children = $this->_mainPage->childNodes;
 
             foreach ($children as $child) {
-                if( $child->nodeName === 'sub' 
+                if( $child->nodeName === 'sub'
                     && $child->getAttribute('id') === $this->_get[$this->_pointer]
                 ){
                     $this->_mainPage    = $child;
@@ -440,7 +440,7 @@ class tree_class
 
                     break;
                 } else {
-                    unset($this->_mainPage);
+                    $this->_mainPage = NULL;
                 }
             }
             $this->_chk404();
