@@ -5,7 +5,7 @@
  * @subpackage  error
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.4.2
+ * @version     2.4.3
  */
 
 /**
@@ -435,7 +435,7 @@ final class error_class
 
         $kom  = array();
         $bool = $this->_pack("modules/$mod/lang/" . $mod . '_error');
-        
+
         if ($bool) {
 
             if (isset($bool[$errorCode])) {
@@ -457,6 +457,7 @@ final class error_class
                         $errorCode
                     );
                 }
+
             } else {
                 @trigger_error(
                     'No default error pack<br/>' . $mod . '<br/>' . $errorCode
