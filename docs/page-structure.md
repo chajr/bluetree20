@@ -23,7 +23,7 @@ Doctype definition
   * `id` - *required*, page id and url page name
   * `layout` - *required*, name of page main html template `if 0 dont load`
   * `external` - name of external tree xml file `like admin.xml`
-  * `name` - *required*, page name, for html page title and navigation
+  * `name` - *required*, page name, for html page title in navigation and site map *(wont be used as page title)*
   * `options` - *required*, page options `on, on tree, on menu, on breadcrumbs`
   * `redirect` - id or url of page to be redirected
   * `startDate` - unix timestamp with data from page will be available
@@ -32,9 +32,9 @@ Doctype definition
   * `priority` - page priority `use in sitemap`
 7. **sub** - list of second and other level pages, node define nested page like: `my-site.pl/page/subpage`, `my-site.pl/page/subpage/another`, contains nodes `menu, sub, lib, mod, css, js`
   * `id` - *required*, page id and url page name
-  * `layout` - *required*, name of page main html template `if 0 dont load`
+  * `layout` - *required*, name of page main html template `if 0 don't load`
   * `external` - name of external tree xml file `like admin.xml`
-  * `name` - *required*, page name, for html page title and navigation
+  * `name` - *required*, page name, for html page title in navigation and site map *(wont be used as page title)*
   * `options` - *required*, page options `on, on tree, on menu, on breadcrumbs, inheritance`
   * `redirect` - id or url of page to be redirected
   * `startDate` - unix timestamp with data from page will be available
@@ -249,8 +249,9 @@ Pages and subpages has some several options, that was basically described in DTD
  template to load for current chosen page/subpage. Contain only file name without extension
  or path with filename. All templates for pages subpages are located in `BLUE_FRAMEWORK/elements/layouts`
  directory and all templates must have `html` extension.
-3. **name** - this is a default page title, always required, used when page don't have meta definition.
- Value of that attribute wil be displayed as page title.
+3. **name** - this is a default page title, always required, used to create bread crumbs
+and site maps. To create that elements we don't use meta page title, because it can
+be modified by modules.
 4. **options** - page options, always required, described as four binary values `0 or 1`. Subpage has five of it. Contains the following information:
   * first index - if 0 page will be disabled, if 1 page work normally
   * second index - if 0 page will be disabled for sitemap creating, if 1 page work normally
