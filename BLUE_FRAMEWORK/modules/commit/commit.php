@@ -6,12 +6,12 @@
  * @subpackage  commit
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     0.3.0
+ * @version     0.3.1
  */
 class commit
     extends module_class
 {
-    static $version             = '0.3.0';
+    static $version             = '0.3.1';
     static $name                = 'Commit generator';
     public $requireLibraries    = array();
     public $requireModules      = array();
@@ -33,6 +33,9 @@ class commit
      */
     public function run()
     {
+        benchmark_class::turnOffBenchmark();
+        tracer_class::turnOffTracer();
+
         $this->_createLayout();
 
         if ($this->params[0] === 'generate') {

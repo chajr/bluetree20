@@ -7,12 +7,12 @@
  * @subpackage  modul1
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.5.1
+ * @version     1.5.2
  */
 class modul1 
     extends module_class
 {
-    static $version             = '1.5.1';
+    static $version             = '1.5.2';
     static $name                = 'module number 1';
     public $requireLibraries    = array();
     public $requireModules      = array();
@@ -298,7 +298,4 @@ class modul1
     public function runErrorMode(){
         $this->generate('marker', '{;lang;modul1_error_mode;}');
     }
-
-    public function install(){}
-    public function uninstall(){}
 }

@@ -10,7 +10,7 @@
  * @subpackage  display
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.10.0
+ * @version     2.10.1
  */
 class display_class
 {
@@ -395,9 +395,9 @@ class display_class
 
     /**
      * join contents included in modules groups in complete page, replace paths
-     * fix urls, clean from markers and optionaly compress
+     * fix urls, clean from markers and optionally compress
      * 
-     * @return string complete content to displa 
+     * @return string complete content to display
      */
     public function render()
     {

@@ -3,7 +3,7 @@
  * trace witch classes, files, functions are run
  * 
  * @author Michał Adamiak <chajr@bluetree.pl>
- * @version 1.4.0
+ * @version 1.4.1
  * @copyright chajr/bluetree
  * @package     tester
  * @subpackage  tracer
@@ -86,6 +86,14 @@ class tracer_class
                 ));
             }
 
+            if (isset($data[1][0]['args']) && is_array($data[1][0]['args'])) {
+                foreach ($data[1][0]['args'] as $arg => $val) {
+                    if (is_object($val)) {
+                        $data[1][0]['args'][$arg] = serialize($val);
+                    }
+                }
+            }
+
             self::$_session['markers'][] = array(
                 'time'      => $markerTime,
                 'name'      => $data[0],
@@ -115,15 +123,10 @@ class tracer_class
             self::$_display = '<div style="
             color: #FFFFFF;
             background-color: #3d3d3d;
-            border-color: #FFFFFF;
-            border-width: 1px;
-            border-style: solid;
-            margin-left: auto;
-            margin-right: auto;
+            border: 1px solid #fff;
+            margin: 25px auto;
             width: 96%;
             text-align: center;
-            margin-bottom:25px;
-            margin-top:25px;
             padding:1%;
             overflow:hidden;
             ">';

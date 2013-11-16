@@ -7,7 +7,7 @@
  * @subpackage  module
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.4.1
+ * @version     2.4.2
  */
 abstract class module_class
 {
@@ -117,7 +117,7 @@ abstract class module_class
      * information that critic framework error will be showed
      * @var array
      */
-    protected $_unThrow;
+    private $_unThrow;
     
     /**
      * method used to start module
@@ -393,7 +393,7 @@ abstract class module_class
     /**
      * skip lunching given module
      * 
-     * @param string $name module name without _class sufix
+     * @param string $name module name without _class suffix
      * @example dissemble('module1');
      */
     protected function _disabled($name)

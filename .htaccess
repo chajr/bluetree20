@@ -1,7 +1,8 @@
 AddOutputFilterByType DEFLATE application/x-httpd-php
-RewriteEngine On
-RewriteBase /
-#AllowOverride All
 
-#RewriteRule ^/?([,\w/-]*)?$ /index.php
-RewriteRule ^/?([,\w/-]*)?$ index.php
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    #AllowOverride All
+    RewriteRule ^/?([,\w/-]*)?$ index.php
+</IfModule>
