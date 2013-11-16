@@ -8,12 +8,12 @@
  * @subpackage  main
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.0.0
+ * @version     1.0.1
  */
 class main
     extends module_class
 {
-    static $version             = '1.0.0';
+    static $version             = '1.0.1';
     static $name                = 'Main Module';
     public $requireLibraries    = array();
     public $requireModules      = array();
@@ -25,26 +25,14 @@ class main
     {
         switch ($this->params[0]) {
             case'sitemap':
-                $this->generate('empty', $this->sitemap(), 1);
+                benchmark_class::turnOffBenchmark();
+                tracer_class::turnOffTracer();
+
+                header ("Content-Type:text/xml");
+                $this->generate('empty', $this->siteMap(), 1);
                 break;
         }
     }
 
-    /**
-     * run when module throws some error
-     */
-    public function runErrorMode()
-    {
-
-    }
-
-    public function install()
-    {
-
-    }
-
-    public function uninstall()
-    {
-
-    }
+    public function runErrorMode(){}
 }

@@ -7,7 +7,7 @@
  * @subpackage  tree
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.5.1
+ * @version     2.6.0
  */
 class tree_class
 {
@@ -189,10 +189,10 @@ class tree_class
      * process xml pages tree and generate sitemap for google
      * @return string full page map in xml
      */
-    public function sitemap()
+    public function siteMap()
     {
         $mainPage       = $this->_treeStructure->documentElement->childNodes;
-        $this->_siteMap = new xml_class(1.0, 'UTF-8');
+        $this->_siteMap = new xml_class('1.0', 'UTF-8');
         $root           = $this->_siteMap->createElement('urlset');
 
         $root->setAttribute(
@@ -230,6 +230,7 @@ class tree_class
 
             $id = $child->getAttribute('id');
             if ($child->childNodes 
+                && $child->firstChild
                 && (   $child->firstChild->nodeName === 'sub' 
                     || $child->firstChild->nodeName === 'page'
                 )

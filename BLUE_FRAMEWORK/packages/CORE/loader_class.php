@@ -6,7 +6,7 @@
  * @subpackage  loader
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.5.0
+ * @version     2.6.0
  */
 class loader_class
 {
@@ -306,6 +306,16 @@ class loader_class
     public function map($xml = 'tree', $admin = FALSE)
     {
         return $this->_tree->map($xml, $admin);
+    }
+
+    /**
+     * process xml pages tree and generate sitemap for google
+     *
+     * @return string full page map in xml
+     */
+    public function siteMap()
+    {
+        return $this->_tree->siteMap();
     }
 
     /**

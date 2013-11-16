@@ -326,6 +326,16 @@ abstract class module_class
     }
 
     /**
+     * process xml pages tree and generate sitemap for google
+     *
+     * @return string full page map in xml
+     */
+    public function siteMap()
+    {
+        return $this->core->siteMap();
+    }
+
+    /**
      * allows add some messages (ok, info, critic error, warning)
      * without stopping module
      * 

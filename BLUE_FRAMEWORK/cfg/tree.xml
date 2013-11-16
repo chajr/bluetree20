@@ -71,9 +71,8 @@
 
     <page id="strona3" name="Page 3" layout="strona3" options="1111">
         <sub id="podstrona3" name="Subpage 3" layout="podstrona3" options="11110">
-            <sub id="podstrona4" name="Subpage 4" layout="podstrona4" options="11111">
-                <lib on="1">files</lib>
-                <mod on="1">mod7</mod>
+            <sub id="podstrona4" name="Subpage 4" layout="podstrona4" options="11110">
+                <mod on="1">map</mod>
             </sub>
             <lib on="1">db/mysql</lib>
             <lib on="1">files</lib>
