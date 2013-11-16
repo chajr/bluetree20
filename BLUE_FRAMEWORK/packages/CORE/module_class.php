@@ -7,7 +7,7 @@
  * @subpackage  module
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.4.2
+ * @version     2.5.0
  */
 abstract class module_class
 {
@@ -369,6 +369,26 @@ abstract class module_class
         }
 
         return option_class::load($this->moduleName);
+    }
+
+    /**
+     * lunched when module try to start method that dos not exists
+     * 
+     * @param string $method
+     * @param array $args
+     * @return null
+     */
+    public function __call($method, $args)
+    {
+        if (class_exists('tracer_class')) {
+            tracer_class::marker(array(
+                'call to undefined method',
+                debug_backtrace(),
+                '#FA6E6E'
+            ));
+        }
+
+        return NULL;
     }
 
     /**
