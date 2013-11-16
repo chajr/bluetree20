@@ -5,7 +5,7 @@
  * @subpackage  error
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.4.1
+ * @version     2.4.2
  */
 
 /**
@@ -81,7 +81,7 @@ final class error_class
     {
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
-                'create error',
+                'create error object to handle errors',
                 debug_backtrace(),
                 '#900000'
             ));
