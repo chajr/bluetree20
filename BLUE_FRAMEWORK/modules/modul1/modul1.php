@@ -7,12 +7,12 @@
  * @subpackage  modul1
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.5.2
+ * @version     1.6.0
  */
 class modul1 
     extends module_class
 {
-    static $version             = '1.5.2';
+    static $version             = '1.6.0';
     static $name                = 'module number 1';
     public $requireLibraries    = array();
     public $requireModules      = array();
@@ -293,6 +293,7 @@ class modul1
             'display'
         );
 
+        $this->generate('module_path', $this->getModuleDir());
     }
     
     public function runErrorMode(){

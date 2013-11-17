@@ -58,4 +58,5 @@ $content = array(
     'nested_value'              => 'nested value',
     'optional_nested'           => 'optional nested value',
     'nested_loops'              => 'nested loops',
+    'module_path'               => 'module path',
 );

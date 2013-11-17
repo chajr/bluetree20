@@ -58,4 +58,5 @@ $content = array(
     'nested_value'              => 'zagnieżdżona wartość',
     'optional_nested'           => 'opcjonalna zagnieżdżona wartość',
     'nested_loops'              => 'zagnieżdżone pętle',
+    'module_path'               => 'ścierzka do modułu',
 );

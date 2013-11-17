@@ -7,7 +7,7 @@
  * @subpackage  module
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.5.0
+ * @version     2.6.0
  */
 abstract class module_class
 {
@@ -399,6 +399,16 @@ abstract class module_class
         }
 
         return NULL;
+    }
+
+    /**
+     * return full module directory
+     * 
+     * @return string
+     */
+    public function getModuleDir()
+    {
+        return starter_class::path('modules/' . $this->moduleName);
     }
 
     /**
