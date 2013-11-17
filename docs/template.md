@@ -260,3 +260,31 @@ $independent = new display_class(array(
 $independent->generate('some_marker', 'some content');
 $data = $independent->render();
 ```
+
+Display data from session by special markers
+--------------
+Last way to render some content in template is use to this `SESSION`. We can put
+some data into session in special group and after that in next framework instance
+special markers will be replaced by data from session.  
+*That way don't handle translations*
+
+```php
+$this->setSession(
+    'marker_name',
+    'some data to render on page',
+    'display'
+);
+```
+
+After that declaration and page refresh we will get that message on each template
+where we put special marker `{;session_display;marker_name;}`.  
+But if we want to use that feature when we use some additional templates, we must
+also give `session` object to `display_class` `__construct`.
+
+```php
+$firstTemplate = new display_class(
+        'independent' => TRUE,
+        'template'    => 'template/address/template.html',
+        'session'     => $this->_session
+    );
+```
