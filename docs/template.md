@@ -178,7 +178,10 @@ That part of code will display:
 **{;block;block_name;}** - Replaced by content from modules that has decelerated `block` attribute in `tree.xml` with the same value of `attribute` and `block_name`
 
 #### Special messages block marker
-**{;core_error;}** - Display messages like errors, warnings, information and success
+1. **{;core_error;}** - Display error messages
+2. **{;core_warning;}** - Display warning messages
+3. **{;core_info;}** - Display information messages
+4. **{;core_ok;}** - Display success messages
 
 ### Core markers used in module templates _(can be used in main template)_
 #### URL markers
