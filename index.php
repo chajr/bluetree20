@@ -42,11 +42,18 @@ tracer_class::saveToFile();
  * @package     Start
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.2.0
+ * @version     2.3.0
  * @final
  */
 final class starter_class
 {
+    /**
+     * contains all loaded libraries short class names
+     * 
+     * @var array
+     */
+    private static $_loadedLibraries = array();
+
     /**
      * start framework, display content or errors
      * load class for error handling, start buffering, sets error handling
@@ -168,50 +175,125 @@ final class starter_class
             '#000'
         ));
 
-        $preg = preg_match('#^[\w-]+\/([\w-]+[,]?)+$#', $pack);
+        $preg       = preg_match('#^[\w-]+\/([\w-]+[,]?)+$#', $pack);
+        $thisOnly   = array();
 
         if($preg){
-            $pack = explode('/', $pack);
-            $list = explode(',', $pack[1]);
-            $pack = $pack[0];
+            $pack       = explode('/', $pack);
+            $thisOnly   = explode(',', $pack[1]);
+            $pack       = $pack[0];
         }
 
         $handler = opendir(self::path('packages') . $pack);
 
         if ($handler) {
-            $array = array();
-            
-            while ($file = readdir($handler)) {
-                $type = preg_match(
-                    '#^[\\w-]+(_(class|interface|abstract)\.php){1}$#',
-                    $file
-                );
+            $libraries = self::_readDirectory($handler);
 
-                if ($type) {
-                    $short = str_replace('_class.php', '', $file);
-                    $short = str_replace('_interface.php', '', $short);
-                    $short = str_replace('_abstract.php', '', $short);
-
-                    if ($preg) {
-                        $bool = in_array($short, $list);
-                           if (!$bool) {
-                            continue;
-                        }
-                    }
-
-                    $bool = self::load('packages/' . $pack . '/' . $file);
-                    $array[] = $short;
-
-                    if (!$bool) {
-                        closedir($handler);
-                        return FALSE;
-                    }
-                }
-            }
+            self::_loadLibraryFiles($libraries['interface'], $pack, $thisOnly);
+            self::_loadLibraryFiles($libraries['abstract'], $pack, $thisOnly);
+            self::_loadLibraryFiles($libraries['class'], $pack, $thisOnly);
 
             closedir($handler);
         }
-        return $array;
+        return self::$_loadedLibraries;
+    }
+
+    /**
+     * load libraries from given lists
+     * 
+     * @param array $list list of all founded in directory libraries
+     * @param string $pack package name
+     * @param array $thisOnly list of libraries to load, only when founded in given string
+     * @return bool
+     */
+    private static function _loadLibraryFiles(array $list, $pack, array $thisOnly)
+    {
+        tracer_class::marker(array(
+            'load library files',
+            debug_backtrace(),
+            '#000'
+        ));
+
+        foreach ($list as $libraryFile) {
+            $short = str_replace('_class.php', '', $libraryFile);
+            $short = str_replace('.php', '', $short);
+
+            if (self::_skipLibrary($short, $thisOnly)) {
+                continue;
+            }
+
+            $bool = self::load('packages/' . $pack . '/' . $libraryFile);
+
+            if ($bool) {
+                self::$_loadedLibraries[$short] = $short;
+            }
+        }
+    }
+
+    /**
+     * skip loaded already and don't required libraries
+     * 
+     * @param string $short
+     * @param array $thisOnly
+     * @return bool
+     */
+    private static function _skipLibrary($short, array $thisOnly)
+    {
+        if (isset(self::$_loadedLibraries[$short])) {
+            return TRUE;
+        }
+
+        if (!empty($thisOnly) && !in_array($short, $thisOnly)) {
+            return TRUE;
+        }
+
+        return FALSE;
+    }
+
+    /**
+     * read given directory handler and return grouped files array
+     * 
+     * @param resource $handler directory handler
+     * @return array
+     */
+    private static function _readDirectory($handler)
+    {
+        $libraries = array(
+            'interface'     => array(),
+            'abstract'      => array(),
+            'class'         => array(),
+        );
+
+        while ($file = readdir($handler)) {
+            $isClass = preg_match(
+                '#^[\\w-]+(_(class)\.php){1}$#',
+                $file
+            );
+
+            $isInterface = preg_match(
+                '#^[\\w-]+(_(interface)\.php){1}$#',
+                $file
+            );
+
+            $isAbstract = preg_match(
+                '#^[\\w-]+(_(abstract)\.php){1}$#',
+                $file
+            );
+
+            if ($isClass) {
+                $libraries['class'][] = $file;
+            }
+
+            if ($isInterface) {
+                $libraries['interface'][] = $file;
+            }
+
+            if ($isAbstract) {
+                $libraries['abstract'][] = $file;
+            }
+        }
+
+        return $libraries;
     }
 
     /**

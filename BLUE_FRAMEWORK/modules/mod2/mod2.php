@@ -7,14 +7,14 @@
  * @subpackage  mod2
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.1.2
+ * @version     1.1.3
  */
 class mod2 
     extends module_class
 {
-    static $version         = '1.1.2';
+    static $version         = '1.1.3';
     static $name            = '';
-    public $require_libs    = array('abstractSql', 'mysql', 'simpleDate');
+    public $require_libs    = array('sql_abstract', 'mysql', 'mysql_connection', 'simpleDate');
     public $require_modules = array();
 
     /**

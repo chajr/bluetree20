@@ -7,10 +7,10 @@
  * @subpackage  fb
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     0.1.0
+ * @version     0.1.1
  */
 class fb_class
-    extends abstractSql_class
+    extends sql_abstract
 {
     /**
      * set default connection and run given query
