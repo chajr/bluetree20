@@ -24,7 +24,7 @@
     <option id="reg_exp_classic" value="#^[\w\.\/?=&amp;-]*$#"/>
     <option id="global_var_check" value="#^[a-zA-Z][\w]*$#"/>
     <option id="max_get" value="11"/>
-    <option id="max_post" value="45"/>
+    <option id="max_post" value="60"/>
     <option id="get_len" value="25"/>
     <option id="test" value=""/>
     <option id="post_secure" value="1"/>
