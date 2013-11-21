@@ -33,10 +33,10 @@ Module reference will be saved in `loader_class->mod` variable that framework ca
 interact between modules.  
 Constructor gets four parameters:
 
-1. *loader_class* instance, we can get access to all libraries like display
-2. *parameters* - some additional parameters for module written in `tree.xml`
-3. *module name*
-4. *unthrow* - from configuration, information to omit all catches exceptions
+1. **loader_class** instance, we can get access to all libraries like display
+2. **parameters** - some additional parameters for module written in `tree.xml`
+3. **module name**
+4. **unthrow** - from configuration, information to omit all catches exceptions
 
 Inside of constructor we can do what we want to and what is allowed by framework
 using `loader_class` methods.
@@ -84,67 +84,67 @@ class module
 }
 ```
 
-*runErrorMode* method is lunched only if `modException` was throw by module and
+**runErrorMode** method is lunched only if `modException` was throw by module and
 unthrow configuration option is set to `FALSE`.
 
 ### Method list
 
-1. *generate* - replace content or content array _(marker or marker array, content or false if marker is array, set tru if you want to replace content in core templates)_
-2. *loop* - create content like table by data in array _(marker, array of content to replaced by loop)_
-3. *addMetaTag* - add complete meta tag node _(complete meta tag node)_
-4. *addToMetaTag* - add some content to existing meta tag _(meta tag type, meta tag content)_
-5. *lang* - return default or loaded language code  _(TRUE - default language; FALSE - loaded language; default variable is NULL)_
-6. *setSession* - set information in session, default in public section _(variable name, data, storage type;user|public|display|core; default is public)_
-7. *clearSession* - remove all data for given group _(user|public|display|core)_
-8. *getSessionVariable* - return value of given session variable _(variable, type; user|public|display|core)_
-9. *layout* - load module template _(optionally template name; if not given will load template as the same name as module `module.html`)_
-10. *set* - add load css or js for module _(file name, type css or js, external or internal file, media type)_
-11. *breadcrumbs* - return array with breadcrumbs list with url to pages
-12. *map* - return site map with urls _(name of file to create map; default is tree.xml, if TRUE return list with pages options)_
-13. *siteMap* - return site map in xml google format
-14. *error* - set some messages from module _(message type critic|warning|info|ok or marker to write message, error code, message to show)_
-15. *loadModuleOptions* - get one option or all options for module, stored in `elements` directory _(option name)_
-16. *_translate* - give information to framework that module will have translations
-17. *_setTranslationArray* - add or replace some base translations _(array of translations)_
-18. *_disabled* - skip lunching given module _(module name)_
-19. *_stop* - stops lunching all other modules
-19. *getModuleDir* - return full module directory path
+1. **generate** - replace content or content array _(marker or marker array, content or false if marker is array, set tru if you want to replace content in core templates)_
+2. **loop** - create content like table by data in array _(marker, array of content to replaced by loop)_
+3. **addMetaTag** - add complete meta tag node _(complete meta tag node)_
+4. **addToMetaTag** - add some content to existing meta tag _(meta tag type, meta tag content)_
+5. **lang** - return default or loaded language code  _(TRUE - default language; FALSE - loaded language; default variable is NULL)_
+6. **setSession** - set information in session, default in public section _(variable name, data, storage type;user|public|display|core; default is public)_
+7. **clearSession** - remove all data for given group _(user|public|display|core)_
+8. **getSessionVariable** - return value of given session variable _(variable, type; user|public|display|core)_
+9. **layout** - load module template _(optionally template name; if not given will load template as the same name as module `module.html`)_
+10. **set** - add load css or js for module _(file name, type css or js, external or internal file, media type)_
+11. **breadcrumbs** - return array with breadcrumbs list with url to pages
+12. **map** - return site map with urls _(name of file to create map; default is tree.xml, if TRUE return list with pages options)_
+13. **siteMap** - return site map in xml google format
+14. **error** - set some messages from module _(message type critic|warning|info|ok or marker to write message, error code, message to show)_
+15. **loadModuleOptions** - get one option or all options for module, stored in `elements` directory _(option name)_
+16. **_translate** - give information to framework that module will have translations
+17. **_setTranslationArray** - add or replace some base translations _(array of translations)_
+18. **_disabled** - skip lunching given module _(module name)_
+19. **_stop** - stops lunching all other modules
+19. **getModuleDir** - return full module directory path
 
 *if module wants to lunch method that dos not exists, then `__call` method will be lunched.*  
 *that method will return `NULL` and add message to tracer _call to undefined method_*
 
 ### Variable list
 
-1. *$version* - (static) module version number
-2. *$name* - (static) full module name _(like this is my module)_
-3. *$requireLibraries* - (static) array with names of libraries required to module work
-4. *$requireModules* - (static) array with names of modules required to module work
-5. *core* - contains `loader_class` reference 
-6. *params* - list of parameters witch module starts (from tree.xml)
-7. *block* - name of block to witch module rendered content will be loaded
-8. *moduleName* - module name
-9. *get* - contains `get` object
-10. *post* - contains `post` object
-11. *session* - contains `session` object
-12. *cookie* - contains `cookie` object
-13. *files* - contains `files` object
-14. *modules* - list of loaded and lunched modules
-15. *error* - array with list of error/information count
-16. *mobileBrowser* - if TRUE means that framework was lunched by mobile browser
+1. **$version** - (static) module version number
+2. **$name** - (static) full module name _(like this is my module)_
+3. **$requireLibraries** - (static) array with names of libraries required to module work
+4. **$requireModules** - (static) array with names of modules required to module work
+5. **core** - contains `loader_class` reference 
+6. **params** - list of parameters witch module starts (from tree.xml)
+7. **block** - name of block to witch module rendered content will be loaded
+8. **moduleName** - module name
+9. **get** - contains `get` object
+10. **post** - contains `post` object
+11. **session** - contains `session` object
+12. **cookie** - contains `cookie` object
+13. **files** - contains `files` object
+14. **modules** - list of loaded and lunched modules
+15. **error** - array with list of error/information count
+16. **mobileBrowser** - if TRUE means that framework was lunched by mobile browser
 
 ### Static methods list
 Access to some other core libraries useful methods:
 
-1. *starter_class::path* - return framework main path (to use files included in BLUE_FRAMEWORK)
-2. *starter_class::load* - load file or file content (can read some file variable) _(path to file inside of BLUE_Framework, read or not file content, loading type)_
-3. *core_class::options* - return all or single framework options _(option name)_
-4. *error_class::log* - create log file _(file prefix, data to save, log time, path to save log file)_
-5. *error_class::other* - return some information like _ip, browser, url and date_ as array
-6. *files::exists* - check that file exists, give full path to file
-7. *globals_class::destroy* - destroy all data stored in global arrays (like `$_GET`, `$_POST` etc.)
-8. *get::realPath* - return repair path for elements
-9. *option_class::load* - load options for given module and save it in array, as second parameter we can force reload all options
-10. *option_class::show* - return value of single option
+1. **starter_class::path** - return framework main path (to use files included in BLUE_FRAMEWORK)
+2. **starter_class::load** - load file or file content (can read some file variable) _(path to file inside of BLUE_Framework, read or not file content, loading type)_
+3. **core_class::options** - return all or single framework options _(option name)_
+4. **error_class::log** - create log file _(file prefix, data to save, log time, path to save log file)_
+5. **error_class::other** - return some information like _ip, browser, url and date_ as array
+6. **files::exists** - check that file exists, give full path to file
+7. **globals_class::destroy** - destroy all data stored in global arrays (like `$_GET`, `$_POST` etc.)
+8. **get::realPath** - return repair path for elements
+9. **option_class::load** - load options for given module and save it in array, as second parameter we can force reload all options
+10. **option_class::show** - return value of single option
 
 Incoming data
 --------------
@@ -156,7 +156,7 @@ POST or FILES global data, each variable key is the name of input.
 
 ### GET
 #### get data
-To use data from *GET* we must use `$this->get->variableKey`. That will return
+To use data from **GET** we must use `$this->get->variableKey`. That will return
 data for given value or NULL if variable don't exists.
 
 ```php
@@ -170,13 +170,13 @@ public function run()
 #### get methods
 By `$this->get` we can also get access to some useful get class methods.
 
-1. *getLanguage* - return language code or `NULL` if language library is off
-2. *getCurrentPage* - return path value of current page
-3. *getParentPage* - return parent of current page, or page given in parameter
-4. *getMasterPage* - return master page, defined in `<page>` node
-5. *fullGetList* - return full array with pages/subpages and their GET parameters
-6. *pageType* - return page type (html|css|js)
-7. *path* - return main path for page, or complete path with subpages
+1. **getLanguage** - return language code or `NULL` if language library is off
+2. **getCurrentPage** - return path value of current page
+3. **getParentPage** - return parent of current page, or page given in parameter
+4. **getMasterPage** - return master page, defined in `<page>` node
+5. **fullGetList** - return full array with pages/subpages and their GET parameters
+6. **pageType** - return page type (html|css|js)
+7. **path** - return main path for page, or complete path with subpages
 
 ### POST
 Access to post data we get using the same way as get data `$this->post->variableKey`.
@@ -184,23 +184,23 @@ Access to post data we get using the same way as get data `$this->post->variable
 ### COOKIE
 Access to cookie data we get using the same way as get data `$this->cookie->variableKey`.  
 That class has only one method:
-*setCookies* - set cookie file that exist on object, with default lifetime value
+**setCookies** - set cookie file that exist on object, with default lifetime value
 
 ### SESSION
 Access to session variable is the same way that previous examples, but session has
 specific data storage, split to some other arrays. Data in session is keep in that
 arrays: `public, core, user, display`.
 
-1. *public* - default array to store data, access to this data as the same as post and get
-2. *core* - store some core information
-3. *user* - store user information
-4. *display* - store data that will be used to replace some special markers when page will be rendered
+1. **public** - default array to store data, access to this data as the same as post and get
+2. **core** - store some core information
+3. **user** - store user information
+4. **display** - store data that will be used to replace some special markers when page will be rendered
 
 #### session methods
 
-1. *set* - set some variable in session object _(var name, var value, group name public|core|session|display)_
-2. *returns* - return all data for given group _(group name public|core|session|display)_
-3. *clear* - clear data in session in given group _(group name public|core|session|display)_
+1. **set** - set some variable in session object _(var name, var value, group name public|core|session|display)_
+2. **returns** - return all data for given group _(group name public|core|session|display)_
+3. **clear** - clear data in session in given group _(group name public|core|session|display)_
 
 ### FILES
 This class store information about all send to framework files and also can make
@@ -224,12 +224,12 @@ If some upload error was occurred, then will be also stored in one public variab
 
 #### files methods
 
-1. *move* - move uploaded file to given directory _(destination or array of destination or array of files and their destination, name of file to save)_
-2. *read* - get data from file, or fromm all files in object _(key name - the same as input name)_
-3. *uploadFullSize* - size of all uploaded files in bytes
-4. *returns* - return array with some file values files name, their types, or errors _(value type name|type|tmp_name etc.)_
-5. *exist* - check that file exists _(path)_
-6. *single* - return content of single file _(key name - the same as input name)_
+1. **move** - move uploaded file to given directory _(destination or array of destination or array of files and their destination, name of file to save)_
+2. **read** - get data from file, or fromm all files in object _(key name - the same as input name)_
+3. **uploadFullSize** - size of all uploaded files in bytes
+4. **returns** - return array with some file values files name, their types, or errors _(value type name|type|tmp_name etc.)_
+5. **exist** - check that file exists _(path)_
+6. **single** - return content of single file _(key name - the same as input name)_
 
 If directory for file don't exist, will be automatically created  
 If file name will have restricted symbols in name, then `core_error_25` will be throwed.
@@ -457,12 +457,12 @@ $this->error('marker_key', 'title', 'message');
 Each module support handling of Exceptions that will stop module work and will
 add some `critic` error to list. There are couple exceptions that module handle:
 
-1. *coreException* - will show `critic` error message information and stops working of all modules
-2. *modException* - will show `critic` error message information and try to lunch module in error mode `runErrorMode`.
-3. *warningException* - will show `warning` message information and stop module working
-4. *infoException* - will show `info` message information and stop module working
-5. *okException* - will show `ok` message information and stop module working
-6. *Exception* - catch all not handled exceptions, catch their messages and create coreException. If there was some error in coreException stop all modules.
+1. **coreException** - will show `critic` error message information and stops working of all modules
+2. **modException** - will show `critic` error message information and try to lunch module in error mode `runErrorMode`.
+3. **warningException** - will show `warning` message information and stop module working
+4. **infoException** - will show `info` message information and stop module working
+5. **okException** - will show `ok` message information and stop module working
+6. **Exception** - catch all not handled exceptions, catch their messages and create coreException. If there was some error in coreException stop all modules.
 
 Of course we can create own `try/catch` block inside module and handle catch error
 by own way.

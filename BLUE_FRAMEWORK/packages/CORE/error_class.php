@@ -5,7 +5,7 @@
  * @subpackage  error
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.4.3
+ * @version     2.4.4
  */
 
 /**
@@ -83,7 +83,7 @@ final class error_class
             tracer_class::marker(array(
                 'create error object to handle errors',
                 debug_backtrace(),
-                '#900000'
+                '#ff0000'
             ));
         }
 
