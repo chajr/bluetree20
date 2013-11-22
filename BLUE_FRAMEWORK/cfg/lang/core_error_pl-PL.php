@@ -5,7 +5,7 @@
  * @subpackage  language
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.0.0
+ * @version     1.0.1
  */
 
 /**
@@ -13,7 +13,6 @@
  * @var array
  */
 $content = array(
-    '000000000000'  => 'Testowy błąd',
     'core_error_0'  => 'Błąd podczas ładowania bibliotek frameworka',
     'core_error_1'  => 'Brak treści do wyświetlenia',
     'core_error_2'  => 'Brak szablonu do załadowania',

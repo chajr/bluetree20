@@ -5,7 +5,7 @@
  * @subpackage  language
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.0.1
+ * @version     1.0.2
  */
 
 /**
@@ -13,7 +13,6 @@
  * @var array
  */
 $content = array(
-    '000000000000'  => 'Test error',
     'core_error_0'  => 'Error on Framework libraries loading',
     'core_error_1'  => 'No content to display',
     'core_error_2'  => 'No layout to load',
