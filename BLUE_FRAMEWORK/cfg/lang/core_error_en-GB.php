@@ -5,7 +5,7 @@
  * @subpackage  language
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.0.0
+ * @version     1.0.1
  */
 
 /**
@@ -20,10 +20,10 @@ $content = array(
     'core_error_3'  => 'Error on loading external layout',
     'core_error_4'  => 'URL has unavailable characters',
     'core_error_5'  => 'URL has to many parameters',
-    'core_error_6'  => 'One of UEL parametera are to long',
+    'core_error_6'  => 'One of URL parameters are to long',
     'core_error_7'  => 'To many POST parameters',
     'core_error_8'  => 'To many files send',
-    'core_error_9'  => 'Error on mata description file loadw',
+    'core_error_9'  => 'Error on mata description file loading',
     'core_error_10' => 'Send file ae to big',
     'core_error_11' => 'All send files are to big',
     'core_error_12' => 'Error when moving send file to temporary directory',
