@@ -8,7 +8,7 @@
  * @subpackage  meta
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.2.0
+ * @version     2.2.1
  */
 class meta_class
 {
@@ -57,7 +57,7 @@ class meta_class
 
             if (!$bool) {
                 throw new coreException(
-                    'core_error_20',
+                    'core_error_9',
                     starter_class::path('cfg') . 'meta.xml'
                 );
             }
