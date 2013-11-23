@@ -1384,7 +1384,7 @@ class files
 
         $this->_checkKey($file);
 
-        $name = starter_class::path('TMP').'tmp';
+        $name = starter_class::path('TMP') . 'tmp';
         $bool = move_uploaded_file($this->$file, $name);
 
         if (!$bool) {
