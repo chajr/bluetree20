@@ -5,7 +5,7 @@
  * @subpackage  globals
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.4.4
+ * @version     2.4.5
  */
 
 /**
@@ -1109,7 +1109,7 @@ class files
                 $maxSize                =  core_class::options('files_max_size');
 
                 if ($this->_uploadFullSize > $maxSize) {
-                    throw new coreException('core_error_11', 'max: '.$maxSize);
+                    throw new coreException('core_error_11', 'max: ' . $maxSize);
                 }
 
                 $path = pathinfo($file['name']);
