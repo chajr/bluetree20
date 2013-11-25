@@ -120,3 +120,15 @@ footer .btn-block b{
 .message button.btn-danger.width{
     width: 40px;
 }
+.info{
+    width: 75%;
+    margin: 20px auto 0;
+    text-align: center;
+    position: relative;
+}
+.info i{
+    font-size: 75px;
+    position: absolute;
+    text-align: center;
+    left: 20px;
+}

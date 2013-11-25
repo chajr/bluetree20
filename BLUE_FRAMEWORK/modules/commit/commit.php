@@ -6,12 +6,12 @@
  * @subpackage  commit
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     0.3.1
+ * @version     0.3.2
  */
 class commit
     extends module_class
 {
-    static $version             = '0.3.1';
+    static $version             = '0.3.2';
     static $name                = 'Commit generator';
     public $requireLibraries    = array();
     public $requireModules      = array();
@@ -49,9 +49,7 @@ class commit
      */
     public function generateCommit()
     {
-        //$data = 'a:19:{s:5:"title";s:12:"commit title";s:7:"version";s:5:"1.0.1";s:5:"issue";s:2:"44";s:5:"alpha";s:2:"on";s:8:"modify_5";s:15:"modified/2/file";s:8:"mAdd_5_1";s:18:"added some content";s:8:"mAdd_5_2";s:0:"";s:11:"mRemove_5_3";s:20:"removed some content";s:15:"modifyVersion_4";s:16:"/changed/version";s:8:"from_4_1";s:5:"1.0.1";s:6:"to_4_1";s:5:"1.1.0";s:9:"removed_3";s:17:"removed/file/path";s:10:"remove_3_1";s:24:"removed file description";s:8:"modify_2";s:14:"/modified/file";s:8:"mAdd_2_1";s:17:"added description";s:8:"mAdd_2_2";s:19:"added 2 description";s:11:"mUpdate_2_3";s:19:"modifie description";s:5:"add_1";s:14:"added/filepath";s:9:"added_1_9";s:22:"added file description";}';
         foreach ($this->post as $key => $value) {
-        //foreach (unserialize($data) as $key => $value) {
 
             if (trim($value) === '') {
                 continue;
@@ -82,6 +80,11 @@ class commit
     protected function _processInformation()
     {
         foreach ($this->_information as $information) {
+            if (!isset($information['type'])) {
+                $this->error('warning', 'missing_file_url', '');
+                return;
+            }
+
             $type       = $information['type'];
             $renderer   = new display_class(array(
                 'independent' => TRUE,
@@ -166,7 +169,8 @@ class commit
                 $newLine = "\n                ";
             }
 
-            $this->_information[$key[1]][$key[0]] .= $value . $newLine;
+            $convert = stripslashes($value);
+            $this->_information[$key[1]][$key[0]] .= $convert . $newLine;
         }
     }
 
@@ -179,15 +183,15 @@ class commit
     protected function _createBaseInfo($key, $value)
     {
         if ($key === 'title') {
-            $this->generate('title', $value);
+            $this->generate('title', stripslashes($value));
         }
 
         if ($key === 'version') {
-            $this->generate('version', $value);
+            $this->generate('version', stripslashes($value));
         }
 
         if ($key === 'issue') {
-            $this->generate('issue', $value);
+            $this->generate('issue', stripslashes($value));
         }
 
         if ($key === 'alpha') {
@@ -195,7 +199,7 @@ class commit
         }
 
         if ($key === 'description') {
-            $this->generate('description', $value);
+            $this->generate('description', stripslashes($value));
         }
     }
 

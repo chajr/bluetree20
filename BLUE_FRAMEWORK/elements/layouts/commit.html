@@ -7,13 +7,20 @@
     </head>
     <body>
         {;op;core_errors;}
-        <div class="error">
+        <div class="info error">
             <legend>
                 {;lang;error;} {;lang;error_title;}
             </legend>
             {;core_error;}
         </div>
         {;op_end;core_errors;}
+        {;op;core_warnings;}
+        <div class="info warning">
+            <i class="icon-warning-sign"></i>
+            {;lang;warning;}<br/>
+            {;core_warning;}
+        </div>
+        {;op_end;core_warnings;}
 
         {;mod;commit;}
         {;core;js;}
