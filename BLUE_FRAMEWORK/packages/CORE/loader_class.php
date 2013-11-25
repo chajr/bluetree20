@@ -6,7 +6,7 @@
  * @subpackage  loader
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.6.0
+ * @version     2.6.1
  */
 class loader_class
 {
@@ -499,7 +499,7 @@ class loader_class
     {
         if (core_class::options('core_procedural_mod_check')) {
             $info = $module . ' - ' . $execute;
-            
+
             $content = starter_class::load($path, TRUE);
             if (!$content) {
                 throw new coreException('core_error_20', $info);

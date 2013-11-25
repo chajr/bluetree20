@@ -8,7 +8,7 @@
  * @subpackage  meta
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.2.1
+ * @version     2.2.2
  */
 class meta_class
 {
@@ -35,7 +35,7 @@ class meta_class
      * set array with specific values
      * 
      * @param array $get list of run pages
-     * @throws coreException core_error_20, core_error_18
+     * @throws coreException core_error_18
      */
      public function __construct($get)
      {

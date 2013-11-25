@@ -5,7 +5,7 @@
  * @subpackage  error
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.3.0
+ * @version     2.3.1
  */
 
  /**
@@ -161,7 +161,7 @@ class coreException
             ));
         }
 
-        $error          = new error_class();
+        $error        = new error_class();
         $formatError  = $error->addError(
             'critic',
             $this->_integerCode,

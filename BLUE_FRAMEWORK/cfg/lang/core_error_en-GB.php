@@ -5,7 +5,7 @@
  * @subpackage  language
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.0.2
+ * @version     1.0.3
  */
 
 /**
@@ -25,7 +25,7 @@ $content = array(
     'core_error_9'  => 'Error on mata description file loading',
     'core_error_10' => 'Send file ae to big',
     'core_error_11' => 'All send files are to big',
-    'core_error_12' => 'Error when moving send file to temporary directory',
+    'core_error_12' => 'Error when moving send file to directory',
     'core_error_13' => 'Unable to load page structure',
     'core_error_14' => 'No main page defined',
     'core_error_15' => 'Page is disabled',

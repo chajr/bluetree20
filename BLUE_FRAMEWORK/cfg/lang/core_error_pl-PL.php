@@ -5,7 +5,7 @@
  * @subpackage  language
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.0.1
+ * @version     1.0.2
  */
 
 /**
@@ -25,7 +25,7 @@ $content = array(
     'core_error_9'  => 'Błąd podczas ładowania pliku metatagów',
     'core_error_10' => 'Przysyłany plik jest zbyt duży',
     'core_error_11' => 'Przesyłane pliki mają za duży łączny rozmiar',
-    'core_error_12' => 'Błąd podczas przenoszenia pliku do tymczasowego katalogu',
+    'core_error_12' => 'Błąd podczas przenoszenia pliku do katalogu',
     'core_error_13' => 'Nie można załadować struktury strony',
     'core_error_14' => 'Brak zdefiniowanej strony głównej',
     'core_error_15' => 'Strona została wyłączona z użytku',

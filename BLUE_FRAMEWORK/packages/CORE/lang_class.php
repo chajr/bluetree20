@@ -6,7 +6,7 @@
  * @subpackage  language
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.7.2
+ * @version     2.7.3
  */
 class lang_class
 {
@@ -146,8 +146,8 @@ class lang_class
     /**
      * set array to translate
      * 
-     * @param string|boolean $mod optionaly name of module that want to translate
-     * @param boolean $type if FALSE setArray started from core, elese runed by error_class
+     * @param string|boolean $mod optionally name of module that want to translate
+     * @param boolean $type if FALSE setArray started from core, else run by error_class
      * @param string|boolean $languageCode force to load array with given language
      * @param boolean $switch allows to load translations from module to core (for marker error)
      * @return boolean
@@ -539,10 +539,9 @@ class lang_class
             } else {
                 self::_redirectWithLanguageCode($get);
             }
-
-        } else {
-            return NULL;
         }
+
+        return NULL;
     }
 
     /**
@@ -565,6 +564,7 @@ class lang_class
         }
 
         self::_redirectWithLanguageCode($get);
+        return NULL;
     }
 
     /**

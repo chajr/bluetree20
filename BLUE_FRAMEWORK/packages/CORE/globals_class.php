@@ -5,7 +5,7 @@
  * @subpackage  globals
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.4.5
+ * @version     2.4.6
  */
 
 /**
@@ -226,6 +226,12 @@ abstract class globals_class
         return serialize($dataArray);
     }
 
+    /**
+     * check that name for variable has proper chars
+     * 
+     * @param string $key
+     * @throws coreException core_error_25
+     */
     protected function _checkKey($key)
     {
         $keyCheck = preg_match(core_class::options('global_var_check'), $key);
@@ -1046,7 +1052,7 @@ class session
 /**
  * process uploaded files
  */
-class files 
+class files
     extends globals_class
 {
     /**
@@ -1212,7 +1218,7 @@ class files
             }
         }
 
-        return $this->put($valueToPut, $path);
+        return $this->_put($valueToPut, $path);
     }
 
     /**
@@ -1234,7 +1240,7 @@ class files
         }
 
         if ($name) {
-            return $this->single($name);
+            return $this->_single($name);
         } else {
             $data = array();
 
@@ -1243,7 +1249,7 @@ class files
                     continue;
                 }
 
-                $data[$key] = $this->single($key);
+                $data[$key] = $this->_single($key);
             }
 
             return $data;
@@ -1372,7 +1378,7 @@ class files
      * @return mixed
      * @throws coreException core_error_12
      */
-    private function single($file)
+    private function _single($file)
     {
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
@@ -1409,7 +1415,7 @@ class files
      * @throws coreException core_error_12
      * @example put('file_from_tmp', '/some_path/directory/file.name')
      */
-    private function put($filename, $destination)
+    private function _put($filename, $destination)
     {
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
