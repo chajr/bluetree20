@@ -378,8 +378,10 @@ that count appears of that information.
 
 ### Error, warning, info, success information
 All that information use the same method `$this->error()` but with different parameters.
-All of tem are stored in special array and will be placed in special marker depends
-of chosen group (error|warning|info|success).  
+All of them are stored in special array and will be placed in special marker depends
+of chosen group (error|warning|info|success). That markers looks like that `{;core_type;}`
+where type is group name `{;core_error;}`. In that markers will be displayed all
+information called by `error()` method and by `exception` usage.  
 Base construction looks like that: `$this->error('type', 'title', 'message')`. In
 message parameter we can use translation markers.
 
