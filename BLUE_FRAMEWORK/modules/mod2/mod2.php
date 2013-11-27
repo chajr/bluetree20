@@ -7,12 +7,12 @@
  * @subpackage  mod2
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.1.3
+ * @version     1.1.4
  */
 class mod2 
     extends module_class
 {
-    static $version         = '1.1.3';
+    static $version         = '1.1.4';
     static $name            = '';
     public $require_libs    = array('sql_abstract', 'mysql', 'mysql_connection', 'simpleDate');
     public $require_modules = array();
@@ -58,7 +58,7 @@ class mod2
     public function connectionTest()
     {
         $conn = new mysql_connection_class(array(
-            'zmp.nazwa.pl', 'zmp_5', 'WE244ef43%$', 'zmp_5'
+            'zmp.nazwa.pl', 'zmp_2', 'WE244ef43%$', 'zmp_2', 3307
         ));
 
         if ($conn->err) {

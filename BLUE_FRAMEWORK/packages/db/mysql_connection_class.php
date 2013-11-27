@@ -8,7 +8,7 @@
  * @subpackage  mysql
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.2.1
+ * @version     1.3.0
  *
  * Display <a href="http://sam.zoy.org/wtfpl/COPYING">Do What The Fuck You Want To Public License</a>
  * @license http://sam.zoy.org/wtfpl/COPYING Do What The Fuck You Want To Public License
@@ -40,8 +40,9 @@ class mysql_connection_class
      *
      * @param array $config (host, username, pass, dbName, connectionName)
      * @param string $charset (default UTF8)
-     * @example new mysql_connection_class(array('localhost', 'user', 'pass', 'db', 'connection'))
+     * @example new mysql_connection_class(array('localhost', 'user', 'pass', 'db', '3306', 'connection'))
      * @example new mysql_connection_class(array('localhost', 'user', 'pass', 'db'))
+     * @example new mysql_connection_class(array('localhost', 'user', 'pass', 'db', '3306'))
      * @example new mysql_connection_class(array('localhost', 'user', 'pass', 'db'), 'LATIN1')
      */
     public function __construct($config, $charset = 'UTF8')
@@ -50,7 +51,13 @@ class mysql_connection_class
 
         if (isset($config) && !empty($config)) {
 
-            parent::__construct($config[0], $config[1], $config[2], $config[3]);
+            parent::__construct(
+                $config[0],
+                $config[1],
+                $config[2],
+                $config[3],
+                $config[4]
+            );
 
             if (mysqli_connect_error()) {
                 $this->err = mysqli_connect_error();
@@ -60,11 +67,11 @@ class mysql_connection_class
             $this->query("SET NAMES '$charset'");
         }
 
-        if (!isset($config[4]) || !$config[4]) {
-            $config[4] = 'default';
+        if (!isset($config[5]) || !$config[5]) {
+            $config[5] = 'default';
         }
 
-        self::$connections[$config[4]] = $this;
+        self::$connections[$config[5]] = $this;
     }
 
     /**
