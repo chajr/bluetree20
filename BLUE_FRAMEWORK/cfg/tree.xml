@@ -74,9 +74,8 @@
             <sub id="podstrona4" name="Subpage 4" layout="podstrona4" options="11110">
                 <mod on="1">map</mod>
             </sub>
-            <lib on="1">db/mysql</lib>
-            <lib on="1">files</lib>
-            <mod on="1">mod6</mod>
+            <lib on="1">db/pdo_connection</lib>
+            <mod on="1">connection</mod>
         </sub>
 
         <lib on="1">db/mysql</lib>

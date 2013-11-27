@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE root SYSTEM "dtd/config.dtd">
+<root>
+    <option id="type" value="mysql"/>
+    <option id="host" value="zmp.nazwa.pl"/>
+    <option id="pass" value="WE244ef43%$"/>
+    <option id="user" value="zmp_2"/><option id="dbname" value="zmp_2"/>
+    <!--<option id="user" value="zmp_5"/><option id="dbname" value="zmp_5"/>-->
+    <!--<option id="user" value="zmp_7"/><option id="dbname" value="zmp_7"/>-->
+    <!--<option id="user" value="zmp_8"/><option id="dbname" value="zmp_8"/>-->
+</root>
