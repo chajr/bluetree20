@@ -6,7 +6,7 @@
  * @subpackage  language
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.7.3
+ * @version     2.8.0
  */
 class lang_class
 {
@@ -176,9 +176,9 @@ class lang_class
             }
 
             if ($languageCode) {
-                $lang = $this->_loadLanguage($path . $mod, $languageCode);
+                $lang = $this->loadLanguage($path . $mod, $languageCode);
             } else {
-                $lang = $this->_loadLanguage($path . $mod);
+                $lang = $this->loadLanguage($path . $mod);
             }
 
             if (!$lang) {
@@ -384,7 +384,7 @@ class lang_class
      * @param string $languageCode optionally code of different language to load
      * @return array
      */
-    private function _loadLanguage($path, $languageCode = NULL)
+    public function loadLanguage($path, $languageCode = NULL)
     {
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
@@ -400,8 +400,7 @@ class lang_class
 
         $bool = starter_class::load(
             $path . '_' . $languageCode . '.php',
-            'content',
-            0
+            'content'
         );
 
         if (!$bool) {
@@ -409,8 +408,7 @@ class lang_class
             if (!$bool) {
                 $bool = starter_class::load(
                     $path . '_' . $this->default . '.php',
-                    'content',
-                    0
+                    'content'
                 );
             }
         }

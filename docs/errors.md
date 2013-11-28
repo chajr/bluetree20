@@ -390,9 +390,9 @@ file)_. If framework cant load any language file, the throw that error in
 
 ```php
 if ($languageCode) {
-    $lang = $this->_loadLanguage($path . $mod, $languageCode);
+    $lang = $this->loadLanguage($path . $mod, $languageCode);
 } else {
-    $lang = $this->_loadLanguage($path . $mod);
+    $lang = $this->loadLanguage($path . $mod);
 }
 if (!$lang) {
     if ($type) {

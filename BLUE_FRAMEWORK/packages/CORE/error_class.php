@@ -5,7 +5,7 @@
  * @subpackage  error
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.4.4
+ * @version     2.4.5
  */
 
 /**
@@ -656,24 +656,12 @@ final class error_class
             ));
         }
 
-        $bool = starter_class::load(
-            $pack . '_' . $this->_lang->lang . '.php',
-            'content',
-            TRUE
-        );
+        $translationArray = $this->_lang->loadLanguage($pack);
 
-        if (!$bool) {
-            $bool = starter_class::load(
-                $pack . '_' . $this->_lang->default . '.php',
-                'content',
-                TRUE
-            );
-
-            if (!$bool) {
-                return FALSE;
-            }
+        if (!$translationArray) {
+            return FALSE;
         }
 
-        return $bool;
+        return $translationArray;
     }
 }
