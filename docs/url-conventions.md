@@ -96,4 +96,7 @@ Markers for URL
 --------------
 Framework has some special markers build in `display_class` to convert them for
 correct URL depends of chosen framework configuration `rewrite`. Thanks that we 
-can easily change that page 
+can easily change page URL, because we give only list of pages and parameters into
+marker, and framework will automatically convert it.  
+Whole description of usage that markers can be found in
+[template](/docs/template.md "Layout and templates") in URL markers section.
