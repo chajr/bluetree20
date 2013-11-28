@@ -192,6 +192,16 @@ That part of code will display:
 5. **{;full;/strona/podstrona/param,val/p2,v/;}** - Convert and apply domain with language code
 6. **{;rel;/strona/podstrona/param,val/p2,v/;}** - Convert and apply domain with language code
 
+In that markers you can use markers replaced from `display_class`. By this feature
+you can put in path marker an parent marker to build return to previous page
+button
+
+```
+{;core;domain;}{;core;lang;}{;path;/{;parent;};}
+```
+
+That construction will return something like this: `http://my-site.pl/?core_lang=pl-PL&p0=parent_page`
+
 ### Translation markers
 #### Base translations
 For text we want to translate use special markers `lang`. That marker will be replaced by
