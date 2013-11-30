@@ -13,34 +13,7 @@
 <!DOCTYPE root SYSTEM "dtd/meta.dtd">
 <root>
     <default val="index">
-        <title title="{;lang;title;}" update="1"/>
-        <meta name="robots" content="index,follow,all" />
-        <meta name="keywords" content="" />
-        <meta name="description" content="" />
-        <meta name="author" content="bluetree.pl powered by blueFramework 2.0" />
+        <title title="Hello world title" update="1"/>
+        <meta name="description" content="That is simple test page" />
     </default>
-    <page val="inna">
-        <title title="" update="1"/>
-        <meta name="robots" content="index,follow,all"/>
-        <meta name="keywords" content=", news" update="1"/>
-        <meta name="description" content="" update="1"/>
-        <meta name="author" content="bluetree.pl powered by blueFramework 2.0" />
-    </page>
-    <page val="jeszcze_inna">
-        <title title="" update="1"/>
-        <meta name="robots" content="index,follow,all" />
-        <meta name="keywords" content=", news" update="1"/>
-        <meta name="description" content="" update="1" />
-        <meta name="author" content="bluetree.pl powered by blueFramework 2.0" />
-    </page>
-    <page val="zagniezdzenie">
-        <title title="" update="1"/>
-        <meta name="robots" content="index,follow,all" />
-        <meta name="keywords" content=", contact, localization" update="1"/>
-        <meta name="description" content="a"  update="1"/>
-        <meta name="author" content="bluetree.pl powered by blueFramework 2.0" />
-    </page>
-    <page val="commit">
-        <title title="Commit generator" update="0"/>
-    </page>
 </root>

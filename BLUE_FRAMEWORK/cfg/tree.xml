@@ -12,35 +12,17 @@
 -->
 <!DOCTYPE root SYSTEM 'dtd/tree.dtd'>
 <root options="1">
-    <lib on="1">valid</lib>
-    <lib on="0">jakas_biblioteka</lib>
-    <lib on="1">user</lib>
-    <css>css1</css>
-    <css>elusive-webfont</css>
-    <css>elusive-webfont-ie7</css>
-    <!--
-    <css external="1">http://domenaaaa.pl/css.css</css>
-    <css media="print" external="1">http://domenaaaa.pl/cssasd.css</css>
-    <css external="1">http://domenaaaa.pl/css.css</css>
-    <css external="1">http://domenaaaa.pl/cssa.css</css>
-    <js external="1">http://domenaaaa.pl/js.js</js>
-    -->
-    <js>js1</js>
-    <js>bootstrap</js>
-
-    <page id="index" name="Main Page" layout="index" options="1111" changefreq="always" priority="0.8">
-        <lib on="1">db/sql_abstract,mysql_connection</lib>
-        <lib on="1">db/mysql</lib>
-        <lib on="1">time</lib>
-        <lib on="1">image/image</lib>
-        <lib on="1">forms</lib>
-        <mod on="1" param="jakis::inny">modul1</mod>
-        <mod on="1" block="blok_testowy">mod2</mod>
-        <mod on="1" block="blok_testowy">mod3</mod>
-        <css external="0">css2</css>
-        <css external="0">css3</css>
-        <css external="0" media="print">as</css>
-        <js>js2</js>
+    <lib on="1">pack</lib>
+    <css>sample1</css>
+    <js>sample1</js>
+    <page id="index" name="Main Page" layout="index" options="1111">
+        <sub id="test_page" name="Subpage" layout="index" options="11110">
+            <mod on="1" block="test_block">second</mod>
+        </sub>
+        <mod on="1" block="test_block">test</mod>
+        <mod on="1" block="test_block">second</mod>
+        <css>sample2</css>
+        <js>sample2</js>
     </page>
 
     <page id="strona2" name="Page 2" layout="strona2" options="1111" changefreq="always" priority="0.8">

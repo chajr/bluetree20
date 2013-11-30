@@ -1,0 +1,19 @@
+html{
+    background-color:#000;
+    color: #fff;
+}
+.error_block{
+    width:80%;
+    padding:10px;
+    text-align:center;
+    margin: 10px auto;
+    border:1px solid #f00;
+}
+
+.success_block{
+    width:80%;
+    padding:10px;
+    text-align:center;
+    margin: 10px auto;
+    border:1px solid #0f0;
+}

@@ -13,6 +13,6 @@
  * @var array
  */
 $content = array(
-    'core_translation_1'    => 'jakieś tułmaczenie z jądra',
-    'core_translation_2'    => 'jakieśkolejne tułmaczenie z jądra',
+    'module_translation_1'    => 'jakieś tułmaczenie z modułu',
+    'module_translation_2'    => 'jakieśkolejne tułmaczenie z modułu',
 );
