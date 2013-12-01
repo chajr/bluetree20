@@ -645,7 +645,7 @@ if (self::$_options['techbreak']) {
 ```
 
 ### No default error pack
-Last one special error is error with missing default language package and that is
+Another special error is error with missing default language package and that is
 specific error, because its can be called only if there was some other error in
 framework. Inside of `error_class::addError()` is called method `error_class::_statement()`
 and if that method cant read language pack to handle some other error _(probably
@@ -661,5 +661,17 @@ if ($bool) {
     @trigger_error(
         'No default error pack<br/>' . $mod . '<br/>' . $errorCode
     );
+}
+```
+
+### missing error_class :(
+That is last of specific errors, lunched only on start framework if `error_class`
+file don't exist. So probably we wont never see this error, of course if we copy
+our framework files properly.
+
+```php
+$bool = starter_class::load('packages/CORE/error_class.php');
+if (!$bool) {
+    die ('missing error_class :(');
 }
 ```
