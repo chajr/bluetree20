@@ -3,7 +3,7 @@
  * trace witch classes, files, functions are run
  * 
  * @author Michał Adamiak <chajr@bluetree.pl>
- * @version 1.4.1
+ * @version 1.5.0
  * @copyright chajr/bluetree
  * @package     tester
  * @subpackage  tracer
@@ -27,6 +27,18 @@ class tracer_class
      * @var boolean 
      */
     protected static $_tracerOn = TRUE;
+    
+    protected static $_divStyles = [
+        'c'            => 'width:3%;float:left;padding:5px 0',
+        'name'         => 'width:12%;float:left;padding:5px 0',
+        'time'         => 'width:10%;float:left;padding:5px 0',
+        'file'         => 'width:16%;float:left;padding:5px 0',
+        'line'         => 'width:3%;float:left;padding:5px 0',
+        'function'     => 'width:11%;float:left;padding:5px 0',
+        'class'        => 'width:15%;float:left;padding:5px 0',
+        'type'         => 'width:0%;float:left;padding:5px 0',
+        'args'         => 'width:30%;float:left;padding:5px 0',
+    ];
 
     /**
      * if set to false tracing data wont be displayed, for only saving file
@@ -123,12 +135,12 @@ class tracer_class
             self::$_display = '<div style="
             color: #FFFFFF;
             background-color: #3d3d3d;
-            border: 1px solid #fff;
             margin: 25px auto;
-            width: 96%;
+            width: 99%;
             text-align: center;
             padding:1%;
             overflow:hidden;
+            font-size:12px;
             ">';
 
             self::$_display .= '
@@ -140,15 +152,15 @@ class tracer_class
 
             self::$_display .= '
                     <div style="background-color:#6D6D6D">
-                        <div style="width:3%;float:left;padding:5px 0">C</div>
-                        <div style="width:12%;float:left;padding:5px 0">Name</div>
-                        <div style="width:120px;float:left;padding:5px 0">Time</div>
-                        <div style="width:16%;float:left;padding:5px 0">File</div>
-                        <div style="width:3%;float:left;padding:5px 0">Line</div>
-                        <div style="width:11%;float:left;padding:5px 0">Function</div>
-                        <div style="width:15%;float:left;padding:5px 0">Class</div>
-                        <div style="width:18px;float:left;padding:5px 0">T</div>
-                        <div style="width:32%;float:left;padding:5px 0">Arguments</div>
+                        <div style="' . self::$_divStyles['c'] . '">C</div>
+                        <div style="' . self::$_divStyles['name'] . '">Name</div>
+                        <div style="' . self::$_divStyles['time'] . '">Time</div>
+                        <div style="' . self::$_divStyles['file'] . '">File</div>
+                        <div style="' . self::$_divStyles['line'] . '">Line</div>
+                        <div style="' . self::$_divStyles['function'] . '">Function</div>
+                        <div style="' . self::$_divStyles['class'] . '">Class</div>
+                        <!--<div style="' . self::$_divStyles['type'] . '">T</div>-->
+                        <div style="' . self::$_divStyles['args'] . '">Arguments</div>
                         <div style="clear:both"></div>
                     </div>
                 ';
@@ -166,31 +178,31 @@ class tracer_class
                 }
 
                 self::$_display .= '<div style="' . $background . '">
-                    <div style="width:3%;float:left;padding:5px 0">' 
+                    <div style="' . self::$_divStyles['c'] . '">' 
                     . ++$l . '</div>'."\n";
 
-                self::$_display .= '<div style="width:12%;float:left;padding:5px 0">' 
+                self::$_display .= '<div style="' . self::$_divStyles['name'] . '">' 
                     . $marker['name'] . '</div>'."\n";
 
-                self::$_display .= '<div style="width:120px;float:left;padding:5px 0">' 
+                self::$_display .= '<div style="' . self::$_divStyles['time'] . '">' 
                     . $marker['time'] . '</div>'."\n";
 
-                self::$_display .= '<div style="width:16%;float:left;padding:5px 0">' 
+                self::$_display .= '<div style="' . self::$_divStyles['file'] . '">' 
                     . $marker['debug'][0]['file'] . '</div>'."\n";
 
-                self::$_display .= '<div style="width:3%;float:left;padding:5px 0">' 
+                self::$_display .= '<div style="' . self::$_divStyles['line'] . '">' 
                     . $marker['debug'][0]['line'] . '</div>'."\n";
 
-                self::$_display .= '<div style="width:11%;float:left;padding:5px 0">' 
+                self::$_display .= '<div style="' . self::$_divStyles['function'] . '">' 
                     . $marker['debug'][0]['function'] . '</div>'."\n";
 
-                self::$_display .= '<div style="width:15%;float:left;padding:5px 0">' 
+                self::$_display .= '<div style="' . self::$_divStyles['class'] . '">' 
                     . $marker['debug'][0]['class'] . '</div>'."\n";
 
-                self::$_display .= '<div style="width:18px;float:left;padding:5px 0">' 
-                    . $marker['debug'][0]['type'] . '</div>'."\n";
+//                self::$_display .= '<div style="' . self::$_divStyles['type'] . '">' 
+//                    . $marker['debug'][0]['type'] . '</div>'."\n";
 
-                self::$_display .= '<div style="width:32%;float:left;padding:5px 0"><pre>' 
+                self::$_display .= '<div style="' . self::$_divStyles['args'] . '"><pre>' 
                     . var_export($marker['debug'][0]['args'], TRUE) 
                     . ' </pre></div>'."\n";
 
