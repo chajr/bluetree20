@@ -110,19 +110,19 @@ benchmark_class methods:
 _All tracer methods are static._
 
 1. **#000000** ![image black](/image/000000.png "#000000") starter class
-1. **#6d6d6d** ![image black](/image/6d6d6d.png "#6d6d6d") default colors
-1. **#4d4d4d** ![image black](/image/4d4d4d.png "#4d4d4d") default colors
-1. **#006c94** ![image black](/image/006c94.png "#006c94") core class
-1. **#7e3a02** ![image black](/image/7e3a02.png "#7e3a02") xml class
-1. **#00306a** ![image black](/image/00306a.png "#00306a") get class
-1. **#6802cf** ![image black](/image/6802cf.png "#6802cf") language class
-1. **#002046** ![image black](/image/002046.png "#002046") post class
-1. **#ff0000** ![image black](/image/ff0000.png "#ff0000") error class (start library, not error in page)
-1. **#374557** ![image black](/image/374557.png "#374557") session class
-1. **#516e91** ![image black](/image/516e91.png "#516e91") files class
-1. **#213a59** ![image black](/image/213a59.png "#213a59") cookie class
-1. **#004396** ![image black](/image/004396.png "#004396") global class
-1. **#bf5702** ![image black](/image/bf5702.png "#bf5702") tree class
-1. **#006400** ![image black](/image/006400.png "#006400") display class
-1. **#008e85** ![image black](/image/008e85.png "#008e85") loader class
-1. **#900000** ![image black](/image/900000.png "#900000") methods responsible for error handling
+2. **#6d6d6d** ![image black](/image/6d6d6d.png "#6d6d6d") default colors
+3. **#4d4d4d** ![image black](/image/4d4d4d.png "#4d4d4d") default colors
+4. **#006c94** ![image black](/image/006c94.png "#006c94") core class
+5. **#7e3a02** ![image black](/image/7e3a02.png "#7e3a02") xml class
+6. **#00306a** ![image black](/image/00306a.png "#00306a") get class
+7. **#6802cf** ![image black](/image/6802cf.png "#6802cf") language class
+8. **#002046** ![image black](/image/002046.png "#002046") post class
+9. **#ff0000** ![image black](/image/ff0000.png "#ff0000") error class (start library, not error in page)
+10. **#374557** ![image black](/image/374557.png "#374557") session class
+11. **#516e91** ![image black](/image/516e91.png "#516e91") files class
+12. **#213a59** ![image black](/image/213a59.png "#213a59") cookie class
+13. **#004396** ![image black](/image/004396.png "#004396") global class
+14. **#bf5702** ![image black](/image/bf5702.png "#bf5702") tree class
+15. **#006400** ![image black](/image/006400.png "#006400") display class
+16. **#008e85** ![image black](/image/008e85.png "#008e85") loader class
+17. **#900000** ![image black](/image/900000.png "#900000") methods responsible for error handling
