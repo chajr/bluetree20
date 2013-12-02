@@ -10,7 +10,7 @@
  * @subpackage  display
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.10.1
+ * @version     2.10.2
  */
 class display_class
 {
@@ -683,7 +683,11 @@ class display_class
         }
 
         $array = array();
-        preg_match_all('#{;external;([\\w-])+;}#', $this->DISPLAY[$module], $array);
+        preg_match_all(
+            '#{;external;([\\w\/-])+;}#',
+            $this->DISPLAY[$module],
+            $array)
+        ;
 
         foreach ($array[0] as $element) {
 
