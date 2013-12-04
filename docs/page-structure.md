@@ -95,14 +95,14 @@ Doctype definition
 Page and subpage idea
 --------------
 Pages and subpages create site tree defined in tree.xml file. Each page is independent of
- other page, but has common modules, libraries, css and js defined on the top of root node.
- Each page can have their own modules, libraries etc. and unlimited subpages as their children's.
- Each children ins an part of page, and parent subpage if its have it and inherit all
- libraries, modules and etc. nodes defined in parent node (inheritance can be disabled).  
+other page, but has common modules, libraries, css and js defined on the top of root node.
+Each page can have their own modules, libraries etc. and unlimited subpages as their children's.
+Each children ins an part of page, and parent subpage if its have it and inherit all
+libraries, modules and etc. nodes defined in parent node (inheritance can be disabled).  
 In that way we can create structure of dependent nodes like: `my-site.pl/articles/article/id,123`
- Article is an part of articles and inherit from articles some nodes. In that way we
- can create more advanced dependencies `my-site.pl/products/software/open-source/id,123` or
- `my-site.pl/admin/configuration/users/permissions`
+Article is an part of articles and inherit from articles some nodes. In that way we
+can create more advanced dependencies `my-site.pl/products/software/open-source/id,123` or
+`my-site.pl/admin/configuration/users/permissions`
 
 Example of page dependency:  
 ```php
@@ -146,15 +146,15 @@ Create base structure
 To create simply start page we must use construction like bellow:
 
 ```xml
-<!DOCTYPE root SYSTEM 'dtd/tree.dtd'>  
-<root options="1">  
-    <page id="index" name="Main test page" layout="index" options="1111">  
-        <lib on="1">library</lib>  
-        <mod on="1">module</mod>  
-        <css external="0">css</css>  
-        <js>js</js>  
-    </page>  
-</root>  
+<!DOCTYPE root SYSTEM 'dtd/tree.dtd'>
+<root options="1">
+    <page id="index" name="Main test page" layout="index" options="1111">
+        <lib on="1">library</lib>
+        <mod on="1">module</mod>
+        <css external="0">css</css>
+        <js>js</js>
+    </page>
+</root>
 ```
 
 In that code we create in root node named page. Give im `id=index` 
@@ -165,19 +165,19 @@ library, module, js and css. This page can be run as `my-site.pl` or `my-site.pl
 To create another first level page, we put another node named page.
 
 ```xml
-<!DOCTYPE root SYSTEM 'dtd/tree.dtd'>  
-<root options="1">  
-    <page id="index" name="Main test page" layout="index" options="1111">  
-        <lib on="1">library</lib>  
-        <mod on="1">module</mod>  
-        <css external="0">css</css>  
-        <js>js</js>  
-    </page>  
+<!DOCTYPE root SYSTEM 'dtd/tree.dtd'>
+<root options="1">
+    <page id="index" name="Main test page" layout="index" options="1111">
+        <lib on="1">library</lib>
+        <mod on="1">module</mod>
+        <css external="0">css</css>
+        <js>js</js>
+    </page>
     
-    <page id="another" name="Main test page 2" layout="index" options="1111">  
-        <css external="0">css</css>  
-        <js>js</js>  
-    </page>  
+    <page id="another" name="Main test page 2" layout="index" options="1111">
+        <css external="0">css</css>
+        <js>js</js>
+    </page>
 </root>
 ```
 
@@ -186,53 +186,53 @@ This example use the same layout, but no library and module. Access to that page
 
 ### Create sub pages
 To create pages tree we must create subpages, that will be part of some page. All
- subpages will inherit styles, scripts, modules and libraries of main page, or
- main subpage. We can create an unlimited nested subpages with working inheritance.
- In assumption we build an tree of related pages, that have some common nodes.
+subpages will inherit styles, scripts, modules and libraries of main page, or
+main subpage. We can create an unlimited nested subpages with working inheritance.
+In assumption we build an tree of related pages, that have some common nodes.
 
 ```xml
-<page id="another" name="Main test page 2" layout="index" options="1111">  
-    <sub id="subpage" name="Test subpage" layout="subpage_layout" options="11111">  
-        <lib on="1">subpage_library</lib>  
-        <mod on="1">subpage_module</mod>  
-        <css>sub_css</css>  
-        <js>sub_js</js>  
-    </sub>  
+<page id="another" name="Main test page 2" layout="index" options="1111">
+    <sub id="subpage" name="Test subpage" layout="subpage_layout" options="11111">
+        <lib on="1">subpage_library</lib>
+        <mod on="1">subpage_module</mod>
+        <css>sub_css</css>
+        <js>sub_js</js>
+    </sub>
 
-    <lib on="1">library</lib>  
-    <mod on="1">module</mod>  
-    <css external="0">css</css>  
-    <js>js</js>  
-</page>  
+    <lib on="1">library</lib>
+    <mod on="1">module</mod>
+    <css external="0">css</css>
+    <js>js</js>
+</page>
 ```
 
 This example show simply subpage that we can access by `my-site.pl/another/subpage`
  url address. Example of many subpages look like that:
 
 ```xml
-<page id="another" name="Main test page 2" layout="index" options="1111">  
-    <sub id="subpage" name="Test subpage" layout="subpage_layout" options="11111">  
-        <sub id="sub_subpage" name="Another subpage 2" layout="sub_subpage_layout" options="11111">  
-            <css>sub_css</css>  
-            <js>sub_js</js>  
-        </sub>  
+<page id="another" name="Main test page 2" layout="index" options="1111">
+    <sub id="subpage" name="Test subpage" layout="subpage_layout" options="11111">
+        <sub id="sub_subpage" name="Another subpage 2" layout="sub_subpage_layout" options="11111">
+            <css>sub_css</css>
+            <js>sub_js</js>
+        </sub>
 
-        <lib on="1">subpage_library</lib>  
-        <mod on="1">subpage_module</mod>  
-        <css>sub_css</css>  
-        <js>sub_js</js>  
-    </sub>  
+        <lib on="1">subpage_library</lib>
+        <mod on="1">subpage_module</mod>
+        <css>sub_css</css>
+        <js>sub_js</js>
+    </sub>
 
-    <sub id="subpage2" name="Test subpage 2" layout="subpage_layout" options="11111">  
-        <css>sub_css</css>  
-        <js>sub_js</js>  
-    </sub>  
+    <sub id="subpage2" name="Test subpage 2" layout="subpage_layout" options="11111">
+        <css>sub_css</css>
+        <js>sub_js</js>
+    </sub>
 
-    <lib on="1">library</lib>  
-    <mod on="1">module</mod>  
-    <css external="0">css</css>  
-    <js>js</js>  
-</page>  
+    <lib on="1">library</lib>
+    <mod on="1">module</mod>
+    <css external="0">css</css>
+    <js>js</js>
+</page>
 ```
 
 Access to subpages in above example: `my-site.pl/another/subpage/sub_subpage`, `my-site.pl/another/subpage2`.
@@ -284,9 +284,9 @@ Css node has some special attributes:
 
 ### Load js file
 Using java script files in page structure is similar than css files. We can make in by the same ways
- as css (in module and tree). We load js file be marker `<js>js_file_name</js>`
- that will read js from `BLUE_FRAMEWORK/elements/js` directory. Remember to give
- only file name, without extension.
+as css (in module and tree). We load js file be marker `<js>js_file_name</js>`
+that will read js from `BLUE_FRAMEWORK/elements/js` directory. Remember to give
+only file name, without extension.
 JS nodes has only one special attribute:    
 * **external** - numeric value `0 or 1` if set to `1`, if set to 1 then will load js form external source (as name give full url)  
 
@@ -296,7 +296,7 @@ If we wat to use `css, js, modules or libraries` for all pages we decelerate it 
  from parent nodes, even from root node. All children pages also will have
  cleared inheritance.
 
-```ruby
+```xml
 <root options="1">
     <lib on="1">library</lib>  -\
     <mod on="1">module</mod>   --\___ nodes that will be always loaded
@@ -314,7 +314,7 @@ it for that page or subpage. But remember that all children subpages will have
 all decelerated nodes as we have in pages idea.
 In pages and subpages we decelerate nodes after pages/subpages
 
-```ruby
+```xml
 <page id="index" name="Main Page" layout="index" options="1111">
     <sub id="index" name="Main Sub Page" layout="index" options="1111"></sub>
 
@@ -351,7 +351,7 @@ Framework is flexible in level that use many other scripts by library in framewo
 Modules are responsible for elementary system work. All we want to make by using 
 that framework will be written in modules. Create node with module declaration 
 `<mod on="1">module</mod>` will load module and lunch method `run` decelerated in
- module class file.
+module class file.
 
 Library node has some following options:
 
@@ -365,9 +365,9 @@ Remember to give library file name without `_class` suffix and without extension
 
 ### Load for common usage
 To load library and module (module will be lunched) for common usage, just put node
- in root node, like css or js.
+in root node, like css or js.
  
-```ruby
+```xml
 <root options="1">
     <lib on="1">library</lib>  -\
     <mod on="1">module</mod>   --\___ nodes that will be always loaded
@@ -381,7 +381,7 @@ To load library and module (module will be lunched) for common usage, just put n
 
 ### Load for specific page sub page
 
-```ruby
+```xml
 <page id="index" name="Main Page" layout="index" options="1111">
     <sub id="index" name="Main Sub Page" layout="index" options="1111"></sub>
 
@@ -395,18 +395,38 @@ To load library and module (module will be lunched) for common usage, just put n
 Load external trees
 --------------
 Framework allow to use some different routers declaration. Of course `tree.xml`
- will be always loaded, but in main tree we can decelerate that some pages/subpages
- load some other tree that will replace default tree. All libraries, modules, css
- and js will be removed and loaded from new tree. External trees ale localed in
- the same directory where default `BLUE_FRAMEWORK/cfg` and to load it we give
- an **external** attribute with file name (without extension) to page or subpage node.
+will be always loaded, but in main tree we can decelerate that some pages/subpages
+load some other tree that will replace default tree. All libraries, modules, css
+and js will be removed and loaded from new tree. External trees ale localed in
+the same directory where default `BLUE_FRAMEWORK/cfg` and to load it we give
+an **external** attribute with file name (without extension) to page or subpage node.
 
 Inheritance of pages, css, js, libraries and modules
 --------------
 Structure of pages and subpages will default inherit all nodes that have parent node.
- All children nodes will have css, js and libraries of parent element and also will
- run modules of all parent elements. Of course we can skip that feature by setting
- inheritance option to 0. Its anf fifth index of node options attribute
- `options="11111" - on` `options="11110" - off`.  
+All children nodes will have css, js and libraries of parent element and also will
+run modules of all parent elements. Of course we can skip that feature by setting
+inheritance option to 0. Its anf fifth index of node options attribute
+`options="11111" - on` `options="11110" - off`.  
 Inheritance can be only switched off for subpages, main pages will always have nodes
- decelerated in root element.
+decelerated in root element.
+
+Usage translations for page name
+--------------
+Basically `name` attribute of page and subpage don't handle translations, but that
+attributes is used only for building page map `tree_class::map()` and breadcrumbs
+`tree_class::$breadcrumbs` so it will be used inside of modules. If we want to
+display value of `name` attribute by module and we want translation to them, just
+paste translation marker with the same construction used in module to display
+translation from core `{;lang;core;translation_code;}`:
+
+```xml
+<page id="index" name="{;lang;core;main_page;}" layout="index" options="1111">
+    <sub id="index" name="{;lang;core;main_sub_page;}" layout="index" options="1111"></sub>
+
+    <lib on="1">library</lib>
+    <mod on="1">module</mod>
+    <css>css</css>
+    <js>js</js>
+</page>
+```
