@@ -90,7 +90,7 @@
             <mod on="1" param="generate">commit</mod>
         </sub>
         <mod on="1">commit</mod>
-        <css>bootstrap</css>
+        <css>bootstrap_dark</css>
     </page>
 
     <page id="ajax_test" layout="ajax" name="Ajax" options="1000">
