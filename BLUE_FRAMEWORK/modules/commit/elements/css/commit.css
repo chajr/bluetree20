@@ -1,5 +1,5 @@
 html{
-    background-color: #fff;
+    background-color: #000;
     background-image: none;
 }
 #commit_generator{
@@ -7,7 +7,6 @@ html{
     margin: 20px auto;
     border: 1px solid #222;
     padding: 10px;
-    background-color: #f0f0f0;
 }
 .sr-only{
     display: none;
@@ -35,6 +34,7 @@ html{
 #commit_base_info .checkbox input{
     outline: none;
     /*margin-top: 16px;*/
+    height: 13px;
 }
 #buttons{
     margin: 10px auto;
@@ -109,13 +109,13 @@ footer .btn-block b{
     margin-bottom: 0;
 }
 .message_modify, .message_modify_version{
-    background-color: #E6E9F4;
+    background-color: #282F49;
 }
 .message_remove{
-    background-color: #f2e7e4;
+    background-color: #573329;
 }
 .message_add{
-    background-color: #e2f2e3;
+    background-color: #224024;
 }
 .message button.btn-danger.width{
     width: 40px;
@@ -131,4 +131,13 @@ footer .btn-block b{
     position: absolute;
     text-align: center;
     left: 20px;
+}
+#submit:hover{
+    border-color: #555555;
+}
+.file_label .btn-danger{
+    padding: 12px 11px;
+}
+.form-control{
+    font-size: 14px;
 }
