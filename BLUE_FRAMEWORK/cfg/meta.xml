@@ -43,4 +43,10 @@
     <page val="commit">
         <title title="Commit generator" update="0"/>
     </page>
+
+    <page val="examples">
+        <title title="{;lang;example_title;}" update="0"/>
+        <meta name="keywords" content="" update="0"/>
+        <meta name="description" content="{;lang;example_description;}" update="0"/>
+    </page>
 </root>

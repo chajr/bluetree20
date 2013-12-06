@@ -43,6 +43,14 @@
         <js>js2</js>
     </page>
 
+    <page id="examples" name="{;lang;core;example_title;}" layout="examples/examples" options="1111">
+        <sub id="example_generate" name="Generate content" layout="examples/example" options="11111">
+
+        </sub>
+        <css>bootstrap</css>
+        <css>styles</css>
+    </page>
+
     <page id="strona2" name="Page 2" layout="strona2" options="1111" changefreq="always" priority="0.8">
         <sub id="podstrona1" name="Subpage 1" layout="strona2" options="11111" changefreq="always" priority="0.8">
             <!--<lib on="1">files</lib>-->
@@ -109,6 +117,4 @@
     <page id="forum" name="forum" layout="empty" options="1001"
           redirect="http://wataha.at/forum"
     />
-
-
 </root>
