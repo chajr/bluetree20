@@ -18,13 +18,7 @@
     <css>bootstrap_dark</css>
     <css>elusive-webfont</css>
     <css>elusive-webfont-ie7</css>
-    <!--
-    <css external="1">http://domenaaaa.pl/css.css</css>
-    <css media="print" external="1">http://domenaaaa.pl/cssasd.css</css>
-    <css external="1">http://domenaaaa.pl/css.css</css>
-    <css external="1">http://domenaaaa.pl/cssa.css</css>
-    <js external="1">http://domenaaaa.pl/js.js</js>
-    -->
+    <css>base</css>
     <js>js1</js>
     <js>bootstrap</js>
 
