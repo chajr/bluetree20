@@ -15,7 +15,7 @@
  
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     0.1.0
+ * @version     0.2.0
  */
 article,
 aside,
@@ -630,8 +630,8 @@ pre {
     line-height: 1.2;
     word-break: break-all;
     word-wrap: break-word;
-    color: #777777;
-    background-color: #f5f5f5;
+    color: #333333;
+    background-color: #eeeeee;
     border: 1px solid #cccccc;
     border-radius: 2px;
 }

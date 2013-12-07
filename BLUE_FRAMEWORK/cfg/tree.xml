@@ -7,7 +7,7 @@
 * @package     BlueFramework Core
 * @author      Michał Adamiak    <chajr@bluetree.pl>
 * @copyright   chajr/bluetree
-* @version     1.2.0
+* @version     1.2.1
 */
 -->
 <!DOCTYPE root SYSTEM 'dtd/tree.dtd'>
@@ -15,7 +15,7 @@
     <lib on="1">valid</lib>
     <lib on="0">jakas_biblioteka</lib>
     <lib on="1">user</lib>
-    <css>css1</css>
+    <css>bootstrap_dark</css>
     <css>elusive-webfont</css>
     <css>elusive-webfont-ie7</css>
     <!--
@@ -47,7 +47,6 @@
         <sub id="example_generate" name="Generate content" layout="examples/example" options="11111">
 
         </sub>
-        <css>bootstrap</css>
         <css>styles</css>
     </page>
 
@@ -98,7 +97,6 @@
             <mod on="1" param="generate">commit</mod>
         </sub>
         <mod on="1">commit</mod>
-        <css>bootstrap_dark</css>
     </page>
 
     <page id="ajax_test" layout="ajax" name="Ajax" options="1000">
