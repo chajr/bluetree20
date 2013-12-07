@@ -9,16 +9,18 @@
  * @subpackage  Object
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     0.1.0
- * 
- * 
- * kiedy obiekt zaiinicjalizowany juz z danymi i dodane zostaja dane, czy ma ustawic original data na NULL??
- * tak aby przy przywracaniu i sprawdzaniu original nowe dane nie istanialy
- * 
- * 
+ * @version     0.2.0
  */
 class blue_object_class
 {
+    /**
+     * name of key prefix for xml node
+     * if array key was integer
+     * 
+     * @var string
+     */
+    protected $_integerKeyPrefix = 'integer_key';
+
     /**
      * if there was some errors in object, that variable will be set on true
      *
@@ -64,10 +66,14 @@ class blue_object_class
      *
      * @param mixed $data
      * @param string|null $type
+     * @param string|null $indexKeyPrefix
      */
-    public function __construct($data = NULL, $type = NULL)
+    public function __construct($data = NULL, $type = NULL, $indexKeyPrefix = NULL)
     {
         $this->initializeObject();
+        if ($indexKeyPrefix) {
+            $this->_integerKeyPrefix = $indexKeyPrefix;
+        }
 
         switch ($type) {
             case 'json':
@@ -171,9 +177,13 @@ class blue_object_class
                     return $this->unsetData($key);
                 }
 
-                $this->_errorsList[] = [
-                    'wrong_method' => get_class($this) . ' - ' . $method
-                ];
+                if ($method === 'clear') {
+                    $key = $this->_convertKeyNames(substr($method, 5));
+                    return $this->clearData($key);
+                }
+
+                $this->_errorsList['wrong_method'] = get_class($this) . ' - ' . $method;
+                $this->_hasErrors = TRUE;
                 return FALSE;
         }
     }
@@ -215,13 +225,35 @@ class blue_object_class
      * @param string $key
      * @return mixed
      */
-    public function getObjectError($key)
+    public function getObjectError($key = NULL)
     {
         if ($key) {
             return $this->_errorsList[$key];
         }
 
         return $this->_errorsList;
+    }
+
+    /**
+     * return value of prefix for integer keys when try to save as xml
+     * 
+     * @return string
+     */
+    public function getIntegerKeyString()
+    {
+        return $this->_integerKeyPrefix;
+    }
+
+    /**
+     * allow to set new prefix for integer key
+     * 
+     * @param string $key
+     * @return blue_object_class
+     */
+    public function setIntegerKeyString($key)
+    {
+        $this->_integerKeyPrefix = (string)$key;
+        return $this;
     }
 
     /**
@@ -235,7 +267,6 @@ class blue_object_class
         if ($key) {
             unset ($this->_errorsList[$key]);
         }
-
         $this->_errorsList = [];
 
         return $this;
@@ -253,15 +284,7 @@ class blue_object_class
         $temporaryData = $this->getData();
 
         if ($skipObjects) {
-            $temporaryData = [];
-
-            foreach ($this->_DATA as $key => $value) {
-                if (is_object($value)) {
-                    $temporaryData[$key] = '{;skipped_object;}';
-                } else {
-                    $temporaryData[$key] = $value;
-                }
-            }
+            $temporaryData = $this->traveler('_skipObject', NULL, $temporaryData);
         }
 
         return serialize($temporaryData);
@@ -321,14 +344,11 @@ class blue_object_class
         $this->_prepareData();
 
         if (!$key) {
-            return array_merge($this->_DATA, $this->_originalDATA);
+            return $this->_originalDATA;
         }
 
         if (isset($this->_originalDATA[$key])) {
             return $this->_originalDATA[$key];
-
-        } else if (isset($this->_DATA[$key])) {
-            return $this->_DATA[$key];
         }
 
         return NULL;
@@ -410,13 +430,10 @@ class blue_object_class
     {
         if ($key === NULL) {
             $this->_dataChanged  = TRUE;
-            $mergedData          = array_merge($this->_DATA, $this->_originalDATA);
-            $this->_originalDATA = $mergedData;
             $this->_DATA         = [];
 
         } elseif (isset($this->_DATA[$key])) {
             $this->_dataChanged = TRUE;
-            $this->_setInOriginData($key, $this->_DATA[$key]);
             unset ($this->_DATA[$key]);
         }
 
@@ -456,6 +473,18 @@ class blue_object_class
     }
 
     /**
+     * this method set current DATA as original data
+     * replace original data by DATA
+     * 
+     * @return blue_object_class
+     */
+    public function replaceDataArrays()
+    {
+        $this->_originalDATA = $this->_DATA;
+        return $this;
+    }
+
+    /**
      * return object as string
      * each data value separated by coma
      * 
@@ -490,39 +519,12 @@ class blue_object_class
     {
         $this->_prepareData();
 
-//        $xml = '<?xml version="' . $version . ' encoding="UTF-8"? >' . "\n";
-//        if (!empty($rootName)) {
-//            $xml .= "<$rootName>\n";
-//        }
-//
-//        foreach ($this->_DATA as $key => $value) {
-//            if (is_object($value) || is_array($value)) {
-//                $value = serialize($value);
-//            }
-//
-//            if ($addCdata) {
-//                $value = "<![CDATA[$value]]>";
-//            }
-//            $key = str_replace(' ', '_', $key);
-//
-//            $xml .= "<$key>$value</$key>\n";
-//        }
-//
-//        if (!empty($rootName)) {
-//            $xml .= "</$rootName>\n";
-//        }
-        $dtd = '';
         $xml = new xml_class($version, 'UTF-8');
+        $xml = $this->_arrayToXml($this->_DATA, $xml, $addCdata, $xml);
 
         if ($dtd) {
             $dtd = "<!DOCTYPE root SYSTEM '$dtd'>";
         }
-
-        $xml = $this->_arrayToXml($this->_DATA, $xml, $addCdata, $xml);
-        //$xml->
-        
-        //atrybuty trzymane w tablicy attributes
-        //dane z noda trzymane w tablicy cdata
 
         return $dtd . $xml->saveXmlFile(FALSE, TRUE);
     }
@@ -541,7 +543,6 @@ class blue_object_class
             if ($name === '_DATA') {
                 continue;
             }
-
             $attributesArray[$name] = $value;
         }
 
@@ -559,6 +560,54 @@ class blue_object_class
     }
 
     /**
+     * check that data for given key was changed
+     * 
+     * @param string $key
+     * @return bool
+     */
+    public function keyDataChanged($key)
+    {
+        $data           = $this->getData($key);
+        $originalData   = $this->getOriginalData($key);
+
+        return $data != $originalData;
+    }
+
+    /**
+     * allow to use given method or function for all data inside of object
+     * 
+     * @param string $method
+     * @param mixed $methodAttributes
+     * @param mixed $data
+     * @param bool $function
+     * @return array|null
+     */
+    public function traveler(
+        $method,
+        $methodAttributes   = NULL,
+        $data               = NULL,
+        $function           = FALSE
+    ){
+        if (!$data) {
+            $data = $this->_DATA;
+        }
+
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                $data[$key] = $this->traveler($method, $methodAttributes, $value);
+            } else {
+                if ($function) {
+                    $data[$key] = call_user_func($method, $methodAttributes);
+                } else {
+                    $data[$key] = $this->$method($value, $methodAttributes);
+                }
+            }
+        }
+
+        return $data;
+    }
+
+    /**
      * apply given json data as object data
      * 
      * @param string $data
@@ -566,10 +615,11 @@ class blue_object_class
      */
     protected function _appendJson($data)
     {
-        $jsonData = json_decode($data);
+        $jsonData = json_decode($data, TRUE);
 
         if ($jsonData) {
-            $this->setData($jsonData);
+            $this->_DATA            = $data;
+            $this->_originalDATA    = $data;
         }
 
         return $this;
@@ -592,27 +642,11 @@ class blue_object_class
     protected function _appendArray($data)
     {
         if (is_array($data)) {
-            $this->_DATA = $data;
+            $this->_DATA            = $data;
+            $this->_originalDATA    = $data;
         } else {
-            $this->_DATA['default'] = $data;
-        }
-
-        return $this;
-    }
-
-    /**
-     * set original data, only if doest exists
-     *
-     * @param string $key
-     * @param mixed $data
-     * @return blue_object_class
-     */
-    protected function _setInOriginData($key, $data)
-    {
-        if (    isset($this->_DATA[$key])
-            && !isset($this->_originalDATA[$key])
-        ) {
-            $this->_originalDATA[$key] = $data;
+            $this->_DATA['default']         = $data;
+            $this->_originalDATA['default'] = $data;
         }
 
         return $this;
@@ -630,7 +664,6 @@ class blue_object_class
     protected function _putData($key, $data)
     {
         $this->_dataChanged = TRUE;
-        $this->_setInOriginData($key, $data);
         $this->_DATA[$key] = $data;
 
         return $this;
@@ -676,13 +709,16 @@ class blue_object_class
             
             //sprawdzenie czy ma tablice attributes
             //tworzy atrybuty dla elkementu i usuwa z temp data tak aby element nie byl juz tablica
+            try{
             if (isset($value['attributes'])) {
                 
                 unset ($value['attributes']);
             }
 
             if (is_array($value)) {
-                $children = $xml->createElement($key);
+                $children = $xml->createElement(
+                    $this->_integerToStringKey($key)
+                );
                 $this->_arrayToXml($value, $xml, $addCdata, $children);
                 $parent->appendChild($children);
                 continue;
@@ -690,37 +726,59 @@ class blue_object_class
 
             if ($addCdata) {
                 $cdata      = $xml->createCDATASection($value);
-                $element    = $xml->createElement($key);
+                $element    = $xml->createElement(
+                    $this->_integerToStringKey($key)
+                );
                 $element->appendChild($cdata);
             } else {
-                $element = $xml->createElement($key, $value);
+                $element = $xml->createElement(
+                    $this->_integerToStringKey($key),
+                    $value
+                );
             }
 
             $parent->appendChild($element);
+            } catch (DOMException $exception) {
+                $this->_errorsList[$exception->getCode()] = [
+                    'message'   => $exception->getMessage(),
+                    'line'      => $exception->getLine(),
+                    'file'      => $exception->getFile(),
+                    'trace'     => $exception->getTraceAsString(),
+                ];
+                $this->_hasErrors = TRUE;
+            }
         }
 
         return $xml;
     }
 
-    protected function _traveler($method, $methodAttributes, $data = NULL)
+    /**
+     * if array key is number, convert it to string with set up _integerKeyPrefix
+     * 
+     * @param string|number $key
+     * @return string
+     */
+    protected function _integerToStringKey($key)
     {
-        if (!$data) {
-            $data = $this->_DATA;
+        if (is_numeric($key)) {
+            $key = $this->_integerKeyPrefix . '_' . $key;
+        }
+        return $key;
+    }
+
+    /**
+     * replace object by string
+     * 
+     * @param $value
+     * @return string
+     */
+    protected function _skipObject($value)
+    {
+        if (is_object($value)) {
+            return '{;skipped_object;}';
         }
 
-        foreach ($data as $key => $value) {
-            if (is_object($value)) {
-                continue;
-            }
-
-            if (is_array($value)) {
-                $data[$key] = $this->_traveler($method, $methodAttributes, $key, $value);
-            } else {
-                $this->$method($key, $value, $methodAttributes);
-            }
-        }
-
-        return $data;
+        return $value;
     }
 
     /**
