@@ -33,16 +33,29 @@
         {;lang;error_marker;}
     </div>
     <div class="panel-body">
-        <div class="text-danger">
-            {;error_marker;}
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                &times;
+            </button>
+            <div class="alert-body">
+                {;error_marker;}
+            </div>
         </div>
-        <br/>
-        <div class="text-danger">
-            {;error_marker1;}
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                &times;
+            </button>
+            <div class="alert-body">
+                {;error_marker1;}
+            </div>
         </div>
-        <br/>
-        <div class="text-danger">
-            {;error_marker2;}
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                &times;
+            </button>
+            <div class="alert-body">
+                {;error_marker2;}
+            </div>
         </div>
     </div>
 </div>
@@ -146,10 +159,10 @@
         {;lang;session_template;}
     </div>
     <div class="panel-body">
-        <p class="text-warning">
-            {;lang;session_test_content;}
-        </p>
         <div>{;session_display;session_display_test;}</div>
+    </div>
+    <div class="panel-footer">
+        {;lang;session_test_content;}
     </div>
 </div>
 

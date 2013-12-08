@@ -11,6 +11,72 @@
                 Blue Framework 2.0.1
             </h1>
         </header>
+        <section>
+            {;op;core_errors;}
+            <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                    &times;
+                </button>
+                <div class="alert-heading">
+                    {;lang;error;} {;lang;error_title;}
+                </div>
+                <div class="alert-body">
+                    {;core_error;}
+                </div>
+                <div class="alert-footer">
+                    alert footer
+                </div>
+            </div>
+            {;op_end;core_errors;}
+            {;op;core_warnings;}
+            <div class="alert alert-warning alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                    &times;
+                </button>
+                <div class="alert-heading">
+                    {;lang;warning;} {;lang;warning_title;}
+                </div>
+                <div class="alert-body">
+                    {;core_error;}
+                </div>
+                <div class="alert-footer">
+                    alert footer
+                </div>
+            </div>
+            {;op_end;core_warnings;}
+            {;op;core_infos;}
+            <div class="alert alert-info alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                    &times;
+                </button>
+                <div class="alert-heading">
+                    {;lang;info;} {;lang;info_title;}
+                </div>
+                <div class="alert-body">
+                    {;core_info;}
+                </div>
+                <div class="alert-footer">
+                    alert footer
+                </div>
+            </div>
+            {;op_end;core_infos;}
+            {;op;core_oks;}
+            <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                    &times;
+                </button>
+                <div class="alert-heading">
+                    OK {;lang;ok_title;}
+                </div>
+                <div class="alert-body">
+                    {;core_ok;}
+                </div>
+                <div class="alert-footer">
+                    alert footer
+                </div>
+            </div>
+            {;op_end;core_oks;}
+        </section>
         <section id="main">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -72,48 +138,6 @@
                     </div>
                 </div>
                 {;block;blok_testowy;}
-            </section>
-            <section>
-                {;op;core_errors;}
-                <div class="panel panel-danger">
-                    <div class="panel-heading">
-                        {;lang;error;} {;lang;error_title;}
-                    </div>
-                    <div class="panel-body">
-                        {;core_error;}
-                    </div>
-                </div>
-                {;op_end;core_errors;}
-                {;op;core_warnings;}
-                <div class="panel panel-warning">
-                    <div class="panel-heading">
-                        {;lang;warning;} {;lang;warning_title;}
-                    </div>
-                    <div class="panel-body">
-                        {;core_warning;}
-                    </div>
-                </div>
-                {;op_end;core_warnings;}
-                {;op;core_infos;}
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        {;lang;info;} {;lang;info_title;}
-                    </div>
-                    <div class="panel-body">
-                        {;core_info;}
-                    </div>
-                </div>
-                {;op_end;core_infos;}
-                {;op;core_oks;}
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        OK {;lang;ok_title;}
-                    </div>
-                    <div class="panel-body">
-                        {;core_ok;}
-                    </div>
-                </div>
-                {;op_end;core_oks;}
             </section>
         </aside>
         <div style="clear: both"></div>
