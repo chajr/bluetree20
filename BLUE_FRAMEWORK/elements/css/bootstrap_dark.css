@@ -15,7 +15,7 @@
  
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     0.2.1
+ * @version     0.3.0
  */
 article,
 aside,
@@ -577,7 +577,7 @@ blockquote p:last-child {
 blockquote small {
     display: block;
     line-height: 1.2;
-    color: #999999;
+    color: #dddddd;
 }
 blockquote small:before {
     content: '\2014 \00A0';
@@ -4623,6 +4623,7 @@ a.list-group-item:focus {
 }
 .panel-body {
     padding: 15px;
+    color:#999999;
 }
 .panel-body:before,
 .panel-body:after {
@@ -4690,6 +4691,7 @@ a.list-group-item:focus {
     border-top: 1px solid #555555;
     border-bottom-right-radius: 1px;
     border-bottom-left-radius: 1px;
+    color:#444;
 }
 .panel-group .panel {
     margin-bottom: 0;
@@ -4715,8 +4717,8 @@ a.list-group-item:focus {
     border-color: #555555;
 }
 .panel-default > .panel-heading {
-    color: #555555;
-    background-color: #999999;
+    color: #dddddd;
+    background-color: #555555;
     border-color: #555555;
 }
 .panel-default > .panel-heading + .panel-collapse .panel-body {

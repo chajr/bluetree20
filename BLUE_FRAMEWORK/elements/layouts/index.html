@@ -7,44 +7,55 @@
     </head>
     <body>
         <header>
-            <div>
-                <legend>
-                    {;lang;external_legend;}
-                </legend>
-                {;external;ext;}
-            </div>
+            <h1 class="text-primary">
+                Blue Framework 2.0.1
+            </h1>
         </header>
         <section id="main">
-            <div>
-                <legend>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {;lang;external_legend;}
+                </div>
+                <div class="panel-body">
+                    {;external;ext;}
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
                     {;lang;replace_paths;}
-                </legend>
-                <a href="{;core;domain;}{;core;lang;}{;path;/strona2;}">
-                    {;lang;internal_link;}
-                </a>
-                <br/>
-                <a href="http://www.bluetree.pl">link</a>
-                <a href="mailto:sdfsdf@asd.cv">link</a><br/>
-                <img src="{;core;domain;}elementy/images/bluetree_base_big.jpg" alt="{;lang;image;}"/>
+                </div>
+                <div class="panel-body">
+                    <a href="{;core;domain;}{;core;lang;}{;path;/strona2;}">
+                        {;lang;internal_link;}
+                    </a>
+                    <br/>
+                    <a href="http://www.bluetree.pl">link</a>
+                    <a href="mailto:sdfsdf@asd.cv">link</a><br/>
+                    <img src="{;core;domain;}elementy/images/bluetree_base_big.jpg" alt="{;lang;image;}"/>
+                </div>
             </div>
-            <div>
-                <legend>
+            <div class="panel panel-default">
+                <div class="panel-heading">
                     {;lang;system_markers;}
-                </legend>
-                {;path;/strona/podstrona/param,val/p2,v/;} - {;lang;path;} ({ ;path;/strona/podstrona/param,val/p2,v/; })<br/>
-                {;full;/strona/podstrona/param,val/p2,v/;} - {;lang;full;} ({ ;full;/strona/podstrona/param,val/p2,v/; })<br/>
-                {;core;domain;} - {;lang;domain;} ({ ;core;domain; })<br/>
-                {;core;lang;} - {;lang;lang;} ({ ;core;lang; })<br/>
-                {;core;mainpath;} - {;lang;main_path;} ({ ;core;mainpath; })
+                </div>
+                <div class="panel-body">
+                    {;path;/strona/podstrona/param,val/p2,v/;} - {;lang;path;} ({ ;path;/strona/podstrona/param,val/p2,v/; })<br/>
+                    {;full;/strona/podstrona/param,val/p2,v/;} - {;lang;full;} ({ ;full;/strona/podstrona/param,val/p2,v/; })<br/>
+                    {;core;domain;} - {;lang;domain;} ({ ;core;domain; })<br/>
+                    {;core;lang;} - {;lang;lang;} ({ ;core;lang; })<br/>
+                    {;core;mainpath;} - {;lang;main_path;} ({ ;core;mainpath; })
+                </div>
             </div>
-            <div>
-                <legend>
+            <div class="panel panel-default">
+                <div class="panel-heading">
                     {;lang;translations;}
-                </legend>
-                {;lang;framework_translations;}:        <strong>{;lang;tulmaczenie_przykladowe;}</strong><br/>
-                {;lang;module_translations;}:           <strong>{;lang;modul1;string_to_translate;}</strong><br/>
-                {;lang;module_code_translations;}:      <strong>{;lang-en-GB;modul1;string_to_translate;}</strong><br/>
-                {;lang;framework_code_translations;}:   <strong>{;lang-en-GB;tekst_do_tulmaczenia;}</strong>
+                </div>
+                <div class="panel-body">
+                    {;lang;framework_translations;}:        <strong>{;lang;tulmaczenie_przykladowe;}</strong><br/>
+                    {;lang;module_translations;}:           <strong>{;lang;modul1;string_to_translate;}</strong><br/>
+                    {;lang;module_code_translations;}:      <strong>{;lang-en-GB;modul1;string_to_translate;}</strong><br/>
+                    {;lang;framework_code_translations;}:   <strong>{;lang-en-GB;tekst_do_tulmaczenia;}</strong>
+                </div>
             </div>
         </section>
         <section id="content">
@@ -55,10 +66,12 @@
                 <h3>
                     {;lang;blocks;}
                 </h3>
-                <div>
-                    <legend>{;lang;test_block;}</legend>
-                    {;block;blok_testowy;}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        {;lang;test_block;}
+                    </div>
                 </div>
+                {;block;blok_testowy;}
             </section>
             <section>
                 {;op;core_errors;}

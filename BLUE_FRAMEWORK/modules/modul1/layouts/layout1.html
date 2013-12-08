@@ -1,214 +1,273 @@
 <h3>{;lang;title;}</h3>
 
-<div>
-    <legend>
+<div class="panel panel-default">
+    <div class="panel-heading">
         {;lang;simple_marker;}
-    </legend>
-    {;marker;}
-</div>
-
-<div>
-    <legend>
-        {;lang;optional_content;}
-    </legend>
-    {;lang;optional;} {;op;oo;} 1: {;marker_a;}{;op_end;oo;}<br/>
-    {;lang;optional;} {;op;ooa;} 2: {;marker;}{;op_end;ooa;}
-
-<div>
-    <legend>
-        {;lang;markers_array;}
-    </legend>
-    {;marker-a;} - {;marker-b;} {;some_marker;}
-</div>
-
-<div style="border-color: #ff0000">
-    <legend>
-        {;lang;error_marker;}
-    </legend>
-    {;error_marker;}<br/>
-    {;error_marker1;}
-    {;error_marker2;}
-</div>
-
-<div style="border-color: #ff0000">
-    <legend>
-        {;lang;errors_array;}
-    </legend>
-    {;errors_list;}
-</div>
-
-<div>
-    <legend>
-        {;lang;simple_loop;}
-    </legend>
-    {;start;loop1;}
-    <b>{;loop1;item1;}</b>
-    {;loop1;item2;}<br/>
-    {;loop1;item3;}<br/>
-    {;end;loop1;}
-    {;start_empty;loop1;}
-    <b>{;lang;empty_loop_message;}</b>
-    {;end_empty;loop1;}
-
-    <legend>
-        {;lang;simple_loop_empty;}
-    </legend>
-    {;start;loop_empty;}
-        {;loop_empty;item1;}
-        {;loop_empty;item2;}<br/>
-    {;end;loop_empty;}
-    {;start_empty;loop_empty;}
-    <b>{;lang;empty_loop_message;}</b>
-    {;end_empty;loop_empty;}
-</div>
-
-<div>
-    <legend>
-        {;lang;nested_loops;}
-    </legend>
-    {;start;app_category_groups;}
-    {;app_category_groups;name;} - {;app_category_groups;id;}
-    <br/>
-    {;lang;nested_values;}:<br/><br/>
-
-    {;start;app_category_{;app_category_groups;id;};}
-    {;lang;nested_value;}: {;app_category_{;app_category_groups;id;};id;}<br/>
-    {;lang;nested_value;}: {;app_category_{;app_category_groups;id;};name;}
-    <br/>
-    {;lang;optional_nested;}:
-    {;op;app_category_{;app_category_groups;id;};}
-    {;app_category_{;app_category_groups;id;};optional;}
-    {;op_end;app_category_{;app_category_groups;id;};}
-    <br/>
-
-    {;end;app_category_{;app_category_groups;id;};}
-    <hr/>
-    {;end;app_category_groups;}
-</div>
-
-<div>
-    <legend>
-        {;lang;optional_loop;}
-    </legend>
-    {;start;loop2;}
-    <b>{;loop2;aaa;}</b>
-    <br/>
-    {;loop2;bbb;} - {;lang;data_expected;}: {;op;oo;}{;lang;optional;} {;loop2;oo;}{;op_end;oo;}
-    <br/>
-    {;lang;data_expected;}: {;op;oo2;}{;lang;optional;} 2 {;loop2;oo2;}{;op_end;oo2;}
-    <hr/>
-    {;end;loop2;}
-</div>
-
-<div>
-    <legend>
-        {;lang;session;}
-    </legend>
-    <div>{;lang;public;}: <strong>{;public;}</strong> - {;lang;new_public;}: <strong>{;public2;}</strong></div>
-    <div>{;lang;user;}: <strong>{;user;}</strong> - {;lang;new_user;}: <strong>{;user2;}</strong></div>
-</div>
-
-<div>
-    <legend>
-        {;lang;session_template;}
-    </legend>
-    <div class="warning">
-        {;lang;session_test_content;}
     </div>
-    <div>{;session_display;session_display_test;}</div>
+    <div class="panel-body">
+        {;marker;}
+    </div>
 </div>
 
-<div>
-    <legend>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        {;lang;optional_content;}
+    </div>
+    <div class="panel-body">
+        {;lang;optional;} {;op;oo;} 1: {;marker_a;}{;op_end;oo;}<br/>
+        {;lang;optional;} {;op;ooa;} 2: <span  class="text-info">{;marker;}</span>{;op_end;ooa;}
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        {;lang;markers_array;}
+    </div>
+    <div class="panel-body">
+        {;marker-a;} - {;marker-b;} {;some_marker;}
+    </div>
+</div>
+
+<div class="panel panel-danger">
+    <div class="panel-heading">
+        {;lang;error_marker;}
+    </div>
+    <div class="panel-body">
+        <div class="text-danger">
+            {;error_marker;}
+        </div>
+        <br/>
+        <div class="text-danger">
+            {;error_marker1;}
+        </div>
+        <br/>
+        <div class="text-danger">
+            {;error_marker2;}
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-danger">
+    <div class="panel-heading">
+        {;lang;errors_array;}
+    </div>
+    <div class="panel-body">
+        {;errors_list;}
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        {;lang;simple_loop;}
+    </div>
+    <div class="panel-body">
+        {;start;loop1;}
+        <b>{;loop1;item1;}</b>
+        {;loop1;item2;}<br/>
+        {;loop1;item3;}<br/>
+        {;end;loop1;}
+        {;start_empty;loop1;}
+        <b>{;lang;empty_loop_message;}</b>
+        {;end_empty;loop1;}
+    </div>
+
+    <div class="panel-heading">
+        {;lang;simple_loop_empty;}
+    </div>
+    <div class="panel-body">
+        {;start;loop_empty;}
+            {;loop_empty;item1;}
+            {;loop_empty;item2;}<br/>
+        {;end;loop_empty;}
+        {;start_empty;loop_empty;}
+        <b>{;lang;empty_loop_message;}</b>
+        {;end_empty;loop_empty;}
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        {;lang;nested_loops;}
+    </div>
+    <div class="panel-body">
+        {;start;app_category_groups;}
+        {;app_category_groups;name;} - {;app_category_groups;id;}
+        <br/>
+        {;lang;nested_values;}:<br/><br/>
+    
+        {;start;app_category_{;app_category_groups;id;};}
+        {;lang;nested_value;}: {;app_category_{;app_category_groups;id;};id;}<br/>
+        {;lang;nested_value;}: {;app_category_{;app_category_groups;id;};name;}
+        <br/>
+        {;lang;optional_nested;}:
+        {;op;app_category_{;app_category_groups;id;};}
+        {;app_category_{;app_category_groups;id;};optional;}
+        {;op_end;app_category_{;app_category_groups;id;};}
+        <br/>
+    
+        {;end;app_category_{;app_category_groups;id;};}
+        <hr/>
+        {;end;app_category_groups;}
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        {;lang;optional_loop;}
+    </div>
+    <div class="panel-body">
+        {;start;loop2;}
+        <b class="text-info">{;loop2;aaa;}</b>
+        <br/>
+        {;loop2;bbb;} - {;lang;data_expected;}: {;op;oo;}{;lang;optional;} {;loop2;oo;}{;op_end;oo;}
+        <br/>
+        {;lang;data_expected;}: {;op;oo2;}{;lang;optional;} 2 {;loop2;oo2;}{;op_end;oo2;}
+        <hr/>
+        {;end;loop2;}
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        {;lang;session;}
+    </div>
+    <div class="panel-body">
+        <div>
+            {;lang;public;}: <strong class="text-info">{;public;}</strong> - {;lang;new_public;}: <strong class="text-info">{;public2;}</strong>
+        </div>
+        <div>
+            {;lang;user;}: <strong class="text-info">{;user;}</strong> - {;lang;new_user;}: <strong class="text-info">{;user2;}</strong>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        {;lang;session_template;}
+    </div>
+    <div class="panel-body">
+        <p class="text-warning">
+            {;lang;session_test_content;}
+        </p>
+        <div>{;session_display;session_display_test;}</div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
         {;lang;breadcrumbs;}
-    </legend>
-    <div>{;breadcrumbs;}</div>
+    </div>
+    <div class="panel-body">
+        {;breadcrumbs;}
+    </div>
 </div>
 
-<div>
-    <legend>
+<div class="panel panel-default">
+    <div class="panel-heading">
         {;lang;site_map;}
-    </legend>
-    {;site_map;}
+    </div>
+    <div class="panel-body">
+        {;site_map;}
+    </div>
 </div>
 
-<div>
-    <legend>
+<div class="panel panel-default">
+    <div class="panel-heading">
         {;lang;module_path;}
-    </legend>
-    <div>{;some_path;}</div>
+    </div>
+    <div class="panel-body">
+        {;some_path;}
+    </div>
 </div>
 
-<div>
-    <legend>
+<div class="panel panel-default">
+    <div class="panel-heading">
         {;lang;lib_info;}
-    </legend>
-    <div>{;lib;}</div>
+    </div>
+    <div class="panel-body">
+        {;lib;}
+    </div>
 </div>
 
-<div>
-    <legend>
+<div class="panel panel-default">
+    <div class="panel-heading">
         {;lang;cookie;}
-    </legend>
-    <div>{;lang;cookie;}-1: {;cookie;}</div>
-    <div>{;lang;cookie;}-2: {;cookie2;}</div>
+    </div>
+    <div class="panel-body">
+        <div>{;lang;cookie;}-1: <span class="text-info">{;cookie;}</span></div>
+        <div>{;lang;cookie;}-2: <span class="text-info">{;cookie2;}</span></div>
+    </div>
 </div>
 
-<div>
-    <legend>
+<div class="panel panel-default">
+    <div class="panel-heading">
         {;lang;get_data;}
-    </legend>
-    <div>{;lang;val;}-1: <strong>{;val1;}</strong></div>
-    <div>{;lang;val;}-2: <strong>{;val2;}</strong></div>
-    <div>{;lang;val;}-3: <strong>{;val3;}</strong></div>
+    </div>
+    <div class="panel-body">
+        <div>{;lang;val;}-1: <strong class="text-info">{;val1;}</strong></div>
+        <div>{;lang;val;}-2: <strong class="text-info">{;val2;}</strong></div>
+        <div>{;lang;val;}-3: <strong class="text-info">{;val3;}</strong></div>
+    </div>
 </div>
 
-<div>
-    <legend>
+<div class="panel panel-default">
+    <div class="panel-heading">
         {;lang;get_object;}
-    </legend>
-    <div>{;lang;path;}:              <strong>{;path;}</strong></div>
-    <div>{;lang;rewrite_get;}:       <strong>{;rget;}</strong></div>
-    <div>{;lang;lang_code;}:         <strong>{;lang;}</strong></div>
-    <div>{;lang;current_page;}:      <strong>{;current_page;}</strong></div>
-    <div>{;lang;parent_page;}:       <strong>{;parent;}</strong></div>
-    <div>{;lang;master_page;}:       <strong>{;master;}</strong></div>
-    <div>{;lang;full_get;}:          <strong>{;full;}</strong></div>
-    <div>{;lang;full_get;} (TRUE):   <strong>{;full2;}</strong></div>
-    <div>{;lang;type;}:              <strong>{;type;}</strong></div>
-    <div>{;lang;with_domain;}        <strong>{;path_domain;}</strong></div>
-    <div>{;lang;complete_path;}      <strong>{;path;}</strong></div>
+    </div>
+    <div class="panel-body">
+        <div>{;lang;path;}:              <strong class="text-success">{;path;}</strong></div>
+        <div>{;lang;rewrite_get;}:       <strong class="text-success">{;rget;}</strong></div>
+        <div>{;lang;lang_code;}:         <strong class="text-success">{;lang;}</strong></div>
+        <div>{;lang;current_page;}:      <strong class="text-success">{;current_page;}</strong></div>
+        <div>{;lang;parent_page;}:       <strong class="text-success">{;parent;}</strong></div>
+        <div>{;lang;master_page;}:       <strong class="text-success">{;master;}</strong></div>
+        <div>{;lang;full_get;}:          <strong class="text-success">{;full;}</strong></div>
+        <div>{;lang;full_get;} (TRUE):   <strong class="text-success">{;full2;}</strong></div>
+        <div>{;lang;type;}:              <strong class="text-success">{;type;}</strong></div>
+        <div>{;lang;with_domain;}        <strong class="text-success">{;path_domain;}</strong></div>
+        <div>{;lang;complete_path;}      <strong class="text-success">{;path;}</strong></div>
+    </div>
 </div>
 
-<div>
-    <legend>
+<div class="panel panel-default">
+    <div class="panel-heading">
         {;lang;mod_params;}
-    </legend>
-    <div>{;param;}</div>
+    </div>
+    <div class="panel-body">
+        {;param;}
+    </div>
 </div>
 
-<div>
-    <legend>
+<div class="panel panel-default">
+    <div class="panel-heading">
         {;lang;translations;}
-    </legend>
-    <div>{;lang;mod_translation;}:       <strong>{;lang;string_to_translate;}</strong></div>
-    <div>{;lang;core_translation;}:      <strong>{;lang;core;testowe_tulmaczenie_core;}</strong></div>
-    <div>{;lang;mod_translation_code;} en-GB:    <strong>{;lang-en-GB;string_to_translate;}</strong></div>
-    <div>{;lang;core_translation_code;} en-GB:   <strong>{;lang-en-GB;core;tekst_do_tulmaczenia;}</strong></div>
-    <div>{;lang;mod_translation_code;} pl-PL:    <strong>{;lang-pl-PL;string_to_translate;}</strong></div>
-    <div>{;lang;core_translation_code;} pl-PL:   <strong>{;lang-pl-PL;core;tekst_do_tulmaczenia;}</strong></div>
+    </div>
+    <div class="panel-body">
+        <div>{;lang;mod_translation;}:       <strong class="text-info">{;lang;string_to_translate;}</strong></div>
+        <div>{;lang;core_translation;}:      <strong class="text-info">{;lang;core;testowe_tulmaczenie_core;}</strong></div>
+        <div>{;lang;mod_translation_code;} en-GB:    <strong class="text-info">{;lang-en-GB;string_to_translate;}</strong></div>
+        <div>{;lang;core_translation_code;} en-GB:   <strong class="text-info">{;lang-en-GB;core;tekst_do_tulmaczenia;}</strong></div>
+        <div>{;lang;mod_translation_code;} pl-PL:    <strong class="text-info">{;lang-pl-PL;string_to_translate;}</strong></div>
+        <div>{;lang;core_translation_code;} pl-PL:   <strong class="text-info">{;lang-pl-PL;core;tekst_do_tulmaczenia;}</strong></div>
+    </div>
 </div>
 
-<div>
-    <legend>
+<div class="panel panel-default">
+    <div class="panel-heading">
         {;lang;mod_conf;}
-    </legend>
-    <div>{;module_config;}</div>
+    </div>
+    <div class="panel-body">
+        {;module_config;}
+    </div>
 </div>
 
-<div>
-    <legend>
+<div class="panel panel-default">
+    <div class="panel-heading">
         {;lang;module_path;}
-    </legend>
-    <div>{;module_path;}</div>
+    </div>
+    <div class="panel-body">
+        <p class="text-info">
+            {;module_path;}
+        </p>
+    </div>
 </div>
