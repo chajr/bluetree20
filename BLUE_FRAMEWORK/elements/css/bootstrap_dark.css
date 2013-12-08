@@ -15,7 +15,7 @@
  
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     0.3.0
+ * @version     0.4.0
  */
 article,
 aside,
@@ -4345,10 +4345,28 @@ a.thumbnail:focus {
     color: #777777;
 }
 .alert {
-    padding: 15px;
     margin-bottom: 14px;
     border: 1px solid transparent;
     border-radius: 2px;
+}
+.alert-danger > .alert-heading{
+    background-color: #D6201D;
+    color: #EFC9C9;
+}
+.alert-warning > .alert-heading{
+    background-color: #a9813c;
+    color: #faf2c5;
+}
+.alert-info > .alert-heading{
+    background-color: #0d92d3;
+    color: #c4e5f5;
+}
+.alert-success > .alert-heading{
+    background-color: #2e882f;
+    color: #ccecbf;
+}
+.alert-body{
+    padding: 15px;
 }
 .alert h4 {
     margin-top: 0;
@@ -4364,13 +4382,13 @@ a.thumbnail:focus {
 .alert > p + p {
     margin-top: 5px;
 }
-.alert-dismissable {
+.alert-dismissable .alert-heading, .alert-dismissable .alert-body{
     padding-right: 35px;
 }
 .alert-dismissable .close {
     position: relative;
-    top: -2px;
-    right: -21px;
+    top: 13px;
+    right: 15px;
     color: inherit;
 }
 .alert-success {
@@ -4671,8 +4689,8 @@ a.list-group-item:focus {
 .panel > .panel-body + .table {
     border-top: 1px solid #333333;
 }
-.panel-heading {
-    padding: 10px 15px;
+.panel-heading, .alert-heading {
+    padding: 15px;
     border-bottom: 1px solid transparent;
     border-top-right-radius: 1px;
     border-top-left-radius: 1px;
@@ -4685,13 +4703,33 @@ a.list-group-item:focus {
 .panel-title > a {
     color: inherit;
 }
-.panel-footer {
+.panel-footer, .alert-footer{
     padding: 10px 15px;
     background-color: #bbbbbb;
     border-top: 1px solid #555555;
     border-bottom-right-radius: 1px;
     border-bottom-left-radius: 1px;
     color:#444;
+}
+.alert-danger > .alert-footer{
+    background-color: #f8baba;
+    border-top: 1px solid #f94949;
+    color:#d6201d;
+}
+.alert-warning > .alert-footer{
+    background-color: #f9edaa;
+    border-top: 1px solid #f3ad1b;
+    color:#a9813c;
+}
+.alert-info > .alert-footer{
+    background-color: #afdbef;
+    border-top: 1px solid #61c8fb;
+    color:#0d92d3;
+}
+.alert-success > .alert-footer{
+    background-color: #bde7ab;
+    border-top: 1px solid #85dc61;
+    color:#2e882f;
 }
 .panel-group .panel {
     margin-bottom: 0;
@@ -4825,16 +4863,19 @@ a.list-group-item:focus {
     font-weight: bold;
     line-height: 1;
     color: #000000;
-    text-shadow: 0 1px 0 #ffffff;
-    opacity: 0.2;
-    filter: alpha(opacity=20);
+    text-shadow: 0 1px 0 #000000;
+    opacity: 0.25;
+    filter: alpha(opacity=25);
+}
+.alert .close{
+    color: #000;
 }
 .close:hover,
 .close:focus {
     color: #000000;
     text-decoration: none;
     cursor: pointer;
-    opacity: 0.5;
+    opacity: 0.6;
     filter: alpha(opacity=50);
 }
 button.close {
