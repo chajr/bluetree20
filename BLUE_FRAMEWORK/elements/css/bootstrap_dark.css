@@ -15,7 +15,7 @@
  
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     0.2.0
+ * @version     0.2.1
  */
 article,
 aside,
@@ -1506,7 +1506,7 @@ legend {
     line-height: inherit;
     color: #555555;
     border: 0;
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #888888;
 }
 label {
     display: inline-block;

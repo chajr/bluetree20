@@ -7,18 +7,15 @@
     </head>
     <body>
         <header>
-            <fieldset>
+            <div>
                 <legend>
                     {;lang;external_legend;}
                 </legend>
                 {;external;ext;}
-            </fieldset>
+            </div>
         </header>
-        <!--<h1>-->
-            <!--instalacja i deinstalacja modulu-->
-        <!--</h1>-->
         <section id="main">
-            <fieldset>
+            <div>
                 <legend>
                     {;lang;replace_paths;}
                 </legend>
@@ -29,8 +26,8 @@
                 <a href="http://www.bluetree.pl">link</a>
                 <a href="mailto:sdfsdf@asd.cv">link</a><br/>
                 <img src="{;core;domain;}elementy/images/bluetree_base_big.jpg" alt="{;lang;image;}"/>
-            </fieldset>
-            <fieldset>
+            </div>
+            <div>
                 <legend>
                     {;lang;system_markers;}
                 </legend>
@@ -39,8 +36,8 @@
                 {;core;domain;} - {;lang;domain;} ({ ;core;domain; })<br/>
                 {;core;lang;} - {;lang;lang;} ({ ;core;lang; })<br/>
                 {;core;mainpath;} - {;lang;main_path;} ({ ;core;mainpath; })
-            </fieldset>
-            <fieldset>
+            </div>
+            <div>
                 <legend>
                     {;lang;translations;}
                 </legend>
@@ -48,7 +45,7 @@
                 {;lang;module_translations;}:           <strong>{;lang;modul1;string_to_translate;}</strong><br/>
                 {;lang;module_code_translations;}:      <strong>{;lang-en-GB;modul1;string_to_translate;}</strong><br/>
                 {;lang;framework_code_translations;}:   <strong>{;lang-en-GB;tekst_do_tulmaczenia;}</strong>
-            </fieldset>
+            </div>
         </section>
         <section id="content">
             {;mod;modul1;}
@@ -58,43 +55,51 @@
                 <h3>
                     {;lang;blocks;}
                 </h3>
-                <fieldset>
+                <div>
                     <legend>{;lang;test_block;}</legend>
                     {;block;blok_testowy;}
-                </fieldset>
+                </div>
             </section>
             <section>
                 {;op;core_errors;}
-                <fieldset class="error">
-                    <legend>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
                         {;lang;error;} {;lang;error_title;}
-                    </legend>
-                    {;core_error;}
-                </fieldset>
+                    </div>
+                    <div class="panel-body">
+                        {;core_error;}
+                    </div>
+                </div>
                 {;op_end;core_errors;}
                 {;op;core_warnings;}
-                <fieldset class="warning">
-                    <legend>
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
                         {;lang;warning;} {;lang;warning_title;}
-                    </legend>
-                    {;core_warning;}
-                </fieldset>
+                    </div>
+                    <div class="panel-body">
+                        {;core_warning;}
+                    </div>
+                </div>
                 {;op_end;core_warnings;}
                 {;op;core_infos;}
-                <fieldset class="info">
-                    <legend>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
                         {;lang;info;} {;lang;info_title;}
-                    </legend>
-                    {;core_info;}
-                </fieldset>
+                    </div>
+                    <div class="panel-body">
+                        {;core_info;}
+                    </div>
+                </div>
                 {;op_end;core_infos;}
                 {;op;core_oks;}
-                <fieldset class="ok">
-                    <legend>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
                         OK {;lang;ok_title;}
-                    </legend>
-                    {;core_ok;}
-                </fieldset>
+                    </div>
+                    <div class="panel-body">
+                        {;core_ok;}
+                    </div>
+                </div>
                 {;op_end;core_oks;}
             </section>
         </aside>
