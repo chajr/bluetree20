@@ -1,11 +1,11 @@
 <?php
 /**
-* @category    BlueFramework
+ * @category    BlueFramework
  * @package     BlueFramework Core
  * @subpackage  language
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.2.0
+ * @version     1.2.1
  */
 
 /**
@@ -58,7 +58,7 @@ $content = array(
     'example_title'           => 'Przykłady użytkowania Blue Frameworka',
     'example_generate'        => 'Tworzenie treści w templatkach',
     'example_translate'       => 'Używanie tułmaczeń',
-    'example_layout'          => 'UUżywanie templatek (w tym tworzenie instancji display_class wewnątrz modułu)',
+    'example_layout'          => 'Używanie templatek (w tym tworzenie instancji display_class wewnątrz modułu)',
     'example_sys_marks'       => 'Znaczniki Core',
     'example_blocks'          => 'Używanie bloków',
     'example_messages'        => 'Wiadomości o błędach, ostrzeżeniach, informacjach i powodzeniach',

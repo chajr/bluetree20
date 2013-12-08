@@ -7,7 +7,7 @@
 * @package     BlueFramework Core
 * @author      Michał Adamiak    <chajr@bluetree.pl>
 * @copyright   chajr/bluetree
-* @version     1.2.1
+* @version     1.2.2
 */
 -->
 <!DOCTYPE root SYSTEM 'dtd/tree.dtd'>
@@ -39,7 +39,9 @@
 
     <page id="examples" name="{;lang;core;example_title;}" layout="examples/examples" options="1111">
         <sub id="example_generate" name="Generate content" layout="examples/example" options="11111">
-
+            <mod on="1" block="examples">example_generate</mod>
+            <mod on="1" block="examples">example_messages</mod>
+            <mod on="1" block="examples">example_layout</mod>
         </sub>
         <css>styles</css>
     </page>
