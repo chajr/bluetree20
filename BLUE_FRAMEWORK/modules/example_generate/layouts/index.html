@@ -1,0 +1,165 @@
+<section id="example_generate">
+    <h2>{;lang;title;}</h2>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {;lang;simple_generate;}
+        </div>
+        <div class="panel-body">
+            {;marker;}<br/>
+        </div>
+        <div class="panel-footer">
+            <pre>
+{&#59;marker&#59;} - $this->generate('marker', '{&#59;lang;content_to_replace&#59;}');</pre>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {;lang;content_array;}
+        </div>
+        <div class="panel-body">
+            <ul>
+                <li>
+                    {;marker_1;}
+                </li>
+                <li>
+                    {;marker_2;}
+                </li>
+                <li>
+                    {;marker_3;}
+                </li>
+            </ul>
+        </div>
+        <div class="panel-footer">
+            <pre>
+&lt;li&gt;
+    {&#59;marker_1&#59;}
+&lt;/li&gt;
+&lt;li&gt;
+    {&#59;marker_2&#59;}
+&lt;/li&gt;
+&lt;li&gt;
+    {&#59;marker_3&#59;}
+&lt;/li&gt;
+
+$data = [
+    'marker_1' => '{&#59;lang;content_to_replace_1&#59;}',
+    'marker_2' => '{&#59;lang;content_to_replace_2&#59;}',
+    'marker_3' => '{&#59;lang;content_to_replace_3&#59;}',
+];
+$this->generate($data);</pre>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {;lang;core_content;}
+        </div>
+        <div class="panel-body">
+
+        </div>
+        <div class="panel-footer">
+            <code>
+
+            </code>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {;lang;optionally_marker_replaced;}
+        </div>
+        <div class="panel-body">
+
+        </div>
+        <div class="panel-footer">
+            <code>
+
+            </code>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {;lang;optionally_marker_none;}
+        </div>
+        <div class="panel-body">
+            
+        </div>
+        <div class="panel-footer">
+            <code>
+
+            </code>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {;lang;loop_content;}
+        </div>
+        <div class="panel-body">
+            
+        </div>
+        <div class="panel-footer">
+            <code>
+
+            </code>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {;lang;loop_content_empty;}
+        </div>
+        <div class="panel-body">
+
+        </div>
+        <div class="panel-footer">
+            <code>
+
+            </code>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {;lang;loop_content_nested;}
+        </div>
+        <div class="panel-body">
+
+        </div>
+        <div class="panel-footer">
+            <code>
+
+            </code>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {;lang;loop_content_optional;}
+        </div>
+        <div class="panel-body">
+
+        </div>
+        <div class="panel-footer">
+            <code>
+
+            </code>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {;lang;session_content;}
+        </div>
+        <div class="panel-body">
+
+        </div>
+        <div class="panel-footer">
+            <code>
+
+            </code>
+        </div>
+    </div>
+</section>
