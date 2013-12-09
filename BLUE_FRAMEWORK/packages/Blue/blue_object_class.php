@@ -9,7 +9,11 @@
  * @subpackage  Object
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     0.2.0
+ * @version     0.3.0
+ * 
+ * @todo finish implementation of initialize xml data
+ * @todo store only keys, set origin data only if changed (to avoid to big usage of memory)
+ * 
  */
 class blue_object_class
 {
@@ -519,12 +523,15 @@ class blue_object_class
     {
         $this->_prepareData();
 
-        $xml = new xml_class($version, 'UTF-8');
-        $xml = $this->_arrayToXml($this->_DATA, $xml, $addCdata, $xml);
+        $xml    = new xml_class($version, 'UTF-8');
+        $root   = $xml->createElement('root');
+        $xml    = $this->_arrayToXml($this->_DATA, $xml, $addCdata, $root);
 
+        $xml->appendChild($root);
         if ($dtd) {
             $dtd = "<!DOCTYPE root SYSTEM '$dtd'>";
         }
+        $xml->formatOutput = TRUE;
 
         return $dtd . $xml->saveXmlFile(FALSE, TRUE);
     }
@@ -625,12 +632,83 @@ class blue_object_class
         return $this;
     }
 
-    protected function _appendXml()
+    protected function _appendXml($data)
     {
+        $xml                        = new xml_class();
+        $xml->preserveWhiteSpace    = FALSE;
+        $bool                       = @$xml->loadXML($data);
+
+        if (!$bool) {
+            $this->_errorsList['xml_load_error'] = $data;
+            return;
+        }
+
+        foreach ($xml->documentElement->childNodes as $nod) {
+            $nodeData = [];
+
+            if ($nod->getAttribute('serialized_object')) {
+                $this->_putInitData($nod->nodeName, unserialize($nod->nodeValue));
+                continue;
+            }
+
+            if ($nod->hasAttributes()) {
+                foreach ($nod->attributes as $key => $value) {
+                    $nodeData['@attributes'][$key] = $value->nodeValue;
+                }
+            }
+
+            if ($nod->hasChildNodes()) {
+                foreach ($nod->childNodes as $childNode) {
+                    echo '<pre>';
+            var_dump($childNode->nodeValue);
+            var_dump($childNode->nodeType);
+            echo '</pre>';
+                    
+                    //nie tworzy danych przy attrybutach dla tablicy
+
+                    if ($childNode->nodeType === 3 || $childNode->nodeType === 4) {
+                        if (empty($nodeData)) {
+                            $nodeData = $nod->nodeValue;
+                        } else {
+                            $nodeData[] = $nod->nodeValue;
+                        }
+                    } elseif ($childNode->nodeType === 1) {
+                        //przetwarzanie
+                    }
+                }
+            }
+//            echo '<pre>';
+//            var_dump($nod->hasChildNodes());
+//            var_dump($nod->nodeValue);
+//            var_dump($nod->nodeType);
+//            echo '</pre>';
+//            
+//            if ($nod->nodeType) {
+//                
+//            } else {
+//                $nodeData = $nod->nodeValue;
+//            }
+            $this->_putInitData($nod->nodeName, $nodeData);
+        }
+
+        
         //tylko plaskie xmle bez atrybutow??
         //jesli ma atrybutu tworzy array z nimi
         
         //zrobic to tak aby mozna bylo obslugiwac w append i save drzewo z tree.xml
+    }
+
+    /**
+     * set given data to DATA with convert string to integer key
+     * 
+     * @param string $key
+     * @param mixed $data
+     */
+    protected function _putInitData($key, $data)
+    {
+        $key                            = $this->_stringToIntegerKey($key);
+        $this->_DATA[$key]              = $data;
+        $this->_originalDATA[$key]      = $data;
     }
 
     /**
@@ -696,48 +774,37 @@ class blue_object_class
      * @param xml_class $xml
      * @param boolean $addCdata
      * @param xml_class|DOMElement $parent
-     * @return mixed
+     * @return xml_class
      */
     protected function _arrayToXml($data, xml_class $xml, $addCdata, $parent)
     {
         foreach ($data as $key => $value) {
-            $key = str_replace(' ', '_', $key);
+            $key        = str_replace(' ', '_', $key);
+            $attributes = [];
+
             if (is_object($value)) {
-                $value = serialize($value);
+                $value = [
+                    '@attributes' => ['serialized_object' => TRUE],
+                    serialize($value)
+                ];
             }
 
-            
-            //sprawdzenie czy ma tablice attributes
-            //tworzy atrybuty dla elkementu i usuwa z temp data tak aby element nie byl juz tablica
             try{
-            if (isset($value['attributes'])) {
-                
-                unset ($value['attributes']);
-            }
+                if (isset($value['@attributes'])) {
+                    $attributes = $value['@attributes'];
+                    unset ($value['@attributes']);
+                }
 
-            if (is_array($value)) {
-                $children = $xml->createElement(
-                    $this->_integerToStringKey($key)
-                );
-                $this->_arrayToXml($value, $xml, $addCdata, $children);
-                $parent->appendChild($children);
-                continue;
-            }
+                if (is_array($value)) {
+                    $parent = $this->_convertArrayDataToXml(
+                        $value, $addCdata, $xml, $key, $parent, $attributes
+                    );
+                    continue;
+                }
 
-            if ($addCdata) {
-                $cdata      = $xml->createCDATASection($value);
-                $element    = $xml->createElement(
-                    $this->_integerToStringKey($key)
-                );
-                $element->appendChild($cdata);
-            } else {
-                $element = $xml->createElement(
-                    $this->_integerToStringKey($key),
-                    $value
-                );
-            }
+                $element = $this->_appendDataToNode($addCdata, $xml, $key, $value);
+                $parent->appendChild($element);
 
-            $parent->appendChild($element);
             } catch (DOMException $exception) {
                 $this->_errorsList[$exception->getCode()] = [
                     'message'   => $exception->getMessage(),
@@ -753,9 +820,68 @@ class blue_object_class
     }
 
     /**
+     * convert array DATA value to xml format and return as xml object
+     * 
+     * @param array|string $value
+     * @param string $addCdata
+     * @param xml_class $xml
+     * @param string|integer $key
+     * @param DOMElement $parent
+     * @param array $attributes
+     * @return DOMElement
+     */
+    protected function _convertArrayDataToXml(
+        $value, $addCdata, xml_class $xml, $key, $parent, array $attributes
+    ){
+        if (count($value) === 1 && !empty($attributes) && isset($value[0])) {
+            $children = $this->_appendDataToNode(
+                $addCdata, $xml, $key, $value[0]);
+        } else {
+            $children = $xml->createElement(
+                $this->_integerToStringKey($key)
+            );
+            $this->_arrayToXml($value, $xml, $addCdata, $children);
+        }
+        $parent->appendChild($children);
+
+        foreach ($attributes as $attributeKey => $attributeValue) {
+            $children->setAttribute($attributeKey, $attributeValue);
+        }
+
+        return $parent;
+    }
+
+    /**
+     * append data to node
+     * 
+     * @param string $addCdata
+     * @param xml_class $xml
+     * @param string|integer $key
+     * @param string $value
+     * @return DOMElement
+     */
+    protected function _appendDataToNode($addCdata, xml_class $xml, $key, $value)
+    {
+        if ($addCdata) {
+            $cdata      = $xml->createCDATASection($value);
+            $element    = $xml->createElement(
+                $this->_integerToStringKey($key)
+            );
+            $element->appendChild($cdata);
+        } else {
+            $element = $xml->createElement(
+                $this->_integerToStringKey($key),
+                $value
+            );
+        }
+
+        return $element;
+    }
+
+    /**
      * if array key is number, convert it to string with set up _integerKeyPrefix
      * 
-     * @param string|number $key
+     * @param string|integer $key
      * @return string
      */
     protected function _integerToStringKey($key)
@@ -764,6 +890,17 @@ class blue_object_class
             $key = $this->_integerKeyPrefix . '_' . $key;
         }
         return $key;
+    }
+
+    /**
+     * remove prefix from integer array key
+     *
+     * @param string $key
+     * @return string|integer
+     */
+    protected function _stringToIntegerKey($key)
+    {
+        return str_replace($this->_integerKeyPrefix, '', $key);
     }
 
     /**
