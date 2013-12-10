@@ -7,7 +7,7 @@
 * @package     BlueFramework Core
 * @author      Michał Adamiak    <chajr@bluetree.pl>
 * @copyright   chajr/bluetree
-* @version     1.2.2
+* @version     1.3.0
 */
 -->
 <!DOCTYPE root SYSTEM 'dtd/tree.dtd'>
@@ -43,6 +43,7 @@
             <mod on="1" block="examples">example_messages</mod>
             <mod on="1" block="examples">example_layout</mod>
         </sub>
+        <mod on="1" param="breadcrumbs">main</mod>
         <css>styles</css>
     </page>
 
