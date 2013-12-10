@@ -7,7 +7,7 @@
  * @subpackage  tree
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.6.0
+ * @version     2.7.0
  */
 class tree_class
 {
@@ -117,6 +117,13 @@ class tree_class
     public $menu = array();
 
     /**
+     * contains path to page for breadcrumbs
+     * 
+     * @var string
+     */
+    protected $_breadcrumbsPath = '';
+
+    /**
      * start processing of pages tree
      * load list of libraries, modules, css, js and layouts for current page
      * 
@@ -138,7 +145,8 @@ class tree_class
         $this->_get             = $get;
         $this->_treeStructure   = new xml_class();
 
-        $this->load();
+        $this->_load();
+        $this->_setActivePage();
 
         if (!$this->layout) {
             throw new coreException('core_error_16', $this->layout);
@@ -203,6 +211,15 @@ class tree_class
         $this->_siteSubMap($mainPage);
 
         return $this->_siteMap->saveXmlFile(FALSE, TRUE);
+    }
+
+    /**
+     * set last page in breadcrumbs array to active
+     */
+    protected function _setActivePage()
+    {
+        $breadcrumbsLastIndex = count($this->breadcrumbs) -1;
+        $this->breadcrumbs[$breadcrumbsLastIndex]['active'] = 'active';
     }
 
     /**
@@ -341,10 +358,12 @@ class tree_class
         $options = $this->_mainPage->getAttribute('options');
 
         if ((bool)$options{3}) {
-            $list = array(
-                'id'    => $this->_mainPage->getAttribute('id'),
-                'name'  => $this->_mainPage->getAttribute('name')
-            );
+            $this->_breadcrumbsPath .= $this->_mainPage->getAttribute('id') . '/';
+            $list = [
+                'id'        => $this->_mainPage->getAttribute('id'),
+                'name'      => $this->_mainPage->getAttribute('name'),
+                'path'      => $this->_breadcrumbsPath,
+            ];
             $this->breadcrumbs[] = $list;
         }
     }
@@ -402,7 +421,7 @@ class tree_class
 
         if ((bool)$this->_mainPage->getAttribute('external')) {
             $this->_clear();
-            $this->load($this->_mainPage->getAttribute('external'));
+            $this->_load($this->_mainPage->getAttribute('external'));
         }
     }
 
@@ -570,7 +589,7 @@ class tree_class
      * @param string $xml xml file name, default is tree
      * @throws coreException core_error_13
      */
-    private function load($xml = 'tree')
+    private function _load($xml = 'tree')
     {
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
@@ -584,13 +603,14 @@ class tree_class
             starter_class::path('cfg') . $xml . '.xml',
             TRUE
         );
+
         if (!$bool) {
             throw new coreException(
                 'core_error_13 ',
                 $this->_treeStructure->err . ' ' . $xml
             );
         }
-        
+
         if (empty($this->_get)) {
             $this->_masterPageName = 'index';
         } else {
@@ -602,13 +622,12 @@ class tree_class
 
             $this->_masterPageName = $param;
         }
-        
+
         $this->_mainPage = $this->_treeStructure->documentElement;
         $this->_on();
         $this->_set(TRUE);
         $this->_mainPage = $this->_treeStructure->getId($this->_masterPageName);
         $this->_chk404();
-
         $this->_on();
         $this->_redirect();
         $this->_external();
