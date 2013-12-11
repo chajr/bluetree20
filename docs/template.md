@@ -274,6 +274,25 @@ $independent->generate('some_marker', 'some content');
 $data = $independent->render();
 ```
 
+### Usage translations and some other codes
+Because `display_class` remove all not replaced markers, we cannot use any features
+related to translation or core markers. But if we want to display rendered by
+`display_class` on some other module or core templates we can turn off cleaning
+markers in `display_class`, so all markers that was leaved will be replaced or
+cleaned by `display_class` lunched by `core`.  
+To use that feature just give special option to `display_class` instance:
+
+```php
+$independent = new display_class(array(
+    'independent' => TRUE,
+    'template'    => 'template/address/template.html',
+    'clean'       => FALSE
+));
+```
+
+All options are described in [module](/docs/module.md "Create and usage module")
+in All configuration for display_class section.
+
 Display data from session by special markers
 --------------
 Last way to render some content in template is use to this `SESSION`. We can put

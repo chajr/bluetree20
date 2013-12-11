@@ -288,6 +288,17 @@ public function run()
 }
 ```
 
+### All configuration for display_class
+1. **template** - path to template, required for core and independent usage
+2. **independent** - if used by core give FALSE, if want to be used independent set on TRUE
+3. **get** - get class instance, required for core
+4. **session** - session class instance, required for core
+5. **language** - language class instance, required for core
+6. **css** - list of loaded css files, required for core
+7. **js** - list of loaded js files, required for core
+8. **options** - framework options, required for core
+9. **clean** - turn off cleaning template from unused markers if set to FALSE, default TRUE
+
 ### Session data display
 Last way to render some content in template is use to this `SESSION`. We can put
 some data into session like that:

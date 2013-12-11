@@ -10,7 +10,7 @@
  * @subpackage  display
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.10.2
+ * @version     2.11.0
  */
 class display_class
 {
@@ -70,6 +70,10 @@ class display_class
     */
     protected $_contentMarkers = "#{;[\\w=\\-|&();\\/,]+;}#";
 
+    /**
+     * default class options
+     * @var array
+     */
     protected $_defaultOptions = array(
         'template'      => '',
         'independent'   => FALSE,
@@ -79,8 +83,9 @@ class display_class
         'css'           => NULL,
         'js'            => NULL,
         'options'       => array(),
+        'clean'         => TRUE
     );
-    
+
     /**
      * load templates and create layout to use in core, or individually
      * 
@@ -933,6 +938,10 @@ class display_class
      */
     protected function _clean()
     {
+        if ($this->_defaultOptions['clean'] === FALSE) {
+            return;
+        }
+
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'remove unused markers',
