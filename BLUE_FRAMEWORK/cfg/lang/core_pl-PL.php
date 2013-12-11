@@ -5,7 +5,7 @@
  * @subpackage  language
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.2.1
+ * @version     1.3.0
  */
 
 /**
@@ -70,4 +70,6 @@ $content = array(
     'example_inheritance'     => 'Dziedziczenie dla podstron',
     'example_exceptions'      => 'Wyjątki Frameworka',
     'test'                    => 'Test, sprawdza czy wszystkie elementy działają poprawnie',
+    'main_page'               => 'Strona główna',
+    'generate_content'        => 'Tworzenie treści',
 );

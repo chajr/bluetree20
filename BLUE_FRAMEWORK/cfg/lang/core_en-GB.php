@@ -5,7 +5,7 @@
  * @subpackage  language
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.2.0
+ * @version     1.3.0
 */
 
 /**
@@ -70,4 +70,6 @@ $content = array(
     'example_inheritance'     => 'Subpage inheritance',
     'example_exceptions'      => 'Framework exceptions',
     'test'                    => 'Test, check that framework features work',
+    'main_page'               => 'Main page',
+    'generate_content'        => 'Generate content',
 );
