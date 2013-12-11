@@ -7,7 +7,7 @@
  * @subpackage  tree
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.7.0
+ * @version     2.7.1
  */
 class tree_class
 {
@@ -220,6 +220,7 @@ class tree_class
     {
         $breadcrumbsLastIndex = count($this->breadcrumbs) -1;
         $this->breadcrumbs[$breadcrumbsLastIndex]['active'] = 'active';
+        unset($this->breadcrumbs[$breadcrumbsLastIndex]['path']);
     }
 
     /**
