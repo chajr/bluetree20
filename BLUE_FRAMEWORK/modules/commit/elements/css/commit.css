@@ -121,13 +121,13 @@ footer .btn-block b{
     width: 40px;
 }
 .info{
-    width: 75%;
+    width: 900px;
     margin: 20px auto 0;
     text-align: center;
     position: relative;
 }
 .info i{
-    font-size: 75px;
+    font-size: 40px;
     position: absolute;
     text-align: center;
     left: 20px;
