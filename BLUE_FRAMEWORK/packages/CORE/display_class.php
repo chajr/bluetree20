@@ -10,7 +10,7 @@
  * @subpackage  display
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.11.0
+ * @version     2.11.1
  */
 class display_class
 {
@@ -104,6 +104,12 @@ class display_class
 
         $this->_defaultOptions = array_merge($this->_defaultOptions, $options);
 
+        if ($this->_defaultOptions['options']) {
+            $this->_options = $this->_defaultOptions['options'];
+        } else {
+            $this->_options = core_class::options();
+        }
+
         if ($this->_defaultOptions['independent']) {
             $this->layout($this->_defaultOptions['template']);
         } else {
@@ -132,12 +138,6 @@ class display_class
         $this->_js      = $this->_defaultOptions['js'];
         $this->_get     = $this->_defaultOptions['get'];
         $this->_session = $this->_defaultOptions['session'];
-
-        if ($this->_defaultOptions['options']) {
-            $this->_options = $this->_defaultOptions['options'];
-        } else {
-            $this->_options = core_class::options();
-        }
 
         if ($this->_get) {
             $typ = $this->_get->pageType();
