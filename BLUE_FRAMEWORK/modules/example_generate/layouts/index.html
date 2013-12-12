@@ -8,7 +8,8 @@
             {;marker;}<br/>
         </div>
         <div class="panel-footer">
-            <pre><code>{&#59;marker&#59;} - $this->generate('marker', '{&#59;lang;content_to_replace&#59;}');</code></pre>
+            <pre><code>{&#59;marker&#59;}
+<hr/>$this->generate('marker', '{&#59;lang;content_to_replace&#59;}');</code></pre>
         </div>
     </div>
 
@@ -30,7 +31,7 @@
             </ul>
         </div>
         <div class="panel-footer">
-<pre><code>&lt;li&gt;
+            <pre><code>&lt;li&gt;
     {&#59;marker_1&#59;}
 &lt;/li&gt;
 &lt;li&gt;
@@ -39,8 +40,7 @@
 &lt;li&gt;
     {&#59;marker_3&#59;}
 &lt;/li&gt;
-
-$data = [
+<hr/>$data = [
     'marker_1' => '{&#59;lang;content_to_replace_1&#59;}',
     'marker_2' => '{&#59;lang;content_to_replace_2&#59;}',
     'marker_3' => '{&#59;lang;content_to_replace_3&#59;}',
@@ -49,31 +49,35 @@ $this->generate($data);</code></pre>
         </div>
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            {;lang;core_content;}
-        </div>
-        <div class="panel-body">
+    <!--<div class="panel panel-default">-->
+        <!--<div class="panel-heading">-->
+            <!--{;lang;core_content;}-->
+        <!--</div>-->
+        <!--<div class="panel-body">-->
 
-        </div>
-        <div class="panel-footer">
-            <code>
+        <!--</div>-->
+        <!--<div class="panel-footer">-->
+            <!--<code>-->
 
-            </code>
-        </div>
-    </div>
+            <!--</code>-->
+        <!--</div>-->
+    <!--</div>-->
 
     <div class="panel panel-default">
         <div class="panel-heading">
             {;lang;optionally_marker_replaced;}
         </div>
         <div class="panel-body">
-
+            {;lang;optional;}:
+            {;op;ooa;}
+            <span class="text-info">{;lang;optional_content;}{;marker_a;}</span>
+            {;op_end;ooa;}
         </div>
         <div class="panel-footer">
-            <code>
-
-            </code>
+            <pre><code>{&#59;op;ooa&#59;}
+&lt;span class="text-info"&gt;{&#59;lang;optional_content&#59;}{&#59;marker_a&#59;}&lt;/span&gt;
+{&#59;op_end;ooa&#59;}
+<hr/>$this->generate('marker_a', '');</code></pre>
         </div>
     </div>
 
@@ -82,12 +86,15 @@ $this->generate($data);</code></pre>
             {;lang;optionally_marker_none;}
         </div>
         <div class="panel-body">
-            
+            {;lang;optional;}:
+            {;op;oob;}
+            <span class="text-info">{;lang;optional_content;}{;marker_b;}</span>
+            {;op_end;oob;}
         </div>
         <div class="panel-footer">
-            <code>
-
-            </code>
+            <pre><code>{&#59;op;oob&#59;}
+&lt;span class="text-info"&gt;{&#59;lang;optional_content&#59;}{&#59;marker_b&#59;}&lt;/span&gt;
+{&#59;op_end;oob&#59;}</code></pre>
         </div>
     </div>
 
@@ -96,12 +103,35 @@ $this->generate($data);</code></pre>
             {;lang;loop_content;}
         </div>
         <div class="panel-body">
-            
+            {;start;loop1;}
+            <b>{;loop1;item1;}</b>
+            {;loop1;item2;}<br/>
+            {;loop1;item3;}<br/>
+            {;end;loop1;}
+            {;start_empty;loop1;}
+            <b>{;lang;empty_loop_message;}</b>
+            {;end_empty;loop1;}
         </div>
         <div class="panel-footer">
-            <code>
-
-            </code>
+            <pre><code>{&#59;start&#59;loop1&#59;}
+    &lt;b&gt;{&#59;loop1&#59;item1&#59;}&lt;/b&gt;
+    {&#59;loop1&#59;item2&#59;}&lt;br/&gt;
+    {&#59;loop1&#59;item3&#59;}&lt;br/&gt;
+{&#59;end&#59;loop1&#59;}
+{&#59;start_empty&#59;loop1&#59;}
+    &lt;b&gt;{&#59;lang&#59;empty_loop_message&#59;}&lt;/b&gt;
+{&#59;end_empty&#59;loop1&#59;}
+<hr/>$list = [
+    [
+        'item1' => '{;lang;val;}: a1',
+        'item2' => '{;lang;val;}: a2'
+    ],
+    [
+        'item1' => '{;lang;val;}: b1',
+        'item2' => '{;lang;val;}: b2'
+    ]
+];
+$this->loop('loop1', $list);</code></pre>
         </div>
     </div>
 
@@ -110,12 +140,26 @@ $this->generate($data);</code></pre>
             {;lang;loop_content_empty;}
         </div>
         <div class="panel-body">
-
+            {;start;loop2;}
+            <b>{;loop2;item1;}</b>
+            {;loop2;item2;}<br/>
+            {;loop2;item3;}<br/>
+            {;end;loop2;}
+            {;start_empty;loop2;}
+            <b class="text-danger">{;lang;empty_loop_message;}</b>
+            {;end_empty;loop2;}
         </div>
         <div class="panel-footer">
-            <code>
-
-            </code>
+            <pre><code>{&#59;start&#59;loop2&#59;}
+    &lt;b&gt;{&#59;loop2&#59;item1&#59;}&lt;/b&gt;
+    {&#59;loop2&#59;item2&#59;}&lt;br/&gt;
+    {&#59;loop2&#59;item3&#59;}&lt;br/&gt;
+{&#59;end&#59;loop2&#59;}
+{&#59;start_empty&#59;loop2&#59;}
+    &lt;b&gt;{&#59;lang&#59;empty_loop_message&#59;}&lt;/b&gt;
+{&#59;end_empty&#59;loop2&#59;}
+<hr/>$list = [];
+$this->loop('loop2', $list);</code></pre>
         </div>
     </div>
 
@@ -124,12 +168,81 @@ $this->generate($data);</code></pre>
             {;lang;loop_content_nested;}
         </div>
         <div class="panel-body">
-
+            {;start;nested_loop_group;}
+            {;nested_loop_group;name;} - <span class="text-info">{;nested_loop_group;id;}</span>
+            <br/>
+            {;lang;nested_values;}:
+            <br/><br/>
+            {;start;nested_loop_{;nested_loop_group;id;};}
+            {;lang;nested_value;}: <span class="text-info">{;nested_loop_{;nested_loop_group;id;};id;}</span>
+            <br/>
+            {;lang;nested_value;}: <span class="text-info">{;nested_loop_{;nested_loop_group;id;};name;}</span>
+            <br/>
+            {;lang;optional_nested;}:
+            {;op;nested_loop_{;nested_loop_group;id;};}
+            <span class="text-info">{;nested_loop_{;nested_loop_group;id;};optional;}</span>
+            {;op_end;nested_loop_{;nested_loop_group;id;};}
+            <br/>
+            {;end;nested_loop_{;nested_loop_group;id;};}
+            <hr/>
+            {;end;nested_loop_group;}
         </div>
         <div class="panel-footer">
-            <code>
+            <pre><code>{&#59;start&#59;nested_loop_group&#59;}
+    {&#59;nested_loop_group&#59;name&#59;} - &lt;span class="text-info"&gt;{&#59;nested_loop_group&#59;id&#59;}&lt;/span&gt;
+    &lt;br/&gt;
+    {&#59;lang&#59;nested_values&#59;}:
+    &lt;br/&gt;&lt;br/&gt;
+    {&#59;start&#59;nested_loop_{&#59;nested_loop_group&#59;id&#59;}&#59;}
+    {&#59;lang&#59;nested_value&#59;}: &lt;span class="text-info"&gt;{&#59;nested_loop_{&#59;nested_loop_group&#59;id&#59;}&#59;id&#59;}&lt;/span&gt;
+        &lt;br/&gt;
+        {&#59;lang&#59;nested_value&#59;}: &lt;span class="text-info"&gt;{&#59;nested_loop_{&#59;nested_loop_group&#59;id&#59;}&#59;name&#59;}&lt;/span&gt;
+        &lt;br/&gt;
+        {&#59;lang&#59;optional_nested&#59;}:
+        {&#59;op&#59;nested_loop_{&#59;nested_loop_group&#59;id&#59;}&#59;}
+            &lt;span class="text-info"&gt;{&#59;nested_loop_{&#59;nested_loop_group&#59;id&#59;}&#59;optional&#59;}&lt;/span&gt;
+        {&#59;op_end&#59;nested_loop_{&#59;nested_loop_group&#59;id&#59;}&#59;}
+        &lt;br/&gt;
+    {&#59;end&#59;nested_loop_{&#59;nested_loop_group&#59;id&#59;}&#59;}
+    &lt;hr/&gt;
+{&#59;end&#59;nested_loop_group&#59;}
+<hr/>$nestedLoopBase = [
+    [
+        'id'    => 1,
+        'name'  => '{;lang;val;} 1',
+    ],
+    [
+        'id'    => 2,
+        'name'  => '{;lang;val;} 2',
+    ],
+    [
+        'id'    => 3,
+        'name'  => '{;lang;val;} 3',
+    ],
+];
 
-            </code>
+$nestedLoopSecond = [
+    [
+        'id'    => 1,
+        'name'  => '{;lang;sec_val;} 1',
+    ],
+    [
+        'id'    => 2,
+        'name'  => '{;lang;sec_val;} 2',
+    ],
+    [
+        'id'        => 3,
+        'name'      => '{;lang;sec_val;} 3',
+        'optional'  => 'ok',
+    ],
+];
+
+$this->loop('nested_loop_group', $nestedLoopBase);
+
+foreach ($nestedLoopSecond as $catCategory) {
+    $loopName = 'nested_loop_' . $catCategory['id'];
+    $this->loop($loopName, $nestedLoopSecond);
+}</code></pre>
         </div>
     </div>
 
