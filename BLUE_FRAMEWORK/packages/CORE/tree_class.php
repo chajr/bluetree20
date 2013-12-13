@@ -7,7 +7,7 @@
  * @subpackage  tree
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.7.1
+ * @version     2.7.2
  */
 class tree_class
 {
@@ -370,6 +370,20 @@ class tree_class
     }
 
     /**
+     * add main page (index) to breadcrumbs list, to return Main Page
+     */
+    protected function _setBreadcrumbsMainPage()
+    {
+        $basePage = $this->_treeStructure->getId('index');
+        $list     = [
+            'id'        => 'index',
+            'name'      => $basePage->getAttribute('name'),
+            'path'      => '/',
+        ];
+        $this->breadcrumbs[] = $list;
+    }
+
+    /**
      * check that given page exists and if not must show page with error404 index
      * 
      * @throws coreException core_error_14
@@ -632,6 +646,7 @@ class tree_class
         $this->_on();
         $this->_redirect();
         $this->_external();
+        $this->_setBreadcrumbsMainPage();
         $this->_breadcrumbs();
         $this->_set();
         $this->_menu();
