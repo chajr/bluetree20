@@ -7,7 +7,7 @@
 * @package     BlueFramework Core
 * @author      Michał Adamiak    <chajr@bluetree.pl>
 * @copyright   chajr/bluetree
-* @version     1.4.0
+* @version     1.4.1
 */
 -->
 <!DOCTYPE root SYSTEM 'dtd/tree.dtd'>
@@ -19,6 +19,7 @@
     <css>elusive-webfont</css>
     <css>elusive-webfont-ie7</css>
     <css>base</css>
+    <js external="1">//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js</js>
     <js>js1</js>
     <js>bootstrap</js>
 

@@ -7,12 +7,12 @@
  * @subpackage  modul1
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.6.0
+ * @version     1.6.1
  */
 class modul1 
     extends module_class
 {
-    static $version             = '1.6.0';
+    static $version             = '1.6.1';
     static $name                = 'module number 1';
     public $requireLibraries    = array();
     public $requireModules      = array();
@@ -46,11 +46,11 @@ class modul1
         $this->generate('lib', $valid->ret());
 
         //add css and js
-        $this->set(
-            'https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js',
-            'js',
-            'external'
-        );
+//        $this->set(
+//            'https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js',
+//            'js',
+//            'external'
+//        );
         $this->set('script', 'js');
         $this->set('base', 'css', 'internal', 'print');
         $this->set('base2', 'css');
