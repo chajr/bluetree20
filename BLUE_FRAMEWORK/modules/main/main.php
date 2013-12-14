@@ -8,12 +8,12 @@
  * @subpackage  main
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.1.0
+ * @version     1.2.0
  */
 class main
     extends module_class
 {
-    static $version             = '1.1.0';
+    static $version             = '1.2.0';
     static $name                = 'Main Module';
     public $requireLibraries    = array();
     public $requireModules      = array();
@@ -33,13 +33,19 @@ class main
                 break;
 
             case'breadcrumbs':
+                benchmark_class::turnOffBenchmark();
+                tracer_class::turnOffTracer();
+
                 $data = [
                     'independent' => TRUE,
                     'clean'       => FALSE,
                     'template'    => 'elements/layouts/examples/breadcrumbs.html',
                 ];
-                $breadcrumbs = new display_class($data);
-                $breadcrumbs->loop('breadcrumbs', $this->breadcrumbs());
+                $breadcrumbs                = new display_class($data);
+                $breadcrumbsData            = $this->breadcrumbs();
+                $breadcrumbsData[0]['name'] = '<i class="icon-home-alt"></i>';
+
+                $breadcrumbs->loop('breadcrumbs', $breadcrumbsData);
                 $this->generate('breadcrumbs', $breadcrumbs->render(), TRUE);
                 break;
         }

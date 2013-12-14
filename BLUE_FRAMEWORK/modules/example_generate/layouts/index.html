@@ -1,8 +1,8 @@
 <section id="example_generate">
     <h2>{;lang;title;}</h2>
     <div class="panel panel-default">
-        <div class="panel-heading">
-            {;lang;simple_generate;}
+        <div class="panel-heading"  id="simple_generate">
+            {;lang;core;simple_generate;}
         </div>
         <div class="panel-body">
             {;marker;}<br/>
@@ -14,8 +14,8 @@
     </div>
 
     <div class="panel panel-default">
-        <div class="panel-heading">
-            {;lang;content_array;}
+        <div class="panel-heading"  id="content_array">
+            {;lang;core;content_array;}
         </div>
         <div class="panel-body">
             <ul>
@@ -50,7 +50,7 @@ $this->generate($data);</code></pre>
     </div>
 
     <!--<div class="panel panel-default">-->
-        <!--<div class="panel-heading">-->
+        <!--<div class="panel-heading"  id="simple_generate">-->
             <!--{;lang;core_content;}-->
         <!--</div>-->
         <!--<div class="panel-body">-->
@@ -64,8 +64,8 @@ $this->generate($data);</code></pre>
     <!--</div>-->
 
     <div class="panel panel-default">
-        <div class="panel-heading">
-            {;lang;optionally_marker_replaced;}
+        <div class="panel-heading"  id="optionally_marker_replaced">
+            {;lang;core;optionally_marker_replaced;}
         </div>
         <div class="panel-body">
             {;lang;optional;}:
@@ -82,8 +82,8 @@ $this->generate($data);</code></pre>
     </div>
 
     <div class="panel panel-default">
-        <div class="panel-heading">
-            {;lang;optionally_marker_none;}
+        <div class="panel-heading"  id="optionally_marker_none">
+            {;lang;core;optionally_marker_none;}
         </div>
         <div class="panel-body">
             {;lang;optional;}:
@@ -99,8 +99,8 @@ $this->generate($data);</code></pre>
     </div>
 
     <div class="panel panel-default">
-        <div class="panel-heading">
-            {;lang;loop_content;}
+        <div class="panel-heading"  id="loop_content">
+            {;lang;core;loop_content;}
         </div>
         <div class="panel-body">
             {;start;loop1;}
@@ -136,8 +136,8 @@ $this->loop('loop1', $list);</code></pre>
     </div>
 
     <div class="panel panel-default">
-        <div class="panel-heading">
-            {;lang;loop_content_empty;}
+        <div class="panel-heading"  id="loop_content_empty">
+            {;lang;core;loop_content_empty;}
         </div>
         <div class="panel-body">
             {;start;loop2;}
@@ -164,8 +164,64 @@ $this->loop('loop2', $list);</code></pre>
     </div>
 
     <div class="panel panel-default">
-        <div class="panel-heading">
-            {;lang;loop_content_nested;}
+        <div class="panel-heading"  id="loop_content_optional">
+            {;lang;core;loop_content_optional;}
+        </div>
+        <div class="panel-body">
+            {;start;loop3;}
+                <b class="text-info">
+                    {;loop3;aaa;}
+                </b>
+                <br/>
+                {;loop3;bbb;} - {;lang;data_expected;}: {;op;op1;}{;lang;optional;} {;loop3;op1;}{;op_end;op1;}
+                <br/>
+                {;lang;data_expected;}: {;op;op2;}{;lang;optional;} 2 {;loop3;op2;}{;op_end;op2;}
+                <hr/>
+            {;end;loop3;}
+        </div>
+        <div class="panel-footer">
+            <pre><code>{&#59;start&#59;loop3&#59;}
+    &lt;b class="text-info"&gt;
+        {&#59;loop3&#59;aaa&#59;}
+    &lt;/b&gt;
+    &lt;br/&gt;
+    {&#59;loop3&#59;bbb&#59;} - {&#59;lang&#59;data_expected&#59;}: {&#59;op&#59;op1&#59;}{&#59;lang&#59;optional&#59;} {&#59;loop3&#59;op1&#59;}{&#59;op_end&#59;op1&#59;}
+    &lt;br/&gt;
+    {&#59;lang&#59;data_expected&#59;}: {&#59;op&#59;op2&#59;}{&#59;lang&#59;optional&#59;} 2 {&#59;loop3&#59;op2&#59;}{&#59;op_end&#59;op2&#59;}
+    &lt;hr/&gt;
+{&#59;end&#59;loop3&#59;}
+<hr/>$arr = [
+    [
+        'aaa' => '{;lang;val;} aaa 1',
+        'bbb' => '{;lang;val;} bbb 2',
+        'op1' => 'op1'
+    ],
+    [
+        'aaa' => '{;lang;val;} ccc 1',
+        'bbb' => '{;lang;val;} ddd 2',
+        'op2' => 'op2'
+    ]
+];
+$this->loop('loop3', $arr);</code></pre>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading"  id="loop_content_missing_element">
+            {;lang;core;loop_content_missing_element;}
+        </div>
+        <div class="panel-body">
+        </div>
+        <div class="panel-footer">
+            <code>
+
+            </code>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading"  id="loop_content_nested">
+            {;lang;core;loop_content_nested;}
         </div>
         <div class="panel-body">
             {;start;nested_loop_group;}
@@ -247,22 +303,8 @@ foreach ($nestedLoopSecond as $catCategory) {
     </div>
 
     <div class="panel panel-default">
-        <div class="panel-heading">
-            {;lang;loop_content_optional;}
-        </div>
-        <div class="panel-body">
-
-        </div>
-        <div class="panel-footer">
-            <code>
-
-            </code>
-        </div>
-    </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            {;lang;session_content;}
+        <div class="panel-heading"  id="session_content">
+            {;lang;core;session_content;}
         </div>
         <div class="panel-body">
 

@@ -7,7 +7,7 @@
 * @package     BlueFramework Core
 * @author      Michał Adamiak    <chajr@bluetree.pl>
 * @copyright   chajr/bluetree
-* @version     1.4.1
+* @version     1.4.2
 */
 -->
 <!DOCTYPE root SYSTEM 'dtd/tree.dtd'>
@@ -32,9 +32,11 @@
         <mod on="1" param="jakis::inny">modul1</mod>
         <mod on="1" block="blok_testowy">mod2</mod>
         <mod on="1" block="blok_testowy">mod3</mod>
+        <mod on="1" param="breadcrumbs">main</mod>
         <css external="0">css2</css>
         <css external="0">css3</css>
         <css external="0" media="print">as</css>
+        <css>styles</css>
         <js>js2</js>
     </page>
 

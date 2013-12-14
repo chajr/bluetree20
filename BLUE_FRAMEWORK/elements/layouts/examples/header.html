@@ -5,7 +5,105 @@
 {;core;css;}
         <meta charset="utf-8">
     </head>
-    <body>
+    <body data-spy="scroll" data-target=".left_menu">
         <header>
-            
+            <div class="width-960">
+                <div class="glow"></div>
+            </div>
+            <section>
+                <div class="width-960">
+                    <h1>
+                        <a href="{;core;domain;}{;core;lang;}"><img alt="BlueTree" src="{;core;domain;}elementy/examples/bluetree.png"/></a>
+                        <br/>
+                        bluetree
+                    </h1>
+                    <nav>
+                        <ul class="nav nav-pills">
+                            <li>
+                                <a href="/"><i class="icon-home-alt"></i></a>
+                            </li>
+                            <li>
+                                <a href="">{;lang;header_services;}</a>
+                            </li>
+                            <li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    Framework <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="">{;lang;framework_requirements;}</a>
+                                    </li>
+                                    <li>
+                                        <a href="">{;lang;framework_installation;}</a>
+                                    </li>
+                                    <li>
+                                        <a href="{;full;examples;}">{;lang;framework_examples;}</a>
+                                    </li>
+                                    <li>
+                                        <a href="">{;lang;framework_documentation;}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="">{;lang;header_design;}</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    {;lang;header_libraries;} <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="http://zmp.nazwa.pl/form/">Form</a>
+                                    </li>
+                                    <li>
+                                        <a href="">Valid</a>
+                                    </li>
+                                    <li>
+                                        <a href="">Data</a>
+                                    </li>
+                                    <li>
+                                        <a href="">Database</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="current">
+                        <img alt="Blue Framework 2.0" src="{;core;domain;}elementy/examples/bluetree_framework.png"/>
+                    </div>
+                </div>
+            </section>
+            <div class="line_top"></div>
+            <aside>
+                <div class="width-960">
+                    {;breadcrumbs;}
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary">
+                            <i class="icon-lock-alt"></i> {;lang;header_login;}
+                        </button>
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                            <span class="sr-only">Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu login" role="menu">
+                            <form role="form">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="icon-user"></i></span>
+                                    <input type="text" class="form-control" placeholder="login"/>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="icon-key"></i></span>
+                                    <input type="text" class="form-control" placeholder="password"/>
+                                </div>
+                                <button type="button" class="btn btn-default">{;lang;header_login_btn;}</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <div class="line_bottom"></div>
+            <div id="fork">
+                
+            </div>
         </header>
+        <div class="main_glow"></div>

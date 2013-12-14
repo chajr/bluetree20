@@ -29,6 +29,7 @@ class example_generate
         $this->_optionalMarker();
         $this->_loopMarker();
         $this->_loopMarkerEmpty();
+        $this->_loopOptionalMarker();
         $this->_nestedLoopMarker();
     }
 
@@ -86,6 +87,26 @@ class example_generate
     {
         $list = [];
         $this->loop('loop2', $list);
+    }
+
+    /**
+     * loop example with optional content
+     */
+    protected function _loopOptionalMarker()
+    {
+        $arr = [
+            [
+                'aaa' => '{;lang;val;} aaa 1',
+                'bbb' => '{;lang;val;} bbb 2',
+                'op1' => 'op1'
+            ],
+            [
+                'aaa' => '{;lang;val;} ccc 1',
+                'bbb' => '{;lang;val;} ddd 2',
+                'op2' => 'op2'
+            ]
+        ];
+        $this->loop('loop3', $arr);
     }
 
     /**
