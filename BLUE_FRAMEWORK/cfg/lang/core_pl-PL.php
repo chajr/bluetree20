@@ -93,4 +93,8 @@ $content = array(
     'header_libraries'              => 'Biblioteki PHP',
     'header_login'                  => 'Logowanie',
     'header_login_btn'              => 'Zaloguj',
+    'current_language'              => 'Polski',
+    'english'                       => 'Angielski',
+    'polish'                        => 'Polski',
+    'language_image'                => 'Poland.png',
 );

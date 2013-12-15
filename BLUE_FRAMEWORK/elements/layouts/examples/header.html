@@ -77,27 +77,32 @@
             <aside>
                 <div class="width-960">
                     {;breadcrumbs;}
-                    <div class="btn-group">
+                    <div class="btn-group" style="margin-right: 5px">
                         <button type="button" class="btn btn-primary">
-                            <i class="icon-lock-alt"></i> {;lang;header_login;}
+                            <img alt="Polski" 
+                                 src="{;core;domain;}elementy/examples/{;lang;language_image;}" 
+                                 style="height: 12px"
+                            />
+                            {;lang;current_language;}
                         </button>
                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                             <span class="caret"></span>
                             <span class="sr-only">Dropdown</span>
                         </button>
-                        <div class="dropdown-menu login" role="menu">
-                            <form role="form">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="icon-user"></i></span>
-                                    <input type="text" class="form-control" placeholder="login"/>
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="icon-key"></i></span>
-                                    <input type="text" class="form-control" placeholder="password"/>
-                                </div>
-                                <button type="button" class="btn btn-default">{;lang;header_login_btn;}</button>
-                            </form>
-                        </div>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="{;core;domain;}pl-PL/{;current_page_url;}">
+                                    <img alt="Polski" src="{;core;domain;}elementy/examples/Poland.png"/>
+                                    {;lang;polish;}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{;core;domain;}en-GB/{;current_page_url;}">
+                                    <img alt="Polski" src="{;core;domain;}elementy/examples/United-Kingdom.png"/>
+                                    {;lang;english;}
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </aside>
@@ -105,5 +110,11 @@
             <div id="fork">
                 
             </div>
+            <a href="https://github.com/chajr/bluetree20">
+                <img style="position: absolute; top: 0; right: 0; border: 0;"
+                     src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"
+                     alt="Fork me on GitHub"
+                />
+            </a>
         </header>
         <div class="main_glow"></div>
