@@ -5,12 +5,12 @@
  * @subpackage  example_generate
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     0.3.0
+ * @version     0.4.0
  */
 class example_generate
     extends module_class
 {
-    static $version             = '0.3.0';
+    static $version             = '0.4.0';
     static $name                = 'content generate module example';
     public $requireLibraries    = array();
     public $requireModules      = array();
@@ -20,9 +20,7 @@ class example_generate
      */
     public function run()
     {
-        $this->layout('index');
-        $this->_translate();
-        $this->set('css', 'css');
+        $this->_prepareLayout();
 
         $this->_simpleMarker();
         $this->_arrayMarker();
@@ -31,6 +29,18 @@ class example_generate
         $this->_loopMarkerEmpty();
         $this->_loopOptionalMarker();
         $this->_nestedLoopMarker();
+        $this->_loopWithMissingElements();
+        $this->_sessionData();
+    }
+
+    /**
+     * load layout template and styles, run translations
+     */
+    protected function _prepareLayout()
+    {
+        $this->layout('index');
+        $this->_translate();
+        $this->set('css', 'css');
     }
 
     /**
@@ -151,6 +161,43 @@ class example_generate
             $loopName = 'nested_loop_' . $catCategory['id'];
             $this->loop($loopName, $nestedLoopSecond);
         }
+    }
+
+    /**
+     * show loop with some missing elements in template
+     */
+    protected function _loopWithMissingElements()
+    {
+        $list = [
+            [
+                'item1' => '{;lang;val;}: a1',
+                'item2' => '{;lang;val;}: a2'
+            ],
+            [
+                'item1' => '{;lang;val;}: b1',
+                'item2' => '{;lang;val;}: b2'
+            ]
+        ];
+
+        $this->loop('loop4', $list);
+    }
+
+    /**
+     * how data directly from session
+     */
+    protected function _sessionData()
+    {
+        if ($this->session->value) {
+            $this->session->value += 1;
+        } else {
+            $this->session->value = 1;
+        }
+
+        $this->setSession(
+            'session_display_test',
+            $this->session->value,
+            'display'
+        );
     }
 
     public function runErrorMode(){}
