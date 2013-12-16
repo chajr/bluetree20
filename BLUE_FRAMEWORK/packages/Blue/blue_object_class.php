@@ -9,11 +9,7 @@
  * @subpackage  Object
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     0.3.0
- * 
- * @todo finish implementation of initialize xml data
- * @todo store only keys, set origin data only if changed (to avoid to big usage of memory)
- * 
+ * @version     1.0.0
  */
 class blue_object_class
 {
@@ -54,6 +50,12 @@ class blue_object_class
     protected $_originalDATA = [];
 
     /**
+     * store all new added data keys, to remove them when in eg. restore original data
+     * @var array
+     */
+    protected $_newKeys = [];
+
+    /**
      * @var array
      */
     protected static $_cacheKeys = [];
@@ -66,7 +68,7 @@ class blue_object_class
     /**
      * create new Blue Object, optionally with some data
      * there are some types we can give to convert data to Blue Object
-     * like: json, xml, default is array
+     * like: json, xml, serialized, default is array
      *
      * @param mixed $data
      * @param string|null $type
@@ -86,6 +88,10 @@ class blue_object_class
 
             case 'xml':
                 $this->_appendXml($data);
+                break;
+
+            case 'serialized':
+                $this->_appendSerialized($data);
                 break;
 
             default:
@@ -347,12 +353,15 @@ class blue_object_class
     {
         $this->_prepareData();
 
+        $mergedData = array_merge($this->_DATA, $this->_originalDATA);
+        $data       = $this->_removeNewKeys($mergedData);
+
         if (!$key) {
-            return $this->_originalDATA;
+            return $data;
         }
 
-        if (isset($this->_originalDATA[$key])) {
-            return $this->_originalDATA[$key];
+        if (isset($data[$key])) {
+            return $data[$key];
         }
 
         return NULL;
@@ -392,7 +401,10 @@ class blue_object_class
     {
         if (is_array($key)) {
             if ($origin) {
-                if ($dataToCheck === $this->_originalDATA) {
+                $mergedData = array_merge($this->_DATA, $this->_originalDATA);
+                $data       = $this->_removeNewKeys($mergedData);
+
+                if ($dataToCheck === $data) {
                     return TRUE;
                 }
             } else {
@@ -402,8 +414,11 @@ class blue_object_class
             }
         } else {
             if ($origin) {
-                if (isset($this->_originalDATA[$key])) {
-                    if ($dataToCheck === $this->_originalDATA[$key]) {
+                $mergedData = array_merge($this->_DATA, $this->_originalDATA);
+                $data       = $this->_removeNewKeys($mergedData);
+
+                if (isset($data[$key])) {
+                    if ($dataToCheck === $data[$key]) {
                         return TRUE;
                     }
                 } else if ($dataToCheck === NULL) {
@@ -434,10 +449,17 @@ class blue_object_class
     {
         if ($key === NULL) {
             $this->_dataChanged  = TRUE;
+            $mergedData          = array_merge($this->_DATA, $this->_originalDATA);
+            $this->_originalDATA = $this->_removeNewKeys($mergedData);
             $this->_DATA         = [];
 
         } elseif (isset($this->_DATA[$key])) {
             $this->_dataChanged = TRUE;
+
+            if (!isset($this->_originalDATA[$key]) && !isset($this->_newKeys[$key])) {
+                $this->_originalDATA[$key] = $this->_DATA[$key];
+            }
+
             unset ($this->_DATA[$key]);
         }
 
@@ -458,6 +480,7 @@ class blue_object_class
 
     /**
      * replace changed data by original data
+     * set data changed to false only if restore whole data
      *
      * @param string $key
      * @return blue_object_class
@@ -465,8 +488,9 @@ class blue_object_class
     public function restoreData($key)
     {
         if ($key === NULL) {
-            $mergedData     = array_merge($this->_DATA, $this->_originalDATA);
-            $this->_DATA    = $mergedData;
+            $mergedData         = array_merge($this->_DATA, $this->_originalDATA);
+            $this->_DATA        = $this->_removeNewKeys($mergedData);
+            $this->_dataChanged = FALSE;
         } else {
             if (isset($this->_originalDATA[$key])) {
                 $this->_DATA[$key] = $this->_originalDATA[$key];
@@ -478,13 +502,14 @@ class blue_object_class
 
     /**
      * this method set current DATA as original data
-     * replace original data by DATA
+     * replace original data by DATA and set data changed to false
      * 
      * @return blue_object_class
      */
     public function replaceDataArrays()
     {
         $this->_originalDATA = $this->_DATA;
+        $this->_dataChanged  = FALSE;
         return $this;
     }
 
@@ -615,6 +640,38 @@ class blue_object_class
     }
 
     /**
+     * allow to join two blue objects into one
+     * 
+     * @param blue_object_class $object
+     * @return blue_object_class
+     */
+    public function mergeBlueObject(blue_object_class $object)
+    {
+        $newData = $object->getData();
+
+        foreach ($newData as $key => $value) {
+            $this->setData($key, $value);
+        }
+
+        $this->_dataChanged = TRUE;
+        return $this;
+    }
+
+    /**
+     * remove all new keys from given data
+     * 
+     * @param array $data
+     * @return array
+     */
+    protected function _removeNewKeys(array $data)
+    {
+        foreach ($this->_newKeys as $key) {
+            unset($data[$key]);
+        }
+        return $data;
+    }
+
+    /**
      * apply given json data as object data
      * 
      * @param string $data
@@ -625,13 +682,18 @@ class blue_object_class
         $jsonData = json_decode($data, TRUE);
 
         if ($jsonData) {
-            $this->_DATA            = $data;
-            $this->_originalDATA    = $data;
+            $this->_DATA = $jsonData;
         }
 
         return $this;
     }
 
+    /**
+     * apply given xml data as object data
+     * 
+     * @param $data string
+     * @return blue_object_class
+     */
     protected function _appendXml($data)
     {
         $xml                        = new xml_class();
@@ -643,72 +705,75 @@ class blue_object_class
             return;
         }
 
-        foreach ($xml->documentElement->childNodes as $nod) {
+        try{
+            $temp                  = $this->_xmlToArray($xml->documentElement);
+            $this->_DATA           = $temp;
+        } catch (DOMException $exception) {
+            $this->_errorsList[$exception->getCode()] = [
+                'message'   => $exception->getMessage(),
+                'line'      => $exception->getLine(),
+                'file'      => $exception->getFile(),
+                'trace'     => $exception->getTraceAsString(),
+            ];
+            $this->_hasErrors = TRUE;
+        }
+
+        return $this;
+    }
+
+    /**
+     * recurrent function to travel on xml nodes and set their data as object data
+     * 
+     * @param DOMElement $data
+     * @return array
+     */
+    protected function _xmlToArray(DOMElement $data)
+    {
+        $temporaryData = [];
+
+        /** @var $node DOMElement */
+        foreach ($data->childNodes as $node) {
+            $nodeName = $this->_stringToIntegerKey($node->nodeName);
             $nodeData = [];
 
-            if ($nod->getAttribute('serialized_object')) {
-                $this->_putInitData($nod->nodeName, unserialize($nod->nodeValue));
+            if ($node->hasAttributes() && $node->getAttribute('serialized_object')) {
+                $temporaryData[$nodeName] = unserialize($node->nodeValue);
                 continue;
             }
 
-            if ($nod->hasAttributes()) {
-                foreach ($nod->attributes as $key => $value) {
+            if ($node->hasAttributes()) {
+                foreach ($node->attributes as $key => $value) {
                     $nodeData['@attributes'][$key] = $value->nodeValue;
                 }
             }
 
-            if ($nod->hasChildNodes()) {
-                foreach ($nod->childNodes as $childNode) {
-                    echo '<pre>';
-            var_dump($childNode->nodeValue);
-            var_dump($childNode->nodeType);
-            echo '</pre>';
-                    
-                    //nie tworzy danych przy attrybutach dla tablicy
+            if ($node->hasChildNodes()) {
+                $childNodesData = [];
 
-                    if ($childNode->nodeType === 3 || $childNode->nodeType === 4) {
-                        if (empty($nodeData)) {
-                            $nodeData = $nod->nodeValue;
-                        } else {
-                            $nodeData[] = $nod->nodeValue;
-                        }
-                    } elseif ($childNode->nodeType === 1) {
-                        //przetwarzanie
+                /** @var $childNode DOMElement */
+                foreach ($node->childNodes as $childNode) {
+                    if ($childNode->nodeType === 1) {
+                        $childNodesData = $this->_xmlToArray($node);
                     }
                 }
+
+                if (!empty($childNodesData)) {
+                    $temporaryData[$nodeName] = $childNodesData;
+                    continue;
+                }
             }
-//            echo '<pre>';
-//            var_dump($nod->hasChildNodes());
-//            var_dump($nod->nodeValue);
-//            var_dump($nod->nodeType);
-//            echo '</pre>';
-//            
-//            if ($nod->nodeType) {
-//                
-//            } else {
-//                $nodeData = $nod->nodeValue;
-//            }
-            $this->_putInitData($nod->nodeName, $nodeData);
+
+            if (!empty($nodeData)) {
+                $temporaryData[$nodeName] = array_merge(
+                    [$node->nodeValue],
+                    $nodeData
+                );
+            } else {
+                $temporaryData[$nodeName] = $node->nodeValue;
+            }
         }
 
-        
-        //tylko plaskie xmle bez atrybutow??
-        //jesli ma atrybutu tworzy array z nimi
-        
-        //zrobic to tak aby mozna bylo obslugiwac w append i save drzewo z tree.xml
-    }
-
-    /**
-     * set given data to DATA with convert string to integer key
-     * 
-     * @param string $key
-     * @param mixed $data
-     */
-    protected function _putInitData($key, $data)
-    {
-        $key                            = $this->_stringToIntegerKey($key);
-        $this->_DATA[$key]              = $data;
-        $this->_originalDATA[$key]      = $data;
+        return $temporaryData;
     }
 
     /**
@@ -720,11 +785,28 @@ class blue_object_class
     protected function _appendArray($data)
     {
         if (is_array($data)) {
-            $this->_DATA            = $data;
-            $this->_originalDATA    = $data;
+            $this->_DATA = $data;
         } else {
-            $this->_DATA['default']         = $data;
-            $this->_originalDATA['default'] = $data;
+            $this->_DATA['default'] = $data;
+        }
+
+        return $this;
+    }
+
+    /**
+     * set data from serialized string as object data
+     * if data is an object set one variable where key is an object class name
+     * 
+     * @param mixed $data
+     * @return blue_object_class
+     */
+    protected function _appendSerialized($data)
+    {
+        $data = unserialize($data);
+        if (is_object($data)) {
+            $this->_DATA[get_class($data)] = $data;
+        } else {
+            $this->_DATA = unserialize($data);
         }
 
         return $this;
@@ -741,8 +823,17 @@ class blue_object_class
      */
     protected function _putData($key, $data)
     {
+        if (!isset($this->_originalDATA[$key]) 
+            && isset($this->_DATA[$key]) 
+            && !isset($this->_newKeys[$key])
+        ) {
+            $this->_originalDATA[$key] = $this->_DATA[$key];
+        } else {
+            $this->_newKeys[$key] = $key;
+        }
+
         $this->_dataChanged = TRUE;
-        $this->_DATA[$key] = $data;
+        $this->_DATA[$key]  = $data;
 
         return $this;
     }
@@ -761,8 +852,8 @@ class blue_object_class
         }
 
         $convertedKey = strtolower(
-            preg_replace('/(.)([A-Z0-9])/', "$1_$2", $key
-        ));
+            preg_replace('/(.)([A-Z0-9])/', "$1_$2", $key)
+        );
         self::$_cacheKeys[$key] = $convertedKey;
         return $convertedKey;
     }
@@ -900,7 +991,7 @@ class blue_object_class
      */
     protected function _stringToIntegerKey($key)
     {
-        return str_replace($this->_integerKeyPrefix, '', $key);
+        return str_replace($this->_integerKeyPrefix . '_', '', $key);
     }
 
     /**
