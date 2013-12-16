@@ -135,16 +135,16 @@ unthrow configuration option is set to `FALSE`.
 ### Static methods list
 Access to some other core libraries useful methods:
 
-1. **starter_class::path** - return framework main path (to use files included in BLUE_FRAMEWORK)
-2. **starter_class::load** - load file or file content (can read some file variable) _(path to file inside of BLUE_Framework, read or not file content, loading type)_
-3. **core_class::options** - return all or single framework options _(option name)_
-4. **error_class::log** - create log file _(file prefix, data to save, log time, path to save log file)_
-5. **error_class::other** - return some information like _ip, browser, url and date_ as array
-6. **files::exists** - check that file exists, give full path to file
-7. **globals_class::destroy** - destroy all data stored in global arrays (like `$_GET`, `$_POST` etc.)
-8. **get::realPath** - return repair path for elements
-9. **option_class::load** - load options for given module and save it in array, as second parameter we can force reload all options
-10. **option_class::show** - return value of single option
+1. **starter_class::path()** - return framework main path (to use files included in BLUE_FRAMEWORK)
+2. **starter_class::load()** - load file or file content (can read some file variable) _(path to file inside of BLUE_Framework, read or not file content, loading type)_
+3. **core_class::options()** - return all or single framework options _(option name)_
+4. **error_class::log()** - create log file _(file prefix, data to save, log time, path to save log file)_
+5. **error_class::other()** - return some information like _ip, browser, url and date_ as array
+6. **files::exists()** - check that file exists, give full path to file
+7. **globals_class::destroy()** - destroy all data stored in global arrays (like `$_GET`, `$_POST` etc.)
+8. **get::realPath()** - return repair path for elements
+9. **option_class::load()** - load options for given module and save it in array, as second parameter we can force reload all options
+10. **option_class::show()** - return value of single option
 
 Incoming data
 --------------
@@ -287,6 +287,17 @@ public function run()
     $this->generate('second_template', $secondTemplate->render());
 }
 ```
+
+### All configuration for display_class
+1. **template** - path to template, required for core and independent usage
+2. **independent** - if used by core give FALSE, if want to be used independent set on TRUE
+3. **get** - get class instance, required for core
+4. **session** - session class instance, required for core
+5. **language** - language class instance, required for core
+6. **css** - list of loaded css files, required for core
+7. **js** - list of loaded js files, required for core
+8. **options** - framework options, required for core
+9. **clean** - turn off cleaning template from unused markers if set to FALSE, default TRUE
 
 ### Session data display
 Last way to render some content in template is use to this `SESSION`. We can put

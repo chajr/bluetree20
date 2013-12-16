@@ -1,11 +1,11 @@
 <?php
 /**
-* @category    BlueFramework
+ * @category    BlueFramework
  * @package     BlueFramework Core
  * @subpackage  language
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.2.0
+ * @version     1.3.0
  */
 
 /**
@@ -55,10 +55,10 @@ $content = array(
     'string_to_translate'           => 'tekst z corowego pliku tułmaczeń',
 
     'example_description'     => 'Ta strona posiada linki do stron z pogrupowanymi przykładami użytkowania frameworka',
-    'example_title'           => 'Przykłady użytkowania Blue Frameworka',
+    'example_title'           => 'Przykłady Blue Frameworka',
     'example_generate'        => 'Tworzenie treści w templatkach',
     'example_translate'       => 'Używanie tułmaczeń',
-    'example_layout'          => 'UUżywanie templatek (w tym tworzenie instancji display_class wewnątrz modułu)',
+    'example_layout'          => 'Używanie templatek (w tym tworzenie instancji display_class wewnątrz modułu)',
     'example_sys_marks'       => 'Znaczniki Core',
     'example_blocks'          => 'Używanie bloków',
     'example_messages'        => 'Wiadomości o błędach, ostrzeżeniach, informacjach i powodzeniach',
@@ -70,4 +70,31 @@ $content = array(
     'example_inheritance'     => 'Dziedziczenie dla podstron',
     'example_exceptions'      => 'Wyjątki Frameworka',
     'test'                    => 'Test, sprawdza czy wszystkie elementy działają poprawnie',
+    'main_page'               => 'Strona główna',
+    'generate_content'        => 'Tworzenie treści',
+
+    'simple_generate'                   => 'Zastępowanie zwykłego znacznika',
+    'optionally_marker_replaced'        => 'Opcjonalny znacznik - pokazany',
+    'optionally_marker_none'            => 'Opcjonalny znacznik - usunięty',
+    'loop_content'                      => 'Generowanie treści w pętli',
+    'loop_content_empty'                => 'Generowanie treści w petli przy braku danych',
+    'loop_content_missing_element'      => 'Generowanie treści w pętli z brakującymi elementami',
+    'loop_content_nested'               => 'Generowanie treści dla zagnieżdżonych pętli',
+    'loop_content_optional'             => 'Generowanie treści w pętli z opcjonalnymi znacznikami',
+    'session_content'                   => 'Generowanie treści zapisanej w sesji',
+    'content_array'                     => 'Generowanie treści z tablicy',
+
+    'header_services'               => 'Serwisy',
+    'framework_requirements'        => 'Wymagania',
+    'framework_installation'        => 'Instalacja',
+    'framework_examples'            => 'Przykłądy',
+    'framework_documentation'       => 'Dokumentacja',
+    'header_design'                 => 'Design',
+    'header_libraries'              => 'Biblioteki PHP',
+    'header_login'                  => 'Logowanie',
+    'header_login_btn'              => 'Zaloguj',
+    'current_language'              => 'Polski',
+    'english'                       => 'Angielski',
+    'polish'                        => 'Polski',
+    'language_image'                => 'Poland.png',
 );

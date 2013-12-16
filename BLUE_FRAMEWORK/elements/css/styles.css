@@ -1,4 +1,115 @@
 body{
-    background: transparent;
     color:#ccc;
+    background-image: url({;core;domain;}elementy/examples/main_background.png);
+    padding: 0px;
+}
+header{
+    width: 100%;
+    height: 130px;
+}
+header h1{
+    margin: 1px 0 0 0;
+    float: left;
+    font-size: 14px;
+    color: #0068aa;
+}
+header h1 img{
+    margin-bottom: 5px;
+}
+header nav{
+    margin-top: 28px;
+    float: right;
+}
+header nav .nav i{
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+    font-size: 20px;
+}
+header .current{
+    width: 76px;
+    height: 76px;
+    margin: 1px auto;
+}
+header section{
+    height: 78px;
+    width: 100%;
+    background-color: #131516;
+}
+.line_top{
+    width: 100%;
+    height: 2px;
+    background-image: url({;core;domain;}elementy/examples/top_line.png);
+}
+.line_bottom{
+    width: 100%;
+    height: 2px;
+    background-image: url({;core;domain;}elementy/examples/bottom_line.png);
+}
+header aside{
+    width: 100%;
+    height: 48px;
+    background-image: url({;core;domain;}elementy/examples/second_menu_background.png);
+}
+header aside .breadcrumb{
+    background-color: transparent;
+    width: 700px;
+    float: left;
+    padding-left: 0;
+}
+header aside .btn-group{
+    float: right;
+}
+header .width-960 .glow{
+    width: 478px;
+    height: 130px;
+    position: absolute;
+    left: -214px;
+    top: -52px;
+    background-image: url({;core;domain;}elementy/examples/logo_glow.png);
+    opacity: .4;
+    filter: alpha(opacity=40);
+}
+.width-960{
+    width: 960px;
+    margin: 0 auto;
+    position: relative;
+}
+.main_glow{
+    width: 100%;
+    background-image: url({;core;domain;}elementy/examples/background_glow.jpg);
+    background-position: top center;
+    height: 192px;
+}
+.main-content{
+    margin-top: -190px;
+}
+.width-200{
+    width: 200px;
+    float: left;
+}
+.width-760{
+    width: 760px;
+    float: right;
+}
+.clear{
+    clear: both;
+}
+.dropdown-menu.login{
+    right: 0;
+    left: auto;
+    width: 300px;
+    float: right;
+}
+.dropdown-menu.login .input-group, .dropdown-menu.login .btn{
+    width:280px;
+    margin: 5px auto;
+}
+.dropdown-menu.login .btn{
+    display: block;
+}
+.width-200 .list-group{
+    float: left;
+    width: 190px;
+    margin-top: 52px;
 }

@@ -5,7 +5,7 @@
  * @subpackage  language
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.2.0
+ * @version     1.3.0
 */
 
 /**
@@ -55,7 +55,7 @@ $content = array(
     'string_to_translate'           => 'string from core translation',
 
     'example_description'     => 'That page has links to pages with grouped examples of usage most of framework features',
-    'example_title'           => 'Blue Framework feature example pages',
+    'example_title'           => 'Blue Framework examples',
     'example_generate'        => 'Generate content in template',
     'example_translate'       => 'Using translations',
     'example_layout'          => 'Usage of templates (including create display_class object inside of module)',
@@ -70,4 +70,31 @@ $content = array(
     'example_inheritance'     => 'Subpage inheritance',
     'example_exceptions'      => 'Framework exceptions',
     'test'                    => 'Test, check that framework features work',
+    'main_page'               => 'Main page',
+    'generate_content'        => 'Generate content',
+
+    'simple_generate'                   => 'Replace simple marker',
+    'optionally_marker_replaced'        => 'Optionally marker - show up',
+    'optionally_marker_none'            => 'Optionally marker - removed',
+    'loop_content'                      => 'Generate content in loop',
+    'loop_content_empty'                => 'Generate content in loop when data is empty',
+    'loop_content_nested'               => 'Generate content in loop for nested loops',
+    'loop_content_optional'             => 'Generate content in loop with optionally markers',
+    'session_content'                   => 'Generate content saved in session',
+    'loop_content_missing_element'      => 'Generate content in loop with missing elements',
+    'content_array'                     => 'Generate content from array',
+
+    'header_services'               => 'Services',
+    'framework_requirements'        => 'Requirements',
+    'framework_installation'        => 'Installation',
+    'framework_examples'            => 'Examples',
+    'framework_documentation'       => 'Documentation',
+    'header_design'                 => 'Design',
+    'header_libraries'              => 'PHP Libraries',
+    'header_login'                  => 'Login',
+    'header_login_btn'              => 'Login',
+    'current_language'              => 'English',
+    'english'                       => 'English',
+    'polish'                        => 'Polish',
+    'language_image'                => 'United-Kingdom.png',
 );

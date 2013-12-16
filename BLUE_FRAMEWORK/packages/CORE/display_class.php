@@ -10,7 +10,7 @@
  * @subpackage  display
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.10.2
+ * @version     2.11.2
  */
 class display_class
 {
@@ -70,6 +70,10 @@ class display_class
     */
     protected $_contentMarkers = "#{;[\\w=\\-|&();\\/,]+;}#";
 
+    /**
+     * default class options
+     * @var array
+     */
     protected $_defaultOptions = array(
         'template'      => '',
         'independent'   => FALSE,
@@ -79,8 +83,9 @@ class display_class
         'css'           => NULL,
         'js'            => NULL,
         'options'       => array(),
+        'clean'         => TRUE
     );
-    
+
     /**
      * load templates and create layout to use in core, or individually
      * 
@@ -98,6 +103,18 @@ class display_class
         }
 
         $this->_defaultOptions = array_merge($this->_defaultOptions, $options);
+
+        if ($this->_defaultOptions['options']) {
+            $this->_options = $this->_defaultOptions['options'];
+        } else {
+            $this->_options = core_class::options();
+        }
+
+        $this->_lang    = $this->_defaultOptions['language'];
+        $this->_css     = $this->_defaultOptions['css'];
+        $this->_js      = $this->_defaultOptions['js'];
+        $this->_get     = $this->_defaultOptions['get'];
+        $this->_session = $this->_defaultOptions['session'];
 
         if ($this->_defaultOptions['independent']) {
             $this->layout($this->_defaultOptions['template']);
@@ -120,18 +137,6 @@ class display_class
                 debug_backtrace(),
                 '#006400'
             ));
-        }
-
-        $this->_lang    = $this->_defaultOptions['language'];
-        $this->_css     = $this->_defaultOptions['css'];
-        $this->_js      = $this->_defaultOptions['js'];
-        $this->_get     = $this->_defaultOptions['get'];
-        $this->_session = $this->_defaultOptions['session'];
-
-        if ($this->_defaultOptions['options']) {
-            $this->_options = $this->_defaultOptions['options'];
-        } else {
-            $this->_options = core_class::options();
         }
 
         if ($this->_get) {
@@ -933,6 +938,10 @@ class display_class
      */
     protected function _clean()
     {
+        if ($this->_defaultOptions['clean'] === FALSE) {
+            return;
+        }
+
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
                 'remove unused markers',

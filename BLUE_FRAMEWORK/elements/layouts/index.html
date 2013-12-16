@@ -1,104 +1,136 @@
-<!doctype html>
-<html>
-    <head>
-{;core;meta;}
-{;core;css;}
-        <meta charset="utf-8">
-    </head>
-    <body>
-        <header>
-            <fieldset>
-                <legend>
-                    {;lang;external_legend;}
-                </legend>
-                {;external;ext;}
-            </fieldset>
-        </header>
-        <!--<h1>-->
-            <!--instalacja i deinstalacja modulu-->
-        <!--</h1>-->
-        <section id="main">
-            <fieldset>
-                <legend>
-                    {;lang;replace_paths;}
-                </legend>
-                <a href="{;core;domain;}{;core;lang;}{;path;/strona2;}">
-                    {;lang;internal_link;}
-                </a>
-                <br/>
-                <a href="http://www.bluetree.pl">link</a>
-                <a href="mailto:sdfsdf@asd.cv">link</a><br/>
-                <img src="{;core;domain;}elementy/images/bluetree_base_big.jpg" alt="{;lang;image;}"/>
-            </fieldset>
-            <fieldset>
-                <legend>
-                    {;lang;system_markers;}
-                </legend>
-                {;path;/strona/podstrona/param,val/p2,v/;} - {;lang;path;} ({ ;path;/strona/podstrona/param,val/p2,v/; })<br/>
-                {;full;/strona/podstrona/param,val/p2,v/;} - {;lang;full;} ({ ;full;/strona/podstrona/param,val/p2,v/; })<br/>
-                {;core;domain;} - {;lang;domain;} ({ ;core;domain; })<br/>
-                {;core;lang;} - {;lang;lang;} ({ ;core;lang; })<br/>
-                {;core;mainpath;} - {;lang;main_path;} ({ ;core;mainpath; })
-            </fieldset>
-            <fieldset>
-                <legend>
-                    {;lang;translations;}
-                </legend>
-                {;lang;framework_translations;}:        <strong>{;lang;tulmaczenie_przykladowe;}</strong><br/>
-                {;lang;module_translations;}:           <strong>{;lang;modul1;string_to_translate;}</strong><br/>
-                {;lang;module_code_translations;}:      <strong>{;lang-en-GB;modul1;string_to_translate;}</strong><br/>
-                {;lang;framework_code_translations;}:   <strong>{;lang-en-GB;tekst_do_tulmaczenia;}</strong>
-            </fieldset>
-        </section>
-        <section id="content">
-            {;mod;modul1;}
-        </section>
-        <aside>
-            <section>
-                <h3>
-                    {;lang;blocks;}
-                </h3>
-                <fieldset>
-                    <legend>{;lang;test_block;}</legend>
-                    {;block;blok_testowy;}
-                </fieldset>
-            </section>
+{;external;examples/header;}
+        <div class="width-960 main-content">
             <section>
                 {;op;core_errors;}
-                <fieldset class="error">
-                    <legend>
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                        &times;
+                    </button>
+                    <div class="alert-heading">
                         {;lang;error;} {;lang;error_title;}
-                    </legend>
-                    {;core_error;}
-                </fieldset>
+                    </div>
+                    <div class="alert-body">
+                        {;core_error;}
+                    </div>
+                    <div class="alert-footer">
+                        alert footer
+                    </div>
+                </div>
                 {;op_end;core_errors;}
                 {;op;core_warnings;}
-                <fieldset class="warning">
-                    <legend>
+                <div class="alert alert-warning alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                        &times;
+                    </button>
+                    <div class="alert-heading">
                         {;lang;warning;} {;lang;warning_title;}
-                    </legend>
-                    {;core_warning;}
-                </fieldset>
+                    </div>
+                    <div class="alert-body">
+                        {;core_error;}
+                    </div>
+                    <div class="alert-footer">
+                        alert footer
+                    </div>
+                </div>
                 {;op_end;core_warnings;}
                 {;op;core_infos;}
-                <fieldset class="info">
-                    <legend>
+                <div class="alert alert-info alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                        &times;
+                    </button>
+                    <div class="alert-heading">
                         {;lang;info;} {;lang;info_title;}
-                    </legend>
-                    {;core_info;}
-                </fieldset>
+                    </div>
+                    <div class="alert-body">
+                        {;core_info;}
+                    </div>
+                    <div class="alert-footer">
+                        alert footer
+                    </div>
+                </div>
                 {;op_end;core_infos;}
                 {;op;core_oks;}
-                <fieldset class="ok">
-                    <legend>
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                        &times;
+                    </button>
+                    <div class="alert-heading">
                         OK {;lang;ok_title;}
-                    </legend>
-                    {;core_ok;}
-                </fieldset>
+                    </div>
+                    <div class="alert-body">
+                        {;core_ok;}
+                    </div>
+                    <div class="alert-footer">
+                        alert footer
+                    </div>
+                </div>
                 {;op_end;core_oks;}
             </section>
-        </aside>
-        <div style="clear: both"></div>
+            <section id="main">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        {;lang;external_legend;}
+                    </div>
+                    <div class="panel-body">
+                        {;external;ext;}
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        {;lang;replace_paths;}
+                    </div>
+                    <div class="panel-body">
+                        <a href="{;core;domain;}{;core;lang;}{;path;/strona2;}">
+                            {;lang;internal_link;}
+                        </a>
+                        <br/>
+                        <a href="http://www.bluetree.pl">link</a>
+                        <a href="mailto:sdfsdf@asd.cv">link</a><br/>
+                        <img src="{;core;domain;}elementy/images/bluetree_base_big.jpg" alt="{;lang;image;}"/>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        {;lang;system_markers;}
+                    </div>
+                    <div class="panel-body">
+                        {;path;/strona/podstrona/param,val/p2,v/;} - {;lang;path;} ({ ;path;/strona/podstrona/param,val/p2,v/; })<br/>
+                        {;full;/strona/podstrona/param,val/p2,v/;} - {;lang;full;} ({ ;full;/strona/podstrona/param,val/p2,v/; })<br/>
+                        {;core;domain;} - {;lang;domain;} ({ ;core;domain; })<br/>
+                        {;core;lang;} - {;lang;lang;} ({ ;core;lang; })<br/>
+                        {;core;mainpath;} - {;lang;main_path;} ({ ;core;mainpath; })
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        {;lang;translations;}
+                    </div>
+                    <div class="panel-body">
+                        {;lang;framework_translations;}:        <strong>{;lang;tulmaczenie_przykladowe;}</strong><br/>
+                        {;lang;module_translations;}:           <strong>{;lang;modul1;string_to_translate;}</strong><br/>
+                        {;lang;module_code_translations;}:      <strong>{;lang-en-GB;modul1;string_to_translate;}</strong><br/>
+                        {;lang;framework_code_translations;}:   <strong>{;lang-en-GB;tekst_do_tulmaczenia;}</strong>
+                    </div>
+                </div>
+            </section>
+            <section id="content">
+                {;mod;modul1;}
+            </section>
+            <aside>
+                <section>
+                    <h3>
+                        {;lang;blocks;}
+                    </h3>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            {;lang;test_block;}
+                        </div>
+                    </div>
+                    {;block;blok_testowy;}
+                </section>
+            </aside>
+            <div style="clear: both"></div>
+        </div>
 {;core;js;}
     </body>
 </html>

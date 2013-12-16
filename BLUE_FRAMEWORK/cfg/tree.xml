@@ -7,7 +7,7 @@
 * @package     BlueFramework Core
 * @author      Michał Adamiak    <chajr@bluetree.pl>
 * @copyright   chajr/bluetree
-* @version     1.2.0
+* @version     1.4.2
 */
 -->
 <!DOCTYPE root SYSTEM 'dtd/tree.dtd'>
@@ -15,20 +15,15 @@
     <lib on="1">valid</lib>
     <lib on="0">jakas_biblioteka</lib>
     <lib on="1">user</lib>
-    <css>css1</css>
+    <css>bootstrap_dark</css>
     <css>elusive-webfont</css>
     <css>elusive-webfont-ie7</css>
-    <!--
-    <css external="1">http://domenaaaa.pl/css.css</css>
-    <css media="print" external="1">http://domenaaaa.pl/cssasd.css</css>
-    <css external="1">http://domenaaaa.pl/css.css</css>
-    <css external="1">http://domenaaaa.pl/cssa.css</css>
-    <js external="1">http://domenaaaa.pl/js.js</js>
-    -->
+    <css>base</css>
+    <js external="1">//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js</js>
     <js>js1</js>
     <js>bootstrap</js>
 
-    <page id="index" name="Main Page" layout="index" options="1111" changefreq="always" priority="0.8">
+    <page id="index" name="{;lang;core;main_page;}" layout="index" options="1111" changefreq="always" priority="0.8">
         <lib on="1">db/sql_abstract,mysql_connection</lib>
         <lib on="1">db/mysql</lib>
         <lib on="1">time</lib>
@@ -37,17 +32,21 @@
         <mod on="1" param="jakis::inny">modul1</mod>
         <mod on="1" block="blok_testowy">mod2</mod>
         <mod on="1" block="blok_testowy">mod3</mod>
+        <mod on="1" param="breadcrumbs">main</mod>
         <css external="0">css2</css>
         <css external="0">css3</css>
         <css external="0" media="print">as</css>
+        <css>styles</css>
         <js>js2</js>
     </page>
 
     <page id="examples" name="{;lang;core;example_title;}" layout="examples/examples" options="1111">
-        <sub id="example_generate" name="Generate content" layout="examples/example" options="11111">
-
+        <sub id="example_generate" name="{;lang;core;generate_content;}" layout="examples/example" options="11111">
+            <mod on="1" block="examples">example_generate</mod>
+            <mod on="1" block="examples">example_messages</mod>
+            <mod on="1" block="examples">example_layout</mod>
         </sub>
-        <css>bootstrap</css>
+        <mod on="1" param="breadcrumbs">main</mod>
         <css>styles</css>
     </page>
 
@@ -98,7 +97,6 @@
             <mod on="1" param="generate">commit</mod>
         </sub>
         <mod on="1">commit</mod>
-        <css>bootstrap_dark</css>
     </page>
 
     <page id="ajax_test" layout="ajax" name="Ajax" options="1000">

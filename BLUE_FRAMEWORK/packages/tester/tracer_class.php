@@ -3,7 +3,7 @@
  * trace witch classes, files, functions are run
  * 
  * @author Michał Adamiak <chajr@bluetree.pl>
- * @version 1.5.0
+ * @version 1.5.1
  * @copyright chajr/bluetree
  * @package     tester
  * @subpackage  tracer
@@ -83,8 +83,11 @@ class tracer_class
         if ((bool)self::$_tracerOn) {
             ++self::$traceStep;
 
-            $time       = microtime(TRUE);
-            $time       = preg_split('#\.|,#', $time);
+            $time = microtime(TRUE);
+            $time = preg_split('#\.|,#', $time);
+            if (!isset($time[1])) {
+                $time[1] = 0;
+            }
             $markerTime = gmstrftime('%d-%m-%Y<br/>%H:%M:%S:', $time[0]) . $time[1];
 
             if (!$data[1]) {
