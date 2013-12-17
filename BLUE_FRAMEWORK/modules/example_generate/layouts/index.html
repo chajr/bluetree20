@@ -8,8 +8,29 @@
             {;marker;}<br/>
         </div>
         <div class="panel-footer">
-            <pre><code>{&#59;marker&#59;}
-<hr/>$this->generate('marker', '{&#59;lang;content_to_replace&#59;}');</code></pre>
+            <div class="panel-group">
+                <div class="panel panel-primary source_code">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse0">
+                                {;lang;show_source;}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse0" class="panel-collapse collapse out">
+                        <div class="panel-body">
+                            <code>
+                                <pre class="brush: xml">{&#59;marker&#59;}</pre>
+                            </code>
+                        </div>
+                        <div class="panel-body">
+                            <code>
+                                <pre class="brush: php">$this->generate('marker', '{&#59;lang;content_to_replace&#59;}');</pre>
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -31,7 +52,19 @@
             </ul>
         </div>
         <div class="panel-footer">
-            <pre><code>&lt;li&gt;
+            <div class="panel-group" id="accordion1">
+                <div class="panel panel-primary source_code">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse1">
+                                {;lang;show_source;}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse out">
+                        <div class="panel-body">
+                            <code>
+                                <pre class="brush: xml">&lt;li&gt;
     {&#59;marker_1&#59;}
 &lt;/li&gt;
 &lt;li&gt;
@@ -39,13 +72,22 @@
 &lt;/li&gt;
 &lt;li&gt;
     {&#59;marker_3&#59;}
-&lt;/li&gt;
-<hr/>$data = [
+&lt;/li&gt;</pre>
+                            </code>
+                        </div>
+                       <div class="panel-body">
+                           <code>
+                               <pre class="brush: php">$data = [
     'marker_1' => '{&#59;lang;content_to_replace_1&#59;}',
     'marker_2' => '{&#59;lang;content_to_replace_2&#59;}',
     'marker_3' => '{&#59;lang;content_to_replace_3&#59;}',
 ];
-$this->generate($data);</code></pre>
+$this->generate($data);</pre>
+                           </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -74,10 +116,31 @@ $this->generate($data);</code></pre>
             {;op_end;ooa;}
         </div>
         <div class="panel-footer">
-            <pre><code>{&#59;op;ooa&#59;}
+            <div class="panel-group">
+                <div class="panel panel-primary source_code">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse2">
+                                {;lang;show_source;}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse out">
+                        <div class="panel-body">
+                            <code>
+                                <pre class="brush: xml">{&#59;op;ooa&#59;}
 &lt;span class="text-info"&gt;{&#59;lang;optional_content&#59;}{&#59;marker_a&#59;}&lt;/span&gt;
-{&#59;op_end;ooa&#59;}
-<hr/>$this->generate('marker_a', '');</code></pre>
+{&#59;op_end;ooa&#59;}</pre>
+                            </code>
+                        </div>
+                        <div class="panel-body">
+                            <code>
+                                <pre class="brush: php">$this->generate('marker_a', '');</pre>
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -92,9 +155,26 @@ $this->generate($data);</code></pre>
             {;op_end;oob;}
         </div>
         <div class="panel-footer">
-            <pre><code>{&#59;op;oob&#59;}
+            <div class="panel-group">
+                <div class="panel panel-primary source_code">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse3">
+                                {;lang;show_source;}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse out">
+                        <div class="panel-body">
+                            <code>
+                                <pre class="brush: xml">{&#59;op;oob&#59;}
 &lt;span class="text-info"&gt;{&#59;lang;optional_content&#59;}{&#59;marker_b&#59;}&lt;/span&gt;
-{&#59;op_end;oob&#59;}</code></pre>
+{&#59;op_end;oob&#59;}</pre>
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -112,14 +192,30 @@ $this->generate($data);</code></pre>
             {;end_empty;loop1;}
         </div>
         <div class="panel-footer">
-            <pre><code>{&#59;start&#59;loop1&#59;}
+            <div class="panel-group">
+                <div class="panel panel-primary source_code">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse4">
+                                {;lang;show_source;}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse4" class="panel-collapse collapse out">
+                        <div class="panel-body">
+                            <code>
+                                <pre class="brush: xml">{&#59;start&#59;loop1&#59;}
     &lt;b&gt;{&#59;loop1&#59;item1&#59;}&lt;/b&gt;
     {&#59;loop1&#59;item2&#59;}&lt;br/&gt;
 {&#59;end&#59;loop1&#59;}
 {&#59;start_empty&#59;loop1&#59;}
     &lt;b&gt;{&#59;lang&#59;empty_loop_message&#59;}&lt;/b&gt;
-{&#59;end_empty&#59;loop1&#59;}
-<hr/>$list = [
+{&#59;end_empty&#59;loop1&#59;}</pre>
+                            </code>
+                        </div>
+                        <div class="panel-body">
+                            <code>
+                                <pre class="brush: php">$list = [
     [
         'item1' => '{;lang;val;}: a1',
         'item2' => '{;lang;val;}: a2'
@@ -129,7 +225,12 @@ $this->generate($data);</code></pre>
         'item2' => '{;lang;val;}: b2'
     ]
 ];
-$this->loop('loop1', $list);</code></pre>
+$this->loop('loop1', $list);</pre>
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -148,16 +249,37 @@ $this->loop('loop1', $list);</code></pre>
             {;end_empty;loop2;}
         </div>
         <div class="panel-footer">
-            <pre><code>{&#59;start&#59;loop2&#59;}
-    &lt;b&gt;{&#59;loop2&#59;item1&#59;}&lt;/b&gt;
+            <div class="panel-group">
+                <div class="panel panel-primary source_code">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse5">
+                                {;lang;show_source;}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse5" class="panel-collapse collapse out">
+                        <div class="panel-body">
+                            <code>
+                                <pre class="brush: xml">{&#59;start&#59;loop2&#59;}
+    &lt; b&gt;{&#59;loop2&#59;item1&#59;}&lt;/b&gt;
     {&#59;loop2&#59;item2&#59;}&lt;br/&gt;
     {&#59;loop2&#59;item3&#59;}&lt;br/&gt;
 {&#59;end&#59;loop2&#59;}
 {&#59;start_empty&#59;loop2&#59;}
     &lt;b&gt;{&#59;lang&#59;empty_loop_message&#59;}&lt;/b&gt;
-{&#59;end_empty&#59;loop2&#59;}
-<hr/>$list = [];
-$this->loop('loop2', $list);</code></pre>
+{&#59;end_empty&#59;loop2&#59;}</pre>
+                            </code>
+                        </div>
+                        <div class="panel-body">
+                            <code>
+                                <pre class="brush: php">$list = [];
+$this->loop('loop2', $list);</pre>
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -178,8 +300,20 @@ $this->loop('loop2', $list);</code></pre>
             {;end;loop3;}
         </div>
         <div class="panel-footer">
-            <pre><code>{&#59;start&#59;loop3&#59;}
-    &lt;b class="text-info"&gt;
+            <div class="panel-group">
+                <div class="panel panel-primary source_code">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse6">
+                                {;lang;show_source;}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse6" class="panel-collapse collapse out">
+                        <div class="panel-body">
+                            <code>
+                                <pre class="brush: xml">{&#59;start&#59;loop3&#59;}
+    &lt;b class="text -info"&gt;
         {&#59;loop3&#59;aaa&#59;}
     &lt;/b&gt;
     &lt;br/&gt;
@@ -187,8 +321,12 @@ $this->loop('loop2', $list);</code></pre>
     &lt;br/&gt;
     {&#59;lang&#59;data_expected&#59;}: {&#59;op&#59;op2&#59;}{&#59;lang&#59;optional&#59;} 2 {&#59;loop3&#59;op2&#59;}{&#59;op_end&#59;op2&#59;}
     &lt;hr/&gt;
-{&#59;end&#59;loop3&#59;}
-<hr/>$arr = [
+{&#59;end&#59;loop3&#59;}</pre>
+                            </code>
+                        </div>
+                        <div class="panel-body">
+                            <code>
+                                <pre class="brush: php">$arr = [
     [
         'aaa' => '{;lang;val;} aaa 1',
         'bbb' => '{;lang;val;} bbb 2',
@@ -200,7 +338,12 @@ $this->loop('loop2', $list);</code></pre>
         'op2' => 'op2'
     ]
 ];
-$this->loop('loop3', $arr);</code></pre>
+$this->loop('loop3', $arr);</pre>
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -219,16 +362,31 @@ $this->loop('loop3', $arr);</code></pre>
             {;end_empty;loop4;}
         </div>
         <div class="panel-footer">
-            <pre><code>{&#59;start&#59;loop4&#59;}
-    &lt;b&gt;{&#59;loop4&#59;item1&#59;}&lt;/b&gt;
+            <div class="panel-group">
+                <div class="panel panel-primary source_code">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse7">
+                                {;lang;show_source;}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse7" class="panel-collapse collapse out">
+                        <div class="panel-body">
+                            <code>
+                                <pre class="brush: xml">{&#59;start&#59;loop4&#59;}
     {&#59;loop4&#59;item2&#59;} - &lt;span class="text-info"&gt;{&#59;lang&#59;data_expected&#59;}&lt;/span&gt;: {&#59;loop4&#59;item4&#59;}
+    &lt;b&gt;{&#59;loop4&#59;item1&#59;}&lt;/b&gt;
     &lt;br/&gt;&lt;br/&gt;
 {&#59;end&#59;loop4&#59;}
 {&#59;start_empty&#59;loop4&#59;}
     &lt;b&gt;{&#59;lang&#59;empty_loop_message&#59;}&lt;/b&gt;
-{&#59;end_empty&#59;loop4&#59;}
-<hr/>
-$list = [
+{&#59;end_empty&#59;loop4&#59;}</pre>
+                            </code>
+                        </div>
+                        <div class="panel-body">
+                            <code>
+                                <pre class="brush: php">$list = [
     [
         'item1' => '{;lang;val;}: a1',
         'item2' => '{;lang;val;}: a2'
@@ -238,7 +396,12 @@ $list = [
         'item2' => '{;lang;val;}: b2'
     ]
 ];
-$this->loop('loop4', $list);</code></pre>
+$this->loop('loop4', $list);</pre>
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -267,7 +430,19 @@ $this->loop('loop4', $list);</code></pre>
             {;end;nested_loop_group;}
         </div>
         <div class="panel-footer">
-            <pre><code>{&#59;start&#59;nested_loop_group&#59;}
+            <div class="panel-group">
+                <div class="panel panel-primary source_code">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse8">
+                                {;lang;show_source;}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse8" class="panel-collapse collapse out">
+                        <div class="panel-body">
+                            <code>
+                                <pre class="brush: xml">{&#59;start&#59;nested_loop_group&#59;}
     {&#59;nested_loop_group&#59;name&#59;} - &lt;span class="text-info"&gt;{&#59;nested_loop_group&#59;id&#59;}&lt;/span&gt;
     &lt;br/&gt;
     {&#59;lang&#59;nested_values&#59;}:
@@ -284,8 +459,12 @@ $this->loop('loop4', $list);</code></pre>
         &lt;br/&gt;
     {&#59;end&#59;nested_loop_{&#59;nested_loop_group&#59;id&#59;}&#59;}
     &lt;hr/&gt;
-{&#59;end&#59;nested_loop_group&#59;}
-<hr/>$nestedLoopBase = [
+{&#59;end&#59;nested_loop_group&#59;}</pre>
+                            </code>
+                        </div>
+                        <div class="panel-body">
+                            <code>
+                                <pre class="brush: php">$nestedLoopBase = [
     [
         'id'    => 1,
         'name'  => '{;lang;val;} 1',
@@ -321,7 +500,12 @@ $this->loop('nested_loop_group', $nestedLoopBase);
 foreach ($nestedLoopSecond as $catCategory) {
     $loopName = 'nested_loop_' . $catCategory['id'];
     $this->loop($loopName, $nestedLoopSecond);
-}</code></pre>
+}</pre>
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -336,9 +520,24 @@ foreach ($nestedLoopSecond as $catCategory) {
             </div>
         </div>
         <div class="panel-footer">
-            <pre><code>{&#59;lang&#59;session_data&#59;} - &lt;span class="text-info"&gt;{&#59;session_display&#59;session_display_test&#59;}&lt;/span&gt;
-<hr/>
-if ($this->session->value) {
+            <div class="panel-group">
+                <div class="panel panel-primary source_code">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse9">
+                                {;lang;show_source;}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse9" class="panel-collapse collapse out">
+                        <div class="panel-body">
+                            <code>
+                                <pre class="brush: xml">{&#59;lang&#59;session_data&#59;} - &lt;span class="text-info"&gt;{&#59;session_display&#59;session_display_test&#59;}&lt;/span&gt;</pre>
+                            </code>
+                        </div>
+                        <div class="panel-body">
+                            <code>
+                                <pre class="brush: php">if ($this->session->value) {
     $this->session->value += 1;
 } else {
     $this->session->value = 1;
@@ -348,7 +547,12 @@ $this->setSession(
     'session_display_test',
     $this->session->value,
     'display'
-);</code></pre>
+);</pre>
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>

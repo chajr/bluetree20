@@ -97,4 +97,5 @@ $content = array(
     'english'                       => 'Angielski',
     'polish'                        => 'Polski',
     'language_image'                => 'Poland.png',
+    'back_to_top'                   => 'Do góry',
 );
