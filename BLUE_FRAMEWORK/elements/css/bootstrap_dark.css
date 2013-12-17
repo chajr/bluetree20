@@ -15,7 +15,7 @@
  
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     0.4.2
+ * @version     0.4.3
  */
 article,
 aside,
@@ -2829,7 +2829,7 @@ input[type="button"].btn-block {
     clear: both;
     font-weight: normal;
     line-height: 1.2;
-    color: #777777;
+    color: #aaa;
     white-space: nowrap;
 }
 .dropdown-menu > li > a:hover,
