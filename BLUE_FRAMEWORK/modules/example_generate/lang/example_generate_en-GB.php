@@ -17,4 +17,5 @@ $content = array(
     'data_expected'                     => 'data expected',
     'session_test_content'              => '(don\'t handle translation)',
     'session_data'                      => 'data from session',
+    'show_source'                       => 'Show source',
 );
