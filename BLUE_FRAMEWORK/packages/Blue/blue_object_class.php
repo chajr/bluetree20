@@ -9,7 +9,7 @@
  * @subpackage  Object
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.0.0
+ * @version     1.0.1
  */
 class blue_object_class
 {
@@ -702,7 +702,7 @@ class blue_object_class
 
         if (!$bool) {
             $this->_errorsList['xml_load_error'] = $data;
-            return;
+            return $this;
         }
 
         try{
