@@ -7,7 +7,7 @@
 * @package     BlueFramework Core
 * @author      Michał Adamiak    <chajr@bluetree.pl>
 * @copyright   chajr/bluetree
-* @version     1.4.2
+* @version     1.5.0
 */
 -->
 <!DOCTYPE root SYSTEM 'dtd/tree.dtd'>
@@ -45,6 +45,13 @@
             <mod on="1" block="examples">example_generate</mod>
             <mod on="1" block="examples">example_messages</mod>
             <mod on="1" block="examples">example_layout</mod>
+            <css>shCore</css>
+            <css>shThemeDefault</css>
+            <js>XRegExp</js>
+            <js>shCore</js>
+            <js>shBrushPhp</js>
+            <js>shBrushXml</js>
+            <js>examples</js>
         </sub>
         <mod on="1" param="breadcrumbs">main</mod>
         <css>styles</css>
