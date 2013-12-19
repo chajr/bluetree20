@@ -43,18 +43,22 @@
     <page id="examples" name="{;lang;core;example_title;}" layout="examples/examples" options="1111">
         <sub id="example_generate" name="{;lang;core;generate_content;}" layout="examples/example" options="11111">
             <mod on="1" block="examples">example_generate</mod>
+        </sub>
+        <sub id="example_messages" name="{;lang;core;generate_content;}" layout="examples/example" options="11111">
             <mod on="1" block="examples">example_messages</mod>
+        </sub>
+        <sub id="example_layouts" name="{;lang;core;generate_content;}" layout="examples/example" options="11111">
             <mod on="1" block="examples">example_layout</mod>
-            <css>shCore</css>
-            <css>shThemeDefault</css>
-            <js>XRegExp</js>
-            <js>shCore</js>
-            <js>shBrushPhp</js>
-            <js>shBrushXml</js>
-            <js>examples</js>
         </sub>
         <mod on="1" param="breadcrumbs">main</mod>
         <css>styles</css>
+        <css>shCore</css>
+        <css>shThemeDefault</css>
+        <js>XRegExp</js>
+        <js>shCore</js>
+        <js>shBrushPhp</js>
+        <js>shBrushXml</js>
+        <js>examples</js>
     </page>
 
     <page id="strona2" name="Page 2" layout="strona2" options="1111" changefreq="always" priority="0.8">

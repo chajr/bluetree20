@@ -113,3 +113,58 @@ header .width-960 .glow{
     width: 190px;
     margin-top: 52px;
 }
+.back-to-top {
+    position: fixed;
+    bottom: 50%;
+    left: 0px;
+    text-decoration: none;
+    color: #000000;
+    background-color: rgba(235, 235, 235, 0.80);
+    font-size: 12px;
+    padding: 1em;
+    display: none;
+}
+
+.back-to-top:hover {
+    background-color: rgba(135, 135, 135, 0.50);
+}
+.panel-footer pre{
+    background-color: #000;
+    border-color: #888;
+}
+.panel-default > .panel-heading{
+    font-size: 16px;
+    font-style: italic;
+}
+.source_code{
+    cursor: pointer;
+    margin: 10px auto;
+}
+.source_code .panel-heading{
+    padding: 0;
+}
+.source_code .panel-heading .panel-title a{
+    outline: none;
+    line-height: 30px;
+    width: 100%;
+    display: block;
+    background-color: #333333;
+    border: 1px solid #002e4c;
+    text-decoration: none;
+    text-align: center;
+}
+.source_code .panel-heading .panel-title a:hover{
+    text-decoration: none;
+    background-color: #222;
+    border-color: #005e84;
+}
+.source_code .panel-body{
+    background-color: #F9F2F4;
+    padding: 5px;
+}
+.source_code code{
+    padding: 0;
+}
+.source_code .container:before, .source_code .container:after{
+    display: block;
+}

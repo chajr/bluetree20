@@ -1,43 +1,44 @@
 {;external;examples/header;}
 <div class="width-960 main-content">
-    <div class="width-200" data-spy="affix" data-offset-bottom="100">
-        <div class="list-group left_menu">
-            <a href="#simple_generate" class="list-group-item">
-                {;lang;simple_generate;}
-            </a>
-            <a href="#content_array" class="list-group-item">
-                {;lang;content_array;}
-            </a>
-            <a href="#optionally_marker_replaced" class="list-group-item">
-                {;lang;optionally_marker_replaced;}
-            </a>
-            <a href="#optionally_marker_none" class="list-group-item">
-                {;lang;optionally_marker_none;}
-            </a>
-            <a href="#loop_content" class="list-group-item">
-                {;lang;loop_content;}
-            </a>
-            <a href="#loop_content_empty" class="list-group-item">
-                {;lang;loop_content_empty;}
-            </a>
-            <a href="#loop_content_optional" class="list-group-item">
-                {;lang;loop_content_optional;}
-            </a>
-            <a href="#loop_content_missing_element" class="list-group-item">
-                {;lang;loop_content_missing_element;}
-            </a>
-            <a href="#loop_content_nested" class="list-group-item">
-                {;lang;loop_content_nested;}
-            </a>
-            <a href="#session_content" class="list-group-item">
-                {;lang;session_content;}
-            </a>
+    {;op;core_content_example;}
+    <div class="width-760">
+        <h2>{;lang;generate_content_core_template;}</h2>
+        <div class="panel panel-default">
+            <div class="panel-heading"  id="simple_generate_core">
+                {;lang;core;simple_generate_core;}
+            </div>
+            <div class="panel-body">
+                {;content_from_module;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse0a">
+                                    {;lang;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse0a" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">{&#59;content_from_module&#59;}</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$this->generate('content_from_module', '{&#59;lang;content_to_replace&#59;}', TRUE);</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="width-760">
-        {;block;examples;}
-    </div>
+    {;op_end;core_content_example;}
+    {;block;examples;}
     <div class="clear"></div>
 </div>
 <a href="#" class="back-to-top">{;lang;back_to_top;}</a>

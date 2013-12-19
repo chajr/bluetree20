@@ -17,7 +17,16 @@ class example_layout
 
     public function run()
     {
+        $this->_prepareLayout();
+    }
+
+    /**
+     * load layout template, run translations
+     */
+    protected function _prepareLayout()
+    {
         $this->layout('index');
+        $this->_translate();
     }
 
     public function runErrorMode(){

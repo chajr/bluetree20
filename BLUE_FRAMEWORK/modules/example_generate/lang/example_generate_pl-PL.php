@@ -17,5 +17,4 @@ $content = array(
     'data_expected'                     => 'oczekiwane dane',
     'session_test_content'              => '(nie obsługuje tułmaczeń)',
     'session_data'                      => 'dane z sesji',
-    'show_source'                       => 'Pokaż źródło',
 );

@@ -55,8 +55,11 @@ $content = array(
     'string_to_translate'           => 'string from core translation',
 
     'example_description'     => 'That page has links to pages with grouped examples of usage most of framework features',
+    'example_layouts'         => 'Usage of layouts and templates',
+    'example_layouts_usage'   => 'Examples of usage core templates, templates by module, load templates to markers and block and create layout using template markers.',
     'example_title'           => 'Blue Framework examples',
     'example_generate'        => 'Generate content in template',
+    'example_generate_usage'  => 'Examples of usage markers to generate content (loops, optional etc.) in templates.',
     'example_translate'       => 'Using translations',
     'example_layout'          => 'Usage of templates (including create display_class object inside of module)',
     'example_sys_marks'       => 'Core markers',
@@ -72,8 +75,11 @@ $content = array(
     'test'                    => 'Test, check that framework features work',
     'main_page'               => 'Main page',
     'generate_content'        => 'Generate content',
+    'load_to_block'           => 'Loading module template to blocks',
+    'load_to_block_usage'     => 'Example how to load some example module templates to one block marker in lunch order',
 
     'simple_generate'                   => 'Replace simple marker',
+    'simple_generate_core'              => 'Replace simple marker in core template',
     'optionally_marker_replaced'        => 'Optionally marker - show up',
     'optionally_marker_none'            => 'Optionally marker - removed',
     'loop_content'                      => 'Generate content in loop',
@@ -83,6 +89,9 @@ $content = array(
     'session_content'                   => 'Generate content saved in session',
     'loop_content_missing_element'      => 'Generate content in loop with missing elements',
     'content_array'                     => 'Generate content from array',
+    'content_to_replace'                => 'Replaced content from module',
+    'generate_content_core_template'    => 'Generate content to markers in core template',
+    'show_source'                       => 'Show source',
 
     'header_services'               => 'Services',
     'framework_requirements'        => 'Requirements',

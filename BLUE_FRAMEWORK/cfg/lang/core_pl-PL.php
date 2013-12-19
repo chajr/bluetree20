@@ -55,8 +55,11 @@ $content = array(
     'string_to_translate'           => 'tekst z corowego pliku tułmaczeń',
 
     'example_description'     => 'Ta strona posiada linki do stron z pogrupowanymi przykładami użytkowania frameworka',
+    'example_layouts'         => 'Przykład uzywania layoutów i templatek',
+    'example_layouts_usage'   => 'Przykłąd używania głównych templatek, templatek dla modułów, wczytywanie templatek do markerów i bloków i tworzenia layoutów przy użyciu markerów.',
     'example_title'           => 'Przykłady Blue Frameworka',
     'example_generate'        => 'Tworzenie treści w templatkach',
+    'example_generate_usage'  => 'Przykłady używania markerów do generowania treści (pętle, opcjonalne itp.) w templatkach.',
     'example_translate'       => 'Używanie tułmaczeń',
     'example_layout'          => 'Używanie templatek (w tym tworzenie instancji display_class wewnątrz modułu)',
     'example_sys_marks'       => 'Znaczniki Core',
@@ -72,8 +75,11 @@ $content = array(
     'test'                    => 'Test, sprawdza czy wszystkie elementy działają poprawnie',
     'main_page'               => 'Strona główna',
     'generate_content'        => 'Tworzenie treści',
+    'load_to_block'           => 'Wczytywanie templatek modułu do bloków',
+    'load_to_block_usage'     => 'Przykłąd jak wczytać templatki z modułów do jednego znacznik bloku w kolejności uruchamiania',
 
     'simple_generate'                   => 'Zastępowanie zwykłego znacznika',
+    'simple_generate_core'              => 'Zastępowanie zwykłego znacznika w głównej templatce',
     'optionally_marker_replaced'        => 'Opcjonalny znacznik - pokazany',
     'optionally_marker_none'            => 'Opcjonalny znacznik - usunięty',
     'loop_content'                      => 'Generowanie treści w pętli',
@@ -83,6 +89,9 @@ $content = array(
     'loop_content_optional'             => 'Generowanie treści w pętli z opcjonalnymi znacznikami',
     'session_content'                   => 'Generowanie treści zapisanej w sesji',
     'content_array'                     => 'Generowanie treści z tablicy',
+    'content_to_replace'                => 'Zastąpiona teść z modułu',
+    'generate_content_core_template'    => 'Generowanie treści do znaczników w głównej templatce',
+    'show_source'                       => 'Pokaż źródło',
 
     'header_services'               => 'Serwisy',
     'framework_requirements'        => 'Wymagania',

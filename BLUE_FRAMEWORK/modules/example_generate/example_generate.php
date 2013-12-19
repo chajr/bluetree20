@@ -5,12 +5,12 @@
  * @subpackage  example_generate
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     0.4.0
+ * @version     1.0.0
  */
 class example_generate
     extends module_class
 {
-    static $version             = '0.4.0';
+    static $version             = '1.0.0';
     static $name                = 'content generate module example';
     public $requireLibraries    = array();
     public $requireModules      = array();
@@ -22,6 +22,7 @@ class example_generate
     {
         $this->_prepareLayout();
 
+        $this->_simpleCoreMarker();
         $this->_simpleMarker();
         $this->_arrayMarker();
         $this->_optionalMarker();
@@ -34,13 +35,20 @@ class example_generate
     }
 
     /**
-     * load layout template and styles, run translations
+     * load layout template, run translations
      */
     protected function _prepareLayout()
     {
         $this->layout('index');
         $this->_translate();
-        $this->set('css', 'css');
+    }
+
+    /**
+     * replace simple marker in core template
+     */
+    protected function _simpleCoreMarker()
+    {
+        $this->generate('content_from_module', '{;lang;content_to_replace;}', TRUE);
     }
 
     /**
