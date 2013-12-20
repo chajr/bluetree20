@@ -36,9 +36,10 @@ But template **cannot be empty**, must have at last one marker that will be repl
 External templates
 --------------
 In all templates we can load some other templates by special marker. All that external templates
- must be localized in directory where main template is localed. To load external template
- use `{;external;template_name;}` marker. Of course put only template fle name
- without file extension.
+must be localized in directory where main template is localed. To load external template
+use `{;external;template_name;}` marker. Of course put only template fle name
+without file extension. as template name we can give path to external file, relative
+to default template.
 
 Module templates
 --------------
@@ -173,6 +174,7 @@ That part of code will display:
 
 #### External template marker
 **{;external;template_name;}** - Load some another template, localed in the same directory
+**{;external;some_directory/template_name;}** - Load some another template, localed in the _some_directory_ directory
 
 #### Module block marker
 **{;block;block_name;}** - Replaced by content from modules that has decelerated `block` attribute in `tree.xml` with the same value of `attribute` and `block_name`

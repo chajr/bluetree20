@@ -10,7 +10,7 @@
  * @subpackage  display
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.11.2
+ * @version     2.11.3
  */
 class display_class
 {
@@ -122,7 +122,7 @@ class display_class
             $this->_constructMainLayout();
         }
 
-        $this->_external();
+        $this->_external('core');
     }
 
     /**
@@ -484,6 +484,7 @@ class display_class
 
         $path                   = $this->_checkTemplatePath($template, $module);
         $this->DISPLAY[$module] = starter_class::load($path, TRUE);
+        $this->_external($module);
 
         if (!$this->DISPLAY[$module]) {
             throw new coreException('core_error_2', $module . ' - ' . $path);
@@ -674,10 +675,10 @@ class display_class
      * load external templates to main template, 
      * or some external templates to module template
      *
-     * @param string $module optionally module name that want to load external template
+     * @param string $module module name that want to load external template
      * @throws coreException core_error_3
      */
-    protected function _external($module = 'core')
+    protected function _external($module)
     {
         if (class_exists('tracer_class')) {
             tracer_class::marker(array(
