@@ -168,3 +168,7 @@ header .width-960 .glow{
 .source_code .container:before, .source_code .container:after{
     display: block;
 }
+.source_code .description{
+    text-align: center;
+    margin: 5px auto 15px;
+}
