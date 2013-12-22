@@ -5,7 +5,7 @@
  * @subpackage  globals
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.4.6
+ * @version     2.4.7
  */
 
 /**
@@ -270,7 +270,7 @@ class get
     private $_corePages = array();
 
     /**
-     * informacja o jezyku pobranym z get, lub null jesli brak podanego
+     * information about language taken from grt, or null if there no was one
      * @var string
      */
     private $_coreLanguage = NULL;
