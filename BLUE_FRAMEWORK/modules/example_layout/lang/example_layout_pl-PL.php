@@ -11,4 +11,5 @@ $content = array(
     'loading_template_description'      => 'Aby użyć templatki dla modułu anleży uzyć specjalnego markera w templatce głównej. Należy stworzyć templatkędla modułu, a w module użyć nazwy pliku owej templatki w metodzie layout.',
     'loading_template_block'            => 'Wczytywanie templatki modułu do znacznika bloku',
     'loading_block_description'         => 'Aby wczytać zawartość z modułu (lub kilka modułów) do bloku należy zadeklarować blok, oraz w deklaracji modułu dodać atrybut block z nazwą bloku do którego ma zostać załadowany moduł.',
+    'additional_template'               => 'Dodatkowa templatka',
 );

@@ -3,11 +3,17 @@
         <a href="#loading_template" class="list-group-item">
             {;lang;loading_template;}
         </a>
-        <a href="#loading_template" class="list-group-item">
+        <a href="#loading_template_block" class="list-group-item">
             {;lang;loading_template_block;}
         </a>
-        <a href="#loading_template" class="list-group-item">
+        <a href="#external_template" class="list-group-item">
             {;lang;external_templates;}
+        </a>
+        <a href="#display_class_instance" class="list-group-item">
+            {;lang;display_class_instance;}
+        </a>
+        <a href="#display_class_operations" class="list-group-item">
+            {;lang;display_class_operations;}
         </a>
     </div>
 </div>
@@ -49,7 +55,7 @@
             </div>
         </div>
         <div class="panel panel-default">
-            <div class="panel-heading" id="loading_block_template">
+            <div class="panel-heading" id="loading_template_block">
                 {;lang;loading_template_block;}
             </div>
             <div class="panel-body">
@@ -87,7 +93,7 @@
             </div>
         </div>
         <div class="panel panel-default">
-            <div class="panel-heading" id="example_one">
+            <div class="panel-heading" id="external_template">
                 {;lang;external_templates;}
             </div>
             <div class="panel-body">
@@ -116,6 +122,163 @@
                                 </code>
                             </div>
                             <div class="description">{;lang;in_external_template;}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="display_class_instance">
+                {;lang;display_class_instance;}
+            </div>
+            <div class="panel-body">
+                {;display_class_content;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse3">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse3" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;h3&gt;{&#59;lang&#59;additional_template&#59;}&lt;/h3&gt;
+{&#59;op&#59;examples&#59;}
+&lt;ul class="list-group"&gt;
+    &lt;li class="list-group-item"&gt;{&#59;simple_content&#59;}&lt;/li&gt;
+    &lt;li class="list-group-item"&gt;
+        {&#59;start&#59;additional_loop&#59;}
+        {&#59;additional_loop&#59;data&#59;}
+        {&#59;end&#59;additional_loop&#59;}
+    &lt;/li&gt;
+    &lt;li class="list-group-item"&gt;{&#59;session_display&#59;session_marker&#59;}&lt;/li&gt;
+    &lt;li class="list-group-item"&gt;{&#59;core&#59;domain&#59;}&lt;/li&gt;
+&lt;/ul&gt;
+{&#59;op_end&#59;examples&#59;}</pre>
+                                </code>
+                            </div>
+                            <div class="description">{;lang;in_external_template;}</div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">{&#59;display_class_content&#59;}</pre>
+                                </code>
+                            </div>
+                            <div class="description">{;lang;in_module_template;}</div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">protected function _additionalDisplayClass()
+{
+    $configuration = [
+        'independent' => TRUE,
+        'clean'       => FALSE,
+        'language'    => $this->get->getLanguage(),
+        'session'     => $this->session,
+        'get'         => $this->get,
+        'template'    => 'modules/example_layout/layouts/additional_template.html',
+    ];
+    return new display_class($configuration);
+}
+
+protected function _baseDisplayClass()
+{
+    $displayObject = $this->_additionalDisplayClass();
+    $content       = $displayObject->render();
+
+    $this->generate('display_class_content', $content);
+}</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="display_class_operations">
+                {;lang;display_class_operations;}
+            </div>
+            <div class="panel-body">
+                {;display_class_operations;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse4">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse4" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;h3&gt;{&#59;lang&#59;additional_template&#59;}&lt;/h3&gt;
+{&#59;op&#59;examples&#59;}
+&lt;ul class="list-group"&gt;
+    &lt;li class="list-group-item"&gt;{&#59;simple_content&#59;}&lt;/li&gt;
+    &lt;li class="list-group-item"&gt;
+        {&#59;start&#59;additional_loop&#59;}
+        {&#59;additional_loop&#59;data&#59;}
+        {&#59;end&#59;additional_loop&#59;}
+    &lt;/li&gt;
+    &lt;li class="list-group-item"&gt;{&#59;session_display&#59;session_marker&#59;}&lt;/li&gt;
+    &lt;li class="list-group-item"&gt;{&#59;core&#59;domain&#59;}&lt;/li&gt;
+&lt;/ul&gt;
+{&#59;op_end&#59;examples&#59;}</pre>
+                                </code>
+                            </div>
+                            <div class="description">{;lang;in_external_template;}</div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">{&#59;display_class_operations&#59;}</pre>
+                                </code>
+                            </div>
+                            <div class="description">{;lang;in_module_template;}</div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">protected function _additionalDisplayClass()
+{
+    $configuration = [
+        'independent' => TRUE,
+        'clean'       => FALSE,
+        'language'    => $this->get->getLanguage(),
+        'session'     => $this->session,
+        'get'         => $this->get,
+        'template'    => 'modules/example_layout/layouts/additional_template.html',
+    ];
+    return new display_class($configuration);
+}
+
+protected function _operatingDisplayClass()
+{
+    $this->setSession(
+        'session_marker',
+        'SESSION',
+        'display'
+    );
+
+    $loopData = [
+        ['data' => 1],
+        ['data' => 2],
+        ['data' => 3],
+        ['data' => 4],
+    ];
+
+    $displayObject = $this->_additionalDisplayClass();
+    $displayObject->generate('simple_content', 'TRUE');
+    $displayObject->loop('additional_loop', $loopData);
+
+    $content = $displayObject->render();
+    $this->generate('display_class_operations', $content);
+}</pre>
+                                </code>
+                            </div>
                         </div>
                     </div>
                 </div>
