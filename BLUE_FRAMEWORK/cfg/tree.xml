@@ -7,7 +7,7 @@
 * @package     BlueFramework Core
 * @author      Michał Adamiak    <chajr@bluetree.pl>
 * @copyright   chajr/bluetree
-* @version     1.5.0
+* @version     1.6.0
 */
 -->
 <!DOCTYPE root SYSTEM 'dtd/tree.dtd'>
@@ -40,6 +40,10 @@
         <js>js2</js>
     </page>
 
+    <page id="requirements" name="{;lang;core;requirements_title;}" layout="examples/requirements" options="1111">
+        <mod on="1" param="breadcrumbs">main</mod>
+        <css>styles</css>
+    </page>
     <page id="examples" name="{;lang;core;example_title;}" layout="examples/examples" options="1111">
         <sub id="example_generate" name="{;lang;core;generate_content;}" layout="examples/example" options="11111">
             <mod on="1" block="examples">example_generate</mod>
