@@ -44,6 +44,10 @@
         <mod on="1" param="breadcrumbs">main</mod>
         <css>styles</css>
     </page>
+    <page id="installation" name="{;lang;core;installation_title;}" layout="examples/installation" options="1111">
+        <mod on="1" param="breadcrumbs">main</mod>
+        <css>styles</css>
+    </page>
     <page id="examples" name="{;lang;core;example_title;}" layout="examples/examples" options="1111">
         <sub id="example_generate" name="{;lang;core;generate_content;}" layout="examples/example" options="11111">
             <mod on="1" block="examples">example_generate</mod>

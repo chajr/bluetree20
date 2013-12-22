@@ -116,4 +116,9 @@ $content = array(
     'htaccess_enabled'              => 'Możliwość modyfikacji plików .htaccess (jeśli opcja rewrite ustawiona na 1)',
     'base_requirements'             => 'Podstawowe wymagania',
     'optional_requirements'         => 'Wymagania zależne od wybranych opcji',
+    'installation'                  => 'Instalacja frameworka',
+    'installation_step_1'           => 'Ściągnij aktualną wersję frameworka z',
+    'installation_step_2'           => 'Skopij wszystkie pliki frameworka na serwer',
+    'installation_step_3'           => 'Zaktualizuj podstawową konfigurację (opisana wewnątrz dokumentacji frameworka)',
+    'installation_step_4'           => 'I to wszystko, framework  jest gotowy do użycia',
 );

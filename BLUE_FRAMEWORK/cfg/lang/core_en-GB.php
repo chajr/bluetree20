@@ -116,4 +116,9 @@ $content = array(
     'htaccess_enabled'              => 'Ability to override options in .htaccess files (if rewrite option set to 1)',
     'base_requirements'             => 'Base requirements',
     'optional_requirements'         => 'Depends on chosen options requirements',
+    'installation'                  => 'Framework installation',
+    'installation_step_1'           => 'Download actual framework files from',
+    'installation_step_2'           => 'Copy all files into server directory',
+    'installation_step_3'           => 'Update base configuration (described inside framework configuration documentation)',
+    'installation_step_4'           => 'That\'s all, framework is ready to use',
 );
