@@ -10,7 +10,7 @@
  * @subpackage  display
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.11.3
+ * @version     2.11.4
  */
 class display_class
 {
@@ -951,8 +951,8 @@ class display_class
             ));
         }
 
+        $this->_cleanMarkers('loop');
         $this->_cleanMarkers('optional');
-        //$this->_cleanMarkers('loop');
 
         $this->DISPLAY = preg_replace(
             $this->_contentMarkers,
@@ -971,7 +971,7 @@ class display_class
         switch ($type) {
             case'loop':
                 $reg1 = '#{;(start|end);([\\w-])+;}#';
-                $reg2 = '#{;([\\w-])+;([\\w-])+;}#';
+                $reg2 = FALSE;
                 $reg3 = '{;start;';
                 $reg4 = '{;end;';
                 break;
@@ -1006,12 +1006,16 @@ class display_class
                 $end            += mb_strlen($endMarker);
                 $len            = $end - $start;
                 $stringToRemove = substr($this->DISPLAY, $start, $len);
-                $bool           = preg_match($reg2, $string);
 
-                if ($bool) {
-                    $this->DISPLAY = str_replace($stringToRemove, '', $this->DISPLAY);
+                if ($reg2) {
+                    $bool = preg_match($reg2, $string);
+                    if ($bool) {
+                        $this->DISPLAY = str_replace($stringToRemove, '', $this->DISPLAY);
+                    } else {
+                        $this->DISPLAY = str_replace($stringToRemove, $string, $this->DISPLAY);
+                    }
                 } else {
-                    $this->DISPLAY = str_replace($stringToRemove, $string, $this->DISPLAY);
+                    $this->DISPLAY = preg_replace($reg1, '', $this->DISPLAY);
                 }
             }
         }
