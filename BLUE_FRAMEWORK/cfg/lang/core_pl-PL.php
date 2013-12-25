@@ -26,7 +26,6 @@ $content = array(
     'line'                          => 'linia',
     'file'                          => 'plik',
     'tekst_do_tulmaczenia'          => 'jakieś tułmaczenie',
-    'page_not_found'                => 'Strona nie została znaleziona',
     'external_legend'               => 'zewnętrzny html z layoutów głównych',
     'replace_paths'                 => 'zastępowanie ścierzek',
     'internal_link'                 => 'link wewnętrzny',
@@ -79,6 +78,7 @@ $content = array(
     'generate_content'          => 'Tworzenie treści',
     'load_to_block'             => 'Wczytywanie templatek modułu do bloków',
     'load_to_block_usage'       => 'Przykłąd jak wczytać templatki z modułów do jednego znacznik bloku w kolejności uruchamiania',
+    'page_not_found'            => 'Strona nie została znaleziona',
 
     'simple_generate'                   => 'Zastępowanie zwykłego znacznika',
     'simple_generate_core'              => 'Zastępowanie zwykłego znacznika w głównej templatce',

@@ -172,3 +172,17 @@ header .width-960 .glow{
     text-align: center;
     margin: 5px auto 15px;
 }
+#not_found_404{
+    margin-top: 5px;
+    text-align: center;
+}
+#not_found_404 .symbol{
+    font-size: 370px;
+    text-shadow: 0 0 0.2em rgba(255,255,255, .7), 0 0 0.2em rgba(255,255,255, .7), 0 0 0.2em rgba(255,255,255, .7);
+}
+#not_found_404 .code{
+    font-size: 60px;
+}
+#not_found_404 .message{
+    font-size: 20px;
+}

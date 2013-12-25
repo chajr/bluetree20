@@ -26,7 +26,6 @@ $content = array(
     'line'                          => 'english line',
     'file'                          => 'english file',
     'tekst_do_tulmaczenia'          => 'english sample translation text',
-    'page_not_found'                => 'Page not found!',
     'external_legend'               => 'external html from layouts group',
     'replace_paths'                 => 'replace paths',
     'internal_link'                 => 'internal link',
@@ -79,6 +78,7 @@ $content = array(
     'generate_content'          => 'Generate content',
     'load_to_block'             => 'Loading module template to blocks',
     'load_to_block_usage'       => 'Example how to load some example module templates to one block marker in lunch order',
+    'page_not_found'            => 'Page not found',
 
     'simple_generate'                   => 'Replace simple marker',
     'simple_generate_core'              => 'Replace simple marker in core template',

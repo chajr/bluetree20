@@ -7,7 +7,7 @@
 * @package     BlueFramework Core
 * @author      Michał Adamiak    <chajr@bluetree.pl>
 * @copyright   chajr/bluetree
-* @version     1.6.0
+* @version     1.7.0
 */
 -->
 <!DOCTYPE root SYSTEM 'dtd/tree.dtd'>
@@ -122,9 +122,9 @@
         <mod on="1">mod_ajax</mod>
     </page>
 
-    <page id="error404" name="error404" layout="404" options="1001">
-        <css>error_css</css>
-        <js>error_js</js>
+    <page id="error404" name="{;lang;core;page_not_found;}" layout="404" options="1001">
+        <mod on="1" param="breadcrumbs">main</mod>
+        <css>styles</css>
     </page>
 
     <page id="sitemap" name="sitemap" layout="empty" options="1001">
