@@ -25,8 +25,7 @@ Beside templates we define for pages/subpages we have some predefined templates
 5. **error_ok.html** - display some success messages
 6. **error_pointer.html** - display errors added manually by module
 7. **error_warning.html** - display some warnings from modules
-8. **errors.html** - 
-9. **techbreak.html** - display information about technical break if `techbreak` value is set to 1 in `config.xml`
+8. **techbreak.html** - display information about technical break if `techbreak` value is set to 1 in `config.xml`
 
 Of course we must have some template for index page. Filename has `html` extension
  but content of the file can be anything that we want to display for given page `xml, json, etc.`.  
