@@ -5,7 +5,7 @@
  * @subpackage  error
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.4.5
+ * @version     2.4.6
  */
 
 /**
@@ -62,13 +62,13 @@ final class error_class
      * array of messages
      * @var array
      */
-    static $list = array(
-        'critic'    => array(),
-        'warning'   => array(),
-        'info'      => array(),
-        'ok'        => array(),
-        'pointer'   => array(),
-    );
+    static $list = [
+        'critic'    => [],
+        'warning'   => [],
+        'info'      => [],
+        'ok'        => [],
+        'pointer'   => [],
+    ];
 
     /**
      * start error handling class
@@ -80,11 +80,11 @@ final class error_class
     public function __construct($lang = FALSE)
     {
         if (class_exists('tracer_class')) {
-            tracer_class::marker(array(
+            tracer_class::marker([
                 'create error object to handle errors',
                 debug_backtrace(),
                 '#ff0000'
-            ));
+            ]);
         }
 
         if ($lang) {
@@ -113,11 +113,11 @@ final class error_class
             }
 
             $this->_lang     = new lang_class($lang, $this->_options);
-            $this->_display  = new display_class(array(
+            $this->_display  = new display_class([
                 'template' => 'error',
                 'language' => $this->_lang->lang,
                 'options'  => $this->_options,
-            ));
+            ]);
         }
     }
 
@@ -149,14 +149,14 @@ final class error_class
             $time       = substr($time, 0, $position);
 
             $buffer = str_replace(
-                array(
+                [
                     '{;lang;error_title;}',
                     '{;errors;error_code;}',
-                ),
-                array(
+                ],
+                [
                     'CRITICAL PHP ERROR',
                     $array[1],
-                ),
+                ],
                 $buffer
             );
 
@@ -166,30 +166,31 @@ final class error_class
 
             if ((bool)$debug) {
                 $buffer = str_replace(
-                    array(
+                    [
                         '{;errors;extend_message;}',
                         '{;errors;line;}',
                         '{;errors;file;}',
-                    ), array(
+                    ],
+                    [
                         'Message'.$array[2],
                         'Line: '.$array[5],
                         $array[3],
-                    ),
+                    ],
                     $buffer
                 );
             } else {
                 $buffer = str_replace(
-                    array(
+                    [
                         '{;errors;message;}',
                         '{;errors;line;}',
                         '{;errors;file;}',
-                    ),
+                    ],
                     '',
                     $buffer
                 );
             }
 
-            $inf            = array();
+            $inf            = [];
             $inf['Error']   = $array[1];
             $inf['Message'] = $array[2];
             $inf['Line']    = $array[5];
@@ -230,11 +231,11 @@ final class error_class
     static final function log($type, $data, $time = FALSE, $path = FALSE)
     {
         if (class_exists('tracer_class')) {
-            tracer_class::marker(array(
+            tracer_class::marker([
                 'create log file',
                 debug_backtrace(),
                 '#900000'
-            ));
+            ]);
         }
 
         if ($time) {
@@ -284,8 +285,7 @@ final class error_class
      */
     static final function other()
     {
-        $inf            = array();
-
+        $inf            = [];
         $inf['ip']      = $_SERVER['REMOTE_ADDR'];
         $inf['browser'] = $_SERVER['HTTP_USER_AGENT'];
         $inf['URI']     = $_SERVER['REQUEST_URI'];
@@ -319,11 +319,11 @@ final class error_class
         $mod = 'core'
     ){
         if (class_exists('tracer_class')) {
-            tracer_class::marker(array(
+            tracer_class::marker([
                 'add some error',
                 debug_backtrace(),
                 '#900000'
-            ));
+            ]);
         }
 
         preg_match_all(
@@ -426,14 +426,14 @@ final class error_class
         $mod
     ){
         if (class_exists('tracer_class')) {
-            tracer_class::marker(array(
+            tracer_class::marker([
                 'create formatted statement',
                 debug_backtrace(),
                 '#900000'
-            ));
+            ]);
         }
 
-        $kom  = array();
+        $kom  = [];
         $bool = $this->_pack("modules/$mod/lang/" . $mod . '_error');
 
         if ($bool) {
@@ -505,21 +505,21 @@ final class error_class
     public final function render($type = FALSE)
     {
         if (class_exists('tracer_class')) {
-            tracer_class::marker(array(
+            tracer_class::marker([
                 'render error',
                 debug_backtrace(),
                 '#900000'
-            ));
+            ]);
         }
 
         if ($type) {
-            $tempList = array(
+            $tempList = [
                 'critic'    => '',
                 'warning'   => '',
                 'info'      => '',
                 'ok'        => '',
                 'pointer'   => '',
-            );
+            ];
 
             foreach (self::$list as $type => $modules) {
                 if (!empty($modules)) {
@@ -529,7 +529,6 @@ final class error_class
                         $bool = $this->_lang->setTranslationArray();
 
                         if ($type === 'pointer') {
-                            
                             if ($mod !== 'core') {
                                 $bool = $this->_lang->setTranslationArray(
                                     $mod,
@@ -548,17 +547,17 @@ final class error_class
                             foreach ($modules as $errorBlock) {
                                 foreach ($errorBlock as $blockName => $errorContent) {
 
-                                    $this->_display = new display_class(array(
+                                    $this->_display = new display_class([
                                         'template' => 'error_' . $type,
                                         'language' => $this->_lang->lang,
                                         'options'  => $this->_options,
-                                    ));
+                                    ]);
 
                                     $this->_display->generate(
-                                        array(
+                                        [
                                             'extend_message' => $errorContent['extend_message'],
                                             'error_code'     => $errorContent['error_code']
-                                        ),
+                                        ],
                                         ''
                                     );
 
@@ -566,13 +565,13 @@ final class error_class
                                     $content = $this->_display->render();
                                     unset($this->_display);
 
-                                    $temp[] = array(
+                                    $temp[] = [
                                         'content' => $content,
                                         'mod' => $mod,
                                         'point' => $blockName
-                                    );
+                                    ];
                                     $op     = $this->_options['errors_log'];
- 
+
                                     if((bool)$op{2}){
                                         self::log('pointer', $content);
                                     }
@@ -580,11 +579,11 @@ final class error_class
                             }
                             
                         } else {
-                            $this->_display = new display_class(array(
+                            $this->_display = new display_class([
                                 'template' => 'error_' . $type,
                                 'language' => $this->_lang->lang,
                                 'options'  => $this->_options,
-                            ));
+                            ]);
 
                             $this->_display->loop('errors', $array);
 
@@ -594,7 +593,7 @@ final class error_class
                                     TRUE
                                 );
                             }
- 
+
                             if (!$bool) {
                                 @trigger_error(
                                     'No default lang pack<br/><br/>' . $mod
@@ -649,11 +648,11 @@ final class error_class
     private function _pack($pack)
     {
         if (class_exists('tracer_class')) {
-            tracer_class::marker(array(
+            tracer_class::marker([
                 'load array with error codes',
                 debug_backtrace(),
                 '#900000'
-            ));
+            ]);
         }
 
         $translationArray = $this->_lang->loadLanguage($pack);
