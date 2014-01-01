@@ -1,14 +1,21 @@
             {;start;errors;}
-            <div class="error_block">
-                <b>{;errors;error_code;}</b>
-                {;op;extend_message;}<br/>
-                {;lang;error_other;}: {;errors;extend_message;}{;op_end;extend_message;}<br/>
-                {;op;line;}
-                <br/><br/>
-                {;lang;line;}: {;errors;line;}{;op_end;line;}
-                {;op;file;}<br/>
-                {;lang;file;}: {;errors;file;}{;op_end;file;}
-                {;op;module;}<br/>
-                {;lang;modul;}: {;errors;module;}{;op_end;module;}
+            <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                    &times;
+                </button>
+                <div class="alert-heading">
+                    {;errors;error_code;}
+                </div>
+                <div class="alert-body">
+                    <div class="error_block">
+                        {;op;extend_message;}{;errors;extend_message;}{;op_end;extend_message;}
+                        {;op;line;}<br/><br/>{;lang;line;}: {;errors;line;}{;op_end;line;}
+                        {;op;file;}<br/>{;lang;file;}: {;errors;file;}{;op_end;file;}
+                    </div>
+                </div>{;op;module;}
+                <div class="alert-footer">
+                    {;lang;modul;}: {;errors;module;}
+                </div>{;op_end;module;}
             </div>
             {;end;errors;}
+

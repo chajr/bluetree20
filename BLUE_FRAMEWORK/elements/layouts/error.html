@@ -1,50 +1,81 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>{;lang;error_title;}</title>
+        <meta charset="utf-8">
+        <link href="/style.php?module=core&amp;style=bootstrap_dark" rel="stylesheet" type="text/css"/>
+        <link href="/style.php?module=core&amp;style=styles" rel="stylesheet" type="text/css"/>
         <style type="text/css">
-            body{
-                background-color: #000000;
-                margin-right: 0px;
-                margin-left: 0px;
-                margin-bottom: 0px;
-                margin-top: 0px;
-                color: #ffffff;
-                font-family: Verdana,Arial,Helvetica,sans-serif;
+            body {
+                background-image: url("/elementy/examples/main_background.png");
+                margin: 0;
             }
-            .error {
-                height: auto;
-                width: 80%;
-                padding-top: 10px;
-                padding-bottom: 10px;
-                margin-top: 10px;
-                margin-right: auto;
-                margin-left: auto;
-                background-color: #FFFFCC;
-                border: medium solid #FF0000;
-                font-size: 16px;
-                color: #FF0000;
+            header{
+                height: 80px;
+            }
+            header .width-960 .glow {
+                background-image: url("/elementy/examples/logo_glow.png");
+            }
+            .main_glow {
+                background-image: url("/elementy/examples/background_glow.jpg");
+            }
+            .line_top {
+                background-image: url("/elementy/examples/top_line.png");
+            }
+            .alert-body h3{
                 text-align: center;
             }
         </style>
     </head>
     <body>
-        <div class="error">
-            <h3>{;lang;error_title;}</h3>
+        <header>
+            <div class="width-960">
+                <div class="glow"></div>
+            </div>
+            <section>
+                <div class="width-960">
+                    <h1>
+                        <a href="/"><img src="http://adamiak.cz/elementy/examples/bluetree.png" alt="BlueTree"></a>
+                        <br>
+                        bluetree
+                    </h1>
+                    <div class="current">
+                        <img src="http://adamiak.cz/elementy/examples/bluetree_framework.png" alt="Blue Framework 2.0">
+                    </div>
+                </div>
+            </section>
+            <div class="line_top"></div>
+        </header>
+        <div class="main_glow"></div>
+        <section class="width-960">
+            <div class="alert alert-danger">
+                <div class="alert-body">
+                    <h3>{;lang;error_title;}</h3>
+                </div>
+            </div>
             {;start;errors;}
-                <b>{;errors;error_code;}</b><br/>
-                {;errors;extend_message;}
-                <br/><br/>
-                {;errors;line;}<br/>
-                {;errors;file;}<br/>
-                {;errors;module;}
+            <div class="alert alert-danger">
+                <div class="alert-heading">
+                    {;errors;error_code;}
+                </div>
+                <div class="alert-body">
+                    <div class="error_block">
+                        {;errors;extend_message;}<br/><br/>
+                        {;errors;line;}<br/>
+                        {;errors;file;}<br/>
+                        <h4>{;lang;error_other;}</h4>
+                        {;data;}<br/>
+                        {;ip;}<br/>
+                        {;browser;}<br/>
+                        {;log;}
+                    </div>
+                </div>{;op;module;}
+                <div class="alert-footer">
+                    {;errors;module;}
+                </div>{;op_end;module;}
+            </div>
             {;end;errors;}
-            <h3>{;lang;error_other;}</h3>
-            {;data;}<br/>
-            {;ip;}<br/>
-            {;browser;}<br/>
-            {;log;}
-        </div>
+        </section>
     </body>
 </html>
+
