@@ -1,0 +1,22 @@
+<?php
+$content = [
+    'title'                                 => 'Istotne templatki systemowe',
+    'page_not_found'                        => 'Strona nie została znaleziona',
+    'page_not_found_description'            => 'Jeśli podana strona nie została znaleziona, framework pokaże specjalnie zdefiniowaną do tego stronę',
+    'error_template'                        => 'Strona błędu',
+    'error_template_description'            => 'Ta strona wyświetli się jeśli wystąpią jakieś błędy krytyczne php lub fareworka.',
+    'error_base'                            => 'Podstawowa templatka błędu',
+    'error_base_description'                => 'Templatka dla informacji o pojedyńczym błędzie generowanych w pętli. Używana do wyświetlania błędów dla całej strony.',
+    'error_info'                            => 'Templatka wiadomości informacyjnej',
+    'error_info_description'                => 'Templatka dla pojedyńczej informacji generowanej w pętli. Używana do wyświetlania informacji dla całej strony.',
+    'error_warning'                         => 'Templatka wiadomości ostrzegającej',
+    'error_warning_description'             => 'Templatka dla pojedyńczego ostrzeżenia generowanego w pętli. Używana do wyświetlania ostrzeżenia dla całej strony.',
+    'error_ok'                              => 'Templatka wiadomości o powodzeniu',
+    'error_ok_description'                  => 'Templatka dla pojedyńczej wiadomości o sukcesie generowanego w pętli. Używana do wyświetlania wiadomości o sukcesie dla całej strony.',
+    'error_pointer'                         => 'Błąd do wskazanego znacznika',
+    'error_pointer_description'             => 'Ta templatka jest używana do tworzenia informacji o błędzie do konkretnego znacznika w templatce.',
+    'empty_template'                        => 'Pusta templatka',
+    'empty_template_description'            => 'Pusta templatka, zawierająca jedynie zwykły znacznik, uzywana w węzłąch kierujących do innej strony, lub do zwracania danych typu json lub xml',
+    'tech_break_template'                   => 'Przerwa techniczna',
+    'tech_break_template_description'       => 'Jeśli system jes tymczasowo wyłączony poprzes ustawienie opcji techbreak na 1, ta strona zostanie wyświetlona.',
+];

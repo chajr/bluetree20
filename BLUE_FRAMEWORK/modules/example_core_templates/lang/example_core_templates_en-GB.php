@@ -1,0 +1,22 @@
+<?php
+$content = [
+    'title'                                 => 'Important core template structure',
+    'page_not_found'                        => 'Page not found',
+    'page_not_found_description'            => 'If page was not found in tree structure, framework will display special defined page.',
+    'error_template'                        => 'Error page template',
+    'error_template_description'            => 'That page will be displayed when some critical php or framework error will be occurred.',
+    'error_base'                            => 'Base error template',
+    'error_base_description'                => 'Template for single error information generated in loop. Used for show error for whole page.',
+    'error_info'                            => 'Information message template',
+    'error_info_description'                => 'Template for single information message. Used for show information for whole page, ore single module element.',
+    'error_warning'                         => 'Warning message template',
+    'error_warning_description'             => 'Template for single warning message. Used for show warning for whole page, ore single module element.',
+    'error_ok'                              => 'Success message template',
+    'error_ok_description'                  => 'Template for single success message. Used for show warning for whole page, ore single module element.',
+    'error_pointer'                         => 'Error to specified marker',
+    'error_pointer_description'             => 'That template is usage when we create error message to specific marker, without usage of core message markers.',
+    'empty_template'                        => 'Empty template',
+    'empty_template_description'            => 'Empty template with only simple marker to use in some nodes that wont return any content, like redirect node or xml or json data.',
+    'tech_break_template'                   => 'Technical break',
+    'tech_break_template_description'       => 'If system is temporary switched off by setting techbreak option to 1, that page will be showed up.',
+];

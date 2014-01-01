@@ -1,0 +1,585 @@
+<div class="width-200" data-spy="affix" data-offset-bottom="100">
+    <div class="list-group left_menu">
+        <a href="#page_not_found" class="list-group-item">
+            {;lang;page_not_found;}
+        </a>
+        <a href="#error_template" class="list-group-item">
+            {;lang;error_template;}
+        </a>
+        <a href="#error_base" class="list-group-item">
+            {;lang;error_base;}
+        </a>
+        <a href="#error_info" class="list-group-item">
+            {;lang;error_info;}
+        </a>
+        <a href="#error_warning" class="list-group-item">
+            {;lang;error_warning;}
+        </a>
+        <a href="#error_ok" class="list-group-item">
+            {;lang;error_ok;}
+        </a>
+        <a href="#error_pointer" class="list-group-item">
+            {;lang;error_pointer;}
+        </a>
+        <a href="#empty_template" class="list-group-item">
+            {;lang;empty_template;}
+        </a>
+        <a href="#tech_break_template" class="list-group-item">
+            {;lang;tech_break_template;}
+        </a>
+    </div>
+</div>
+
+<div class="width-760">
+    <section id="example_generate">
+        <h2>{;lang;title;}</h2>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="page_not_found">
+                {;lang;page_not_found;}
+            </div>
+            <div class="panel-body">
+                {;lang;page_not_found_description;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse0">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse0" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">{&#59;external&#59;examples/header&#59;}
+        &lt;div class="width-960 main-content"&gt;
+            &lt;div id="not_found_404"&gt;
+                &lt;div class="symbol"&gt;?&lt;/div&gt;
+                &lt;div class="code"&gt;404&lt;/div&gt;
+                &lt;div class="message"&gt;{&#59;lang&#59;page_not_found&#59;}!!&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div>
+{&#59;external&#59;examples/footer&#59;}</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;page id="error404" name="{&#59;lang&#59;core&#59;page_not_found&#59;}" layout="404" options="1001"&gt;
+    &lt;mod on="1" param="breadcrumbs"&gt;main&lt;/mod&gt;
+    &lt;css&gt;styles&lt;/css&gt;
+&lt;/page&gt;</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="error_template">
+                {;lang;error_template;}
+            </div>
+            <div class="panel-body">
+                {;lang;error_template_description;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse2">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse2" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;{;lang;error_title;}&lt;/title&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;link href="/style.php?module=core&amp;style=bootstrap_dark" rel="stylesheet" type="text/css"/&gt;
+    &lt;link href="/style.php?module=core&amp;style=styles" rel="stylesheet" type="text/css"/&gt;
+    &lt;style type="text/css"&gt;
+        body {
+            background-image: url("/elementy/examples/main_background.png");
+            margin: 0;
+        }
+        header{
+            height: 80px;
+        }
+        header .width-960 .glow {
+            background-image: url("/elementy/examples/logo_glow.png");
+        }
+        .main_glow {
+            background-image: url("/elementy/examples/background_glow.jpg");
+        }
+        .line_top {
+            background-image: url("/elementy/examples/top_line.png");
+        }
+        .alert-body h3{
+            text-align: center;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;header&gt;
+    &lt;div class="width-960"&gt;
+        &lt;div class="glow"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;section&gt;
+        &lt;div class="width-960"&gt;
+            &lt;h1&gt;
+                &lt;a href="/"&gt;&lt;img src="http://adamiak.cz/elementy/examples/bluetree.png" alt="BlueTree"&gt;&lt;/a&gt;
+                &lt;br&gt;
+                bluetree
+            &lt;/h1&gt;
+            &lt;div class="current"&gt;
+                &lt;img src="http://adamiak.cz/elementy/examples/bluetree_framework.png" alt="Blue Framework 2.0"&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+    &lt;div class="line_top"&gt;&lt;/div&gt;
+&lt;/header&gt;
+&lt;div class="main_glow"&gt;&lt;/div&gt;
+&lt;section class="width-960"&gt;
+    &lt;div class="alert alert-danger"&gt;
+        &lt;div class="alert-body"&gt;
+            &lt;h3&gt;{&#59;lang;error_title&#59;}&lt;/h3&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    {;start;errors;}
+    &lt;div class="alert alert-danger"&gt;
+        &lt;div class="alert-heading"&gt;
+            {&#59;errors;error_code&#59;}
+        &lt;/div&gt;
+        &lt;div class="alert-body"&gt;
+            &lt;div class="error_block"&gt;
+                {&#59;errors;extend_message&#59;}&lt;br/&gt;&lt;br/&gt;
+                {&#59;errors;line&#59;}&lt;br/&gt;
+                {&#59;errors;file&#59;}&lt;br/&gt;
+                &lt;h4&gt;{&#59;lang;error_other&#59;}&lt;/h4&gt;
+                {&#59;data&#59;}&lt;br/&gt;
+                {&#59;ip&#59;}&lt;br/&gt;
+                {&#59;browser&#59;}&lt;br/&gt;
+                {&#59;log&#59;}
+            &lt;/div&gt;
+        &lt;/div&gt;{&#59;op;module&#59;}
+        &lt;div class="alert-footer"&gt;
+            {&#59;errors;module&#59;}
+        &lt;/div&gt;{&#59;op_end;module&#59;}
+    &lt;/div&gt;
+    {&#59;end;errors&#59;}
+&lt;/section&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="error_base">
+                {;lang;error_base;}
+            </div>
+            <div class="panel-body">
+                {;lang;error_base_description;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse3">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse3" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">            {&#59;start&#59;errors&#59;}
+            &lt;div class="alert alert-danger alert-dismissable"&gt;
+                &lt;button type="button" class="close" data-dismiss="alert" aria-hidden="true"&gt;
+                    &times&#59;
+                &lt;/button&gt;
+                &lt;div class="alert-heading"&gt;
+                    {&#59;errors&#59;error_code&#59;}
+                &lt;/div&gt;
+                &lt;div class="alert-body"&gt;
+                    &lt;div class="error_block"&gt;
+                        {&#59;op&#59;extend_message&#59;}{&#59;errors&#59;extend_message&#59;}{&#59;op_end&#59;extend_message&#59;}
+                        {&#59;op&#59;line&#59;}&lt;br/&gt;&lt;br/&gt;{&#59;lang&#59;line&#59;}: {&#59;errors&#59;line&#59;}{&#59;op_end&#59;line&#59;}
+                        {&#59;op&#59;file&#59;}&lt;br/&gt;{&#59;lang&#59;file&#59;}: {&#59;errors&#59;file&#59;}{&#59;op_end&#59;file&#59;}
+                    &lt;/div&gt;
+                &lt;/div&gt;{&#59;op&#59;module&#59;}
+                &lt;div class="alert-footer"&gt;
+                    {&#59;lang&#59;modul&#59;}: {&#59;errors&#59;module&#59;}
+                &lt;/div&gt;{&#59;op_end&#59;module&#59;}
+            &lt;/div&gt;
+            {&#59;end&#59;errors&#59;}</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$this->error(
+    'critic',
+    'some_code',
+    'some additional information'
+);</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="error_info">
+                {;lang;error_info;}
+            </div>
+            <div class="panel-body">
+                {;lang;error_info_description;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse5">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse5" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">            {&#59;start&#59;errors&#59;}
+            &lt;div class="alert alert-info alert-dismissable"&gt;
+                &lt;button type="button" class="close" data-dismiss="alert" aria-hidden="true"&gt;
+                    &times&#59;
+                &lt;/button&gt;
+                &lt;div class="alert-heading"&gt;
+                    {&#59;errors&#59;error_code&#59;}
+                &lt;/div&gt;
+                &lt;div class="alert-body"&gt;
+                    &lt;div class="error_block"&gt;
+                        {&#59;op&#59;extend_message&#59;}{&#59;errors&#59;extend_message&#59;}{&#59;op_end&#59;extend_message&#59;}
+                        {&#59;op&#59;line&#59;}&lt;br/&gt;&lt;br/&gt;{&#59;lang&#59;line&#59;}: {&#59;errors&#59;line&#59;}{&#59;op_end&#59;line&#59;}
+                        {&#59;op&#59;file&#59;}&lt;br/&gt;{&#59;lang&#59;file&#59;}: {&#59;errors&#59;file&#59;}{&#59;op_end&#59;file&#59;}
+                    &lt;/div&gt;
+                &lt;/div&gt;{&#59;op&#59;module&#59;}
+                &lt;div class="alert-footer"&gt;
+                    {&#59;lang&#59;modul&#59;}: {&#59;errors&#59;module&#59;}
+                &lt;/div&gt;{&#59;op_end&#59;module&#59;}
+            &lt;/div&gt;
+            {&#59;end&#59;errors&#59;}</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$this->error(
+    'info',
+    'some_code',
+    'some additional information'
+);</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="error_warning">
+                {;lang;error_warning;}
+            </div>
+            <div class="panel-body">
+                {;lang;error_warning_description;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse6">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse6" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">            {&#59;start&#59;errors&#59;}
+            &lt;div class="alert alert-warning alert-dismissable"&gt;
+                &lt;button type="button" class="close" data-dismiss="alert" aria-hidden="true"&gt;
+                    &times&#59;
+                &lt;/button&gt;
+                &lt;div class="alert-heading"&gt;
+                    {&#59;errors&#59;error_code&#59;}
+                &lt;/div&gt;
+                &lt;div class="alert-body"&gt;
+                    &lt;div class="error_block"&gt;
+                        {&#59;op&#59;extend_message&#59;}{&#59;errors&#59;extend_message&#59;}{&#59;op_end&#59;extend_message&#59;}
+                        {&#59;op&#59;line&#59;}&lt;br/&gt;&lt;br/&gt;{&#59;lang&#59;line&#59;}: {&#59;errors&#59;line&#59;}{&#59;op_end&#59;line&#59;}
+                        {&#59;op&#59;file&#59;}&lt;br/&gt;{&#59;lang&#59;file&#59;}: {&#59;errors&#59;file&#59;}{&#59;op_end&#59;file&#59;}
+                    &lt;/div&gt;
+                &lt;/div&gt;{&#59;op&#59;module&#59;}
+                &lt;div class="alert-footer"&gt;
+                    {&#59;lang&#59;modul&#59;}: {&#59;errors&#59;module&#59;}
+                &lt;/div&gt;{&#59;op_end&#59;module&#59;}
+            &lt;/div&gt;
+            {&#59;end&#59;errors&#59;}</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$this->error(
+    'warning',
+    'some_code',
+    'some additional information'
+);</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="error_ok">
+                {;lang;error_ok;}
+            </div>
+            <div class="panel-body">
+                {;lang;error_ok_description;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse7">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse7" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">            {&#59;start&#59;errors&#59;}
+            &lt;div class="alert alert-success alert-dismissable"&gt;
+                &lt;button type="button" class="close" data-dismiss="alert" aria-hidden="true"&gt;
+                    &times&#59;
+                &lt;/button&gt;
+                &lt;div class="alert-heading"&gt;
+                    {&#59;errors&#59;error_code&#59;}
+                &lt;/div&gt;
+                &lt;div class="alert-body"&gt;
+                    &lt;div class="error_block"&gt;
+                        {&#59;op&#59;extend_message&#59;}{&#59;errors&#59;extend_message&#59;}{&#59;op_end&#59;extend_message&#59;}
+                        {&#59;op&#59;line&#59;}&lt;br/&gt;&lt;br/&gt;{&#59;lang&#59;line&#59;}: {&#59;errors&#59;line&#59;}{&#59;op_end&#59;line&#59;}
+                        {&#59;op&#59;file&#59;}&lt;br/&gt;{&#59;lang&#59;file&#59;}: {&#59;errors&#59;file&#59;}{&#59;op_end&#59;file&#59;}
+                    &lt;/div&gt;
+                &lt;/div&gt;{&#59;op&#59;module&#59;}
+                &lt;div class="alert-footer"&gt;
+                    {&#59;lang&#59;modul&#59;}: {&#59;errors&#59;module&#59;}
+                &lt;/div&gt;{&#59;op_end&#59;module&#59;}
+            &lt;/div&gt;
+            {&#59;end&#59;errors&#59;}</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$this->error(
+    'ok',
+    'some_code',
+    'some additional information'
+);</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="error_pointer">
+                {;lang;error_pointer;}
+            </div>
+            <div class="panel-body">
+                {;lang;error_pointer_description;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse8">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse8" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;div class="alert alert-danger alert-dismissable"&gt;
+    &lt;button type="button" class="close" data-dismiss="alert" aria-hidden="true"&gt;
+        &times&#59;
+    &lt;/button&gt;
+    &lt;div class="alert-body"&gt;
+        &lt;div class="error_block"&gt;
+            &lt;b&gt;{&#59;error_code&#59;}&lt;/b&gt;
+            {&#59;op&#59;extend_message&#59;}&lt;br/&gt;
+            {&#59;extend_message&#59;}{&#59;op_end&#59;extend_message&#59;}&lt;br/&gt;
+            {&#59;op&#59;line&#59;}
+            &lt;br/&gt;&lt;br/&gt;
+            {&#59;lang&#59;line&#59;}: {&#59;line&#59;}{&#59;op_end&#59;line&#59;}
+            {&#59;op&#59;file&#59;}&lt;br/&gt;
+            {&#59;lang&#59;file&#59;}: {&#59;file&#59;}{&#59;op_end&#59;file&#59;}
+            {&#59;op&#59;module&#59;}&lt;br/&gt;
+            {&#59;lang&#59;modul&#59;}: {&#59;module&#59;}{&#59;op_end&#59;module&#59;}
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$this->error(
+    'some_marker',
+    'some_code',
+    'some additional information'
+);</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="empty_template">
+                {;lang;empty_template;}
+            </div>
+            <div class="panel-body">
+                {;lang;empty_template_description;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse9">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse9" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">{&#59;empty&#59;}</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="tech_break_template">
+                {;lang;tech_break_template;}
+            </div>
+            <div class="panel-body">
+                {;lang;tech_break_template_description;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse10">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse10" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Technical break&lt;/title&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;link href="/style.php?module=core&amp;style=bootstrap_dark" rel="stylesheet" type="text/css"/&gt;
+    &lt;link href="/style.php?module=core&amp;style=styles" rel="stylesheet" type="text/css"/&gt;
+    &lt;style type="text/css"&gt;
+        body {
+            background-image: url("/elementy/examples/main_background.png");
+            margin: 0;
+        }
+        header{
+            height: 80px;
+        }
+        header .width-960 .glow {
+            background-image: url("/elementy/examples/logo_glow.png");
+        }
+        .main_glow {
+            background-image: url("/elementy/examples/background_glow.jpg");
+        }
+        .line_top {
+            background-image: url("/elementy/examples/top_line.png");
+        }
+        .jumbotron{
+            border: 2px solid #ff6600;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;header&gt;
+    &lt;div class="width-960"&gt;
+        &lt;div class="glow"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;section&gt;
+        &lt;div class="width-960"&gt;
+            &lt;h1&gt;
+                &lt;a href="/"&gt;&lt;img src="http://adamiak.cz/elementy/examples/bluetree.png" alt="BlueTree"&gt;&lt;/a&gt;
+                &lt;br&gt;
+                bluetree
+            &lt;/h1&gt;
+            &lt;div class="current"&gt;
+                &lt;img src="http://adamiak.cz/elementy/examples/bluetree_framework.png" alt="Blue Framework 2.0"&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+    &lt;div class="line_top"&gt;&lt;/div&gt;
+&lt;/header&gt;
+&lt;div class="main_glow"&gt;&lt;/div&gt;
+&lt;section class="width-960"&gt;
+    &lt;div class="jumbotron"&gt;
+        &lt;h1&gt;Technical break!&lt;/h1&gt;
+        &lt;p&gt;System is temporary switched off&lt;/p&gt;
+        &lt;p&gt;System jest tymczasowo wyłączony z powodu przerwy technicznej&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;option id="techbreak" value="1"/&gt;</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
