@@ -76,7 +76,7 @@ $content = array(
     'test'                      => 'Test, sprawdza czy wszystkie elementy działają poprawnie',
     'main_page'                 => 'Strona główna',
     'generate_content'          => 'Tworzenie treści',
-    'load_to_block'             => 'Wczytywanie templatek modułu do bloków',
+    'load_to_block'             => 'Wczytywanie modułów do bloków',
     'load_to_block_usage'       => 'Przykłąd jak wczytać templatki z modułów do jednego znacznik bloku w kolejności uruchamiania',
     'page_not_found'            => 'Strona nie została znaleziona',
 

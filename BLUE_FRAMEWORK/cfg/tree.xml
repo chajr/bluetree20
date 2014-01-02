@@ -7,7 +7,7 @@
 * @package     BlueFramework Core
 * @author      Michał Adamiak    <chajr@bluetree.pl>
 * @copyright   chajr/bluetree
-* @version     1.8.0
+* @version     1.9.0
 */
 -->
 <!DOCTYPE root SYSTEM 'dtd/tree.dtd'>
@@ -60,6 +60,12 @@
         </sub>
         <sub id="example_core_templates" name="{;lang;core;example_core_templates;}" layout="examples/example" options="11111">
             <mod on="1" block="examples">example_core_templates</mod>
+        </sub>
+        <sub id="example_blocks" name="{;lang;core;example_blocks;}" layout="examples/example" options="11111">
+            <mod on="1" block="examples">example_blocks</mod>
+            <mod on="1" block="example_block">example_blocks_1</mod>
+            <mod on="1" block="example_block">example_blocks_2</mod>
+            <mod on="1" block="example_block">example_blocks_3</mod>
         </sub>
         <mod on="1" param="breadcrumbs">main</mod>
         <css>styles</css>

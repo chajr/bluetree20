@@ -76,7 +76,7 @@ $content = array(
     'test'                      => 'Test, check that framework features work',
     'main_page'                 => 'Main page',
     'generate_content'          => 'Generate content',
-    'load_to_block'             => 'Loading module template to blocks',
+    'load_to_block'             => 'Loading modules to blocks',
     'load_to_block_usage'       => 'Example how to load some example module templates to one block marker in lunch order',
     'page_not_found'            => 'Page not found',
 
