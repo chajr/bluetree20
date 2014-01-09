@@ -1,11 +1,274 @@
-<p>
-    tworzenie wiadomości typu error<br/>
-    tworzenie wiadomości typu warning<br/>
-    tworzenie wiadomości typu info<br/>
-    tworzenie wiadomości typu ok<br/>
-    tworzenie wiadomości do dowolnego markera<br/>
-    tworzenie wiadomości do dowolnego markera w core<br/>
-    wyjatki wewnetrzne<br/>
-    lista z informacjami<br/>
-    wyjatki zatrzymujace modul ale zwracajace juz utworzaona tresc<br/>
-</p>
+<div class="width-200" data-spy="affix" data-offset-bottom="100">
+    <div class="list-group left_menu">
+        <a href="#system_messages" class="list-group-item">
+            {;lang;system_messages;}
+        </a>
+        <a href="#error_marker" class="list-group-item">
+            {;lang;error_marker;}
+        </a>
+        <a href="#errors_array" class="list-group-item">
+            {;lang;errors_array;}
+        </a>
+        <a href="#simple_exception" class="list-group-item">
+            {;lang;simple_exception;}
+        </a>
+        <a href="#error_mode" class="list-group-item">
+            {;lang;error_mode;}
+        </a>
+    </div>
+</div>
+<div class="width-760">
+    <section id="example_generate">
+        <h2>{;lang;title;}</h2>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="system_messages">
+                {;lang;error_marker;}
+            </div>
+            <div class="panel-body">
+                {;lang;system_messages_description;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse01">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse01" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;section class="width-960 main-content"&gt;
+    {&#59;op&#59;core_errors&#59;}
+    {&#59;core_error&#59;}
+    {&#59;op_end&#59;core_errors&#59;}
+    {&#59;op&#59;core_warnings&#59;}
+    {&#59;core_warning&#59;}
+    {&#59;op_end&#59;core_warnings&#59;}
+    {&#59;op&#59;core_infos&#59;}
+    {&#59;core_info&#59;}
+    {&#59;op_end&#59;core_infos&#59;}
+    {&#59;op&#59;core_oks&#59;}
+    {&#59;core_ok&#59;}
+    {&#59;op_end&#59;core_oks&#59;}
+&lt;/section&gt;</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$this->error(
+    'critic',
+    'error_from_module',
+    '{&#59;lang;additional_message&#59;}'
+);
+
+$this->error(
+    'warning',
+    'warning_code',
+    '{&#59;lang;additional_message&#59;}'
+);
+
+$this->error(
+    'info',
+    'info_code',
+    '{&#59;lang;additional_message&#59;}'
+);
+
+$this->error(
+    'ok',
+    'ok_code',
+    '{&#59;lang;additional_message&#59;}'
+);</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="error_marker">
+                {;lang;error_marker;}
+            </div>
+            <div class="panel-body">
+                {;error_marker;}
+                {;error_marker1;}
+                {;error_marker2;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse0">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse0" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;div class="panel-body"&gt;
+    {&#59;error_marker&#59;}
+    {&#59;error_marker1&#59;}
+    {&#59;error_marker2&#59;}
+&lt;/div&gt;</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$this->error(
+    'error_marker',
+    'some_code',
+    '{&#59;lang;other_info&#59;} - {&#59;lang;additional_message&#59;}'
+);
+
+$this->error(
+    'error_marker1',
+    'some_code',
+    '{&#59;lang;other_info&#59;}'
+);
+
+$this->error(
+    'error_marker2',
+    'some_code',
+    '12345'
+);</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="errors_array">
+                {;lang;errors_array;}
+            </div>
+            <div class="panel-body">
+                <pre>{;errors_list;}</pre>
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse1">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse1" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;pre&gt;{&#59;errors_list&#59;}&lt;/pre&gt;</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$errors = var_export($this->error, TRUE);
+$this->generate('errors_list', $errors);</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="simple_exception">
+                {;lang;simple_exception;}
+            </div>
+            <div class="panel-body">
+                {;exception;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse2">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse2" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">{&#59;exception&#59;}</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">try{
+    throw new Exception('some exception');
+} catch (Exception $e) {
+    $this->error('exception', 'simple_exception', '{&#59;lang;normal_exception&#59;}');
+}</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="error_mode">
+                {;lang;error_mode;}
+            </div>
+            <div class="panel-body">
+                <div class="alert alert-warning">
+                    <div class="alert-body">
+                        {;error_mode;}
+                    </div>
+                </div>
+                <div class="alert alert-info">
+                    <div class="alert-body">
+                        {;lang;error_mode_info;}
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse3">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse3" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml"><div class="alert alert-warning">
+    <div class="alert-body">
+        {&#59;error_mode&#59;}
+    </div>
+</div></pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">throw new modException(
+    'error_mode',
+    '{&#59;lang;other_info&#59;}'
+);</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">public function runErrorMode(){
+    $this->generate('error_mode', '{&#59;lang;error_mode&#59;}');
+}</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

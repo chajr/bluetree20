@@ -79,6 +79,7 @@ $content = array(
     'load_to_block'             => 'Wczytywanie modułów do bloków',
     'load_to_block_usage'       => 'Przykłąd jak wczytać templatki z modułów do jednego znacznik bloku w kolejności uruchamiania',
     'page_not_found'            => 'Strona nie została znaleziona',
+    'example_messages_usage'    => 'Przykłady tworzenia wiadomości (błędy ostrzezenia, itp.) to głównych znaczników systemowych lub wskazanych znaczników',
 
     'simple_generate'                   => 'Zastępowanie zwykłego znacznika',
     'simple_generate_core'              => 'Zastępowanie zwykłego znacznika w głównej templatce',
