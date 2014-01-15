@@ -80,6 +80,8 @@ $content = array(
     'load_to_block_usage'       => 'Przykłąd jak wczytać templatki z modułów do jednego znacznik bloku w kolejności uruchamiania',
     'page_not_found'            => 'Strona nie została znaleziona',
     'example_messages_usage'    => 'Przykłady tworzenia wiadomości (błędy ostrzezenia, itp.) to głównych znaczników systemowych lub wskazanych znaczników',
+    'example_translate_usage'   => 'Przykłądy używania znaczników tułmaczeń w templatkach (uwzględniając tułmaczenia z innych plików oraz wymuszanie tułmaczeń)',
+    'example_sys_marks_usage'   => 'Pokazuje znaczniki zamieniane przez treść z systemowych bibliotek',
 
     'simple_generate'                   => 'Zastępowanie zwykłego znacznika',
     'simple_generate_core'              => 'Zastępowanie zwykłego znacznika w głównej templatce',

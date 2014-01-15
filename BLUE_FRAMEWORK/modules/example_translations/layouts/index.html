@@ -1,0 +1,210 @@
+<div class="width-200" data-spy="affix" data-offset-bottom="100">
+    <div class="list-group left_menu">
+        <a href="#simple_translation" class="list-group-item">
+            {;lang;simple_translation;}
+        </a>
+        <a href="#from_other" class="list-group-item">
+            {;lang;from_other;}
+        </a>
+        <a href="#to_given_lang" class="list-group-item">
+            {;lang;to_given_lang;}
+        </a>
+        <a href="#from_other_to_given_lang" class="list-group-item">
+            {;lang;from_other_to_given_lang;}
+        </a>
+        <a href="#translation_code" class="list-group-item">
+            {;lang;translation_code;}
+        </a>
+    </div>
+</div>
+<div class="width-760">
+    <section id="example_generate">
+        <h2>{;lang;title;}</h2>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="simple_translation">
+                {;lang;simple_translation;}
+            </div>
+            <div class="panel-body">
+                {;lang;sample_translation;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse0">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse0" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">{&#59;lang;sample_translation&#59;}</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$content = [
+    'sample_translation'                => 'This is some sample translation',
+];</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="from_other">
+                {;lang;from_other;}
+            </div>
+            <div class="panel-body">
+                {;lang;core;example_translate;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse1">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse1" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">{&#59;lang;core;example_translate&#59;}</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$content = [
+    'example_translate'         => 'Using translations',
+];</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="to_given_lang">
+                {;lang;to_given_lang;}
+            </div>
+            <div class="panel-body">
+                <b>en-GB:</b> {;lang-en-GB;sample_translation;}<br/>
+                <b>pl-PL:</b> {;lang-pl-PL;sample_translation;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse2">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse2" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;b&gt;en-GB:&lt;/b&gt; {&#59;lang-en-GB&#59;sample_translation&#59;}&lt;br/&gt;
+&lt;b&gt;pl-PL:&lt;/b&gt; {&#59;lang-pl-PL&#59;sample_translation&#59;}</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$content = [
+    'sample_translation'                => 'This is some sample translation',
+];</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$content = [
+    'sample_translation'                => 'To jest jakieś przykładowe tułmaczenie',
+];</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="from_other_to_given_lang">
+                {;lang;from_other_to_given_lang;}
+            </div>
+            <div class="panel-body">
+                <b>en-GB:</b> {;lang-en-GB;core;example_translate;}<br/>
+                <b>pl-PL:</b> {;lang-pl-PL;core;example_translate;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse3">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse3" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;b&gt;en-GB:&lt;/b&gt; {&#59;lang-en-GB&#59;core;example_translate&#59;}&lt;br/&gt;
+&lt;b&gt;pl-PL:&lt;/b&gt; {&#59;lang-pl-PL&#59;core;example_translate&#59;}</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$content = [
+    'example_translate'         => 'Using translations',
+];</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$content = [
+    'example_translate'         => 'Używanie tułmaczeń',
+];</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="translation_code">
+                {;lang;translation_code;}
+            </div>
+            <div class="panel-body">
+                {;lang;not_existing_translation_code;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse4">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse4" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">{&#59;lang;not_existing_translation_code&#59;}</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

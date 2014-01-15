@@ -79,7 +79,9 @@ $content = array(
     'load_to_block'             => 'Loading modules to blocks',
     'load_to_block_usage'       => 'Example how to load some example module templates to one block marker in lunch order',
     'page_not_found'            => 'Page not found',
-    'example_messages_usage'    => 'Example of creating messages (errors, warnings, etc.) to main system markers ore some specific markers',
+    'example_messages_usage'    => 'Examples of creating messages (errors, warnings, etc.) to main system markers ore some specific markers',
+    'example_translate_usage'   => 'Examples of usage translation markers in template (including translate from other files and force translation)',
+    'example_sys_marks_usage'   => 'Shows usage of using markers replaced by content from core libraries',
 
     'simple_generate'                   => 'Replace simple marker',
     'simple_generate_core'              => 'Replace simple marker in core template',

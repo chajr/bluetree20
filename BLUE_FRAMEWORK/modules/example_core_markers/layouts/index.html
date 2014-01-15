@@ -1,0 +1,176 @@
+<div class="width-200" data-spy="affix" data-offset-bottom="100">
+    <div class="list-group left_menu">
+        <a href="#content_markers" class="list-group-item">
+            {;lang;content_markers;}
+        </a>
+        <a href="#header_markers" class="list-group-item">
+            {;lang;header_markers;}
+        </a>
+        <a href="#messages_markers" class="list-group-item">
+            {;lang;messages_markers;}
+        </a>
+        <a href="#url_markers" class="list-group-item">
+            {;lang;url_markers;}
+        </a>
+    </div>
+</div>
+<div class="width-760">
+    <section id="example_generate">
+        <h2>{;lang;title;}</h2>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="content_markers">
+                {;lang;content_markers;}
+            </div>
+            <div class="panel-body">
+                {;external;template_name;}
+                {;external;some_directory/template_name;}
+                {;block;example_block;}
+                <div class="alert alert-warning">
+                    <div class="alert-body">
+                        {;lang;mod_marker;}
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse0">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse0" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">{&#59;external&#59;template_name&#59;}
+{&#59;external&#59;some_directory/template_name&#59;}
+{&#59;block&#59;example_block&#59;}
+&lt;div class="alert alert-warning"&gt;
+    &lt;div class="alert-body"&gt;
+        {&#59;lang&#59;mod_marker&#59;}
+    &lt;/div&gt;
+&lt;/div&gt;</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;p&gt;{&#59;lang&#59;external_template&#59;} 1&lt;/p&gt;</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;p&gt;{&#59;lang&#59;external_template&#59;} 2&lt;/p&gt;</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;div class="alert alert-success"&gt;
+    &lt;div class="alert-body"&gt;
+        {&#59;module_name&#59;}
+    &lt;/div&gt;
+&lt;/div&gt;</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="header_markers">
+                {;lang;header_markers;}
+            </div>
+            <div class="panel-body">
+                {;core;meta;}
+                {;core;css;}
+                {;core;js;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse1">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse1" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml"></pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="messages_markers">
+                {;lang;messages_markers;}
+            </div>
+            <div class="panel-body">
+                {;core_error;} - Display error messages
+                {;core_warning;} - Display warning messages
+                {;core_info;} - Display information messages
+                {;core_ok;} - Display success messages
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse2">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse2" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml"></pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="url_markers">
+                {;lang;url_markers;}
+            </div>
+            <div class="panel-body">
+                {;core;domain;} - Replaced by actually lunched domain with test directory is set http://my-site.pl
+                {;core;lang;} - Replaced by actually lunched language code, like pl-PL/
+                {;core;mainpath;} - Replaced by actually lunched domain with test directory is set and language code http://my-site.pl/pl-PL/
+                {;path;/strona/podstrona/param,val/p2,v/;} - Convert given key => value data to mode rewrite url or classic url
+                {;full;/strona/podstrona/param,val/p2,v/;} - Convert and apply domain with language code
+                {;rel;/strona/podstrona/param,val/p2,v/;} - Convert and apply domain with language code
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse3">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse3" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml"></pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
