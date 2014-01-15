@@ -10,7 +10,7 @@
  * @subpackage  display
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.11.4
+ * @version     2.11.5
  */
 class display_class
 {
@@ -432,17 +432,17 @@ class display_class
             }
 
             $this->DISPLAY['core'] = str_replace(
-                '{;mod;'.$key.';}',
+                '{;mod;' . $key . ';}',
                 $val,
                 $this->DISPLAY['core']
             );
             unset($this->DISPLAY[$key]);
         }
 
-        foreach($blocks as $block_name => $block_content){
+        foreach($blocks as $blockName => $blockContent){
             $this->DISPLAY['core'] = str_replace(
-                '{;block;'.$block_name.';}',
-                $block_content,
+                '{;block;' . $blockName . ';}',
+                $blockContent,
                 $this->DISPLAY['core']
             );
         }
@@ -707,7 +707,7 @@ class display_class
             $content   = starter_class::load($finalPath, TRUE);
 
             if (!$content) {
-                throw new coreException('core_error_3', $finalPath . '.html');
+                throw new coreException('core_error_3', $finalPath);
             }
 
             $this->DISPLAY[$module] = str_replace(
