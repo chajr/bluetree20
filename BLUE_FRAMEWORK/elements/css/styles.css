@@ -79,6 +79,7 @@ header .width-960 .glow{
     width: 100%;
     background-image: url({;core;domain;}elementy/examples/background_glow.jpg);
     background-position: top center;
+    background-repeat: no-repeat;
     height: 192px;
 }
 .main-content{
