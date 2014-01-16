@@ -15,6 +15,7 @@
     <lib on="1">valid</lib>
     <lib on="0">jakas_biblioteka</lib>
     <lib on="1">user</lib>
+    <mod on="1">benchmark</mod>
     <css>bootstrap_dark</css>
     <css>elusive-webfont</css>
     <css>elusive-webfont-ie7</css>
