@@ -198,12 +198,12 @@ That part of code will display:
 
 ### Core markers used in module templates _(can be used in main template)_
 #### URL markers
-1. **{;core;domain;}** - Replaced by actually lunched domain with test directory is set `http://my-site.pl`
+1. **{;core;domain;}** - Replaced by actually lunched domain optionally with test directory `(http://my-site.pl)`
 2. **{;core;lang;}** - Replaced by actually lunched language code, like `pl-PL/`
 3. **{;core;mainpath;}** - Replaced by actually lunched domain with test directory is set and language code `http://my-site.pl/pl-PL/`
 4. **{;path;/strona/podstrona/param,val/p2,v/;}** - Convert given key => value data to mode rewrite url or classic url
-5. **{;full;/strona/podstrona/param,val/p2,v/;}** - Convert and apply domain with language code
-6. **{;rel;/strona/podstrona/param,val/p2,v/;}** - Convert and apply domain with language code
+5. **{;full;/strona/podstrona/param,val/p2,v/;}** - Convert and apply key => value data domain with language code
+6. **{;rel;/strona/podstrona/param,val/p2,v/;}** - Convert and apply key => value data domain with language code, relative to current page
 
 In that markers you can use markers replaced from `display_class`. By this feature
 you can put in path marker an parent marker to build return to previous page

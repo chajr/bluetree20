@@ -83,73 +83,46 @@
                 {;lang;header_markers;}
             </div>
             <div class="panel-body">
-                {;core;meta;}
-                {;core;css;}
-                {;core;js;}
-            </div>
-            <div class="panel-footer">
-                <div class="panel-group">
-                    <div class="panel panel-primary source_code">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#collapse1">
-                                    {;lang;core;show_source;}
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapse1" class="panel-collapse collapse out">
-                            <div class="panel-body">
-                                <code>
-                                    <pre class="brush: xml"></pre>
-                                </code>
-                            </div>
-                        </div>
-                    </div>
+                <div id="css_links">
+                    <h4>{&#59;core;css&#59;}</h4>
+                    <pre></pre>
+                </div>
+                <br/>
+                <div id="js_links">
+                    <h4>{&#59;core;js&#59;}</h4>
+                    <pre></pre>
+                </div>
+                <br/>
+                <div id="meta_tags">
+                    <h4>{&#59;core;meta&#59;}</h4>
+                    <pre></pre>
                 </div>
             </div>
         </div>
+
         <div class="panel panel-default">
             <div class="panel-heading" id="messages_markers">
                 {;lang;messages_markers;}
             </div>
             <div class="panel-body">
-                {;core_error;} - Display error messages
-                {;core_warning;} - Display warning messages
-                {;core_info;} - Display information messages
-                {;core_ok;} - Display success messages
-            </div>
-            <div class="panel-footer">
-                <div class="panel-group">
-                    <div class="panel panel-primary source_code">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#collapse2">
-                                    {;lang;core;show_source;}
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapse2" class="panel-collapse collapse out">
-                            <div class="panel-body">
-                                <code>
-                                    <pre class="brush: xml"></pre>
-                                </code>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <p>{&#59;core_error&#59;} - Display error messages</p>
+                <p>{&#59;core_warning&#59;} - Display warning messages</p>
+                <p>{&#59;core_info&#59;} - Display information messages</p>
+                <p>{&#59;core_ok&#59;} - Display success messages</p>
             </div>
         </div>
+
         <div class="panel panel-default">
             <div class="panel-heading" id="url_markers">
                 {;lang;url_markers;}
             </div>
             <div class="panel-body">
-                {;core;domain;} - Replaced by actually lunched domain with test directory is set http://my-site.pl
-                {;core;lang;} - Replaced by actually lunched language code, like pl-PL/
-                {;core;mainpath;} - Replaced by actually lunched domain with test directory is set and language code http://my-site.pl/pl-PL/
-                {;path;/strona/podstrona/param,val/p2,v/;} - Convert given key => value data to mode rewrite url or classic url
-                {;full;/strona/podstrona/param,val/p2,v/;} - Convert and apply domain with language code
-                {;rel;/strona/podstrona/param,val/p2,v/;} - Convert and apply domain with language code
+                <p><b>{;core;domain;}</b> - {;lang;domain;}</p>
+                <p><b>{;core;lang;}</b> - {;lang;lang;}/</p>
+                <p><b>{;core;mainpath;}</b> - {;lang;mainpath;}</p>
+                <p><b>{;path;/strona/podstrona/param,val/p2,v/;}</b> - {;lang;path;}</p>
+                <p><b>{;full;/strona/podstrona/param,val/p2,v/;}</b> - {;lang;full;}</p>
+                <p><b>{;rel;/strona/podstrona/param,val/p2,v/;}</b> - {;lang;rel;}</p>
             </div>
             <div class="panel-footer">
                 <div class="panel-group">
@@ -164,7 +137,12 @@
                         <div id="collapse3" class="panel-collapse collapse out">
                             <div class="panel-body">
                                 <code>
-                                    <pre class="brush: xml"></pre>
+                                    <pre class="brush: xml">&lt;p&gt;&lt;b&gt;{&#59;core&#59;domain&#59;}&lt;/b&gt; - {;lang&#59;domain;}&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;{&#59;core&#59;lang&#59;}&lt;/b&gt; -{;lang&#59;lang;}&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;{&#59;core&#59;mainpath&#59;}&lt;/b&gt; -{;lang&#59;mainpath;}&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;{&#59;path&#59;/strona/podstrona/param,val/p2,v/&#59;}&lt;/b&gt; - {;lang&#59;path;}&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;{&#59;full&#59;/strona/podstrona/param,val/p2,v/&#59;}&lt;/b&gt; - {;lang&#59;full;}&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;{&#59;rel&#59;/strona/podstrona/param,val/p2,v/&#59;}&lt;/b&gt; - {;lang&#59;rel;}&lt;/p&gt;</pre>
                                 </code>
                             </div>
                         </div>

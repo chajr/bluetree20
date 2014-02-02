@@ -30,6 +30,7 @@ class example_core_markers
     {
         $this->layout('index');
         $this->_translate();
+        $this->set('show', 'js');
     }
 
     public function runErrorMode(){
