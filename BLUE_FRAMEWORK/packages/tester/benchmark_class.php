@@ -7,7 +7,7 @@
  * @subpackage  benchmark
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.6.1
+ * @version     1.6.2
  */
 class benchmark_class
 {
@@ -234,8 +234,6 @@ class benchmark_class
                     $ram        .= ' kB';
                 }
 
-                
-                
                 $display .= '<tr style="' . $additionalColor . '">
                     <td style="width:40%;color:#fff">' . $marker['marker_name'] . '</td>' . "\n";
                 $display .= '<td style="width:20%">' . $time . '</td>'."\n";
