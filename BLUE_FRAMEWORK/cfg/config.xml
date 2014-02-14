@@ -25,7 +25,7 @@
     <option id="global_var_check" value="#^[a-zA-Z][\w]*$#"/>
     <option id="max_get" value="11"/>
     <option id="max_post" value="60"/>
-    <option id="get_len" value="25"/>
+    <option id="get_len" value="55"/>
     <option id="test" value=""/>
     <option id="post_secure" value="1"/>
     <option id="file_max_size" value="1000"/>
