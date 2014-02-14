@@ -7,7 +7,7 @@
 * @package     BlueFramework Core
 * @author      Michał Adamiak    <chajr@bluetree.pl>
 * @copyright   chajr/bluetree
-* @version     1.13.0
+* @version     1.14.0
 */
 -->
 <!DOCTYPE root SYSTEM 'dtd/tree.dtd'>
@@ -137,10 +137,12 @@
     </page>
 
     <page id="commit" name="Commit creator" layout="commit" options="1111">
-        <sub id="generate" name="Commit creator" layout="commit" options="11111">
+        <sub id="generate" name="Commit content" layout="commit" options="11111">
             <mod on="1" param="generate">commit</mod>
         </sub>
+        <mod on="1" param="breadcrumbs">main</mod>
         <mod on="1">commit</mod>
+        <css>styles</css>
     </page>
 
     <page id="ajax_test" layout="ajax" name="Ajax" options="1000">
