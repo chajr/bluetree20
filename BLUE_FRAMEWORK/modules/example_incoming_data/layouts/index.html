@@ -1,0 +1,373 @@
+<div class="width-200" data-spy="affix" data-offset-bottom="100">
+    <div class="list-group left_menu">
+        <a href="#incoming_data_settings" class="list-group-item">
+            {;lang;incoming_data_settings;}
+        </a>
+        <a href="#get_access" class="list-group-item">
+            {;lang;get_access;}
+        </a>
+        <a href="#get_access" class="list-group-item">
+            {;lang;get_object_methods;}
+        </a>
+        <a href="#post_access" class="list-group-item">
+            {;lang;post_access;}
+        </a>
+        <a href="#session_access" class="list-group-item">
+            {;lang;session_access;}
+        </a>
+        <a href="#cookie_access" class="list-group-item">
+            {;lang;cookie_access;}
+        </a>
+        <a href="#file_access" class="list-group-item">
+            {;lang;file_access;}
+        </a>
+    </div>
+</div>
+
+<div class="width-760">
+    <section id="example_layout">
+        <h2>{;lang;core;example_incoming_data;}</h2>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="incoming_data_settings">
+                {;lang;incoming_data_settings;}
+            </div>
+            <div class="panel-body">
+                <h3>{;lang;settings;} /BLUE_FRAMEWORK/cfg/config.xml</h3>
+                <p><b>reg_exp_rewrite</b> - {;lang;reg_exp_rewrite;}</p>
+                <p><b>reg_exp_classic</b> - {;lang;reg_exp_classic;}</p>
+                <p><b>global_var_check</b> - {;lang;global_var_check;}</p>
+                <p><b>max_get</b> - {;lang;max_get;}</p>
+                <p><b>max_post</b> - {;lang;max_post;}</p>
+                <p><b>get_len</b> - {;lang;get_len;}</p>
+                <p><b>post_secure</b> - {;lang;post_secure;}</p>
+                <p><b>file_max_size</b> - {;lang;file_max_size;}</p>
+                <p><b>files_max_size</b> - {;lang;files_max_size;}</p>
+                <p><b>files_max</b> - {;lang;files_max;}</p>
+                <p><b>cookielifetime</b> - {;lang;cookielifetime;}</p>
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse0">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse0" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;option id="reg_exp_rewrite" value="#^[\w-\\,\/]*$#"/&gt;
+&lt;option id="reg_exp_classic" value="#^[\w\.\/?=&amp;-]*$#"/&gt;
+&lt;option id="global_var_check" value="#^[a-zA-Z][\w]*$#"/&gt;
+&lt;option id="max_get" value="11"/&gt;
+&lt;option id="max_post" value="60"/&gt;
+&lt;option id="get_len" value="25"/&gt;
+&lt;option id="test" value=""/&gt;
+&lt;option id="post_secure" value="1"/&gt;
+&lt;option id="file_max_size" value="1000"/&gt;
+&lt;option id="files_max_size" value="10000"/&gt;
+&lt;option id="files_max" value="10"/&gt;
+&lt;option id="cookielifetime" value="3600"/&gt;</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" id="get_access">
+                {;lang;get_access;}
+            </div>
+            <div class="panel-body">
+                {;lang;get_description;}
+                <h3>GET {;lang;variable;}: <b>{;get_variable;}</b></h3>
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse1">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse1" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">
+$variable = $this->get->variable;
+$this->generate('get_variable', $variable);</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">
+&lt;h3&gt;GET {;lang&#59;variable;}: &lt;b&gt;{&#59;get_variable&#59;}&lt;/b&gt;&lt;/h3&gt;</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" id="post_access">
+                {;lang;post_access;}
+            </div>
+            <div class="panel-body">
+                {;lang;post_description;}
+                <h3>POST {;lang;variable;}: <b>{;post_variable;}</b></h3>
+                <form action="" method="post" class="form-inline">
+                    <div class="input-group">
+                        <input type="text"
+                               name="variable"
+                               value="{;post_variable;}"
+                               placeholder="{;lang;put_value;}"
+                               class="form-control"
+                        />
+                        <span class="input-group-btn">
+                            <input type="submit"
+                                   value="{;lang;sent;}"
+                                   class="btn btn-primary"
+                            />
+                          </span>
+                    </div>
+                </form>
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse2">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse2" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">
+$variable = $this->post->variable;
+$this->generate('variable', $variable);</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">
+&lt;h3&gt;POST {;lang&#59;variable;}: &lt;b&gt;{&#59;variable&#59;}&lt;/b&gt;&lt;/h3&gt;
+&lt;form action="" method="post" class="form-inline"&gt;
+    &lt;div class="input-group"&gt;
+        &lt;input type="text"
+               name="variable"
+               value="{&#59;post_variable&#59;}"
+               placeholder="{;lang&#59;put_value;}"
+               class="form-control"
+        /&gt;
+        &lt;span class="input-group-btn"&gt;
+            &lt;input type="submit"
+                   value="{;lang&#59;sent;}"
+                   class="btn btn-primary"
+            /&gt;
+        &lt;/span&gt;
+    &lt;/div&gt;
+&lt;/form&gt;</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" id="session_access">
+                {;lang;session_access;}
+            </div>
+            <div class="panel-body">
+                <p>{;lang;session_description;}</p>
+                <div>
+                    {;lang;public;}: <strong class="text-info">{;public;}</strong> - {;lang;new_public;}: <strong class="text-info">{;public2;}</strong>
+                </div>
+                <div>
+                    {;lang;user;}: <strong class="text-info">{;user;}</strong> - {;lang;new_user;}: <strong class="text-info">{;user2;}</strong>
+                </div>
+                <div>{;session_display;session_display_test;}</div>
+                <span class="warning-info">
+                    {;lang;not_support;}
+                </span>
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse3">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse3" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$this->generate(array(
+    'public'    => $this->session->val,
+    'user'      => $this->getSessionVariable('val_user', 'user')
+));
+
+if ($this->session->val) {
+    $this->session->val += 1;
+} else {
+    $this->session->val = 1;
+}
+
+if ($this->getSessionVariable('val_user', 'user')) {
+    $userValue = $this->getSessionVariable('val_user', 'user') +1;
+} else {
+    $userValue = 1;
+}
+
+$this->setSession('val_user', $userValue, 'user');
+$this->generate(array(
+    'public2'   => $this->session->val,
+    'user2'     => $this->getSessionVariable('val_user', 'user')
+));
+
+$this->setSession(
+    'session_display_test',
+    $this->session->val . ' - display',
+    'display'
+);</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                    <pre class="brush: xml">&lt;div&gt;
+    {;lang&#59;public;}: &lt;strong class="text-info"&gt;{&#59;public&#59;}&lt;/strong&gt; - {;lang&#59;new_public;}: &lt;strong class="text-info"&gt;{&#59;public2&#59;}&lt;/strong&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    {;lang&#59;user;}: &lt;strong class="text-info"&gt;{&#59;user&#59;}&lt;/strong&gt; - {;lang&#59;new_user;}: &lt;strong class="text-info"&gt;{&#59;user2&#59;}&lt;/strong&gt;
+&lt;/div&gt;
+&lt;div&gt;{;session_display&#59;session_display_test;}&lt;/div&gt;</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" id="cookie_access">
+                {;lang;cookie_access;}
+            </div>
+            <div class="panel-body">
+                <div>{;lang;cookie;}-1: <span class="text-info">{;cookie;}</span></div>
+                <div>{;lang;cookie;}-2: <span class="text-info">{;cookie2;}</span></div>
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse4">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse4" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$this->generate('cookie', $this->cookie->cookieVariable);
+if ($this->cookie->cookieVariable) {
+    $this->cookie->cookieVariable += 1;
+} else {
+    $this->cookie->cookieVariable = 1;
+}
+$this->generate('cookie2', $this->cookie->cookieVariable);</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;div&gt;{;lang&#59;cookie;}-1: &lt;span class="text-info"&gt;{&#59;cookie&#59;}&lt;/span&gt;&lt;/div&gt;
+&lt;div&gt;{;lang&#59;cookie;}-2: &lt;span class="text-info"&gt;{&#59;cookie2&#59;}&lt;/span&gt;&lt;/div&gt;</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" id="file_access">
+                {;lang;file_access;}
+            </div>
+            <div class="panel-body">
+                <form action="" method="post" class="form-inline" enctype="multipart/form-data">
+                    <div class="input-group">
+                        <input type="file"
+                               name="file_upload"
+                               class="file_input"
+                        />
+                        <input type="submit"
+                               value="{;lang;sent_file;}"
+                               class="btn btn-primary file_button"
+                        />
+                    </div>
+                </form>
+                <div class="file_data">
+                    <pre>{;file_data;}</pre>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse5">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse5" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">if ($this->files->file_upload) {
+    $fileData = var_export($this->files->file_upload, TRUE);
+    $this->generate('file_data', $fileData);
+}</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;form action="" method="post" class="form-inline" enctype="multipart/form-data"&gt;
+    &lt;div class="input-group"&gt;
+        &lt;input type="file"
+                  name="file_upload"
+                  class="file_input"
+        /&gt;
+        &lt;input type="submit"
+                  value="{;lang&#59;sent_file;}"
+                  class="btn btn-primary file_button"
+        /&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;div class="file_data"&gt;
+    &lt;pre&gt;{&#59;file_data&#59;}&lt;/pre&gt;
+&lt;/div&gt;</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
