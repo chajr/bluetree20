@@ -7,7 +7,7 @@
 * @package     BlueFramework Core
 * @author      Michał Adamiak    <chajr@bluetree.pl>
 * @copyright   chajr/bluetree
-* @version     1.11.0
+* @version     1.12.0
 */
 -->
 <!DOCTYPE root SYSTEM 'dtd/tree.dtd'>
@@ -23,6 +23,7 @@
     <js external="1">//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js</js>
     <js>js1</js>
     <js>bootstrap</js>
+    <js>bootstrap_dropdown_hover</js>
 
     <page id="index" name="{;lang;core;main_page;}" layout="index" options="1111" changefreq="always" priority="0.8">
         <lib on="1">db/sql_abstract,mysql_connection</lib>
