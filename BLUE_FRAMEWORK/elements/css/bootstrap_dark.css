@@ -15,7 +15,7 @@
  
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     0.4.4
+ * @version     0.4.5
  */
 article,
 aside,
@@ -4926,9 +4926,8 @@ body.modal-open,
 }
 .modal-content {
     position: relative;
-    background-color: #ffffff;
-    border: 1px solid #999999;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    background-color: #111;
+    border: 1px solid #2a2a2a;
     border-radius: 4px;
     -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
     box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
@@ -4954,7 +4953,8 @@ body.modal-open,
 }
 .modal-header {
     padding: 15px;
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #2a2a2a;
+    background-color: #191919;
     min-height: 16.2px;
 }
 .modal-header .close {
@@ -4972,7 +4972,8 @@ body.modal-open,
     margin-top: 15px;
     padding: 19px 20px 20px;
     text-align: right;
-    border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #2a2a2a;
+    background-color: #222;
 }
 .modal-footer:before,
 .modal-footer:after {
