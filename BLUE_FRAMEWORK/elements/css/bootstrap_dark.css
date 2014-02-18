@@ -15,7 +15,7 @@
  
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     0.4.5
+ * @version     0.4.6
  */
 article,
 aside,
@@ -3349,7 +3349,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 .nav-tabs > li > a {
     margin-right: 2px;
-    line-height: 1.2;
+    line-height: 2;
     border: 1px solid transparent;
     border-radius: 2px 2px 0 0;
 }
@@ -3359,11 +3359,21 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
-    color: #777777;
+    color: #999;
     background-color: #000000;
     border: 1px solid #555555;
     border-bottom-color: transparent;
     cursor: default;
+    outline: none;
+}
+.tab-content{
+    border-bottom: 1px solid #555555;
+    border-right: 1px solid #555555;
+    border-left: 1px solid #555555;
+    padding: 15px;
+}
+.tab-content p{
+    margin-bottom: 0;
 }
 .nav-tabs.nav-justified {
     width: 100%;
