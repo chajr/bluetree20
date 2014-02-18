@@ -1,0 +1,9 @@
+.file_data{
+     margin-top: 15px;
+ }
+.file_button, .file_input{
+    float: left;
+}
+.file_input{
+    margin-top: 5px;
+}
