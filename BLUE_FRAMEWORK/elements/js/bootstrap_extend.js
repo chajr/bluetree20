@@ -4,7 +4,7 @@
  * @subpackage  bootstrap
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     0.1.0
+ * @version     0.2.0
  */
 
 /**
@@ -23,3 +23,9 @@
         $('[data-auto-close]').autoClose();
     });
 })(jQuery, this);
+
+/**
+ * automatic lunch tooltip and popover
+ */
+$('[data-toggle="tooltip"]').tooltip();
+$('[data-toggle="popover"]').popover();
