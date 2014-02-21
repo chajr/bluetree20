@@ -1,0 +1,147 @@
+<div class="width-200 affix" data-spy="affix" data-offset-bottom="100">
+    <div class="list-group left_menu">
+        <a href="#loading_library" class="list-group-item">
+            {;lang;loading_library;}
+        </a>
+        <a href="#basic_usage" class="list-group-item">
+            {;lang;basic_usage;}
+        </a>
+        <a href="#static_usage" class="list-group-item">
+            {;lang;static_usage;}
+        </a>
+    </div>
+</div>
+
+<div class="width-760">
+    <section id="example_layout">
+        <h2>{;lang;title;}</h2>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="loading_template">
+                {;lang;loading_library;}
+            </div>
+            <div class="panel-body">
+                <b>{;lang;loaded_libraries;} ({;lang;include_core;}):</b><br/>
+                {;libraries;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse0">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse0" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;lib on="1"&gt;image&lt;/lib&gt;
+
+&lt;lib on="1"&gt;valid&lt;/lib&gt;
+&lt;lib on="1"&gt;user&lt;/lib&gt;</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$this->generate('libraries', var_export($this->core->lib, TRUE));</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" id="basic_usage">
+                {;lang;basic_usage;}
+            </div>
+            <div class="panel-body">
+                <p>{;lang;image_lib_test;}:</p>
+                <img src="{;core;domain;}elementy/images/bluetree_base_big.jpg" alt="{;lang;image;}"/>
+                <img src="{;core;domain;}elementy/images/bluetree_base_big_copy.jpg" alt="{;lang;rotate;}"/>
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse1">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse1" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;p&gt;{&#59;lang&#59;image_lib_test&#59;}:&lt;/p&gt;
+&lt;img src="{&#59;core&#59;domain&#59;}elementy/images/bluetree_base_big.jpg" alt="{&#59;lang&#59;image&#59;}"/&gt;
+&lt;img src="{&#59;core&#59;domain&#59;}elementy/images/bluetree_base_big_copy.jpg" alt="{&#59;lang&#59;rotate&#59;}"/&gt;</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$options = [
+    'name'=>'elementy/images/bluetree_base_big.jpg'
+];
+
+$img = new image_class($options);
+$img->rotate(rand(10, 170), '#222222');
+$img->save('elementy/images/bluetree_base_big_copy.jpg', 'jpg');</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" id="static_usage">
+                {;lang;static_usage;}
+            </div>
+            <div class="panel-body">
+                <p>{;lang;static_lib_test;}:</p>
+                {;lang;first_email;}: {;first_email;}<br/>
+                {;lang;second_email;}: {;second_email;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse2">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse2" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                    <pre class="brush: xml">&lt;p&gt;{&#59;lang&#59;static_lib_test&#59;}:&lt;/p&gt;
+{&#59;lang&#59;first_email&#59;}: {&#59;first_email&#59;}&lt;br/&gt;
+{&#59;lang&#59;second_email&#59;}: {&#59;second_email&#59;}</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$emailCorrect   = 'some@test_email.com';
+$emailIncorrect = 'some_test_email.com';
+
+$checkFirstEmail    = simpleValid_class::mail($emailCorrect);
+$checkSecondEmail   = simpleValid_class::mail($emailIncorrect);
+
+$this->generate([
+    'first_email'   => strtoupper(var_export($checkFirstEmail, TRUE)),
+    'second_email'  => strtoupper(var_export($checkSecondEmail, TRUE)),
+]);</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

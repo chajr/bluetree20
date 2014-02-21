@@ -7,7 +7,7 @@
 * @package     BlueFramework Core
 * @author      Michał Adamiak    <chajr@bluetree.pl>
 * @copyright   chajr/bluetree
-* @version     1.14.0
+* @version     1.15.0
 */
 -->
 <!DOCTYPE root SYSTEM 'dtd/tree.dtd'>
@@ -81,6 +81,7 @@
             <mod on="1" block="examples">example_incoming_data</mod>
         </sub>
         <sub id="example_libraries" name="{;lang;core;example_libraries;}" layout="examples/example" options="11111">
+            <lib on="1">image</lib>
             <mod on="1" block="examples">example_libraries</mod>
         </sub>
         <mod on="1" param="breadcrumbs">main</mod>

@@ -69,6 +69,7 @@ $content = array(
     'example_incoming_data'         => 'Dane z GET, POST, SESSION, COOKIE, FILES',
     'example_incoming_data_usage'   => 'Jak używać dane z tablic globalnych oraz jak ustawiać dane w sesji i plikach cookie',
     'example_libraries'             => 'Używanie niektórych wbudowanych bibliotek',
+    'example_libraries_description' => 'Przykład wczytywania, normalnego i statycznego używania bibliotek (zawiera biblioteki image i valid)',
     'example_modules'               => 'Komunikacja między modułami',
     'example_navigation'            => 'Breadcrumbs, mapa strony',
     'example_ajax'                  => 'Żądanie ajax',

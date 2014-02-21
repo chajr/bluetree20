@@ -69,6 +69,7 @@ $content = array(
     'example_incoming_data'         => 'Data from GET, POST, SESSION, COOKIE, FILES',
     'example_incoming_data_usage'   => 'How to use data from global arrays and how to set some data in session or cookies',
     'example_libraries'             => 'Some build in libraries usage',
+    'example_libraries_description' => 'Example with loading, normal and static library usage (include image and valid libraries)',
     'example_modules'               => 'Communication between modules',
     'example_navigation'            => 'Breadcrumbs, page map',
     'example_ajax'                  => 'Ajax request',
