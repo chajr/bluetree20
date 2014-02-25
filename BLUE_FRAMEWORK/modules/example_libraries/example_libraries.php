@@ -12,7 +12,7 @@ class example_libraries
 {
     static $version             = '1.0.0';
     static $name                = 'libraries usage module example';
-    public $requireLibraries    = array('image');
+    public $requireLibraries    = array();
     public $requireModules      = array();
 
     public function run()
