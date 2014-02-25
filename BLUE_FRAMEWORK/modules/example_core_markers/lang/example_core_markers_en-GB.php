@@ -13,4 +13,8 @@ $content = [
     'path'                              => 'Convert given key => value data to mode rewrite url or classic url',
     'full'                              => 'Convert and apply key => value data, domain with language code',
     'rel'                               => 'Convert and apply key => value data, domain with language code, relative to current page',
+    'display_error_msg'                 => 'Display error messages',
+    'display_warning_msg'               => 'Display warning messages',
+    'display_info_msg'                  => 'Display information messages',
+    'display_ok_msg'                    => 'Display success messages',
 ];

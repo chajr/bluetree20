@@ -1,6 +1,6 @@
 <?php
 $content = [
-    'title'                             => '',
+    'title'                             => 'Używanie znaczników core',
     'content_markers'                   => 'Znaczniki treści',
     'header_markers'                    => 'Znaczniki nagłówka',
     'messages_markers'                  => 'Znaczniki wiadomości',
@@ -13,4 +13,8 @@ $content = [
     'path'                              => 'Zastępuje podaną listę klucz => wartość do mode rewrite url lub klasycznego url',
     'full'                              => 'Zastępuje podaną listę klucz => wartość, dodając domenę i kod językowy',
     'rel'                               => 'Zastępuje podaną listę klucz => wartość, dodając domenę i kod językowy, relatywnie do podanej strony',
+    'display_error_msg'                 => 'Wyświetla wiadomość o błędzie',
+    'display_warning_msg'               => 'Wyświetla wiadomość o ostrzeżeniu',
+    'display_info_msg'                  => 'Wyświetla wiadomość informacyjną',
+    'display_ok_msg'                    => 'Wyświetla wiadomość o powodzeniu',
 ];
