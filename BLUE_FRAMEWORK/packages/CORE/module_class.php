@@ -7,7 +7,7 @@
  * @subpackage  module
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     2.6.0
+ * @version     2.6.1
  */
 abstract class module_class
 {
@@ -66,20 +66,20 @@ abstract class module_class
     public $get;
 
     /**
-     * contains get object
-     * @var object
+     * contains post object
+     * @var post
      */
     public $post;
 
     /**
-     * contains post object
-     * @var post
+     * contains cookie object
+     * @var cookie
      */
     public $cookie;
 
     /**
-     * contains cookie object
-     * @var cookie
+     * contains session object
+     * @var session
      */
     public $session;
 
