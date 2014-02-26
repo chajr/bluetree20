@@ -1,0 +1,284 @@
+<div class="width-200 affix" data-spy="affix" data-offset-bottom="100">
+    <div class="list-group left_menu">
+        <a href="#module_config_xml" class="list-group-item">
+            {;lang;module_config_xml;}
+        </a>
+        <a href="#module_config_tree" class="list-group-item">
+            {;lang;module_config_tree;}
+        </a>
+        <a href="#module_exists" class="list-group-item">
+            {;lang;module_exists;}
+        </a>
+        <a href="#set_module_data" class="list-group-item">
+            {;lang;set_module_data;}
+        </a>
+        <a href="#set_session" class="list-group-item">
+            {;lang;set_session;}
+        </a>
+        <a href="#other_methods" class="list-group-item">
+            {;lang;other_methods;}
+        </a>
+        <a href="#get_module_data" class="list-group-item">
+            {;lang;get_module_data;}
+        </a>
+        <a href="#get_session" class="list-group-item">
+            {;lang;get_session;}
+        </a>
+        <a href="#module_exists_2" class="list-group-item">
+            {;lang;module_exists;}
+        </a>
+    </div>
+</div>
+<div class="width-760">
+    <section id="example_modules">
+        <h2>{;lang;title;}</h2>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="module_config_xml">
+                {;lang;module_config_xml;}
+            </div>
+            <div class="panel-body">
+                <pre>{;module_config;}</pre>
+                {;lang;single_option;}: {;module_config_single;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse4">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse4" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE root SYSTEM "dtd/config.dtd"&gt;
+&lt;root&gt;
+    &lt;option id="config_option_1" value="123123"/&gt;
+    &lt;option id="config_option_2" value="TRUE"/&gt;
+    &lt;option id="config_option_3" value="some option"/&gt;
+&lt;/root&gt;</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;pre&gt;{&#59;module_config&#59;}&lt;/pre&gt;
+{&#59;lang&#59;single_option&#59;}: {&#59;module_config_single&#59;}</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$list = var_export($this->loadModuleOptions(), TRUE);
+$this->generate('module_config', $list);
+
+$this->generate(
+    'module_config_single',
+    $this->loadModuleOptions('config_option_3')
+);</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" id="module_config_tree">
+                {;lang;module_config_tree;}
+            </div>
+            <div class="panel-body">
+                <pre>{;params;}</pre>
+                {;lang;single_option;}: {;params_single;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse5">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse5" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;mod on="1" block="examples" param="first::second::third"&gt;example_modules&lt;/mod&gt;</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;pre&gt;{&#59;params&#59;}&lt;/pre&gt;
+{&#59;lang&#59;single_option&#59;}: {&#59;params_single&#59;}</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                            <pre class="brush: php">$param = var_export($this->params, TRUE);
+$this->generate('params', $param);
+
+$this->generate('params_single', $this->params[1]);</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" id="module_exists">
+                {;lang;module_exists;}
+            </div>
+            <div class="panel-body">
+                <p>{;lang;module_list;}: {;modules;}</p>
+                <p>{;lang;check;} example_modules_reader {;lang;exist;}: {;reader_exist;}</p>
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse0">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse0" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;p&gt;{&#59;lang&#59;module_list&#59;}: {&#59;modules&#59;}&lt;/p&gt;
+&lt;p&gt;{&#59;lang&#59;check&#59;} example_modules_reader {;lang&#59;exist;}: {&#59;reader_exist&#59;}&lt;/p&gt;</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">if (isset($this->modules['example_modules_reader'])) {
+    $this->generate('reader_exist', '{;lang&#59;exists;}');
+} else {
+    $this->generate('reader_exist', '{;lang&#59;not_exists;}');
+}
+$this->generate('modules', var_export(array_keys($this->modules), TRUE));</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" id="set_module_data">
+                {;lang;set_module_data;}
+            </div>
+            <div class="panel-body">
+                {;lang;module_data;}: {;module_data;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse1">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse1" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">{;lang&#59;module_data;}: {&#59;module_data&#59;}</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$this->testVariable = '{;lang&#59;test_variable&#59;}';
+$this->generate('module_data', $this->testVariable);</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" id="set_session">
+                {;lang;set_session;}
+            </div>
+            <div class="panel-body">
+                {;lang;session_data;}: {;session_data;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse2">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse2" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">{;lang&#59;session_data;}: {&#59;session_data&#59;}</pre>
+                                </code>
+                            </div><div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$this->session->testVal = '{;lang&#59;test_session_variable;}';
+$this->generate('session_data', $this->session->testVal);</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" id="other_methods">
+                {;lang;other_methods;}
+            </div>
+            <div class="panel-body">
+                {;lang;started_by_other;}: {;other_methods;}
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse8">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse8" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">{;lang&#59;started_by_other;}: {&#59;other_methods&#59;}</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">public function methodToLunch()
+{
+    $this->generate('other_methods', '{;lang&#59;started;}');
+}</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$this->modules['example_modules']->methodToLunch();</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,23 @@
+<?php
+$content = [
+    'title'                             => 'Pobieranie konfiguracji i ustawianie danych dostępnych dla innych modułów',
+    'module_config_xml'                 => 'Odczyt konfiguracji modułu',
+    'single_option'                     => 'Odczyt pojedyńczej konfiguracji modułu',
+    'module_config_tree'                => 'Odczyt konfiguracji z drzewa',
+    'module_exists'                     => 'Sprawdzanie czy moduł istnieje',
+    'module_list'                       => 'Lista załadowanych modułów (do teraz)',
+    'check'                             => 'Sprawdza czy moduł',
+    'not_exists'                        => 'nie istnieje',
+    'set_module_data'                   => 'Ustawianie danych do zmiennej modułu',
+    'module_data'                       => 'Dane ze zmiennej modułu',
+    'test_variable'                     => 'jakaś wartość',
+    'set_session'                       => 'Ustawianie danych w sesjiSet data to session',
+    'session_data'                      => 'Dane z sesji',
+    'test_session_variable'             => 'jakaś wartość z sesji',
+    'other_methods'                     => 'Moduł uruchamia metode innego modułu',
+    'started_by_other'                  => 'Wynik z metody w example_modules odpalonej przez example_modules_reader',
+    'started'                           => 'uruchomiony',
+    'get_module_data'                   => 'Pobieranie danych z innego modułu',
+    'get_session'                       => 'Pobieranie danych z sesji',
+    'exist'                             => 'istnieje',
+];

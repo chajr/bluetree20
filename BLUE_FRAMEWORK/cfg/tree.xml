@@ -84,6 +84,10 @@
             <lib on="1">image</lib>
             <mod on="1" block="examples">example_libraries</mod>
         </sub>
+        <sub id="example_modules" name="{;lang;core;example_modules;}" layout="examples/example" options="11111">
+            <mod on="1" block="examples" param="first::second::third">example_modules</mod>
+            <mod on="1" block="examples">example_modules_reader</mod>
+        </sub>
         <mod on="1" param="breadcrumbs">main</mod>
         <css>styles</css>
         <css>shCore</css>

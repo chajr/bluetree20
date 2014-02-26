@@ -71,6 +71,7 @@ $content = array(
     'example_libraries'             => 'Some build in libraries usage',
     'example_libraries_description' => 'Example with loading, normal and static library usage (include image and valid libraries)',
     'example_modules'               => 'Communication between modules',
+    'example_modules_description'   => 'How modules can communicate between themselves, run methods and use own configuration',
     'example_navigation'            => 'Breadcrumbs, page map',
     'example_ajax'                  => 'Ajax request',
     'example_inheritance'           => 'Subpage inheritance',
