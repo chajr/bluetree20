@@ -5,15 +5,15 @@
  * @subpackage  example_modules_reader
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.0.0
+ * @version     1.0.1
  */
 class example_modules_reader
     extends module_class
 {
-    static $version             = '1.0.0';
+    static $version             = '1.0.1';
     static $name                = '';
-    public $requireLibraries    = array();
-    public $requireModules      = array();
+    public $requireLibraries    = [];
+    public $requireModules      = ['example_modules'];
 
     /**
      * initialize module

@@ -5,15 +5,15 @@
  * @subpackage  example_libraries
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.0.0
+ * @version     1.0.1
  */
 class example_libraries
     extends module_class
 {
-    static $version             = '1.0.0';
+    static $version             = '1.0.1';
     static $name                = 'libraries usage module example';
-    public $requireLibraries    = array();
-    public $requireModules      = array();
+    public $requireLibraries    = ['image', 'simpleValid'];
+    public $requireModules      = [];
 
     public function run()
     {
