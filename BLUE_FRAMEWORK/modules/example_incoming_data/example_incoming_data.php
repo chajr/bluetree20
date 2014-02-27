@@ -5,12 +5,12 @@
  * @subpackage  example_incoming_data
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.0.0
+ * @version     1.1.0
  */
 class example_incoming_data
     extends module_class
 {
-    static $version             = '1.0.0';
+    static $version             = '1.1.0';
     static $name                = 'incoming data module example';
     public $requireLibraries    = array();
     public $requireModules      = array();
@@ -28,6 +28,7 @@ class example_incoming_data
         $this->_showSessionExamples();
         $this->_showCookieExamples();
         $this->_fileUploadExample();
+        $this->_getObjectData();
     }
 
     /**
@@ -98,6 +99,28 @@ class example_incoming_data
             $fileData = var_export($this->files->file_upload, TRUE);
             $this->generate('file_data', $fileData);
         }
+    }
+
+    /**
+     * show some data directly from get object
+     */
+    protected function _getObjectData()
+    {
+        $getArray = array(
+            'path'          => get::realPath(),
+            'rget'          => var_export(get::convertGet('', 'val/val2/val3'), TRUE),
+            'lang'          => $this->get->getLanguage(),
+            'current_page'  => $this->get->getCurrentPage(),
+            'parent'        => $this->get->getParentPage(),
+            'master'        => $this->get->getMasterPage(),
+            'full'          => var_export($this->get->fullGetList(TRUE), TRUE),
+            'full2'         => var_export($this->get->fullGetList(), TRUE),
+            'type'          => $this->get->pageType(),
+            'path_domain'   => $this->get->path(),
+            'path2'         => $this->get->path(TRUE),
+        );
+
+        $this->generate($getArray);
     }
 
     public function runErrorMode(){}

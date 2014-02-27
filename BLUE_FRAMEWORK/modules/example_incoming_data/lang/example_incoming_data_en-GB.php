@@ -28,6 +28,16 @@ $content = array(
     'new_user'                              => 'new user',
     'cookie'                                => 'cookie',
     'sent_file'                             => 'sent file',
+    'path'                                  => 'path',
+    'rewrite_get'                           => 'rewrite get',
+    'lang_code'                             => 'language code',
+    'current_page'                          => 'current page',
+    'parent_page'                           => 'parent page',
+    'master_page'                           => 'master page',
+    'full_get'                              => 'full get',
+    'type'                                  => 'type',
+    'with_domain'                           => 'path with domain',
+    'complete_path'                         => 'complete path',
     'get_description'                       => '<p>
     Inside of module:<br/>
     To use data from **GET** we must use <i>$this->get->variableKey</i>.
