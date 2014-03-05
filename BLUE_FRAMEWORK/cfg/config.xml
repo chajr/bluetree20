@@ -7,7 +7,7 @@
 * @package     BlueFramework Core
 * @author      Michał Adamiak    <chajr@bluetree.pl>
 * @copyright   chajr/bluetree
-* @version     1.1.0
+* @version     1.1.1
 */
 -->
 <!DOCTYPE root SYSTEM "dtd/config.dtd">
@@ -23,9 +23,9 @@
     <option id="reg_exp_rewrite" value="#^[\w-\\,\/]*$#"/>
     <option id="reg_exp_classic" value="#^[\w\.\/?=&amp;-]*$#"/>
     <option id="global_var_check" value="#^[a-zA-Z][\w]*$#"/>
-    <option id="max_get" value="11"/>
+    <option id="max_get" value="15"/>
     <option id="max_post" value="60"/>
-    <option id="get_len" value="55"/>
+    <option id="get_len" value="100"/>
     <option id="test" value=""/>
     <option id="post_secure" value="1"/>
     <option id="file_max_size" value="1000"/>
