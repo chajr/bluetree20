@@ -73,6 +73,7 @@ $content = array(
     'example_modules'               => 'Komunikacja między modułami',
     'example_modules_description'   => 'Jak moduły mogą się ze sobą komunikować, wywoływać metody oraz kożystaćz własnej konfiguracji',
     'example_navigation'            => 'Breadcrumbs, mapa strony',
+    'example_navigation_description'=> 'Pokazuje breadcrumbs oraz mapę strony jako tablice',
     'example_ajax'                  => 'Żądanie ajax',
     'example_inheritance'           => 'Dziedziczenie dla podstron',
     'example_exceptions'            => 'Wyjątki Frameworka',

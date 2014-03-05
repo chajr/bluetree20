@@ -7,7 +7,7 @@
 * @package     BlueFramework Core
 * @author      Michał Adamiak    <chajr@bluetree.pl>
 * @copyright   chajr/bluetree
-* @version     1.15.0
+* @version     1.16.0
 */
 -->
 <!DOCTYPE root SYSTEM 'dtd/tree.dtd'>
@@ -87,6 +87,9 @@
         <sub id="example_modules" name="{;lang;core;example_modules;}" layout="examples/example" options="11111">
             <mod on="1" block="examples" param="first::second::third">example_modules</mod>
             <mod on="1" block="examples">example_modules_reader</mod>
+        </sub>
+        <sub id="example_navigation" name="{;lang;core;example_navigation;}" layout="examples/example" options="11111">
+            <mod on="1" block="examples">example_navigation</mod>
         </sub>
         <mod on="1" param="breadcrumbs">main</mod>
         <css>styles</css>

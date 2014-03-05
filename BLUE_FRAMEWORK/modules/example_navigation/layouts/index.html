@@ -1,0 +1,197 @@
+<div class="width-200 affix" data-spy="affix" data-offset-bottom="100">
+    <div class="list-group left_menu">
+        <a href="#breadcrumbs" class="list-group-item">
+            {;lang;breadcrumbs;}
+        </a>
+        <a href="#breadcrumbs_advanced" class="list-group-item">
+            {;lang;breadcrumbs_advanced;}
+        </a>
+        <a href="#map" class="list-group-item">
+            {;lang;map;}
+        </a>
+        <a href="#site_map" class="list-group-item">
+            {;lang;site_map;}
+        </a>
+    </div>
+</div>
+<div class="width-760">
+    <section id="example_modules">
+        <h2>{;lang;title;}</h2>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="breadcrumbs">
+                {;lang;breadcrumbs;}
+            </div>
+            <div class="panel-body">
+                <pre>{;breadcrumbs;}</pre>
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse01">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse01" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;pre&gt;{&#59;breadcrumbs&#59;}&lt;/pre&gt;</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$bread = var_export($this->breadcrumbs(), TRUE);
+$this->generate('breadcrumbs', $bread);</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" id="breadcrumbs_advanced">
+                {;lang;breadcrumbs_advanced;}
+            </div>
+            <div class="panel-body">
+                <p>{;current_page_url;}</p>
+                <p>{;breadcrumbs_advanced;}</p>
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse1">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse1" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;p&gt;{&#59;current_page_url&#59;}&lt;/p&gt;
+&lt;p&gt;{&#59;breadcrumbs_advanced&#59;}&lt;/p&gt;</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">public function breadcrumbsAdvanced()
+{
+    $data = [
+        'independent' => TRUE,
+        'clean'       => FALSE,
+        'language'    => $this->get->getLanguage(),
+        'template'    => 'elements/layouts/examples/breadcrumbs.html',
+    ];
+    $breadcrumbs                = new display_class($data);
+    $breadcrumbsData            = $this->breadcrumbs();
+    $breadcrumbsData[0]['name'] = '&lt;i class="icon-home-alt"&gt;&lt;/i&gt;';
+
+    $currentPageUrl = '';
+    foreach ($this->get->fullGetList() as $page) {
+        $currentPageUrl .= $page . '/';
+    }
+
+    $breadcrumbs->loop('breadcrumbs', $breadcrumbsData);
+
+    return [
+        'current_page'          => $currentPageUrl,
+        'breadcrumbs_html'      => $breadcrumbs->render()
+    ];
+}</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">if (isset($this->modules['main'])) {
+    $breadcrumbsData = $this->modules['main']->breadcrumbsAdvanced();
+
+    $this->generate('current_page_url', $breadcrumbsData['current_page']);
+    $this->generate('breadcrumbs_advanced', $breadcrumbsData['breadcrumbs_html']);
+}</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" id="map">
+                {;lang;map;}
+            </div>
+            <div class="panel-body">
+                <pre>{;map;}</pre>
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse2">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse2" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;pre&gt;{&#59;map&#59;}&lt;/pre&gt;</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$map = var_export($this->map(), TRUE);
+$this->generate('map', $map);</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" id="site_map">
+                {;lang;site_map;}
+            </div>
+            <div class="panel-body">
+                <pre>{;site_map;}</pre>
+            </div>
+            <div class="panel-footer">
+                <div class="panel-group">
+                    <div class="panel panel-primary source_code">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse4">
+                                    {;lang;core;show_source;}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse4" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: xml">&lt;pre&gt;{&#59;site_map&#59;}&lt;/pre&gt;</pre>
+                                </code>
+                            </div>
+                            <div class="panel-body">
+                                <code>
+                                    <pre class="brush: php">$siteMap = $this->siteMap();
+$siteMap = str_replace('<', '&lt;', $siteMap);
+$siteMap = str_replace('>', '&gt;', $siteMap);
+
+$this->generate('site_map', $siteMap);</pre>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

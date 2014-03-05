@@ -73,6 +73,7 @@ $content = array(
     'example_modules'               => 'Communication between modules',
     'example_modules_description'   => 'How modules can communicate between themselves, run methods and use own configuration',
     'example_navigation'            => 'Breadcrumbs, page map',
+    'example_navigation_description'=> 'Show breadcrumbs and page site map as arrays',
     'example_ajax'                  => 'Ajax request',
     'example_inheritance'           => 'Subpage inheritance',
     'example_exceptions'            => 'Framework exceptions',
