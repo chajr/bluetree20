@@ -9,7 +9,8 @@
  * @subpackage  Object
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.0.1
+ * @version     1.1.0
+ * @todo ini data handling (convert from ini and to ini data)
  */
 class blue_object_class
 {
@@ -294,7 +295,13 @@ class blue_object_class
         $temporaryData = $this->getData();
 
         if ($skipObjects) {
-            $temporaryData = $this->traveler('_skipObject', NULL, $temporaryData);
+            $temporaryData = $this->traveler(
+                '_skipObject',
+                NULL,
+                $temporaryData,
+                FALSE,
+                TRUE
+            );
         }
 
         return serialize($temporaryData);
@@ -607,36 +614,76 @@ class blue_object_class
 
     /**
      * allow to use given method or function for all data inside of object
-     * 
+     *
      * @param string $method
      * @param mixed $methodAttributes
      * @param mixed $data
      * @param bool $function
+     * @param bool $recursive
      * @return array|null
      */
     public function traveler(
         $method,
         $methodAttributes   = NULL,
         $data               = NULL,
-        $function           = FALSE
+        $function           = FALSE,
+        $recursive          = FALSE
     ){
         if (!$data) {
             $data = $this->_DATA;
         }
 
         foreach ($data as $key => $value) {
-            if (is_array($value)) {
-                $data[$key] = $this->traveler($method, $methodAttributes, $value);
+            $isRecursive = is_array($value) && $recursive;
+
+            if ($isRecursive) {
+                $data[$key] = $this->_recursiveTraveler($method, $methodAttributes, $value, $function);
             } else {
-                if ($function) {
-                    $data[$key] = call_user_func($method, $methodAttributes);
-                } else {
-                    $data[$key] = $this->$method($value, $methodAttributes);
-                }
+                $data[$key] = $this->_callUserFunction($function, $method, $key, $value, $methodAttributes);
             }
         }
 
         return $data;
+    }
+
+    /**
+     * allow to change some data in multi level arrays
+     *
+     * @param string $method
+     * @param mixed $methodAttributes
+     * @param mixed $data
+     * @param string|boolean $function
+     * @return mixed
+     */
+    protected function _recursiveTraveler($method, $methodAttributes, $data, $function)
+    {
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                $data[$key] = $this->_recursiveTraveler($method, $methodAttributes, $value, $function);
+            } else {
+                $data[$key] = $this->_callUserFunction($function, $method, $key, $value, $methodAttributes);
+            }
+        }
+
+        return $data;
+    }
+
+    /**
+     * run given function or method on given data
+     *
+     * @param string|boolean $function
+     * @param string $method
+     * @param string $key
+     * @param mixed $value
+     * @param mixed $methodAttributes
+     * @return mixed
+     */
+    protected function _callUserFunction($function, $method, $key, $value, $methodAttributes)
+    {
+        if ($function) {
+            return call_user_func($method, $key, $value, $methodAttributes);
+        }
+        return $this->$method($key, $value, $methodAttributes);
     }
 
     /**
