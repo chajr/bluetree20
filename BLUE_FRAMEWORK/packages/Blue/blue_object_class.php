@@ -9,7 +9,7 @@
  * @subpackage  Object
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     1.1.0
+ * @version     1.1.1
  * @todo ini data handling (convert from ini and to ini data)
  */
 class blue_object_class
@@ -182,13 +182,14 @@ class blue_object_class
                 return $this->hasData($key);
 
             default:
-                $method = substr($method, 0, 5);
-                if ($method === 'unset') {
+                $methodPrefix = substr($method, 0, 5);
+
+                if ($methodPrefix === 'unset') {
                     $key = $this->_convertKeyNames(substr($method, 5));
                     return $this->unsetData($key);
                 }
 
-                if ($method === 'clear') {
+                if ($methodPrefix === 'clear') {
                     $key = $this->_convertKeyNames(substr($method, 5));
                     return $this->clearData($key);
                 }
