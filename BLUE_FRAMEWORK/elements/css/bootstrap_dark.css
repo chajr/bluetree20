@@ -15,7 +15,7 @@
  
  * @author      Michał Adamiak    <chajr@bluetree.pl>
  * @copyright   chajr/bluetree
- * @version     0.4.7
+ * @version     0.4.8
  */
 article,
 aside,
@@ -269,7 +269,7 @@ html {
 body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 12px;
-    line-height: 1.2;
+    line-height: 1.5;
     color: #777777;
     background-color: #000000;
 }
@@ -1814,7 +1814,7 @@ textarea.input-lg {
     margin-bottom: 0;
     font-size: 12px;
     font-weight: normal;
-    line-height: 1.2;
+    line-height: 1.5;
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
