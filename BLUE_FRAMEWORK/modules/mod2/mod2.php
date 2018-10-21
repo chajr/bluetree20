@@ -58,7 +58,7 @@ class mod2
     public function connectionTest()
     {
         $conn = new mysql_connection_class(array(
-            'zmp.nazwa.pl', 'zmp_2', 'WE244ef43%$', 'zmp_2', 3307
+            'localhost', 'bt_test', 'WE244ef43%$', 'bt_test', 3306
         ));
 
         if ($conn->err) {
