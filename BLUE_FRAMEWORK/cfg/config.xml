@@ -22,7 +22,7 @@
 
     <option id="reg_exp_rewrite" value="#^[\w-\\,\/]*$#"/>
     <option id="reg_exp_classic" value="#^[\w\.\/?=&amp;-]*$#"/>
-    <option id="global_var_check" value="#^[a-zA-Z][\w]*$#"/>
+    <option id="global_var_check" value="#^[a-zA-Z_][\w]*$#"/>
     <option id="max_get" value="15"/>
     <option id="max_post" value="60"/>
     <option id="get_len" value="100"/>
