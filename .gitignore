@@ -1,0 +1,3 @@
+dev/log/nginx/*
+!dev/log/nginx/.gitkeep
+.idea
