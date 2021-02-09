@@ -11,7 +11,7 @@ services:
     env_file:
       - ./etc/.env-db
 
-  wataha:
+  bluetree20:
     image: chajr/bluetree20
     container_name: bluetree20
     volumes:
