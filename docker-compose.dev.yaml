@@ -27,7 +27,11 @@ services:
     ports:
       - 80:8080
     environment:
+      - BLUETREE_DB_HOST=maria_db
+      - BLUETREE_DB_USER=bt_test
+      - BLUETREE_DB=bt_test
       - BLUETREE_DB_PASS=bt_test
+      - BLUETREE_DB_PORT=3306
     depends_on:
       - maria_db
 

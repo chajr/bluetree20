@@ -58,15 +58,18 @@ class mod2
     public function connectionTest()
     {
         $conn = new mysql_connection_class(array(
-            'maria_db', 'bt_test', 'bt_test', 'bt_test', 3306
+            \getenv('BLUETREE_DB_HOST'),
+            \getenv('BLUETREE_DB_USER'),
+            \getenv('BLUETREE_DB_PASS'),
+            \getenv('BLUETREE_DB'),
+            \getenv('BLUETREE_DB_PORT'),
         ));
-        //getenv()
 
         if ($conn->err) {
             throw new modException('db_conn_error', $conn->err);
-        } else {
-            $this->generate('connection', '{;lang;connection_on;}');
         }
+
+        $this->generate('connection', '{;lang;connection_on;}');
 
         $query = new mysql_class('SELECT * FROM test');        //work with error
 

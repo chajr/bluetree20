@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  maria_db:
+    image: mariadb
+    container_name: maria_db
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    restart: unless-stopped
+    volumes:
+      - maria_db:/var/lib/mysql
+    env_file:
+      - ./etc/.env-db
+
+  wataha:
+    image: chajr/bluetree20
+    container_name: bluetree20
+    volumes:
+      - ./dev/log:/var/log/
+      - ./dev/blue-log:/var/www/html/BLUE_FRAMEWORK/log
+    env_file:
+      - ./etc/.env-bluetree20
+    depends_on:
+      - maria_db
+
+volumes:
+  maria_db:

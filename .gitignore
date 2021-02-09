@@ -1,3 +1,6 @@
 dev/log/nginx/*
 !dev/log/nginx/.gitkeep
 .idea
+source/elementy/images/bluetree_base_big_copy.jpg
+source/BLUE_FRAMEWORK/log/*
+!source/BLUE_FRAMEWORK/log/.gitkeep
